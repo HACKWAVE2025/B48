@@ -6,6 +6,7 @@ const User = require('../models/User');
 const authenticateToken = require('../middleware/authMiddleware');
 const upload = require('../config/multer');
 const path = require('path');
+const aiSummaryService = require('../services/aiSummaryService');
 
 const router = express.Router();
 
@@ -740,6 +741,108 @@ router.post('/sessions/:sessionId/upload', authenticateToken, upload.single('fil
     res.status(500).json({
       success: false,
       message: error.message || 'Failed to upload file'
+    });
+  }
+});
+
+// Generate AI summary for a session
+router.post('/sessions/:sessionId/generate-summary', authenticateToken, async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const session = await StudySession.findOne({ sessionId });
+    
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: 'Session not found'
+      });
+    }
+
+    // Check if user is the creator or was a participant
+    const isCreator = session.createdBy.toString() === req.user.userId;
+    
+    // Check if user was ever a participant (even if session ended and activeUsers was cleared)
+    const hasMessages = await Message.exists({ 
+      roomId: sessionId, 
+      userId: req.user.userId 
+    });
+
+    if (!isCreator && !hasMessages) {
+      return res.status(403).json({
+        success: false,
+        message: 'You must be a participant to generate summary'
+      });
+    }
+
+    // Generate summary
+    const summary = await aiSummaryService.generateSessionSummary(sessionId);
+
+    res.json({
+      success: true,
+      message: 'Summary generated successfully',
+      summary: summary
+    });
+
+  } catch (error) {
+    console.error('Generate summary error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to generate summary'
+    });
+  }
+});
+
+// Get AI summary for a session
+router.get('/sessions/:sessionId/summary', authenticateToken, async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const session = await StudySession.findOne({ sessionId });
+    
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: 'Session not found'
+      });
+    }
+
+    // Check if user is the creator or was a participant
+    const isCreator = session.createdBy.toString() === req.user.userId;
+    
+    // Check if user was ever a participant (even if session ended and activeUsers was cleared)
+    const hasMessages = await Message.exists({ 
+      roomId: sessionId, 
+      userId: req.user.userId 
+    });
+
+    if (!isCreator && !hasMessages) {
+      return res.status(403).json({
+        success: false,
+        message: 'You must be a participant to view summary'
+      });
+    }
+
+    // Get summary (will generate if not exists and session is completed)
+    const summary = await aiSummaryService.getSessionSummary(sessionId);
+
+    if (!summary) {
+      return res.status(404).json({
+        success: false,
+        message: 'Summary not available yet. Session must be completed first.'
+      });
+    }
+
+    res.json({
+      success: true,
+      summary: summary
+    });
+
+  } catch (error) {
+    console.error('Get summary error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to get summary'
     });
   }
 });

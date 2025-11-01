@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Users, BookOpen, Play, Eye, CheckCircle, XCircle, Tag, UserPlus } from 'lucide-react';
+import { Calendar, Clock, Users, BookOpen, Play, Eye, CheckCircle, XCircle, Tag, UserPlus, Sparkles } from 'lucide-react';
 import InviteUsersModal from './InviteUsersModal';
+import SessionSummaryModal from './SessionSummaryModal';
 
 const SessionList = ({ sessions, onSessionSelect, onRefresh, userTimeZone = 'local' }) => {
   const [filter, setFilter] = useState('all'); // all, upcoming, active, past
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [selectedSessionForInvite, setSelectedSessionForInvite] = useState(null);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
+  const [selectedSessionForSummary, setSelectedSessionForSummary] = useState(null);
 
   const subjectColors = {
     'Mathematics': 'from-blue-500 to-blue-600',
@@ -100,6 +103,12 @@ const SessionList = ({ sessions, onSessionSelect, onRefresh, userTimeZone = 'loc
     setShowInviteModal(true);
   };
 
+  const handleSummaryClick = (e, session) => {
+    e.stopPropagation();
+    setSelectedSessionForSummary(session);
+    setShowSummaryModal(true);
+  };
+
   return (
     <div className="lg:col-span-4">
       <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
@@ -166,13 +175,21 @@ const SessionList = ({ sessions, onSessionSelect, onRefresh, userTimeZone = 'loc
                       {status.icon}
                       <span>{status.text}</span>
                     </div>
-                    {!session.hasEnded && (
+                    {!session.hasEnded ? (
                       <button
                         onClick={(e) => handleInviteClick(e, session)}
                         className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-all"
                         title="Invite users"
                       >
                         <UserPlus className="w-3 h-3" />
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) => handleSummaryClick(e, session)}
+                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all"
+                        title="View AI Summary"
+                      >
+                        <Sparkles className="w-3 h-3" />
                       </button>
                     )}
                   </div>
@@ -282,6 +299,16 @@ const SessionList = ({ sessions, onSessionSelect, onRefresh, userTimeZone = 'loc
           setSelectedSessionForInvite(null);
         }}
         session={selectedSessionForInvite}
+      />
+
+      {/* AI Summary Modal */}
+      <SessionSummaryModal
+        session={selectedSessionForSummary}
+        isOpen={showSummaryModal}
+        onClose={() => {
+          setShowSummaryModal(false);
+          setSelectedSessionForSummary(null);
+        }}
       />
     </div>
   );

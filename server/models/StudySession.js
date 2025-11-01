@@ -99,6 +99,15 @@ const studySessionSchema = new mongoose.Schema({
     type: String,
     trim: true
   }],
+  aiSummary: {
+    summary: String,
+    keyTopics: [String],
+    participants: Number,
+    totalMessages: Number,
+    filesShared: Number,
+    insights: [String],
+    generatedAt: Date
+  },
   completedAt: {
     type: Date
   },

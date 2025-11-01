@@ -4,6 +4,7 @@ const StudySession = require('../models/StudySession');
 const Message = require('../models/Message');
 const User = require('../models/User');
 const QuizRoom = require('../models/QuizRoom');
+const Whiteboard = require('../models/Whiteboard');
 const quizService = require('../services/quizService');
 
 class SocketHandler {
@@ -98,6 +99,12 @@ class SocketHandler {
     socket.on('join_video_call', (data) => this.handleJoinVideoCall(socket, data));
     socket.on('leave_video_call', (data) => this.handleLeaveVideoCall(socket, data));
     socket.on('moderator_action', (data) => this.handleModeratorAction(socket, data));
+    
+    // Whiteboard events
+    socket.on('load_whiteboard', (data) => this.handleLoadWhiteboard(socket, data));
+    socket.on('save_whiteboard', (data) => this.handleSaveWhiteboard(socket, data));
+    socket.on('whiteboard_draw', (data) => this.handleWhiteboardDraw(socket, data));
+    socket.on('whiteboard_clear', (data) => this.handleWhiteboardClear(socket, data));
     
     // --- ADD: multiplayer quiz events (client emits createRoom/joinRoom/startQuiz) ---
     socket.on('createRoom', (data) => this.handleCreateRoom(socket, data));
@@ -1536,6 +1543,94 @@ async handleSubmitMultiplayerQuiz(socket, data) {
       console.log(`${socket.user.name} left session: ${sessionId}`);
     } catch (error) {
       console.error('Error leaving session:', error);
+    }
+  }
+
+  // Whiteboard handlers
+  async handleLoadWhiteboard(socket, data) {
+    try {
+      const { sessionId } = data;
+
+      if (!sessionId) {
+        return;
+      }
+
+      // Find or create whiteboard for this session
+      let whiteboard = await Whiteboard.findOne({ sessionId });
+
+      if (!whiteboard) {
+        whiteboard = new Whiteboard({ sessionId, data: [] });
+        await whiteboard.save();
+      }
+
+      // Send whiteboard data to the requesting user
+      socket.emit('whiteboard_loaded', {
+        data: whiteboard.data
+      });
+
+      console.log(`Loaded whiteboard for session: ${sessionId}`);
+    } catch (error) {
+      console.error('Error loading whiteboard:', error);
+      socket.emit('error', { message: 'Failed to load whiteboard' });
+    }
+  }
+
+  async handleSaveWhiteboard(socket, data) {
+    try {
+      const { sessionId, data: whiteboardData } = data;
+
+      if (!sessionId || !whiteboardData) {
+        return;
+      }
+
+      // Find or create whiteboard
+      let whiteboard = await Whiteboard.findOne({ sessionId });
+
+      if (!whiteboard) {
+        whiteboard = new Whiteboard({ sessionId, data: whiteboardData });
+      } else {
+        whiteboard.data = whiteboardData;
+      }
+
+      await whiteboard.save();
+
+      console.log(`Saved whiteboard for session: ${sessionId}`);
+    } catch (error) {
+      console.error('Error saving whiteboard:', error);
+    }
+  }
+
+  handleWhiteboardDraw(socket, data) {
+    try {
+      const { sessionId, drawData } = data;
+
+      if (!sessionId || !drawData) {
+        return;
+      }
+
+      // Broadcast draw action to all other users in the session
+      socket.to(sessionId).emit('whiteboard_draw', {
+        drawData
+      });
+    } catch (error) {
+      console.error('Error broadcasting whiteboard draw:', error);
+    }
+  }
+
+  handleWhiteboardClear(socket, data) {
+    try {
+      const { sessionId } = data;
+
+      if (!sessionId) {
+        return;
+      }
+
+      // Broadcast clear action to all users in the session
+      socket.to(sessionId).emit('whiteboard_clear');
+
+      console.log(`Whiteboard cleared for session: ${sessionId}`);
+    } catch (error) {
+      console.error('Error clearing whiteboard:', error);
     }
   }
 }
