@@ -174,6 +174,9 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
     setQuizFinished(true); // This will trigger the final results screen
     setQuizStarted(false);
     setRoomStatus('finished');
+    
+    // Trigger analytics refresh across tabs
+    localStorage.setItem('activityCompleted', Date.now().toString());
   };
 
   const handleError = (data) => {

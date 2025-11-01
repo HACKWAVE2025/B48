@@ -1,48 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext';
 import Badge from './Badge';
-import { Trophy, Award, Filter } from 'lucide-react';
+import BadgeAnalytics from './BadgeAnalytics';
+import { Trophy, Award, Filter, BarChart3 } from 'lucide-react';
 
 const BadgesGrid = () => {
   const [badges, setBadges] = useState([]);
   const [filteredBadges, setFilteredBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [analyticsKey, setAnalyticsKey] = useState(0); // Key to force re-render
  const token=localStorage.getItem('token') ;
 
   const API_URL = import.meta.env.VITE_BACKEND_URL ;
 
-  useEffect(() => {
-    fetchBadges();
-  }, []);
-
-  useEffect(() => {
-    filterBadges();
-  }, [badges, filter]);
-
-  const fetchBadges = async () => {
-    try {
-      const response = await fetch(`${API_URL}/api/xp/badges`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const data = await response.json();
-      if (data.success && data.data && data.data.length > 0) {
-        setBadges(data.data);
-      } else {
-        // Fallback: show basic badge structure if API fails or returns empty
-        console.log('API returned no badges, using fallback');
-        setBadges(getDefaultBadges());
-      }
-    } catch (error) {
-      console.error('Error fetching badges:', error);
-      // Fallback: show basic badge structure if API fails
-      setBadges(getDefaultBadges());
-    } finally {
-      setLoading(false);
+  // Function to trigger analytics refresh
+  const handleShowAnalytics = (show) => {
+    setShowAnalytics(show);
+    if (show) {
+      // Force re-render of analytics component by changing key
+      setAnalyticsKey(prev => prev + 1);
     }
   };
 
@@ -66,25 +43,59 @@ const BadgesGrid = () => {
     ];
   };
 
-  const filterBadges = () => {
-    let filtered = badges;
+  useEffect(() => {
+    const fetchBadges = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/xp/badges`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+        if (data.success && data.data && data.data.length > 0) {
+          setBadges(data.data);
+        } else {
+          // Fallback: show basic badge structure if API fails or returns empty
+          console.log('API returned no badges, using fallback');
+          setBadges(getDefaultBadges());
+        }
+      } catch (error) {
+        console.error('Error fetching badges:', error);
+        // Fallback: show basic badge structure if API fails
+        setBadges(getDefaultBadges());
+      } finally {
+        setLoading(false);
+      }
+    };
     
-    switch (filter) {
-      case 'earned':
-        filtered = badges.filter(badge => badge.isEarned);
-        break;
-      case 'progress':
-        filtered = badges.filter(badge => !badge.isEarned && badge.progress > 0);
-        break;
-      case 'locked':
-        filtered = badges.filter(badge => !badge.isEarned);
-        break;
-      default:
-        filtered = badges;
-    }
+    fetchBadges();
+  }, [API_URL, token]);
+
+  useEffect(() => {
+    const filterBadges = () => {
+      let filtered = badges;
+      
+      switch (filter) {
+        case 'earned':
+          filtered = badges.filter(badge => badge.isEarned);
+          break;
+        case 'progress':
+          filtered = badges.filter(badge => !badge.isEarned && badge.progress > 0);
+          break;
+        case 'locked':
+          filtered = badges.filter(badge => !badge.isEarned);
+          break;
+        default:
+          filtered = badges;
+      }
+      
+      setFilteredBadges(filtered);
+    };
     
-    setFilteredBadges(filtered);
-  };
+    filterBadges();
+  }, [badges, filter]);
 
   const getFilterStats = () => {
     const earned = badges.filter(badge => badge.isEarned).length;
@@ -122,76 +133,109 @@ const BadgesGrid = () => {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 text-center">
-            <Award className="w-10 h-10 text-green-400 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-green-300">{stats.earned}</div>
-            <div className="text-green-200/80 text-sm font-medium">Badges Earned</div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 backdrop-blur-sm border border-yellow-500/30 rounded-xl p-6 text-center">
-            <Trophy className="w-10 h-10 text-yellow-400 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-yellow-300">{stats.inProgress}</div>
-            <div className="text-yellow-200/80 text-sm font-medium">In Progress</div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 text-center">
-            <Filter className="w-10 h-10 text-purple-400 mx-auto mb-3" />
-            <div className="text-3xl font-bold text-purple-300">{stats.total}</div>
-            <div className="text-purple-200/80 text-sm font-medium">Total Badges</div>
-          </div>
+        {/* View Toggle */}
+        <div className="flex justify-center gap-3 mb-6">
+          <button
+            onClick={() => handleShowAnalytics(false)}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+              !showAnalytics
+                ? 'bg-purple-600/40 border border-purple-400/80 text-white shadow-lg'
+                : 'bg-white/10 border border-white/20 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/20'
+            }`}
+          >
+            <Trophy className="w-5 h-5" />
+            Badges
+          </button>
+          <button
+            onClick={() => handleShowAnalytics(true)}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+              showAnalytics
+                ? 'bg-cyan-600/40 border border-cyan-400/80 text-white shadow-lg'
+                : 'bg-white/10 border border-white/20 text-gray-300 hover:border-cyan-500/50 hover:bg-cyan-500/20'
+            }`}
+          >
+            <BarChart3 className="w-5 h-5" />
+            Analytics
+          </button>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex justify-center flex-wrap gap-3 mb-8">
-          {[
-            { key: 'all', label: 'All', count: badges.length },
-            { key: 'earned', label: 'Earned', count: stats.earned },
-            { key: 'progress', label: 'In Progress', count: stats.inProgress },
-            { key: 'locked', label: 'Locked', count: stats.total - stats.earned }
-          ].map(filterOption => (
-            <button
-              key={filterOption.key}
-              onClick={() => setFilter(filterOption.key)}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
-                filter === filterOption.key
-                  ? 'bg-purple-600/40 border border-purple-400/80 text-white shadow-lg'
-                  : 'bg-white/10 border border-white/20 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/20'
-              }`}
-            >
-              {filterOption.label} ({filterOption.count})
-            </button>
-          ))}
-        </div>
-
-        {/* Badges Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-          {filteredBadges.map(badge => (
-            <div key={badge.id} className="flex flex-col items-center group">
-              <Badge badge={badge} size="lg" showProgress={!badge.isEarned} />
-              <div className="text-center mt-3 transition-all duration-300 group-hover:scale-105">
-                <div className={`text-sm font-semibold ${badge.isEarned ? 'text-white' : 'text-gray-400'}`}>
-                  {badge.name}
-                </div>
-                <div className="text-xs text-gray-500 mt-1 max-w-[120px]">
-                  {badge.description}
-                </div>
-                {!badge.isEarned && (
-                  <div className="text-xs text-purple-300 mt-2 font-medium">
-                    {badge.current}/{badge.requirement}
-                  </div>
-                )}
+        {/* Conditional Rendering: Badges or Analytics */}
+        {showAnalytics ? (
+          <BadgeAnalytics key={analyticsKey} />
+        ) : (
+          <>
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 text-center">
+                <Award className="w-10 h-10 text-green-400 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-green-300">{stats.earned}</div>
+                <div className="text-green-200/80 text-sm font-medium">Badges Earned</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 backdrop-blur-sm border border-yellow-500/30 rounded-xl p-6 text-center">
+                <Trophy className="w-10 h-10 text-yellow-400 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-yellow-300">{stats.inProgress}</div>
+                <div className="text-yellow-200/80 text-sm font-medium">In Progress</div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 text-center">
+                <Filter className="w-10 h-10 text-purple-400 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-purple-300">{stats.total}</div>
+                <div className="text-purple-200/80 text-sm font-medium">Total Badges</div>
               </div>
             </div>
-          ))}
-        </div>
 
-        {filteredBadges.length === 0 && (
-          <div className="text-center py-20">
-            <div className="text-gray-400 text-xl mb-2">No badges found for this filter</div>
-            <div className="text-gray-500">Complete activities to start earning badges!</div>
-          </div>
+            {/* Filter Buttons */}
+            <div className="flex justify-center flex-wrap gap-3 mb-8">
+              {[
+                { key: 'all', label: 'All', count: badges.length },
+                { key: 'earned', label: 'Earned', count: stats.earned },
+                { key: 'progress', label: 'In Progress', count: stats.inProgress },
+                { key: 'locked', label: 'Locked', count: stats.total - stats.earned }
+              ].map(filterOption => (
+                <button
+                  key={filterOption.key}
+                  onClick={() => setFilter(filterOption.key)}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+                    filter === filterOption.key
+                      ? 'bg-purple-600/40 border border-purple-400/80 text-white shadow-lg'
+                      : 'bg-white/10 border border-white/20 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/20'
+                  }`}
+                >
+                  {filterOption.label} ({filterOption.count})
+                </button>
+              ))}
+            </div>
+
+            {/* Badges Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+              {filteredBadges.map(badge => (
+                <div key={badge.id} className="flex flex-col items-center group">
+                  <Badge badge={badge} size="lg" showProgress={!badge.isEarned} />
+                  <div className="text-center mt-3 transition-all duration-300 group-hover:scale-105">
+                    <div className={`text-sm font-semibold ${badge.isEarned ? 'text-white' : 'text-gray-400'}`}>
+                      {badge.name}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1 max-w-[120px]">
+                      {badge.description}
+                    </div>
+                    {!badge.isEarned && (
+                      <div className="text-xs text-purple-300 mt-2 font-medium">
+                        {badge.current}/{badge.requirement}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {filteredBadges.length === 0 && (
+              <div className="text-center py-20">
+                <div className="text-gray-400 text-xl mb-2">No badges found for this filter</div>
+                <div className="text-gray-500">Complete activities to start earning badges!</div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
