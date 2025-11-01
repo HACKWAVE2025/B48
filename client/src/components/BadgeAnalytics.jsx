@@ -135,21 +135,6 @@ const BadgeAnalytics = () => {
     inProgress: data.inProgress
   }));
 
-  const performanceChartData = quizPerformance.recentScores.slice(-10).map((score, index) => ({
-    quiz: `Q${index + 1}`,
-    score: score.score,
-    date: new Date(score.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-  }));
-
-  const subjectChartData = Object.entries(quizPerformance.subjectDistribution)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
-    .map(([subject, count]) => ({
-      name: subject,
-      value: count,
-      percentage: ((count / quizPerformance.totalQuizzes) * 100).toFixed(1)
-    }));
-
   const progressChartData = progressTracking.slice(0, 8).map(badge => ({
     name: badge.name.length > 15 ? badge.name.substring(0, 15) + '...' : badge.name,
     progress: badge.progress,
@@ -224,7 +209,6 @@ const BadgeAnalytics = () => {
         {[
           { key: 'overview', label: 'Overview', icon: TrendingUp },
           { key: 'progress', label: 'Progress', icon: Target },
-          { key: 'performance', label: 'Performance', icon: BarChart3 },
           { key: 'recommendations', label: 'Tips', icon: Star }
         ].map(tab => (
           <button
@@ -554,168 +538,6 @@ const BadgeAnalytics = () => {
               </ResponsiveContainer>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Performance Tab */}
-      {activeTab === 'performance' && (
-        <div className="space-y-6">
-          {/* Quiz Performance Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatBox label="Total Quizzes" value={quizPerformance.totalQuizzes} />
-            <StatBox label="Average Score" value={quizPerformance.averageScore} unit="%" />
-            <StatBox label="Highest Score" value={quizPerformance.highestScore} unit="%" />
-            <StatBox label="Perfect Scores" value={quizPerformance.perfectScores} />
-          </div>
-
-          {/* Performance Trend Line Chart */}
-          {performanceChartData.length > 0 && (
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <TrendingUp className="w-6 h-6 text-blue-400" />
-                Recent Performance Trend
-              </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={performanceChartData}>
-                  <defs>
-                    <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                  <XAxis dataKey="date" tick={{ fill: '#ffffff' }} />
-                  <YAxis domain={[0, 100]} tick={{ fill: '#ffffff' }} />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Area type="monotone" dataKey="score" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorScore)" name="Score %" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          )}
-
-          {/* Subject Distribution */}
-          {subjectChartData.length > 0 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Pie Chart */}
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <PieChart className="w-6 h-6 text-purple-400" />
-                  Subject Distribution
-                </h3>
-                <ResponsiveContainer width="100%" height={350}>
-                  <RechartsPieChart>
-                    <Pie
-                      data={subjectChartData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={{
-                        stroke: '#ffffff40',
-                        strokeWidth: 1
-                      }}
-                      label={({
-                        cx,
-                        cy,
-                        midAngle,
-                        outerRadius,
-                        percent,
-                        name
-                      }) => {
-                        const RADIAN = Math.PI / 180;
-                        const radius = outerRadius + 25;
-                        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-                        
-                        // Only show label if percentage is > 3% to avoid clutter
-                        if (percent < 0.03) return null;
-
-                        return (
-                          <text
-                            x={x}
-                            y={y}
-                            fill="white"
-                            textAnchor={x > cx ? 'start' : 'end'}
-                            dominantBaseline="central"
-                            fontSize={11}
-                            fontWeight={500}
-                          >
-                            {`${name}: ${(percent * 100).toFixed(0)}%`}
-                          </text>
-                        );
-                      }}
-                      outerRadius={85}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {subjectChartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend 
-                      verticalAlign="bottom" 
-                      height={36}
-                      wrapperStyle={{ fontSize: '11px', color: '#ffffff' }}
-                    />
-                  </RechartsPieChart>
-                </ResponsiveContainer>
-              </div>
-
-              {/* Bar Chart */}
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6 text-blue-400" />
-                  Quiz Count by Subject
-                </h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={subjectChartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                    <XAxis dataKey="name" tick={{ fill: '#ffffff', fontSize: 11 }} angle={-45} textAnchor="end" height={80} />
-                    <YAxis tick={{ fill: '#ffffff' }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="value" fill="#3b82f6" name="Quiz Count" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          )}
-
-          {/* Time Stats */}
-          {(quizPerformance.averageTime > 0 || quizPerformance.fastestTime) && (
-            <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Clock className="w-6 h-6 text-cyan-400" />
-                Time Performance
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {quizPerformance.averageTime > 0 && (
-                  <StatBox 
-                    label="Average Time" 
-                    value={Math.floor(quizPerformance.averageTime / 60)} 
-                    unit="min" 
-                  />
-                )}
-                {quizPerformance.fastestTime && (
-                  <StatBox 
-                    label="Fastest Time" 
-                    value={Math.floor(quizPerformance.fastestTime / 60)} 
-                    unit="min" 
-                  />
-                )}
-                <ResponsiveContainer width="100%" height={120}>
-                  <BarChart data={[
-                    { name: 'Avg', time: Math.floor(quizPerformance.averageTime / 60) },
-                    { name: 'Fast', time: quizPerformance.fastestTime ? Math.floor(quizPerformance.fastestTime / 60) : 0 }
-                  ]}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                    <XAxis dataKey="name" tick={{ fill: '#ffffff' }} />
-                    <YAxis tick={{ fill: '#ffffff' }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="time" fill="#06b6d4" name="Time (min)" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          )}
         </div>
       )}
 

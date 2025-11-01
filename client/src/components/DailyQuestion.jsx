@@ -96,10 +96,6 @@ const DailyQuestion = () => {
           userAnswer: selectedAnswer
         });
         setHasSubmitted(true);
-        
-        // Trigger analytics refresh across tabs
-        localStorage.setItem('activityCompleted', Date.now().toString());
-        
         // Refresh streak stats
         await fetchStreakStats();
       } else {

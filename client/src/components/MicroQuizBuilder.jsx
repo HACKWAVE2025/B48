@@ -401,9 +401,6 @@ const MicroQuizBuilder = () => {
           setNewBadges(data.newBadges);
         }
         
-        // Trigger analytics refresh across tabs
-        localStorage.setItem('activityCompleted', Date.now().toString());
-        
         // Generate voice summary if available
         if (voiceEnabled) {
           generateVoiceSummary(data);
