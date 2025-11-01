@@ -14,6 +14,8 @@ import InviteUsersModal from './InviteUsersModal';
 import SessionSummaryModal from './SessionSummaryModal';
 import Whiteboard from './Whiteboard';
 import FlowchartGenerator from './FlowchartGenerator';
+import QuizGenerator from './QuizGenerator';
+import MultiplayerQuizRoom from './MultiplayerQuizRoom';
 import resourcesData from '../data/resourcesData';
 import { toast } from 'react-hot-toast';
 import { api, animationApi } from '../utils/api';
@@ -52,6 +54,9 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [aiIsLoading, setAiIsLoading] = useState(false);
   const [aiResponseType, setAiResponseType] = useState('both'); // 'text', 'animation', 'both'
   const [currentAiSessionId, setCurrentAiSessionId] = useState(null);
+  
+  // Quiz states
+  const [activeQuizRoom, setActiveQuizRoom] = useState(null);
   
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
@@ -926,6 +931,27 @@ const StudySessionRoom = ({ session, onBack }) => {
               <Library className="w-4 h-4" />
               <span>Resources</span>
             </button>
+            <button
+              onClick={() => setActiveTab('solo-quiz')}
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
+                activeTab === 'solo-quiz'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <Brain className="w-4 h-4" />
+              <span>Quiz</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('multiplayer-quiz')}
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
+                activeTab === 'multiplayer-quiz'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+             
+            </button>
           </div>
 
           {/* Tab Content */}
@@ -1175,6 +1201,29 @@ const StudySessionRoom = ({ session, onBack }) => {
 
           {activeTab === 'flowchart' && (
             <FlowchartGenerator sessionId={session?.sessionId} />
+          )}
+
+          {activeTab === 'solo-quiz' && (
+            <div className="flex-1 overflow-y-auto bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+              <div className="h-full min-h-[600px]">
+                <QuizGenerator />
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'multiplayer-quiz' && (
+            <div className="flex-1 overflow-y-auto bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+              <div className="h-full min-h-[600px]">
+                {activeQuizRoom ? (
+                  <MultiplayerQuizRoom 
+                    room={activeQuizRoom} 
+                    onLeave={() => setActiveQuizRoom(null)} 
+                  />
+                ) : (
+                  <QuizGenerator />
+                )}
+              </div>
+            </div>
           )}
 
           {activeTab === 'resources' && (
