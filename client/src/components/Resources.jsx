@@ -1,82 +1,63 @@
-import React, { useState } from 'react';
-import { ArrowLeft, BookOpen, GraduationCap, Library, FileText, Video, Download, Info } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Search, BookOpen, Library, FileText, Video, Download, ExternalLink, X, Eye } from 'lucide-react';
 import AutoText from './AutoText';
 import resourcesData from '../data/resourcesData';
 
 const Resources = () => {
-  const [currentView, setCurrentView] = useState('classes'); // classes, subjects, lessons, resources
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const showResourceNotification = (type) => {
-    const messages = {
-      textbook: 'Textbooks will be available soon! We are working on uploading all curriculum-aligned PDF resources.',
-      video: 'Educational videos will be integrated here! Coming soon with curated content from Khan Academy, BYJU\'S, and other educational platforms.',
-      notes: 'Study notes will be available soon! We are creating comprehensive notes for all lessons.'
-    };
-    alert(messages[type]);
-  };
+  // Flatten all lessons from all subjects for searching
+  const allLessons = useMemo(() => {
+    const lessons = [];
+    Object.keys(resourcesData).forEach((category) => {
+      resourcesData[category].subjects.forEach((subject) => {
+        subject.lessons.forEach((lesson) => {
+          lessons.push({
+            ...lesson,
+            subject: subject.name,
+            category: category
+          });
+        });
+      });
+    });
+    return lessons;
+  }, []);
 
-  const handleClassSelect = (classNum) => {
-    setSelectedClass(classNum);
-    setCurrentView('subjects');
-  };
-
-  const handleSubjectSelect = (subject) => {
-    setSelectedSubject(subject);
-    setCurrentView('lessons');
-  };
-
-  const handleLessonSelect = (lesson) => {
-    setSelectedLesson(lesson);
-    setCurrentView('resources');
-  };
-
-  const handleBack = () => {
-    if (currentView === 'resources') {
-      setCurrentView('lessons');
-      setSelectedLesson(null);
-    } else if (currentView === 'lessons') {
-      setCurrentView('subjects');
-      setSelectedSubject(null);
-    } else if (currentView === 'subjects') {
-      setCurrentView('classes');
-      setSelectedClass(null);
+  // Filter lessons based on search query
+  const filteredLessons = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return allLessons;
     }
-  };
-
-  const getSubjectIcon = (subjectName) => {
-    switch (subjectName.toLowerCase()) {
-      case 'english':
-        return BookOpen;
-      case 'mathematics':
-        return GraduationCap;
-      case 'science':
-        return Library;
-      case 'social studies':
-        return FileText;
-      default:
-        return BookOpen;
-    }
-  };
+    
+    const query = searchQuery.toLowerCase();
+    return allLessons.filter((lesson) => 
+      lesson.title.toLowerCase().includes(query) ||
+      lesson.subject.toLowerCase().includes(query)
+    );
+  }, [searchQuery, allLessons]);
 
   const getSubjectColor = (subjectName) => {
     switch (subjectName.toLowerCase()) {
-      case 'english':
-        return 'from-blue-500 to-cyan-500';
-      case 'mathematics':
+      case 'biology':
         return 'from-green-500 to-emerald-500';
-      case 'science':
+      case 'computer science':
+        return 'from-blue-500 to-cyan-500';
+      case 'physics':
         return 'from-purple-500 to-pink-500';
-      case 'social studies':
+      case 'chemistry':
         return 'from-orange-500 to-red-500';
+      case 'mathematics':
+        return 'from-yellow-500 to-orange-500';
       default:
-        return 'from-gray-500 to-slate-500';
+        return 'from-[#5E936C] to-[#93DA97]';
     }
   };
 
-  const renderClasses = () => (
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
+
+  return (
     <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
       {/* Animated particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -99,7 +80,7 @@ const Resources = () => {
       <div className="w-full relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
-          <div className="flex items-center space-x-4 mb-4">
+          <div className="flex items-center space-x-4 mb-6">
             <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
               <Library className="w-8 h-8 text-white" />
             </div>
@@ -108,295 +89,167 @@ const Resources = () => {
                 <AutoText>Learning Resources</AutoText>
               </h1>
               <p className="text-[#557063] text-lg mt-2">
-                <AutoText>Choose your class to access comprehensive study materials</AutoText>
+                <AutoText>Search for any topic to access notes and video tutorials</AutoText>
               </p>
             </div>
           </div>
-        </div>
 
-        {/* Classes Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {Object.keys(resourcesData.classes).map((classNum) => (
-            <div
-              key={classNum}
-              onClick={() => handleClassSelect(classNum)}
-              className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
-            >
-              <div className="text-center">
-                <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-sm mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl font-bold text-white">
-                    {classNum}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300">
-                  <AutoText>Class {classNum}</AutoText>
-                </h3>
-                <p className="text-[#557063] text-sm">
-                  <AutoText>
-                    {resourcesData.classes[classNum].subjects.length} subjects available
-                  </AutoText>
-                </p>
-              </div>
+          {/* Search Bar */}
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-6 w-6 text-[#5E936C]" />
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderSubjects = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
-      <div className="w-full relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for topics (e.g., Photosynthesis, CPU Scheduling...)"
+              className="w-full pl-12 pr-12 py-4 border-2 border-[#93DA97] rounded-2xl text-[#3E5F44] placeholder-[#557063]/60 focus:outline-none focus:border-[#5E936C] transition-colors duration-300 text-lg bg-white/80"
+            />
+            {searchQuery && (
               <button
-                onClick={handleBack}
-                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
+                onClick={clearSearch}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-[#557063] hover:text-[#5E936C] transition-colors duration-300"
               >
-                <ArrowLeft className="w-6 h-6 text-white" />
+                <X className="h-6 w-6" />
               </button>
-              <div>
-                <h1 className="text-4xl font-bold text-[#3E5F44]">
-                  <AutoText>Class {selectedClass} - Subjects</AutoText>
-                </h1>
-                <p className="text-[#557063] text-lg mt-2">
-                  <AutoText>Select a subject to explore lessons</AutoText>
-                </p>
-              </div>
-            </div>
+            )}
+          </div>
+
+          {/* Results count */}
+          <div className="mt-4 text-[#557063] text-sm">
+            <AutoText>
+              {filteredLessons.length} {filteredLessons.length === 1 ? 'resource' : 'resources'} found
+            </AutoText>
           </div>
         </div>
 
-        {/* Subjects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {resourcesData.classes[selectedClass].subjects.map((subject) => {
-            const IconComponent = getSubjectIcon(subject.name);
-            const colorClass = getSubjectColor(subject.name);
-            
-            return (
-              <div
-                key={subject.name}
-                onClick={() => handleSubjectSelect(subject)}
-                className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
-              >
-                <div className="text-center">
-                  <div className={`bg-gradient-to-r ${colorClass} p-6 rounded-full shadow-sm mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300">
-                    <AutoText>{subject.name}</AutoText>
-                  </h3>
-                  <p className="text-[#557063] text-sm">
-                    <AutoText>
-                      {subject.lessons.length} lessons available
-                    </AutoText>
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderLessons = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
-      <div className="w-full relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={handleBack}
-                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
-              >
-                <ArrowLeft className="w-6 h-6 text-white" />
-              </button>
-              <div>
-                <h1 className="text-4xl font-bold text-[#3E5F44]">
-                  <AutoText>Class {selectedClass} - {selectedSubject.name}</AutoText>
-                </h1>
-                <p className="text-[#557063] text-lg mt-2">
-                  <AutoText>Choose a lesson to access resources</AutoText>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Lessons Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {selectedSubject.lessons.map((lesson, index) => {
-            const colorClass = getSubjectColor(selectedSubject.name);
-            
-            return (
-              <div
-                key={index}
-                onClick={() => handleLessonSelect(lesson)}
-                className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-6 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className={`bg-gradient-to-r ${colorClass} p-3 rounded-lg shadow-sm group-hover:scale-110 transition-transform duration-300 shrink-0`}>
-                    <BookOpen className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300 leading-tight">
-                      <AutoText>{lesson.title}</AutoText>
-                    </h3>
-                    <div className="flex items-center space-x-4 text-sm text-[#557063]">
-                      <div className="flex items-center space-x-1">
-                        <FileText className="w-4 h-4" />
-                        <span><AutoText>Textbook</AutoText></span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Video className="w-4 h-4" />
-                        <span><AutoText>Video</AutoText></span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Download className="w-4 h-4" />
-                        <span><AutoText>Notes</AutoText></span>
+        {/* Results Grid */}
+        {filteredLessons.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6">
+            {filteredLessons.map((lesson, index) => {
+              const colorClass = getSubjectColor(lesson.subject);
+              
+              return (
+                <div
+                  key={index}
+                  className="bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+                >
+                  {/* Lesson Header */}
+                  <div className="flex items-start space-x-4 mb-6">
+                    <div className={`bg-gradient-to-r ${colorClass} p-3 rounded-lg shadow-sm shrink-0`}>
+                      <BookOpen className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-[#3E5F44] mb-2 leading-tight">
+                        {lesson.title}
+                      </h3>
+                      <div className="inline-flex items-center space-x-2 bg-[#E8FFD7] px-3 py-1 rounded-full">
+                        <span className="text-sm font-medium text-[#5E936C]">
+                          {lesson.subject}
+                        </span>
                       </div>
                     </div>
                   </div>
+
+                  {/* Resources Section */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Textbook/Notes */}
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-2 rounded-lg">
+                          <FileText className="w-5 h-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-[#3E5F44]">
+                          <AutoText>Study Notes</AutoText>
+                        </h4>
+                      </div>
+                      {lesson.resources.notes && lesson.resources.notes !== 'N/A' ? (
+                        <div className="space-y-2">
+                          <p className="text-sm text-[#557063] mb-3">
+                            Comprehensive notes and key points
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            <a
+                              href={lesson.resources.notes}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
+                            >
+                              <Eye className="w-4 h-4" />
+                              <span>View Notes</span>
+                            </a>
+                            {lesson.resources.notes.endsWith('.pdf') && (
+                              <a
+                                href={lesson.resources.notes}
+                                download
+                                className="inline-flex items-center space-x-2 bg-white border-2 border-blue-500 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
+                              >
+                                <Download className="w-4 h-4" />
+                                <span>Download</span>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-[#557063] italic">
+                          Notes coming soon...
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Video */}
+                    <div className="bg-gradient-to-br from-red-50 to-pink-50 border border-red-200 rounded-xl p-4">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className="bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg">
+                          <Video className="w-5 h-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-[#3E5F44]">
+                          <AutoText>Video Tutorial</AutoText>
+                        </h4>
+                      </div>
+                      {lesson.resources.video && lesson.resources.video !== 'N/A' ? (
+                        <div className="space-y-2">
+                          <p className="text-sm text-[#557063] mb-3">
+                            Interactive video explanation
+                          </p>
+                          <a
+                            href={lesson.resources.video}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-pink-600 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Watch Video</span>
+                          </a>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-[#557063] italic">
+                          Video coming soon...
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="bg-white border border-[#93DA97]/30 rounded-2xl p-12 text-center">
+            <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center">
+              <Search className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-[#3E5F44] mb-3">
+              <AutoText>No resources found</AutoText>
+            </h3>
+            <p className="text-[#557063] text-lg">
+              <AutoText>Try searching for different keywords or topics</AutoText>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
-
-  const renderResources = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
-      <div className="w-full relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={handleBack}
-                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
-              >
-                <ArrowLeft className="w-6 h-6 text-white" />
-              </button>
-              <div>
-                <h1 className="text-3xl font-bold text-[#3E5F44]">
-                  <AutoText>{selectedLesson.title}</AutoText>
-                </h1>
-                <p className="text-[#557063] text-lg mt-2">
-                  <AutoText>Class {selectedClass} - {selectedSubject.name}</AutoText>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Resources Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Textbook */}
-          <div className="group bg-white border border-[#93DA97]/30 hover:border-blue-500 rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
-            <div className="text-center">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <FileText className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                <AutoText>Textbook</AutoText>
-              </h3>
-              <p className="text-[#557063] mb-6 text-sm">
-                <AutoText>Official curriculum textbook in PDF format</AutoText>
-              </p>
-              <a
-                href={selectedLesson.resources.textbook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
-              >
-                <Download className="w-5 h-5" />
-                <span><AutoText>View Textbook</AutoText></span>
-              </a>
-            </div>
-          </div>
-
-          {/* Video */}
-          <div className="group bg-white border border-[#93DA97]/30 hover:border-red-500 rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
-            <div className="text-center">
-              <div className="bg-gradient-to-r from-red-500 to-pink-500 p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Video className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-red-600 transition-colors duration-300">
-                <AutoText>Video Lesson</AutoText>
-              </h3>
-              <p className="text-[#557063] mb-6 text-sm">
-                <AutoText>Interactive video explanation with animations</AutoText>
-              </p>
-              {selectedLesson.resources.video.includes('youtube.com') ? (
-                <a
-                  href={selectedLesson.resources.video}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
-                >
-                  <Video className="w-5 h-5" />
-                  <span><AutoText>Watch Video</AutoText></span>
-                </a>
-              ) : (
-                <button
-                  onClick={() => showResourceNotification('video')}
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
-                >
-                  <Video className="w-5 h-5" />
-                  <span><AutoText>Coming Soon</AutoText></span>
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Notes */}
-          <div className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
-            <div className="text-center">
-              <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <BookOpen className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-[#5E936C] transition-colors duration-300">
-                <AutoText>Study Notes</AutoText>
-              </h3>
-              <p className="text-[#557063] mb-6 text-sm">
-                <AutoText>Comprehensive study notes and key points</AutoText>
-              </p>
-              <button
-                onClick={() => showResourceNotification('notes')}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white px-6 py-3 rounded-xl hover:from-[#3E5F44] hover:to-[#5E936C] transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
-              >
-                <Download className="w-5 h-5" />
-                <span><AutoText>Coming Soon</AutoText></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderCurrentView = () => {
-    switch (currentView) {
-      case 'classes':
-        return renderClasses();
-      case 'subjects':
-        return renderSubjects();
-      case 'lessons':
-        return renderLessons();
-      case 'resources':
-        return renderResources();
-      default:
-        return renderClasses();
-    }
-  };
-
-  return renderCurrentView();
 };
 
 export default Resources;
