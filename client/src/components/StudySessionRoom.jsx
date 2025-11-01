@@ -66,6 +66,28 @@ const StudySessionRoom = ({ session, onBack }) => {
     return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
   };
 
+  const getSubjectIcon = (subject) => {
+    const icons = {
+      math: '🔢',
+      science: '🔬',
+      english: '📚',
+      history: '📜',
+      geography: '🌍'
+    };
+    return icons[subject?.toLowerCase()] || '📖';
+  };
+
+  const getSubjectColor = (subject) => {
+    const colors = {
+      math: 'from-blue-500/20 to-cyan-500/20 border-blue-500/30',
+      science: 'from-green-500/20 to-emerald-500/20 border-green-500/30',
+      english: 'from-purple-500/20 to-pink-500/20 border-purple-500/30',
+      history: 'from-amber-500/20 to-orange-500/20 border-amber-500/30',
+      geography: 'from-teal-500/20 to-cyan-500/20 border-teal-500/30'
+    };
+    return colors[subject?.toLowerCase()] || 'from-gray-500/20 to-slate-500/20 border-gray-500/30';
+  };
+
   // Fetch simulations when switching to simulations tab
   useEffect(() => {
     if (activeTab === 'simulations' && simulations.length === 0) {
