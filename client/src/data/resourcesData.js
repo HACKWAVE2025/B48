@@ -9,7 +9,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=E22APTvfwyE",
-              "notes": "N/A"
+              "notes": "general/biology/photosynthesis_intro_notes.pdf"
             }
           },
           {
@@ -17,7 +17,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=4xHPDxVrJqc",
-              "notes": "N/A"
+              "notes": "general/biology/photosynthesis_light_reactions_notes.pdf"
             }
           },
           {
@@ -25,7 +25,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=slm6D2VEXYs",
-              "notes": "N/A"
+              "notes": "general/biology/photosynthesis_calvin_cycle_notes.pdf"
             }
           },
           {
@@ -33,7 +33,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=7ynX_F-SwNY",
-              "notes": "N/A"
+              "notes": "general/biology/photosynthesis_c4_cam_notes.pdf"
             }
           }
         ]
@@ -46,7 +46,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=vlc0Ea4ID9s",
-              "notes": "N/A"
+              "notes": "general/cs/fcfs_notes.pdf"
             }
           },
           {
@@ -54,7 +54,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=pYO-FAg-TpQ",
-              "notes": "N/A"
+              "notes": "general/cs/sjf_notes.pdf"
             }
           },
           {
@@ -62,7 +62,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=Bmv4hctjevI",
-              "notes": "N/A"
+              "notes": "general/cs/round_robin_notes.pdf"
             }
           },
           {
@@ -70,7 +70,7 @@ const resourcesData = {
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=q4GqVK8HnKQ",
-              "notes": "N/A"
+              "notes": "general/cs/priority_scheduling_notes.pdf"
             }
           }
         ]
