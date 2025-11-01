@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const messageSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: true,
     trim: true,
     maxlength: 1000
   },
@@ -19,8 +18,20 @@ const messageSchema = new mongoose.Schema({
   },
   messageType: {
     type: String,
-    enum: ['text', 'image', 'system'],
+    enum: ['text', 'image', 'video', 'audio', 'file', 'system'],
     default: 'text'
+  },
+  fileUrl: {
+    type: String
+  },
+  fileName: {
+    type: String
+  },
+  fileSize: {
+    type: Number
+  },
+  mimeType: {
+    type: String
   },
   edited: {
     type: Boolean,

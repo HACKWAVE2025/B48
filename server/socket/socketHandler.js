@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Room = require('../models/Room');
+const StudySession = require('../models/StudySession');
 const Message = require('../models/Message');
 const User = require('../models/User');
 const QuizRoom = require('../models/QuizRoom');
@@ -87,8 +88,11 @@ class SocketHandler {
 
     // Socket event handlers (existing chat/video/etc handlers)
     socket.on('join_room', (data) => this.handleJoinRoom(socket, data));
+    socket.on('join_session', (data) => this.handleJoinSession(socket, data));
     socket.on('leave_room', (data) => this.handleLeaveRoom(socket, data));
+    socket.on('leave_session', (data) => this.handleLeaveSession(socket, data));
     socket.on('send_message', (data) => this.handleSendMessage(socket, data));
+    socket.on('file_uploaded', (data) => this.handleFileUploaded(socket, data));
     socket.on('typing_start', (data) => this.handleTypingStart(socket, data));
     socket.on('typing_stop', (data) => this.handleTypingStop(socket, data));
     socket.on('join_video_call', (data) => this.handleJoinVideoCall(socket, data));
@@ -339,8 +343,17 @@ class SocketHandler {
       // Award XP for participation
       await this.awardParticipationXP(socket.userId, 'message');
 
-      // Broadcast message to room
-      this.io.to(cleanRoomId).emit('new_message', {
+      // Broadcast message to room (excluding sender to avoid duplicates)
+      socket.broadcast.to(cleanRoomId).emit('new_message', {
+        _id: message._id,
+        content: message.content,
+        userId: message.userId,
+        roomId: message.roomId,
+        createdAt: message.createdAt
+      });
+
+      // Send message back to sender
+      socket.emit('new_message', {
         _id: message._id,
         content: message.content,
         userId: message.userId,
@@ -351,6 +364,26 @@ class SocketHandler {
     } catch (error) {
       console.error('Send message error:', error);
       socket.emit('error', { message: 'Failed to send message' });
+    }
+  }
+
+  handleFileUploaded(socket, data) {
+    try {
+      const { roomId, message } = data;
+      
+      if (!roomId || !message) {
+        return;
+      }
+
+      console.log(`Broadcasting file upload in room: ${roomId}`);
+
+      // Broadcast file message to everyone except sender
+      socket.broadcast.to(roomId).emit('file_uploaded', {
+        message: message
+      });
+
+    } catch (error) {
+      console.error('File upload broadcast error:', error);
     }
   }
 
@@ -1347,6 +1380,164 @@ async handleSubmitMultiplayerQuiz(socket, data) {
         console.error('Error handling multiplayer quiz submission:', error);
     }
 }
+
+  // Study Session Handlers
+  async handleJoinSession(socket, data) {
+    try {
+      const { sessionId } = data;
+      
+      if (!sessionId) {
+        socket.emit('error', { message: 'Session ID is required' });
+        return;
+      }
+
+      console.log(`${socket.user.name} attempting to join session: ${sessionId}`);
+
+      // Find the session
+      const session = await StudySession.findOne({ sessionId });
+      
+      if (!session) {
+        socket.emit('error', { message: 'Session not found' });
+        return;
+      }
+
+      // Check if session is joinable
+      const now = new Date();
+      const sessionDate = new Date(session.date);
+      const [hours, minutes] = session.startTime.split(':').map(Number);
+      sessionDate.setHours(hours, minutes, 0, 0);
+      
+      const [endHours, endMinutes] = session.endTime.split(':').map(Number);
+      const endDate = new Date(sessionDate);
+      endDate.setHours(endHours, endMinutes, 0, 0);
+
+      // Check if session is active or has ended
+      if (session.status === 'completed' || session.status === 'cancelled') {
+        socket.emit('error', { message: 'This session has ended' });
+        return;
+      }
+
+      if (now > endDate) {
+        socket.emit('error', { message: 'This session has ended' });
+        return;
+      }
+
+      // Check if session is full
+      if (session.activeUsers.length >= session.maxUsers) {
+        socket.emit('error', { message: 'Session is full' });
+        return;
+      }
+
+      // Check if user is already in another active session
+      const userActiveSessions = await StudySession.find({
+        activeUsers: socket.userId,
+        status: 'active',
+        sessionId: { $ne: sessionId }
+      });
+
+      if (userActiveSessions.length > 0) {
+        socket.emit('error', { 
+          message: 'You are already in another active session. Please leave it first.',
+          currentSession: userActiveSessions[0].sessionId
+        });
+        return;
+      }
+
+      // Join the socket room
+      socket.join(sessionId);
+
+      // Add user to active users if not already there
+      if (!session.activeUsers.includes(socket.userId)) {
+        session.activeUsers.push(socket.userId);
+        await session.save();
+      }
+
+      // Track user in memory
+      const userInfo = this.activeUsers.get(socket.userId);
+      if (userInfo) {
+        userInfo.rooms.add(sessionId);
+      }
+
+      // Get populated session data
+      await session.populate('activeUsers', 'name level avatar');
+
+      // Notify user
+      socket.emit('session_joined', {
+        sessionId: session.sessionId,
+        title: session.title,
+        topic: session.topic,
+        subject: session.subject,
+        description: session.description,
+        activeUsers: session.activeUsers,
+        status: session.status
+      });
+
+      // Notify room
+      socket.to(sessionId).emit('user_joined_session', {
+        user: {
+          id: socket.userId,
+          name: socket.user.name,
+          level: socket.user.level,
+          avatar: socket.user.avatar
+        },
+        activeUsersCount: session.activeUsers.length
+      });
+
+      console.log(`${socket.user.name} joined session: ${sessionId}`);
+    } catch (error) {
+      console.error('Error joining session:', error);
+      socket.emit('error', { message: 'Failed to join session' });
+    }
+  }
+
+  async handleLeaveSession(socket, data) {
+    try {
+      const { sessionId } = data;
+      
+      if (!sessionId) {
+        return;
+      }
+
+      console.log(`${socket.user.name} leaving session: ${sessionId}`);
+
+      // Find the session
+      const session = await StudySession.findOne({ sessionId });
+      
+      if (session) {
+        // Remove user from active users
+        session.activeUsers = session.activeUsers.filter(
+          userId => userId.toString() !== socket.userId
+        );
+        await session.save();
+
+        // Get updated user list
+        await session.populate('activeUsers', 'name level avatar');
+
+        // Notify room
+        socket.to(sessionId).emit('user_left_session', {
+          userId: socket.userId,
+          userName: socket.user.name,
+          activeUsersCount: session.activeUsers.length
+        });
+      }
+
+      // Leave socket room
+      socket.leave(sessionId);
+
+      // Update user info
+      const userInfo = this.activeUsers.get(socket.userId);
+      if (userInfo) {
+        userInfo.rooms.delete(sessionId);
+      }
+
+      // Notify user
+      socket.emit('session_left', { sessionId });
+
+      console.log(`${socket.user.name} left session: ${sessionId}`);
+    } catch (error) {
+      console.error('Error leaving session:', error);
+    }
+  }
 }
 
 module.exports = SocketHandler;
