@@ -3,7 +3,7 @@ import {
   ArrowLeft, Send, Video, Users, Clock, BookOpen, 
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
   Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
-  Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize
+  Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize, GitBranch
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
@@ -11,6 +11,7 @@ import VideoCall from './VideoCall';
 import InviteUsersModal from './InviteUsersModal';
 import SessionSummaryModal from './SessionSummaryModal';
 import Whiteboard from './Whiteboard';
+import FlowchartGenerator from './FlowchartGenerator';
 import resourcesData from '../data/resourcesData';
 
 const StudySessionRoom = ({ session, onBack }) => {
@@ -642,6 +643,20 @@ const StudySessionRoom = ({ session, onBack }) => {
               </span>
             </button>
             <button
+              onClick={() => setActiveTab('flowchart')}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+                activeTab === 'flowchart'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <GitBranch className="w-4 h-4" />
+              <span>Flowchart</span>
+              <span className="bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">
+                AI
+              </span>
+            </button>
+            <button
               onClick={() => {
                 setActiveTab('resources');
                 setSelectedClass(null);
@@ -902,6 +917,10 @@ const StudySessionRoom = ({ session, onBack }) => {
                 </div>
               )}
             </div>
+          )}
+
+          {activeTab === 'flowchart' && (
+            <FlowchartGenerator sessionId={session?.sessionId} />
           )}
 
           {activeTab === 'resources' && (

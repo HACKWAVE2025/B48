@@ -218,7 +218,7 @@ const LearnViaAnimations = () => {
           let errorMessage = 'Failed to generate animation. Please try again.';
           
           if (error.code === 'ECONNABORTED') {
-            errorMessage = 'Animation generation timed out (took more than 3 minutes). Please try a simpler prompt or try again later.';
+            errorMessage = 'Animation generation timed out (took more than 10 minutes). Please try a simpler prompt or try again later.';
           } else if (error.code === 'ERR_NETWORK') {
             errorMessage = 'Network error while generating animation. Please check your connection and try again.';
           } else if (error.response?.data?.message) {

@@ -139,7 +139,7 @@ const ChatRoom = ({ room, onBack }) => {
       />
 
       {/* Chat Interface */}
-      <div className={`flex flex-col h-full bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl ${videoCallActive ? 'hidden' : ''}`}>
+      <div className={`flex flex-col h-[calc(100vh-8rem)] min-h-[800px] bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl ${videoCallActive ? 'hidden' : ''}`}>
         {/* Header */}
         <div className="p-4 border-b border-white/20 flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -210,7 +210,7 @@ const ChatRoom = ({ room, onBack }) => {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
           {messages.map((msg) => {
             const isOwnMessage = msg.userId._id === getCurrentUserId() || msg.userId === getCurrentUserId();
             
@@ -219,7 +219,7 @@ const ChatRoom = ({ room, onBack }) => {
                 key={msg._id}
                 className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex items-start space-x-3 max-w-xs lg:max-w-md ${isOwnMessage ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                <div className={`flex items-start space-x-3 max-w-sm lg:max-w-xl ${isOwnMessage ? 'flex-row-reverse space-x-reverse' : ''}`}>
                   {!isOwnMessage && (
                     <div className="flex-shrink-0">
                       <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">

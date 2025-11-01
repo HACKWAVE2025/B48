@@ -14,7 +14,7 @@ const api = axios.create({
 // Create separate instance for animation requests with longer timeout
 const animationApi = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000',
-  timeout: 150000, // 2.5 minutes for animation requests
+  timeout: 600000, // 10 minutes for animation requests
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'

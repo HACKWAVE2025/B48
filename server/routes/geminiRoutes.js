@@ -355,7 +355,7 @@ router.post('/generate-animation', async (req, res) => {
         'Accept': 'application/json',
         'User-Agent': 'Rural-Learning-Platform/1.0'
       },
-      timeout: 180000, // 3 minute timeout for animation generation
+      timeout: 600000, // 10 minute timeout for animation generation
       validateStatus: function (status) {
         return status < 500; // Don't throw for status codes less than 500
       }
@@ -578,6 +578,166 @@ router.get('/cache-stats', async (req, res) => {
     res.status(500).json({
       error: 'Failed to fetch cache statistics',
       message: 'An error occurred while fetching cache statistics.'
+    });
+  }
+});
+
+// Generate flowchart from question
+router.post('/generate-flowchart', async (req, res) => {
+  try {
+    console.log('Received flowchart generation request:', req.body);
+    
+    const { question, sessionId } = req.body;
+
+    if (!question || !question.trim()) {
+      return res.status(400).json({ error: 'Question is required' });
+    }
+
+    console.log('Processing flowchart request for:', question.trim());
+
+    // Check if API key exists
+    if (!process.env.GEMINI_API_KEY) {
+      console.error('GEMINI_API_KEY not found in environment variables');
+      return res.status(500).json({
+        error: 'Configuration error',
+        message: 'Gemini API key not configured'
+      });
+    }
+
+    // Get the generative model
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+    // Create a specialized prompt for flowchart generation
+    const flowchartPrompt = `You are an expert at creating Mermaid.js flowchart diagrams. Your task is to convert educational concepts, processes, or algorithms into clear, well-structured flowcharts.
+
+User Question/Topic: ${question}
+
+Please create a Mermaid.js flowchart diagram that visualizes this concept or process. Follow these STRICT guidelines:
+
+1. Start with "flowchart TD" (top-down) or "flowchart LR" (left-right)
+2. Use ONLY these node types with SIMPLE text (no special characters inside labels):
+   - Rectangle: A[Start Process]
+   - Diamond: B{Is Condition True}
+   - Rounded: C(End Process)
+   - Stadium: D([Alternative Step])
+3. Use simple arrows: --> or --- (no fancy arrows)
+4. Keep node IDs simple: A, B, C, D, etc.
+5. Keep text inside nodes short and simple (3-8 words max)
+6. Avoid special characters like parentheses, brackets, or quotes inside node text
+7. Use only alphanumeric characters, spaces, and basic punctuation (. , ?) in labels
+8. Include 5-12 nodes total
+9. Each line should be: NodeID[Text] --> NodeID2[Text] or NodeID{Question?}
+
+EXAMPLE FORMAT:
+flowchart TD
+    A[Start] --> B[First Step]
+    B --> C{Decision Point?}
+    C -->|Yes| D[Action A]
+    C -->|No| E[Action B]
+    D --> F[End]
+    E --> F
+
+CRITICAL RULES:
+- NO parentheses inside square brackets or curly braces
+- NO nested brackets
+- NO quotes inside node labels
+- NO special symbols inside labels (except ? for questions)
+- Keep labels plain and simple
+- Only output the Mermaid.js code, nothing else
+- Do not include markdown code blocks
+- Do not include explanations
+
+Generate the Mermaid.js flowchart code now:`;
+
+    console.log('Sending request to Gemini API for flowchart generation...');
+
+    // Generate response with timeout
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 second timeout
+    });
+
+    const result = await Promise.race([
+      model.generateContent(flowchartPrompt),
+      timeoutPromise
+    ]);
+
+    console.log('Received response from Gemini API');
+    
+    const response = await result.response;
+    let flowchartCode = response.text();
+
+    // Clean up the response
+    flowchartCode = flowchartCode.trim();
+    
+    // Remove markdown code blocks if present
+    flowchartCode = flowchartCode.replace(/```mermaid\n?/g, '');
+    flowchartCode = flowchartCode.replace(/```\n?/g, '');
+    flowchartCode = flowchartCode.trim();
+
+    // Validate that it starts with flowchart
+    if (!flowchartCode.startsWith('flowchart')) {
+      // Try to find flowchart in the response
+      const lines = flowchartCode.split('\n');
+      const flowchartStart = lines.findIndex(line => line.trim().startsWith('flowchart'));
+      if (flowchartStart !== -1) {
+        flowchartCode = lines.slice(flowchartStart).join('\n');
+      } else {
+        throw new Error('Invalid flowchart code generated');
+      }
+    }
+
+    // Additional cleaning: Fix common syntax issues
+    flowchartCode = flowchartCode
+      .split('\n')
+      .map(line => {
+        // Remove any stray characters that might cause parsing issues
+        return line.trim();
+      })
+      .filter(line => line.length > 0) // Remove empty lines
+      .join('\n');
+
+    // Validate basic syntax
+    if (!flowchartCode.includes('[') && !flowchartCode.includes('{')) {
+      throw new Error('Invalid flowchart structure - no nodes found');
+    }
+
+    console.log('Successfully generated and validated flowchart');
+
+    res.json({
+      success: true,
+      flowchart: flowchartCode,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Flowchart generation error:', error);
+    console.error('Error stack:', error.stack);
+    
+    // Handle specific API errors
+    if (error.message.includes('API key') || error.message.includes('API_KEY')) {
+      return res.status(401).json({ 
+        error: 'Invalid API key', 
+        message: 'Please check your Gemini API configuration' 
+      });
+    }
+    
+    if (error.message.includes('quota') || error.message.includes('QUOTA')) {
+      return res.status(429).json({ 
+        error: 'API quota exceeded', 
+        message: 'You have reached your API usage limit. Please try again later.' 
+      });
+    }
+
+    if (error.message === 'Request timeout') {
+      return res.status(504).json({ 
+        error: 'Request timeout', 
+        message: 'The request took too long to process. Please try again.' 
+      });
+    }
+    
+    res.status(500).json({ 
+      error: 'Failed to generate flowchart', 
+      message: error.message || 'An unexpected error occurred while generating the flowchart.' 
     });
   }
 });
