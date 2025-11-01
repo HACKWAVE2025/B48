@@ -180,181 +180,183 @@ const FlowchartGenerator = ({ sessionId }) => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-[#E8FFD7]/30 to-white">
-      {/* Header */}
-      <div className="p-6 border-b border-[#93DA97]/30 bg-[#E8FFD7]/50">
-        <h3 className="text-2xl font-bold text-[#3E5F44] mb-2 flex items-center space-x-2">
-          <Sparkles className="w-6 h-6" />
+    <div className="h-full flex flex-col bg-gradient-to-br from-[#E8FFD7]/30 to-white overflow-hidden">
+      {/* Compact Header */}
+      <div className="p-2 border-b border-[#93DA97]/30 bg-[#E8FFD7]/50 flex-shrink-0">
+        <h3 className="text-base font-bold text-[#3E5F44] flex items-center space-x-2">
+          <Sparkles className="w-4 h-4" />
           <span>AI Flowchart Generator</span>
         </h3>
-        <p className="text-[#557063]">
-          Describe a process, concept, or algorithm, and AI will generate a visual flowchart for you.
-        </p>
       </div>
 
-      {/* Input Section */}
-      <div className="p-6 border-b border-[#93DA97]/30 bg-white">
-        <form onSubmit={handleGenerateFlowchart} className="space-y-4">
-          <div>
-            <label className="block text-[#3E5F44] font-medium mb-2">
-              What would you like to visualize?
-            </label>
-            <textarea
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Example: How does photosynthesis work? Or explain the process of solving a quadratic equation..."
-              className="w-full bg-white border border-[#93DA97]/30 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none"
-              rows="4"
-              disabled={loading}
-            />
-          </div>
-          
-          <div className="flex space-x-3">
-            <button
-              type="submit"
-              disabled={!question.trim() || loading}
-              className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg transition-all disabled:cursor-not-allowed shadow-sm font-medium"
-            >
-              {loading ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Generating...</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5" />
-                  <span>Generate Flowchart</span>
-                </>
-              )}
-            </button>
-            
-            {flowchartSvg && !loading && (
-              <button
-                type="button"
-                onClick={handleRegenerate}
-                className="flex items-center space-x-2 px-6 py-3 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all shadow-sm font-medium"
-              >
-                <RefreshCw className="w-5 h-5" />
-                <span>Regenerate</span>
-              </button>
-            )}
-          </div>
-        </form>
-
-        {error && (
-          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <div className="flex items-start space-x-2">
-              <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-red-600 text-sm font-medium mb-2">{error}</p>
-                <p className="text-red-500 text-xs">
-                  Tip: Try asking simpler questions like "How does photosynthesis work?" or "Explain the if-else statement"
-                </p>
+      {/* Main Content - Side by Side Layout */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Side - Input Section */}
+        <div className="w-80 border-r border-[#93DA97]/30 bg-white flex flex-col flex-shrink-0">
+          <div className="p-3 flex-1 overflow-y-auto">
+            <form onSubmit={handleGenerateFlowchart} className="space-y-3 h-full flex flex-col">
+              <div className="flex-1">
+                <label className="block text-[#3E5F44] font-medium mb-2 text-sm">
+                  What would you like to visualize?
+                </label>
+                <textarea
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  placeholder="Example: How does photosynthesis work? Or explain the process of solving a quadratic equation..."
+                  className="w-full h-full bg-white border border-[#93DA97]/30 rounded-lg px-3 py-2 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none text-sm"
+                  disabled={loading}
+                  style={{ minHeight: '200px' }}
+                />
               </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Flowchart Display */}
-      {flowchartSvg && (
-        <div className="flex-1 overflow-auto p-6">
-          <div className="bg-white rounded-lg border border-[#93DA97]/30 shadow-sm">
-            {/* Actions Bar */}
-            <div className="p-4 border-b border-[#93DA97]/30 flex items-center justify-between bg-[#E8FFD7]/30">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-[#3E5F44] font-medium text-sm">Generated Flowchart</span>
-              </div>
-              <div className="flex items-center space-x-2">
+              
+              <div className="space-y-2 flex-shrink-0">
                 <button
-                  onClick={handleCopyCode}
-                  className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all text-sm"
-                  title="Copy Mermaid Code"
+                  type="submit"
+                  disabled={!question.trim() || loading}
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg transition-all disabled:cursor-not-allowed shadow-sm font-medium text-sm"
                 >
-                  {copied ? (
+                  {loading ? (
                     <>
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span className="text-green-600">Copied!</span>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Generating...</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-4 h-4" />
-                      <span>Copy Code</span>
+                      <Sparkles className="w-4 h-4" />
+                      <span>Generate Flowchart</span>
                     </>
                   )}
                 </button>
-                <button
-                  onClick={handleDownloadSvg}
-                  className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all text-sm"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>SVG</span>
-                </button>
-                <button
-                  onClick={handleDownloadPng}
-                  className="flex items-center space-x-2 px-3 py-2 bg-[#5E936C] hover:bg-[#3E5F44] rounded-lg text-white transition-all text-sm shadow-sm"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>PNG</span>
-                </button>
+                
+                {flowchartSvg && !loading && (
+                  <button
+                    type="button"
+                    onClick={handleRegenerate}
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all shadow-sm font-medium text-sm"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    <span>Regenerate</span>
+                  </button>
+                )}
+              </div>
+
+              {error && (
+                <div className="p-2 bg-red-50 border border-red-200 rounded-lg flex-shrink-0">
+                  <div className="flex items-start space-x-2">
+                    <X className="w-3.5 h-3.5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-red-600 text-xs font-medium mb-1">{error}</p>
+                      <p className="text-red-500 text-xs">
+                        Try simpler questions like "How does photosynthesis work?"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+
+          {/* Code Section at Bottom */}
+          {flowchartCode && (
+            <details className="border-t border-[#93DA97]/30 flex-shrink-0 bg-gray-50">
+              <summary className="p-2 cursor-pointer hover:bg-[#E8FFD7]/20 transition-colors text-[#3E5F44] font-medium text-xs">
+                View Mermaid Code
+              </summary>
+              <div className="p-2 bg-gray-50 max-h-32 overflow-auto">
+                <pre className="bg-gray-900 text-gray-100 p-2 rounded-lg overflow-x-auto text-xs">
+                  <code>{flowchartCode}</code>
+                </pre>
+              </div>
+            </details>
+          )}
+        </div>
+
+        {/* Right Side - Flowchart Display */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {flowchartSvg ? (
+            <>
+              {/* Actions Bar */}
+              <div className="p-2 border-b border-[#93DA97]/30 flex items-center justify-between bg-[#E8FFD7]/30 flex-shrink-0">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-[#3E5F44] font-medium text-sm">Generated Flowchart</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={handleCopyCode}
+                    className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all text-xs"
+                    title="Copy Mermaid Code"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-green-600" />
+                        <span className="text-green-600">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy Code</span>
+                      </>
+                    )}
+                  </button>
+                  <button
+                    onClick={handleDownloadSvg}
+                    className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white hover:bg-gray-50 border border-[#93DA97] rounded-lg text-[#3E5F44] transition-all text-xs"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>SVG</span>
+                  </button>
+                  <button
+                    onClick={handleDownloadPng}
+                    className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-[#5E936C] hover:bg-[#3E5F44] rounded-lg text-white transition-all text-xs shadow-sm"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>PNG</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Flowchart SVG - Full Height Scrollable */}
+              <div className="flex-1 overflow-auto bg-gradient-to-br from-blue-50 to-purple-50">
+                <div className="p-6">
+                  <div 
+                    className="mermaid-container bg-white rounded-lg shadow-lg p-6 inline-block min-w-full"
+                    dangerouslySetInnerHTML={{ __html: flowchartSvg }}
+                    style={{
+                      fontSize: '16px',
+                      fontFamily: 'Arial, sans-serif'
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            /* Empty State */
+            <div className="flex-1 flex items-center justify-center p-4">
+              <div className="text-center max-w-md">
+                <div className="w-16 h-16 bg-[#E8FFD7] rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Sparkles className="w-8 h-8 text-[#5E936C]" />
+                </div>
+                <h4 className="text-lg font-semibold text-[#3E5F44] mb-2">
+                  No Flowchart Yet
+                </h4>
+                <p className="text-[#557063] mb-3 text-sm">
+                  Enter a question in the left panel to generate a visual flowchart using AI.
+                </p>
+                <div className="bg-[#E8FFD7]/50 rounded-lg p-3 text-left">
+                  <p className="text-[#3E5F44] font-medium mb-2 text-xs">Example questions:</p>
+                  <ul className="text-[#557063] text-xs space-y-1 list-disc list-inside">
+                    <li>Explain the water cycle</li>
+                    <li>Show cellular respiration process</li>
+                    <li>How does a for loop work?</li>
+                    <li>Steps to solve equations</li>
+                  </ul>
+                </div>
               </div>
             </div>
-
-            {/* Flowchart SVG */}
-            <div className="p-6 overflow-auto bg-gradient-to-br from-blue-50 to-purple-50">
-              <div 
-                className="mermaid-container flex items-center justify-center min-h-[400px]"
-                dangerouslySetInnerHTML={{ __html: flowchartSvg }}
-                style={{
-                  fontSize: '14px',
-                  fontFamily: 'Arial, sans-serif'
-                }}
-              />
-            </div>
-
-            {/* Code Section (Collapsible) */}
-            {flowchartCode && (
-              <details className="border-t border-[#93DA97]/30">
-                <summary className="p-4 cursor-pointer hover:bg-[#E8FFD7]/20 transition-colors text-[#3E5F44] font-medium">
-                  View Mermaid Code
-                </summary>
-                <div className="p-4 bg-gray-50">
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-                    <code>{flowchartCode}</code>
-                  </pre>
-                </div>
-              </details>
-            )}
-          </div>
+          )}
         </div>
-      )}
-
-      {/* Empty State */}
-      {!flowchartSvg && !loading && (
-        <div className="flex-1 flex items-center justify-center p-6">
-          <div className="text-center max-w-md">
-            <div className="w-20 h-20 bg-[#E8FFD7] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-10 h-10 text-[#5E936C]" />
-            </div>
-            <h4 className="text-xl font-semibold text-[#3E5F44] mb-2">
-              No Flowchart Yet
-            </h4>
-            <p className="text-[#557063] mb-4">
-              Enter a question or describe a process above to generate a visual flowchart using AI.
-            </p>
-            <div className="bg-[#E8FFD7]/50 rounded-lg p-4 text-left">
-              <p className="text-[#3E5F44] font-medium mb-2 text-sm">Example questions:</p>
-              <ul className="text-[#557063] text-sm space-y-1 list-disc list-inside">
-                <li>Explain the water cycle</li>
-                <li>Show the process of cellular respiration</li>
-                <li>How does a for loop work in programming?</li>
-                <li>Steps to solve a system of equations</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
