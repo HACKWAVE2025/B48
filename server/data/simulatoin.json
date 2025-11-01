@@ -1,0 +1,2538 @@
+[{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c67b"
+  },
+  "title": "Forces and Motion: Basics",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Forces and Motion: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.300Z"
+  },
+  "__v": 0,
+  "slug": "forces-and-motion-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c67c"
+  },
+  "title": "Projectile Motion",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Projectile Motion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.300Z"
+  },
+  "__v": 0,
+  "slug": "projectile-motion"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c67d"
+  },
+  "title": "The Ramp: Forces and Motion",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/the-ramp-forces-and-motion/latest/the-ramp-forces-and-motion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/the-ramp-forces-and-motion/latest/the-ramp-forces-and-motion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of The Ramp: Forces and Motion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.300Z"
+  },
+  "__v": 0,
+  "slug": "the-ramp-forces-and-motion"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c67e"
+  },
+  "title": "Friction",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/friction/latest/friction_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/friction/latest/friction_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Friction.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.301Z"
+  },
+  "__v": 0,
+  "slug": "friction"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c67f"
+  },
+  "title": "Masses and Springs",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/masses-and-springs/latest/masses-and-springs_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/masses-and-springs/latest/masses-and-springs_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Masses and Springs.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.301Z"
+  },
+  "__v": 0,
+  "slug": "masses-and-springs"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c680"
+  },
+  "title": "Masses and Springs: Basics",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/masses-and-springs-basics/latest/masses-and-springs-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/masses-and-springs-basics/latest/masses-and-springs-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Masses and Springs: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.301Z"
+  },
+  "__v": 0,
+  "slug": "masses-and-springs-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c681"
+  },
+  "title": "Pendulum Lab",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Pendulum Lab.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.301Z"
+  },
+  "__v": 0,
+  "slug": "pendulum-lab"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c682"
+  },
+  "title": "Under Pressure",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/under-pressure/latest/under-pressure_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/under-pressure/latest/under-pressure_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Under Pressure.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.301Z"
+  },
+  "__v": 0,
+  "slug": "under-pressure"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c683"
+  },
+  "title": "Balancing Act",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Balancing Act.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "balancing-act"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c684"
+  },
+  "title": "Gravity Force Lab",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gravity-force-lab/latest/gravity-force-lab_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gravity-force-lab/latest/gravity-force-lab_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gravity Force Lab.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "gravity-force-lab"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c685"
+  },
+  "title": "Gravity Force Lab: Basics",
+  "subject": "Physics",
+  "category": "MECHANICS & MOTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gravity-force-lab-basics/latest/gravity-force-lab-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gravity-force-lab-basics/latest/gravity-force-lab-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gravity Force Lab: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "gravity-force-lab-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c686"
+  },
+  "title": "Energy Skate Park",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Energy Skate Park.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "energy-skate-park"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c687"
+  },
+  "title": "Energy Skate Park: Basics",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/energy-skate-park-basics/latest/energy-skate-park-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/energy-skate-park-basics/latest/energy-skate-park-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Energy Skate Park: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "energy-skate-park-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c688"
+  },
+  "title": "Energy Forms and Changes",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Energy Forms and Changes.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "energy-forms-and-changes"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c689"
+  },
+  "title": "States of Matter",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of States of Matter.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "states-of-matter"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68a"
+  },
+  "title": "States of Matter: Basics",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of States of Matter: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "states-of-matter-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68b"
+  },
+  "title": "Gas Properties",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gas Properties.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "gas-properties"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68c"
+  },
+  "title": "Diffusion",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Diffusion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "diffusion"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68d"
+  },
+  "title": "Gases Intro",
+  "subject": "Physics",
+  "category": "ENERGY & THERMODYNAMICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gases Intro.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.302Z"
+  },
+  "__v": 0,
+  "slug": "gases-intro"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68e"
+  },
+  "title": "Wave on a String",
+  "subject": "Physics",
+  "category": "WAVES & SOUND",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Wave on a String.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "wave-on-a-string"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c68f"
+  },
+  "title": "Waves Intro",
+  "subject": "Physics",
+  "category": "WAVES & SOUND",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Waves Intro.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "waves-intro"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c690"
+  },
+  "title": "Wave Interference",
+  "subject": "Physics",
+  "category": "WAVES & SOUND",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Wave Interference.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "wave-interference"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c691"
+  },
+  "title": "Sound",
+  "subject": "Physics",
+  "category": "WAVES & SOUND",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/sound/latest/sound_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/sound/latest/sound_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Sound.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "sound"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c692"
+  },
+  "title": "Fourier: Making Waves",
+  "subject": "Physics",
+  "category": "WAVES & SOUND",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Fourier: Making Waves.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "fourier-making-waves"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c693"
+  },
+  "title": "Circuit Construction Kit: DC",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Circuit Construction Kit: DC.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "circuit-construction-kit-dc"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c694"
+  },
+  "title": "Circuit Construction Kit: DC - Virtual Lab",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Circuit Construction Kit: DC - Virtual Lab.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "circuit-construction-kit-dc-virtual-lab"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c695"
+  },
+  "title": "Circuit Construction Kit: AC",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Circuit Construction Kit: AC.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "circuit-construction-kit-ac"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c696"
+  },
+  "title": "Ohm's Law",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ohms-law/latest/ohms-law_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Ohm's Law.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "ohms-law"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c697"
+  },
+  "title": "Balloons and Static Electricity",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/balloons-and-static-electricity/latest/balloons-and-static-electricity_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/balloons-and-static-electricity/latest/balloons-and-static-electricity_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Balloons and Static Electricity.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "balloons-and-static-electricity"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c698"
+  },
+  "title": "Charges and Fields",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/charges-and-fields/latest/charges-and-fields_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Charges and Fields.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "charges-and-fields"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c699"
+  },
+  "title": "Capacitor Lab: Basics",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/capacitor-lab-basics/latest/capacitor-lab-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/capacitor-lab-basics/latest/capacitor-lab-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Capacitor Lab: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "capacitor-lab-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69a"
+  },
+  "title": "Faraday's Law",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Faraday's Law.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "faradays-law"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69b"
+  },
+  "title": "Faraday's Electromagnetic Lab",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/faradays-electromagnetic-lab/latest/faradays-electromagnetic-lab_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/faradays-electromagnetic-lab/latest/faradays-electromagnetic-lab_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Faraday's Electromagnetic Lab.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "faradays-electromagnetic-lab"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69c"
+  },
+  "title": "Magnet and Compass",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/magnet-and-compass/latest/magnet-and-compass_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/magnet-and-compass/latest/magnet-and-compass_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Magnet and Compass.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "magnet-and-compass"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69d"
+  },
+  "title": "John Travoltage",
+  "subject": "Physics",
+  "category": "ELECTRICITY & MAGNETISM",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/john-travoltage/latest/john-travoltage_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/john-travoltage/latest/john-travoltage_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of John Travoltage.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "john-travoltage"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69e"
+  },
+  "title": "Bending Light",
+  "subject": "Physics",
+  "category": "LIGHT & OPTICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Bending Light.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "bending-light"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c69f"
+  },
+  "title": "Color Vision",
+  "subject": "Physics",
+  "category": "LIGHT & OPTICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Color Vision.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "color-vision"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a0"
+  },
+  "title": "Geometric Optics",
+  "subject": "Physics",
+  "category": "LIGHT & OPTICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/geometric-optics/latest/geometric-optics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Geometric Optics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "geometric-optics"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a1"
+  },
+  "title": "Blackbody Spectrum",
+  "subject": "Physics",
+  "category": "LIGHT & OPTICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Blackbody Spectrum.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "blackbody-spectrum"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a2"
+  },
+  "title": "Molecules and Light",
+  "subject": "Physics",
+  "category": "LIGHT & OPTICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecules and Light.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "molecules-and-light"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a3"
+  },
+  "title": "Photoelectric Effect",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/photoelectric/latest/photoelectric_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/photoelectric/latest/photoelectric_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Photoelectric Effect.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "photoelectric-effect"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a4"
+  },
+  "title": "Quantum Wave Interference",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/quantum-wave-interference/latest/quantum-wave-interference_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/quantum-wave-interference/latest/quantum-wave-interference_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Quantum Wave Interference.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "quantum-wave-interference"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a5"
+  },
+  "title": "Models of the Hydrogen Atom",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/models-of-the-hydrogen-atom/latest/models-of-the-hydrogen-atom_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/models-of-the-hydrogen-atom/latest/models-of-the-hydrogen-atom_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Models of the Hydrogen Atom.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "models-of-the-hydrogen-atom"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a6"
+  },
+  "title": "Rutherford Scattering",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Rutherford Scattering.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "rutherford-scattering"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a7"
+  },
+  "title": "Build an Atom",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Build an Atom.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "build-an-atom"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a8"
+  },
+  "title": "Atomic Interactions",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/atomic-interactions/latest/atomic-interactions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/atomic-interactions/latest/atomic-interactions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Atomic Interactions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "atomic-interactions"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6a9"
+  },
+  "title": "Quantum Tunneling and Wave Packets",
+  "subject": "Physics",
+  "category": "QUANTUM PHYSICS & ATOMIC STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/quantum-tunneling/latest/quantum-tunneling_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/quantum-tunneling/latest/quantum-tunneling_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Quantum Tunneling and Wave Packets.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "quantum-tunneling-and-wave-packets"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6aa"
+  },
+  "title": "Density",
+  "subject": "Physics",
+  "category": "FLUID DYNAMICS & PRESSURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/density/latest/density_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/density/latest/density_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Density.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "density"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6ab"
+  },
+  "title": "Buoyancy",
+  "subject": "Physics",
+  "category": "FLUID DYNAMICS & PRESSURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Buoyancy.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "buoyancy"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6ac"
+  },
+  "title": "Fluid Pressure and Flow",
+  "subject": "Physics",
+  "category": "FLUID DYNAMICS & PRESSURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/fluid-pressure-and-flow/latest/fluid-pressure-and-flow_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/fluid-pressure-and-flow/latest/fluid-pressure-and-flow_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Fluid Pressure and Flow.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "fluid-pressure-and-flow"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6ad"
+  },
+  "title": "Alpha Decay",
+  "subject": "Physics",
+  "category": "NUCLEAR PHYSICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Alpha Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.303Z"
+  },
+  "__v": 0,
+  "slug": "alpha-decay"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6ae"
+  },
+  "title": "Beta Decay",
+  "subject": "Physics",
+  "category": "NUCLEAR PHYSICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Beta Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.304Z"
+  },
+  "__v": 0,
+  "slug": "beta-decay"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6af"
+  },
+  "title": "Nuclear Fission",
+  "subject": "Physics",
+  "category": "NUCLEAR PHYSICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/nuclear-fission/latest/nuclear-fission_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/nuclear-fission/latest/nuclear-fission_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Nuclear Fission.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.304Z"
+  },
+  "__v": 0,
+  "slug": "nuclear-fission"
+},
+{
+  "_id": {
+    "$oid": "68c1bf530750ba0ec007c6b0"
+  },
+  "title": "Radioactive Dating Game",
+  "subject": "Physics",
+  "category": "NUCLEAR PHYSICS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Radioactive Dating Game.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:11:31.304Z"
+  },
+  "__v": 0,
+  "slug": "radioactive-dating-game"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77319"
+  },
+  "title": "Number Line: Integers",
+  "subject": "Mathematics",
+  "category": "ARITHMETIC & NUMBER SENSE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/number-line-integers/latest/number-line-integers_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/number-line-integers/latest/number-line-integers_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Number Line: Integers.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.242Z"
+  },
+  "__v": 0,
+  "slug": "number-line-integers"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731a"
+  },
+  "title": "Number Line: Operations",
+  "subject": "Mathematics",
+  "category": "ARITHMETIC & NUMBER SENSE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/number-line-operations/latest/number-line-operations_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/number-line-operations/latest/number-line-operations_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Number Line: Operations.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.242Z"
+  },
+  "__v": 0,
+  "slug": "number-line-operations"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731b"
+  },
+  "title": "Number Line: Distance",
+  "subject": "Mathematics",
+  "category": "ARITHMETIC & NUMBER SENSE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/number-line-distance/latest/number-line-distance_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/number-line-distance/latest/number-line-distance_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Number Line: Distance.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.242Z"
+  },
+  "__v": 0,
+  "slug": "number-line-distance"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731c"
+  },
+  "title": "Make a Ten",
+  "subject": "Mathematics",
+  "category": "ARITHMETIC & NUMBER SENSE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/make-a-ten/latest/make-a-ten_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/make-a-ten/latest/make-a-ten_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Make a Ten.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.243Z"
+  },
+  "__v": 0,
+  "slug": "make-a-ten"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731d"
+  },
+  "title": "Arithmetic",
+  "subject": "Mathematics",
+  "category": "ARITHMETIC & NUMBER SENSE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/arithmetic/latest/arithmetic_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/arithmetic/latest/arithmetic_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Arithmetic.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.243Z"
+  },
+  "__v": 0,
+  "slug": "arithmetic"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731e"
+  },
+  "title": "Fractions: Intro",
+  "subject": "Mathematics",
+  "category": "FRACTIONS & PROPORTIONAL REASONING",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/fractions-intro/latest/fractions-intro_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/fractions-intro/latest/fractions-intro_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Fractions: Intro.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.243Z"
+  },
+  "__v": 0,
+  "slug": "fractions-intro"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7731f"
+  },
+  "title": "Fractions: Equality",
+  "subject": "Mathematics",
+  "category": "FRACTIONS & PROPORTIONAL REASONING",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/fractions-equality/latest/fractions-equality_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/fractions-equality/latest/fractions-equality_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Fractions: Equality.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.243Z"
+  },
+  "__v": 0,
+  "slug": "fractions-equality"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77320"
+  },
+  "title": "Fractions: Mixed Numbers",
+  "subject": "Mathematics",
+  "category": "FRACTIONS & PROPORTIONAL REASONING",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/fractions-mixed-numbers/latest/fractions-mixed-numbers_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/fractions-mixed-numbers/latest/fractions-mixed-numbers_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Fractions: Mixed Numbers.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.243Z"
+  },
+  "__v": 0,
+  "slug": "fractions-mixed-numbers"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77321"
+  },
+  "title": "Unit Rates",
+  "subject": "Mathematics",
+  "category": "FRACTIONS & PROPORTIONAL REASONING",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/unit-rates/latest/unit-rates_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/unit-rates/latest/unit-rates_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Unit Rates.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "unit-rates"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77322"
+  },
+  "title": "Ratio and Proportion",
+  "subject": "Mathematics",
+  "category": "FRACTIONS & PROPORTIONAL REASONING",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ratio-and-proportion/latest/ratio-and-proportion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ratio-and-proportion/latest/ratio-and-proportion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Ratio and Proportion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "ratio-and-proportion"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77323"
+  },
+  "title": "Graphing Lines",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Graphing Lines.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "graphing-lines"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77324"
+  },
+  "title": "Graphing Slope-Intercept",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/graphing-slope-intercept/latest/graphing-slope-intercept_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/graphing-slope-intercept/latest/graphing-slope-intercept_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Graphing Slope-Intercept.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "graphing-slope-intercept"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77325"
+  },
+  "title": "Graphing Quadratics",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/graphing-quadratics/latest/graphing-quadratics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/graphing-quadratics/latest/graphing-quadratics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Graphing Quadratics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "graphing-quadratics"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77326"
+  },
+  "title": "Function Builder",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/function-builder/latest/function-builder_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/function-builder/latest/function-builder_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Function Builder.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "function-builder"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77327"
+  },
+  "title": "Function Builder: Basics",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/function-builder-basics/latest/function-builder-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/function-builder-basics/latest/function-builder-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Function Builder: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "function-builder-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77328"
+  },
+  "title": "Equality Explorer",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/equality-explorer/latest/equality-explorer_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/equality-explorer/latest/equality-explorer_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Equality Explorer.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "equality-explorer"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77329"
+  },
+  "title": "Equality Explorer: Basics",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/equality-explorer-basics/latest/equality-explorer-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/equality-explorer-basics/latest/equality-explorer-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Equality Explorer: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.244Z"
+  },
+  "__v": 0,
+  "slug": "equality-explorer-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732a"
+  },
+  "title": "Equality Explorer: Two Variables",
+  "subject": "Mathematics",
+  "category": "ALGEBRA & FUNCTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/equality-explorer-two-variables/latest/equality-explorer-two-variables_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/equality-explorer-two-variables/latest/equality-explorer-two-variables_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Equality Explorer: Two Variables.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "equality-explorer-two-variables"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732b"
+  },
+  "title": "Area Builder",
+  "subject": "Mathematics",
+  "category": "GEOMETRY & MEASUREMENT",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/area-builder/latest/area-builder_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/area-builder/latest/area-builder_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Area Builder.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "area-builder"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732c"
+  },
+  "title": "Area Model Introduction",
+  "subject": "Mathematics",
+  "category": "GEOMETRY & MEASUREMENT",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/area-model-introduction/latest/area-model-introduction_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/area-model-introduction/latest/area-model-introduction_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Area Model Introduction.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "area-model-introduction"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732d"
+  },
+  "title": "Area Model Algebra",
+  "subject": "Mathematics",
+  "category": "GEOMETRY & MEASUREMENT",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/area-model-algebra/latest/area-model-algebra_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/area-model-algebra/latest/area-model-algebra_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Area Model Algebra.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "area-model-algebra"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732e"
+  },
+  "title": "Area Model Multiplication",
+  "subject": "Mathematics",
+  "category": "GEOMETRY & MEASUREMENT",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/area-model-multiplication/latest/area-model-multiplication_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/area-model-multiplication/latest/area-model-multiplication_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Area Model Multiplication.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "area-model-multiplication"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea7732f"
+  },
+  "title": "Area Model Decimals",
+  "subject": "Mathematics",
+  "category": "GEOMETRY & MEASUREMENT",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/area-model-decimals/latest/area-model-decimals_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/area-model-decimals/latest/area-model-decimals_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Area Model Decimals.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "area-model-decimals"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77330"
+  },
+  "title": "Plinko Probability",
+  "subject": "Mathematics",
+  "category": "STATISTICS & PROBABILITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Plinko Probability.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "plinko-probability"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77331"
+  },
+  "title": "Least-Squares Regression",
+  "subject": "Mathematics",
+  "category": "STATISTICS & PROBABILITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Least-Squares Regression.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "least-squares-regression"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77332"
+  },
+  "title": "Mean: Share and Balance",
+  "subject": "Mathematics",
+  "category": "STATISTICS & PROBABILITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/mean-share-and-balance/latest/mean-share-and-balance_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/mean-share-and-balance/latest/mean-share-and-balance_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Mean: Share and Balance.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "mean-share-and-balance"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77333"
+  },
+  "title": "Center and Variability",
+  "subject": "Mathematics",
+  "category": "STATISTICS & PROBABILITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/center-and-variability/latest/center-and-variability_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/center-and-variability/latest/center-and-variability_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Center and Variability.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "center-and-variability"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77334"
+  },
+  "title": "Calculus Grapher",
+  "subject": "Mathematics",
+  "category": "CALCULUS CONCEPTS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/calculus-grapher/latest/calculus-grapher_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/calculus-grapher/latest/calculus-grapher_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Calculus Grapher.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "calculus-grapher"
+},
+{
+  "_id": {
+    "$oid": "68c1c0bfefb586c37ea77335"
+  },
+  "title": "Curve Fitting",
+  "subject": "Mathematics",
+  "category": "CALCULUS CONCEPTS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/curve-fitting/latest/curve-fitting_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/curve-fitting/latest/curve-fitting_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Curve Fitting.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:17:35.245Z"
+  },
+  "__v": 0,
+  "slug": "curve-fitting"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b0"
+  },
+  "title": "Build an Atom",
+  "subject": "Chemistry",
+  "category": "ATOMIC STRUCTURE & PERIODIC TABLE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Build an Atom.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.046Z"
+  },
+  "__v": 0,
+  "slug": "build-an-atom-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b1"
+  },
+  "title": "Isotopes and Atomic Mass",
+  "subject": "Chemistry",
+  "category": "ATOMIC STRUCTURE & PERIODIC TABLE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Isotopes and Atomic Mass.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.047Z"
+  },
+  "__v": 0,
+  "slug": "isotopes-and-atomic-mass"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b2"
+  },
+  "title": "Atomic Interactions",
+  "subject": "Chemistry",
+  "category": "ATOMIC STRUCTURE & PERIODIC TABLE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/atomic-interactions/latest/atomic-interactions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/atomic-interactions/latest/atomic-interactions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Atomic Interactions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.047Z"
+  },
+  "__v": 0,
+  "slug": "atomic-interactions-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b3"
+  },
+  "title": "Rutherford Scattering",
+  "subject": "Chemistry",
+  "category": "ATOMIC STRUCTURE & PERIODIC TABLE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Rutherford Scattering.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.048Z"
+  },
+  "__v": 0,
+  "slug": "rutherford-scattering-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b4"
+  },
+  "title": "Models of the Hydrogen Atom",
+  "subject": "Chemistry",
+  "category": "ATOMIC STRUCTURE & PERIODIC TABLE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/models-of-the-hydrogen-atom/latest/models-of-the-hydrogen-atom_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/models-of-the-hydrogen-atom/latest/models-of-the-hydrogen-atom_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Models of the Hydrogen Atom.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.048Z"
+  },
+  "__v": 0,
+  "slug": "models-of-the-hydrogen-atom-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b5"
+  },
+  "title": "Molecule Shapes",
+  "subject": "Chemistry",
+  "category": "CHEMICAL BONDING & MOLECULAR STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecule Shapes.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.048Z"
+  },
+  "__v": 0,
+  "slug": "molecule-shapes"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b6"
+  },
+  "title": "Molecule Shapes: Basics",
+  "subject": "Chemistry",
+  "category": "CHEMICAL BONDING & MOLECULAR STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecule-shapes-basics/latest/molecule-shapes-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecule-shapes-basics/latest/molecule-shapes-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecule Shapes: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.048Z"
+  },
+  "__v": 0,
+  "slug": "molecule-shapes-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b7"
+  },
+  "title": "Molecule Polarity",
+  "subject": "Chemistry",
+  "category": "CHEMICAL BONDING & MOLECULAR STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecule-polarity/latest/molecule-polarity_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecule-polarity/latest/molecule-polarity_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecule Polarity.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.048Z"
+  },
+  "__v": 0,
+  "slug": "molecule-polarity"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b8"
+  },
+  "title": "Build a Molecule",
+  "subject": "Chemistry",
+  "category": "CHEMICAL BONDING & MOLECULAR STRUCTURE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Build a Molecule.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "build-a-molecule"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329b9"
+  },
+  "title": "States of Matter",
+  "subject": "Chemistry",
+  "category": "STATES OF MATTER & PHASE CHANGES",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/states-of-matter/latest/states-of-matter_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of States of Matter.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "states-of-matter-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329ba"
+  },
+  "title": "States of Matter: Basics",
+  "subject": "Chemistry",
+  "category": "STATES OF MATTER & PHASE CHANGES",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of States of Matter: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "states-of-matter-basics-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329bb"
+  },
+  "title": "Gas Properties",
+  "subject": "Chemistry",
+  "category": "STATES OF MATTER & PHASE CHANGES",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gas Properties.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "gas-properties-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329bc"
+  },
+  "title": "Gases Intro",
+  "subject": "Chemistry",
+  "category": "STATES OF MATTER & PHASE CHANGES",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gases Intro.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "gases-intro-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329bd"
+  },
+  "title": "Diffusion",
+  "subject": "Chemistry",
+  "category": "STATES OF MATTER & PHASE CHANGES",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Diffusion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "diffusion-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329be"
+  },
+  "title": "Reactants, Products and Leftovers",
+  "subject": "Chemistry",
+  "category": "CHEMICAL REACTIONS & STOICHIOMETRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Reactants, Products and Leftovers.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "reactants-products-and-leftovers"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329bf"
+  },
+  "title": "Balancing Chemical Equations",
+  "subject": "Chemistry",
+  "category": "CHEMICAL REACTIONS & STOICHIOMETRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Balancing Chemical Equations.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "balancing-chemical-equations"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c0"
+  },
+  "title": "Reversible Reactions",
+  "subject": "Chemistry",
+  "category": "CHEMICAL REACTIONS & STOICHIOMETRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/reversible-reactions/latest/reversible-reactions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/reversible-reactions/latest/reversible-reactions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Reversible Reactions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "reversible-reactions"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c1"
+  },
+  "title": "Concentration",
+  "subject": "Chemistry",
+  "category": "SOLUTIONS & CONCENTRATION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Concentration.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "concentration"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c2"
+  },
+  "title": "Molarity",
+  "subject": "Chemistry",
+  "category": "SOLUTIONS & CONCENTRATION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molarity.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.049Z"
+  },
+  "__v": 0,
+  "slug": "molarity"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c3"
+  },
+  "title": "Sugar and Salt Solutions",
+  "subject": "Chemistry",
+  "category": "SOLUTIONS & CONCENTRATION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/sugar-and-salt-solutions/latest/sugar-and-salt-solutions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/sugar-and-salt-solutions/latest/sugar-and-salt-solutions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Sugar and Salt Solutions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "sugar-and-salt-solutions"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c4"
+  },
+  "title": "Beers Law Lab",
+  "subject": "Chemistry",
+  "category": "SOLUTIONS & CONCENTRATION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/beers-law-lab/latest/beers-law-lab_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/beers-law-lab/latest/beers-law-lab_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Beers Law Lab.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "beers-law-lab"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c5"
+  },
+  "title": "pH Scale",
+  "subject": "Chemistry",
+  "category": "ACIDS, BASES & pH",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of pH Scale.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "ph-scale"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c6"
+  },
+  "title": "pH Scale: Basics",
+  "subject": "Chemistry",
+  "category": "ACIDS, BASES & pH",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of pH Scale: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "ph-scale-basics"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c7"
+  },
+  "title": "Acid-Base Solutions",
+  "subject": "Chemistry",
+  "category": "ACIDS, BASES & pH",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/acid-base-solutions/latest/acid-base-solutions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/acid-base-solutions/latest/acid-base-solutions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Acid-Base Solutions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "acid-base-solutions"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c8"
+  },
+  "title": "Molecules and Light",
+  "subject": "Chemistry",
+  "category": "LIGHT INTERACTION WITH MATTER",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecules and Light.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "molecules-and-light-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329c9"
+  },
+  "title": "Blackbody Spectrum",
+  "subject": "Chemistry",
+  "category": "LIGHT INTERACTION WITH MATTER",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/blackbody-spectrum/latest/blackbody-spectrum_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Blackbody Spectrum.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "blackbody-spectrum-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329ca"
+  },
+  "title": "Photoelectric Effect",
+  "subject": "Chemistry",
+  "category": "LIGHT INTERACTION WITH MATTER",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/photoelectric/latest/photoelectric_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/photoelectric/latest/photoelectric_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Photoelectric Effect.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "photoelectric-effect-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329cb"
+  },
+  "title": "Alpha Decay",
+  "subject": "Chemistry",
+  "category": "NUCLEAR CHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Alpha Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "alpha-decay-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329cc"
+  },
+  "title": "Beta Decay",
+  "subject": "Chemistry",
+  "category": "NUCLEAR CHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Beta Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "beta-decay-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329cd"
+  },
+  "title": "Nuclear Fission",
+  "subject": "Chemistry",
+  "category": "NUCLEAR CHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/nuclear-fission/latest/nuclear-fission_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/nuclear-fission/latest/nuclear-fission_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Nuclear Fission.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "nuclear-fission-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329ce"
+  },
+  "title": "Radioactive Dating Game",
+  "subject": "Chemistry",
+  "category": "NUCLEAR CHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Radioactive Dating Game.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "radioactive-dating-game-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c133a5336f01cc8329cf"
+  },
+  "title": "Energy Forms and Changes",
+  "subject": "Chemistry",
+  "category": "ENERGY IN CHEMICAL REACTIONS",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Energy Forms and Changes.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:19:31.050Z"
+  },
+  "__v": 0,
+  "slug": "energy-forms-and-changes-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5a"
+  },
+  "title": "Natural Selection",
+  "subject": "Biology",
+  "category": "GENETICS & HEREDITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Natural Selection.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.526Z"
+  },
+  "__v": 0,
+  "slug": "natural-selection"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5b"
+  },
+  "title": "Gene Expression Essentials",
+  "subject": "Biology",
+  "category": "GENETICS & HEREDITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gene-expression-essentials/latest/gene-expression-essentials_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gene Expression Essentials.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.527Z"
+  },
+  "__v": 0,
+  "slug": "gene-expression-essentials"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5c"
+  },
+  "title": "Gene Machine: The Lac Operon",
+  "subject": "Biology",
+  "category": "GENETICS & HEREDITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/gene-machine-lac-operon/latest/gene-machine-lac-operon_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/gene-machine-lac-operon/latest/gene-machine-lac-operon_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Gene Machine: The Lac Operon.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.528Z"
+  },
+  "__v": 0,
+  "slug": "gene-machine-the-lac-operon"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5d"
+  },
+  "title": "DNA",
+  "subject": "Biology",
+  "category": "GENETICS & HEREDITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/dna/latest/dna_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/dna/latest/dna_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of DNA.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.528Z"
+  },
+  "__v": 0,
+  "slug": "dna"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5e"
+  },
+  "title": "Protein Synthesis",
+  "subject": "Biology",
+  "category": "GENETICS & HEREDITY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/protein-synthesis/latest/protein-synthesis_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/protein-synthesis/latest/protein-synthesis_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Protein Synthesis.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.528Z"
+  },
+  "__v": 0,
+  "slug": "protein-synthesis"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae5f"
+  },
+  "title": "Population",
+  "subject": "Biology",
+  "category": "ECOLOGY & EVOLUTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/population/latest/population_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/population/latest/population_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Population.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.529Z"
+  },
+  "__v": 0,
+  "slug": "population"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae60"
+  },
+  "title": "Predator-Prey Cycles",
+  "subject": "Biology",
+  "category": "ECOLOGY & EVOLUTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/predator-prey/latest/predator-prey_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/predator-prey/latest/predator-prey_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Predator-Prey Cycles.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.529Z"
+  },
+  "__v": 0,
+  "slug": "predator-prey-cycles"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae61"
+  },
+  "title": "Foraging",
+  "subject": "Biology",
+  "category": "ECOLOGY & EVOLUTION",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/foraging/latest/foraging_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/foraging/latest/foraging_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Foraging.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.529Z"
+  },
+  "__v": 0,
+  "slug": "foraging"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae62"
+  },
+  "title": "Build a Molecule",
+  "subject": "Biology",
+  "category": "MOLECULAR BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/build-a-molecule/latest/build-a-molecule_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Build a Molecule.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.529Z"
+  },
+  "__v": 0,
+  "slug": "build-a-molecule-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae63"
+  },
+  "title": "Molecules and Light",
+  "subject": "Biology",
+  "category": "MOLECULAR BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molecules-and-light/latest/molecules-and-light_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molecules and Light.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "molecules-and-light-2"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae64"
+  },
+  "title": "Diffusion",
+  "subject": "Biology",
+  "category": "CELL BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/diffusion/latest/diffusion_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Diffusion.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "diffusion-2"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae65"
+  },
+  "title": "Osmosis",
+  "subject": "Biology",
+  "category": "CELL BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/osmosis/latest/osmosis_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/osmosis/latest/osmosis_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Osmosis.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "osmosis"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae66"
+  },
+  "title": "Membrane Channels",
+  "subject": "Biology",
+  "category": "CELL BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/membrane-channels/latest/membrane-channels_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Membrane Channels.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "membrane-channels"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae67"
+  },
+  "title": "Sugar and Salt Solutions",
+  "subject": "Biology",
+  "category": "BIOCHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/sugar-and-salt-solutions/latest/sugar-and-salt-solutions_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/sugar-and-salt-solutions/latest/sugar-and-salt-solutions_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Sugar and Salt Solutions.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "sugar-and-salt-solutions-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae68"
+  },
+  "title": "pH Scale",
+  "subject": "Biology",
+  "category": "BIOCHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of pH Scale.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "ph-scale-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae69"
+  },
+  "title": "pH Scale: Basics",
+  "subject": "Biology",
+  "category": "BIOCHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/ph-scale-basics/latest/ph-scale-basics_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of pH Scale: Basics.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "ph-scale-basics-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6a"
+  },
+  "title": "Concentration",
+  "subject": "Biology",
+  "category": "BIOCHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/concentration/latest/concentration_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Concentration.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "concentration-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6b"
+  },
+  "title": "Molarity",
+  "subject": "Biology",
+  "category": "BIOCHEMISTRY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/molarity/latest/molarity_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Molarity.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "molarity-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6c"
+  },
+  "title": "Radioactive Dating Game",
+  "subject": "Biology",
+  "category": "RADIOACTIVE DATING & EARTH SCIENCE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/radioactive-dating-game/latest/radioactive-dating-game_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Radioactive Dating Game.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "radioactive-dating-game-2"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6d"
+  },
+  "title": "Alpha Decay",
+  "subject": "Biology",
+  "category": "RADIOACTIVE DATING & EARTH SCIENCE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/alpha-decay/latest/alpha-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Alpha Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "alpha-decay-2"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6e"
+  },
+  "title": "Beta Decay",
+  "subject": "Biology",
+  "category": "RADIOACTIVE DATING & EARTH SCIENCE",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/beta-decay/latest/beta-decay_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Beta Decay.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "beta-decay-2"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae6f"
+  },
+  "title": "Neuron",
+  "subject": "Biology",
+  "category": "NEUROSCIENCE & PHYSIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/neuron/latest/neuron_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Neuron.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.530Z"
+  },
+  "__v": 0,
+  "slug": "neuron"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae70"
+  },
+  "title": "Bending Light",
+  "subject": "Biology",
+  "category": "OPTICS IN BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Bending Light.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.531Z"
+  },
+  "__v": 0,
+  "slug": "bending-light-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae71"
+  },
+  "title": "Color Vision",
+  "subject": "Biology",
+  "category": "OPTICS IN BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/color-vision/latest/color-vision_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Color Vision.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.531Z"
+  },
+  "__v": 0,
+  "slug": "color-vision-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae72"
+  },
+  "title": "Plinko Probability",
+  "subject": "Biology",
+  "category": "STATISTICS FOR BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Plinko Probability.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.531Z"
+  },
+  "__v": 0,
+  "slug": "plinko-probability-1"
+},
+{
+  "_id": {
+    "$oid": "68c1c1742f8c67e01022ae73"
+  },
+  "title": "Least-Squares Regression",
+  "subject": "Biology",
+  "category": "STATISTICS FOR BIOLOGY",
+  "iframeUrl": "https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_en.html",
+  "downloadUrl": "https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_en.html?download",
+  "description": "An interactive PhET simulation exploring the concepts of Least-Squares Regression.",
+  "tags": [],
+  "difficulty": "Beginner",
+  "createdAt": {
+    "$date": "2025-09-10T18:20:36.531Z"
+  },
+  "__v": 0,
+  "slug": "least-squares-regression-1"
+}]
