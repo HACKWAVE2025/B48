@@ -4,7 +4,8 @@ import {
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
   Paperclip, File, Image, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
   Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize,
-  Brain, Bot, Loader, Gamepad2, Type, Star, StickyNote, Save, GitBranch
+  Brain, Bot, Loader, Gamepad2, Type, Star, StickyNote, Save,
+  GitBranch, FileText
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
@@ -730,22 +731,55 @@ const StudySessionRoom = ({ session, onBack }) => {
   // Allow notes access for active sessions and completed sessions
   const canAccessNotes = session && (session.status === 'active' || session.status === 'completed' || !session.hasEnded);
 
+  // Helper functions for Resources
+  const getSubjectIcon = (subjectName) => {
+    const iconMap = {
+      'Mathematics': BookOpen,
+      'Science': Beaker,
+      'Physics': Beaker,
+      'Chemistry': Beaker,
+      'Biology': Beaker,
+      'English': BookOpen,
+      'History': BookOpen,
+      'Geography': BookOpen,
+      'Computer Science': BookOpen,
+      'Social Science': BookOpen
+    };
+    return iconMap[subjectName] || BookOpen;
+  };
+
+  const getSubjectColor = (subjectName) => {
+    const colorMap = {
+      'Mathematics': 'from-blue-500 to-cyan-500',
+      'Science': 'from-green-500 to-emerald-500',
+      'Physics': 'from-purple-500 to-pink-500',
+      'Chemistry': 'from-orange-500 to-red-500',
+      'Biology': 'from-green-600 to-teal-600',
+      'English': 'from-indigo-500 to-purple-500',
+      'History': 'from-amber-500 to-orange-500',
+      'Geography': 'from-cyan-500 to-blue-500',
+      'Computer Science': 'from-gray-700 to-gray-900',
+      'Social Science': 'from-pink-500 to-rose-500'
+    };
+    return colorMap[subjectName] || 'from-[#5E936C] to-[#93DA97]';
+  };
+
   return (
-    <div className="bg-white border border-[#93DA97]/30 rounded-xl overflow-hidden flex flex-col shadow-sm" style={{ height: 'calc(100vh - 200px)' }}>
+    <div className="bg-white border border-[#93DA97]/30 rounded-xl overflow-hidden flex flex-col shadow-sm" style={{ height: 'calc(100vh - 100px)' }}>
       {/* Header */}
-      <div className="p-4 border-b border-[#93DA97]/30 bg-gradient-to-r from-[#5E936C] to-[#93DA97]">
-        <div className="flex items-center justify-between mb-3">
+      <div className="p-2 border-b border-[#93DA97]/30 bg-gradient-to-r from-[#5E936C] to-[#93DA97]">
+        <div className="flex items-center justify-between mb-1">
           <button
             onClick={onBack}
-            className="text-white/80 hover:text-white transition-colors flex items-center space-x-2"
+            className="text-white/80 hover:text-white transition-colors flex items-center space-x-1.5"
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back</span>
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-xs">Back</span>
           </button>
           
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2 px-3 py-1 bg-white/20 rounded-full text-white text-sm">
-              <Clock className="w-4 h-4" />
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5 px-2 py-0.5 bg-white/20 rounded-full text-white text-xs">
+              <Clock className="w-3 h-3" />
               <span>{timeRemaining}</span>
             </div>
             
@@ -753,29 +787,29 @@ const StudySessionRoom = ({ session, onBack }) => {
               <>
                 <button
                   onClick={() => setShowInviteModal(true)}
-                  className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
+                  className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
                   title="Invite users"
                 >
-                  <UserPlus className="w-5 h-5" />
+                  <UserPlus className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={() => setShowWhiteboard(true)}
-                  className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
+                  className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
                   title="Open Whiteboard"
                 >
-                  <Pencil className="w-5 h-5" />
+                  <Pencil className="w-4 h-4" />
                 </button>
                 
                 <button
                   onClick={() => setShowVideoCall(!showVideoCall)}
-                  className={`p-2 rounded-lg transition-colors ${
+                  className={`p-1.5 rounded-lg transition-colors ${
                     showVideoCall
                       ? 'bg-green-700 text-white'
                       : 'bg-white/20 hover:bg-white/30 text-white'
                   }`}
                 >
-                  <Video className="w-5 h-5" />
+                  <Video className="w-4 h-4" />
                 </button>
               </>
             )}
@@ -784,11 +818,11 @@ const StudySessionRoom = ({ session, onBack }) => {
             {!canInteract && (
               <button
                 onClick={() => setShowWhiteboard(true)}
-                className="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-all flex items-center space-x-2"
+                className="px-3 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-all flex items-center space-x-1.5"
                 title="View Whiteboard"
               >
-                <Pencil className="w-4 h-4" />
-                <span className="text-sm font-medium">View Whiteboard</span>
+                <Pencil className="w-3 h-3" />
+                <span className="text-xs font-medium">View Whiteboard</span>
               </button>
             )}
 
@@ -796,49 +830,38 @@ const StudySessionRoom = ({ session, onBack }) => {
             {session?.status === 'completed' && (
               <button
                 onClick={() => setShowSummaryModal(true)}
-                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-2 shadow-sm"
+                className="px-3 py-1 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-1.5 shadow-sm"
                 title="View AI Summary"
               >
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-medium">AI Summary</span>
+                <Sparkles className="w-3 h-3" />
+                <span className="text-xs font-medium">AI Summary</span>
               </button>
             )}
           </div>
         </div>
 
         <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold text-white mb-1">{session?.title}</h2>
-            <p className="text-[#E8FFD7] mb-2">{session?.topic}</p>
-            {session?.description && (
-              <p className="text-white/80 text-sm">{session.description}</p>
-            )}
+          <div className="flex-1 min-w-0">
+            <h2 className="text-base font-bold text-white mb-0.5 truncate">{session?.title}</h2>
+            <div className="flex items-center gap-2 flex-wrap">
+              <p className="text-[#E8FFD7] text-xs">{session?.topic}</p>
+              {session?.objectives && session.objectives.length > 0 && (
+                <span className="px-1.5 py-0.5 bg-white/20 rounded text-white text-xs">
+                  {session.objectives.length} objective{session.objectives.length !== 1 ? 's' : ''}
+                </span>
+              )}
+              <span className="px-1.5 py-0.5 bg-white/20 rounded text-white text-xs">
+                {new Date(session?.date).toLocaleDateString()}
+              </span>
+            </div>
           </div>
           
           {isCreator && (
-            <div className="flex items-center space-x-1 px-2 py-1 bg-yellow-500/20 rounded-full text-yellow-300 text-xs">
+            <div className="flex items-center space-x-1 px-1.5 py-0.5 bg-yellow-500/20 rounded-full text-yellow-300 text-xs ml-2">
               <Crown className="w-3 h-3" />
               <span>Creator</span>
             </div>
           )}
-        </div>
-
-        {/* Session Info */}
-        <div className="flex flex-wrap gap-2 mt-3">
-          {session?.objectives && session.objectives.length > 0 && (
-            <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
-              <Target className="w-3 h-3" />
-              <span>{session.objectives.length} objective{session.objectives.length !== 1 ? 's' : ''}</span>
-            </div>
-          )}
-          <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
-            <Calendar className="w-3 h-3" />
-            <span>{new Date(session?.date).toLocaleDateString()}</span>
-          </div>
-          <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
-            <Clock className="w-3 h-3" />
-            <span>{session?.startTime} ({session?.duration}m)</span>
-          </div>
         </div>
       </div>
 
@@ -846,10 +869,10 @@ const StudySessionRoom = ({ session, onBack }) => {
         {/* Main Content Area with Tabs */}
         <div className={`flex flex-col ${showVideoCall ? 'w-2/3' : 'w-full'}`}>
           {/* Tab Navigation */}
-          <div className="flex items-center border-b border-[#93DA97]/30 bg-white overflow-x-auto">
+          <div className="flex items-center border-b border-[#93DA97]/30 bg-white overflow-x-auto flex-shrink-0">
             <button
               onClick={() => setActiveTab('chat')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
                 activeTab === 'chat'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -860,7 +883,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             </button>
             <button
               onClick={() => setActiveTab('ai-learning')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
                 activeTab === 'ai-learning'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -872,7 +895,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             </button>
             <button
               onClick={() => setActiveTab('notes')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
                 activeTab === 'notes'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -883,7 +906,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             </button>
             <button
               onClick={() => setActiveTab('simulations')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
                 activeTab === 'simulations'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -891,13 +914,13 @@ const StudySessionRoom = ({ session, onBack }) => {
             >
               <Beaker className="w-4 h-4" />
               <span>Simulations</span>
-              <span className="bg-[#5E936C] text-white text-xs px-2 py-0.5 rounded-full">
+              <span className="bg-[#5E936C] text-white text-xs px-1.5 py-0.5 rounded-full">
                 {simulations.length || 'New'}
               </span>
             </button>
             <button
               onClick={() => setActiveTab('flowchart')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 text-sm ${
                 activeTab === 'flowchart'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -905,7 +928,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             >
               <GitBranch className="w-4 h-4" />
               <span>Flowchart</span>
-              <span className="bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">
+              <span className="bg-purple-600 text-white text-xs px-1.5 py-0.5 rounded-full">
                 AI
               </span>
             </button>
@@ -916,7 +939,7 @@ const StudySessionRoom = ({ session, onBack }) => {
                 setSelectedSubject(null);
                 setSelectedLesson(null);
               }}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+              className={`flex items-center space-x-2 px-4 py-2.5 font-medium transition-all duration-200 border-b-2 whitespace-nowrap text-sm ${
                 activeTab === 'resources'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -979,17 +1002,17 @@ const StudySessionRoom = ({ session, onBack }) => {
 
           {/* Message Input */}
           {canInteract ? (
-            <div className="p-4 border-t border-[#93DA97]/30 bg-white">
+            <div className="p-2 border-t border-[#93DA97]/30 bg-white">
               {/* File Preview */}
               {selectedFile && (
-                <div className="mb-3 p-3 bg-[#E8FFD7] rounded-lg border border-[#93DA97]/30">
+                <div className="mb-2 p-2 bg-[#E8FFD7] rounded-lg border border-[#93DA97]/30">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-[#5E936C]/30 rounded">
+                    <div className="flex items-center space-x-2">
+                      <div className="p-1.5 bg-[#5E936C]/30 rounded">
                         {getFileIcon(selectedFile.type)}
                       </div>
                       <div>
-                        <p className="text-[#3E5F44] text-sm font-medium">{selectedFile.name}</p>
+                        <p className="text-[#3E5F44] text-xs font-medium">{selectedFile.name}</p>
                         <p className="text-[#557063] text-xs">{formatFileSize(selectedFile.size)}</p>
                       </div>
                     </div>
@@ -997,7 +1020,7 @@ const StudySessionRoom = ({ session, onBack }) => {
                       onClick={handleCancelFile}
                       className="p-1 hover:bg-white rounded transition"
                     >
-                      <X className="w-4 h-4 text-[#557063]" />
+                      <X className="w-3 h-3 text-[#557063]" />
                     </button>
                   </div>
                 </div>
@@ -1014,41 +1037,41 @@ const StudySessionRoom = ({ session, onBack }) => {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] p-3 rounded-lg transition-all border border-[#93DA97]/30"
+                  className="bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] p-2 rounded-lg transition-all border border-[#93DA97]/30"
                   disabled={!connected || uploading}
                 >
-                  <Paperclip className="w-5 h-5" />
+                  <Paperclip className="w-4 h-4" />
                 </button>
                 <input
                   type="text"
                   value={newMessage}
                   onChange={handleTyping}
                   placeholder={selectedFile ? "Add a caption (optional)..." : "Type your message..."}
-                  className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C]"
+                  className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-3 py-2 text-[#3E5F44] text-sm placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C]"
                   disabled={!connected || uploading}
                 />
                 <button
                   type="submit"
                   disabled={(!newMessage.trim() && !selectedFile) || !connected || uploading}
-                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-3 rounded-lg transition-all disabled:cursor-not-allowed min-w-[52px] flex items-center justify-center shadow-sm"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-2 rounded-lg transition-all disabled:cursor-not-allowed min-w-[44px] flex items-center justify-center shadow-sm"
                 >
                   {uploading ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
-                    <Send className="w-5 h-5" />
+                    <Send className="w-4 h-4" />
                   )}
                 </button>
               </form>
             </div>
           ) : (
-            <div className="p-4 border-t border-[#93DA97]/30 bg-white">
-              <div className="text-center mb-3">
-                <p className="text-[#557063] text-sm mb-3">This session has ended. You can view the chat history.</p>
+            <div className="p-2 border-t border-[#93DA97]/30 bg-white">
+              <div className="text-center mb-2">
+                <p className="text-[#557063] text-xs mb-2">This session has ended. You can view the chat history.</p>
                 <button
                   onClick={() => setShowSummaryModal(true)}
-                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-sm"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white text-sm font-medium transition-all flex items-center space-x-2 mx-auto shadow-sm"
                 >
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-4 h-4" />
                   <span>View AI Summary</span>
                 </button>
               </div>
@@ -1385,11 +1408,11 @@ const StudySessionRoom = ({ session, onBack }) => {
 
           {/* AI Learning Tab */}
           {activeTab === 'ai-learning' && (
-            <div className="flex flex-col flex-1 overflow-hidden">
+            <div className="flex flex-col flex-1 overflow-hidden h-full">
               {/* AI Response Type Selector */}
-              <div className="p-3 border-b border-[#93DA97]/30 bg-white flex items-center justify-between">
+              <div className="p-2.5 border-b border-[#93DA97]/30 bg-white flex items-center justify-between flex-shrink-0">
                 <div className="flex items-center space-x-2">
-                  <Brain className="w-5 h-5 text-[#5E936C]" />
+                  <Brain className="w-4 h-4 text-[#5E936C]" />
                   <span className="text-sm font-medium text-[#3E5F44]">AI Learning Assistant</span>
                 </div>
                 <div className="flex items-center space-x-1 bg-[#E8FFD7]/50 rounded-lg p-1">
@@ -1436,12 +1459,12 @@ const StudySessionRoom = ({ session, onBack }) => {
               </div>
 
               {/* AI Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
                 {aiMessages.length === 0 ? (
-                  <div className="flex items-center justify-center min-h-[50vh]">
-                    <div className="text-center space-y-4 max-w-xl px-6">
-                      <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-lg mx-auto w-24 h-24 flex items-center justify-center">
-                        <Brain className="w-12 h-12 text-white" />
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center space-y-4 max-w-2xl px-6">
+                      <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-lg mx-auto w-20 h-20 flex items-center justify-center">
+                        <Brain className="w-10 h-10 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-[#3E5F44]">AI Learning Assistant</h3>
                       <p className="text-[#557063] leading-relaxed">
@@ -1469,9 +1492,9 @@ const StudySessionRoom = ({ session, onBack }) => {
                     
                     return (
                       <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`flex items-start space-x-3 max-w-3xl ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                        <div className={`flex items-start space-x-3 max-w-4xl ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
                           {/* Avatar */}
-                          <div className={`p-3 rounded-full shadow-sm flex-shrink-0 ${
+                          <div className={`p-2.5 rounded-full shadow-sm flex-shrink-0 ${
                             isUser 
                               ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97]' 
                               : message.type === 'bot-animation'
@@ -1479,16 +1502,16 @@ const StudySessionRoom = ({ session, onBack }) => {
                               : 'bg-gradient-to-r from-[#5E936C] to-emerald-500'
                           }`}>
                             {isUser ? (
-                              <User className="w-5 h-5 text-white" />
+                              <User className="w-4 h-4 text-white" />
                             ) : message.type === 'bot-animation' ? (
-                              <Video className="w-5 h-5 text-white" />
+                              <Video className="w-4 h-4 text-white" />
                             ) : (
-                              <Brain className="w-5 h-5 text-white" />
+                              <Brain className="w-4 h-4 text-white" />
                             )}
                           </div>
 
                           {/* Message Content */}
-                          <div className={`border rounded-3xl p-6 shadow-sm ${
+                          <div className={`border rounded-2xl p-5 shadow-sm ${
                             isUser
                               ? 'bg-[#E8FFD7] border-[#93DA97] text-[#3E5F44]'
                               : message.error
@@ -1520,7 +1543,8 @@ const StudySessionRoom = ({ session, onBack }) => {
                                 )}
                                 <video 
                                   controls 
-                                  className="w-full max-w-lg rounded-2xl border border-blue-300"
+                                  className="w-full rounded-2xl border border-blue-300"
+                                  style={{ maxHeight: '500px' }}
                                 >
                                   <source src={message.content} type="video/mp4" />
                                   Your browser does not support the video tag.
@@ -1603,33 +1627,31 @@ const StudySessionRoom = ({ session, onBack }) => {
               </div>
 
               {/* AI Input */}
-              {canInteract && (
-                <div className="p-4 border-t border-[#93DA97]/30 bg-white">
-                  <form onSubmit={handleAiSubmit} className="flex space-x-2">
-                    <textarea
-                      ref={aiTextareaRef}
-                      value={aiInputMessage}
-                      onChange={(e) => setAiInputMessage(e.target.value)}
-                      onKeyPress={handleAiKeyPress}
-                      placeholder="Ask me anything about the topic..."
-                      className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none"
-                      rows="2"
-                      disabled={aiIsLoading}
-                    />
-                    <button
-                      type="submit"
-                      disabled={!aiInputMessage.trim() || aiIsLoading}
-                      className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-3 rounded-lg transition-all disabled:cursor-not-allowed flex items-center justify-center shadow-sm"
-                    >
-                      {aiIsLoading ? (
-                        <Loader className="w-5 h-5 animate-spin" />
-                      ) : (
-                        <Send className="w-5 h-5" />
-                      )}
-                    </button>
-                  </form>
-                </div>
-              )}
+              <div className="p-3 border-t border-[#93DA97]/30 bg-white flex-shrink-0">
+                <form onSubmit={handleAiSubmit} className="flex space-x-2">
+                  <textarea
+                    ref={aiTextareaRef}
+                    value={aiInputMessage}
+                    onChange={(e) => setAiInputMessage(e.target.value)}
+                    onKeyPress={handleAiKeyPress}
+                    placeholder="Ask me anything about the topic..."
+                    className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-4 py-2.5 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none"
+                    rows="2"
+                    disabled={aiIsLoading || !canInteract}
+                  />
+                  <button
+                    type="submit"
+                    disabled={!aiInputMessage.trim() || aiIsLoading || !canInteract}
+                    className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-2 rounded-lg transition-all disabled:cursor-not-allowed flex items-center justify-center shadow-sm"
+                  >
+                    {aiIsLoading ? (
+                      <Loader className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <Send className="w-5 h-5" />
+                    )}
+                  </button>
+                </form>
+              </div>
             </div>
           )}
 
@@ -1637,7 +1659,7 @@ const StudySessionRoom = ({ session, onBack }) => {
           {activeTab === 'notes' && (
             <div className="flex-1 flex flex-col overflow-hidden">
               <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-6xl mx-auto h-full">
                   <div className="mb-4 flex items-center justify-between">
                     <div>
                       <h3 className="text-lg font-bold text-[#3E5F44] mb-1">
@@ -1679,7 +1701,8 @@ const StudySessionRoom = ({ session, onBack }) => {
                     value={sessionNotes}
                     onChange={(e) => setSessionNotes(e.target.value)}
                     placeholder="Start taking notes here...&#10;&#10;You can use this space to:&#10;• Write down key points from the discussion&#10;• Save important links or resources&#10;• Track action items&#10;• Summarize what you learned"
-                    className="w-full h-[calc(100vh-450px)] min-h-[300px] p-4 bg-white border-2 border-[#93DA97]/30 rounded-lg text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none font-mono text-sm"
+                    className="w-full p-4 bg-white border-2 border-[#93DA97]/30 rounded-lg text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none font-mono text-sm"
+                    style={{ height: 'calc(100vh - 400px)', minHeight: '400px' }}
                     disabled={session?.status === 'scheduled'}
                   />
                   
