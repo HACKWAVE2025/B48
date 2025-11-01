@@ -5,35 +5,35 @@ const resourcesData = {
         "name": "Biology",
         "lessons": [
           {
-            "title": "Introduction to Photosynthesis",
+            "title": "Lesson 1: Introduction to Photosynthesis",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=E22APTvfwyE",
-              "notes": "general/biology/photosynthesis_intro_notes.pdf"
+              "notes": "https://germanna.edu/sites/default/files/2022-03/Photosynthesis.pdf"
             }
           },
           {
-            "title": "Light-Dependent Reactions",
+            "title": "Lesson 2: Light-Dependent Reactions",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=4xHPDxVrJqc",
-              "notes": "general/biology/photosynthesis_light_reactions_notes.pdf"
+              "notes": "https://www.biologycorner.com/worksheets/photosynthesis-coloring.pdf"
             }
           },
           {
-            "title": "The Calvin Cycle (Light-Independent Reactions)",
+            "title": "Lesson 3: The Calvin Cycle (Light-Independent Reactions)",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=slm6D2VEXYs",
-              "notes": "general/biology/photosynthesis_calvin_cycle_notes.pdf"
+              "notes": "https://www.biologycorner.com/worksheets/photosynthesis-coloring.pdf"
             }
           },
           {
-            "title": "C4 and CAM Photosynthesis",
+            "title": "Lesson 4: C4 and CAM Photosynthesis",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=7ynX_F-SwNY",
-              "notes": "general/biology/photosynthesis_c4_cam_notes.pdf"
+              "notes": "https://www.biologycorner.com/worksheets/photosynthesis-coloring.pdf"
             }
           }
         ]
@@ -42,35 +42,35 @@ const resourcesData = {
         "name": "Computer Science",
         "lessons": [
           {
-            "title": "CPU Scheduling - First-Come, First-Served (FCFS)",
+            "title": "Lesson 1: CPU Scheduling - First-Come, First-Served (FCFS)",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=vlc0Ea4ID9s",
-              "notes": "general/cs/fcfs_notes.pdf"
+              "notes": "https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html"
             }
           },
           {
-            "title": "CPU Scheduling - Shortest Job First (SJF)",
+            "title": "Lesson 2: CPU Scheduling - Shortest Job First (SJF)",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=pYO-FAg-TpQ",
-              "notes": "general/cs/sjf_notes.pdf"
+              "notes": "https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html"
             }
           },
           {
-            "title": "CPU Scheduling - Round Robin",
+            "title": "Lesson 3: CPU Scheduling - Round Robin",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=Bmv4hctjevI",
-              "notes": "general/cs/round_robin_notes.pdf"
+              "notes": "https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html"
             }
           },
           {
-            "title": "CPU Scheduling - Priority Scheduling",
+            "title": "Lesson 4: CPU Scheduling - Priority Scheduling",
             "resources": {
               "textbook": "N/A",
               "video": "https://www.youtube.com/watch?v=q4GqVK8HnKQ",
-              "notes": "general/cs/priority_scheduling_notes.pdf"
+              "notes": "https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html"
             }
           }
         ]

@@ -171,7 +171,7 @@ const Resources = () => {
                           </p>
                           <div className="flex flex-wrap gap-2">
                             <a
-                              href={`/${lesson.resources.notes}`}
+                              href={lesson.resources.notes}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
@@ -179,14 +179,16 @@ const Resources = () => {
                               <Eye className="w-4 h-4" />
                               <span>View Notes</span>
                             </a>
-                            <a
-                              href={`/${lesson.resources.notes}`}
-                              download
-                              className="inline-flex items-center space-x-2 bg-white border-2 border-blue-500 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
-                            >
-                              <Download className="w-4 h-4" />
-                              <span>Download</span>
-                            </a>
+                            {lesson.resources.notes.endsWith('.pdf') && (
+                              <a
+                                href={lesson.resources.notes}
+                                download
+                                className="inline-flex items-center space-x-2 bg-white border-2 border-blue-500 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
+                              >
+                                <Download className="w-4 h-4" />
+                                <span>Download</span>
+                              </a>
+                            )}
                           </div>
                         </div>
                       ) : (
