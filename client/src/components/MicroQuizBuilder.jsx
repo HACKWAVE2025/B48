@@ -48,14 +48,60 @@ const MicroQuizBuilder = () => {
   const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
   const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
 
-  const subjects = [
+  // Student type and custom subject
+  const [studentType, setStudentType] = useState('school'); // 'school' or 'college'
+  const [customSubject, setCustomSubject] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
+
+  // Subject lists based on role
+  const schoolSubjects = [
     { value: 'math', label: 'Mathematics', icon: '🔢' },
     { value: 'science', label: 'Science', icon: '🔬' },
     { value: 'english', label: 'English', icon: '📚' },
-    { value: 'history', label: 'History', icon: '📜' },
-    { value: 'geography', label: 'Geography', icon: '🌍' },
-    { value: 'general', label: 'General', icon: '🎯' }
+    { value: 'hindi', label: 'Hindi', icon: '🇮🇳' },
+    { value: 'social_studies', label: 'Social Studies', icon: '🌍' },
+    { value: 'art', label: 'Art', icon: '🎨' },
+    { value: 'music', label: 'Music', icon: '🎵' },
+    { value: 'computer_science', label: 'Computer Science', icon: '💻' }
   ];
+
+  const collegeSubjects = [
+    { value: 'engineering', label: 'Engineering', icon: '⚙️' },
+    { value: 'commerce', label: 'Commerce', icon: '💼' },
+    { value: 'humanities', label: 'Humanities', icon: '📖' },
+    { value: 'life_sciences', label: 'Life Sciences', icon: '🧬' },
+    { value: 'business', label: 'Business', icon: '📊' },
+    { value: 'law', label: 'Law', icon: '⚖️' },
+    { value: 'it', label: 'IT', icon: '💻' },
+    { value: 'data_science', label: 'Data Science', icon: '📈' },
+    { value: 'research_skills', label: 'Research Skills', icon: '�' },
+    { value: 'languages', label: 'Languages', icon: '🗣️' }
+  ];
+
+  const researcherSubjects = [
+    { value: 'artificial_intelligence', label: 'Artificial Intelligence', icon: '🤖' },
+    { value: 'data_science', label: 'Data Science', icon: '📊' },
+    { value: 'educational_technology', label: 'Educational Technology', icon: '🎓' },
+    { value: 'policy_research', label: 'Policy Research', icon: '📋' },
+    { value: 'machine_learning', label: 'Machine Learning', icon: '🧠' },
+    { value: 'biotechnology', label: 'Biotechnology', icon: '🧬' },
+    { value: 'environmental_science', label: 'Environmental Science', icon: '�' },
+    { value: 'social_research', label: 'Social Research', icon: '👥' },
+    { value: 'medical_research', label: 'Medical Research', icon: '⚕️' },
+    { value: 'quantum_computing', label: 'Quantum Computing', icon: '⚛️' }
+  ];
+
+  // Get subjects based on user role
+  const getSubjects = () => {
+    if (user?.role === 'researcher') {
+      return researcherSubjects;
+    } else if (user?.role === 'student') {
+      return studentType === 'school' ? schoolSubjects : collegeSubjects;
+    }
+    return schoolSubjects; // default
+  };
+
+  const subjects = getSubjects();
 
   const difficulties = [
     { value: 'easy', label: 'Easy', color: 'green' },
@@ -721,17 +767,64 @@ const MicroQuizBuilder = () => {
               />
             </div>
 
+            {/* Student Type Selection - Only for students */}
+            {user?.role === 'student' && (
+              <div className="mb-6">
+                <label className="block text-white font-semibold mb-2">Student Type*</label>
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setStudentType('school')}
+                    className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                      studentType === 'school'
+                        ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
+                        : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl mb-1">🎒</div>
+                      <div className="font-semibold">School Student</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStudentType('college')}
+                    className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                      studentType === 'college'
+                        ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
+                        : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl mb-1">🎓</div>
+                      <div className="font-semibold">College Student</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
                 <label className="block text-white font-semibold mb-2">Subject*</label>
                 <select
                   value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value === 'custom') {
+                      setShowCustomInput(true);
+                      setSubject('');
+                    } else {
+                      setShowCustomInput(false);
+                      setSubject(e.target.value);
+                    }
+                  }}
                   className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
                 >
+                  <option value="">Select Subject</option>
                   {subjects.map(s => (
                     <option key={s.value} value={s.value}>{s.icon} {s.label}</option>
                   ))}
+                  <option value="custom">➕ Custom Subject</option>
                 </select>
               </div>
 
@@ -748,6 +841,55 @@ const MicroQuizBuilder = () => {
                 </select>
               </div>
             </div>
+
+            {/* Custom Subject Input */}
+            {showCustomInput && (
+              <div className="mb-6">
+                <label className="block text-white font-semibold mb-2">Custom Subject*</label>
+                <div className="flex gap-3">
+                  <input
+                    type="text"
+                    value={customSubject}
+                    onChange={(e) => setCustomSubject(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (customSubject.trim()) {
+                          setSubject(customSubject.trim());
+                          setShowCustomInput(false);
+                        }
+                      }
+                    }}
+                    className="flex-1 px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                    placeholder="Enter your custom subject (e.g., Robotics, Creative Writing)"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (customSubject.trim()) {
+                        setSubject(customSubject.trim());
+                        setShowCustomInput(false);
+                      }
+                    }}
+                    disabled={!customSubject.trim()}
+                    className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Add
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowCustomInput(false);
+                      setCustomSubject('');
+                    }}
+                    className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div className="mb-6">
               <label className="block text-white font-semibold mb-2">Number of Questions*</label>

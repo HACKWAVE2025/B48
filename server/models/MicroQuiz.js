@@ -42,7 +42,8 @@ const microQuizSchema = new mongoose.Schema({
   subject: {
     type: String,
     required: true,
-    enum: ['math', 'science', 'english', 'history', 'geography', 'general']
+    trim: true
+    // Removed enum to allow custom subjects based on user role
   },
   difficulty: {
     type: String,
