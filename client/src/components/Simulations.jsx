@@ -16,11 +16,24 @@ const Simulations = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [showFilters, setShowFilters] = useState(false);
 const beurl=import.meta.env.VITE_BACKEND_URL;
+	// Filter options - these will match both subject and category fields
 	const subjects = [
 		{ name: "Physics", icon: Atom, color: "from-blue-600 to-indigo-600" },
 		{ name: "Chemistry", icon: Beaker, color: "from-green-600 to-emerald-600" },
 		{ name: "Biology", icon: Dna, color: "from-purple-600 to-pink-600" },
-		{ name: "Mathematics", icon: Calculator, color: "from-orange-600 to-red-600" }
+		{ name: "Mathematics", icon: Calculator, color: "from-orange-600 to-red-600" },
+		{ name: "Computer Science", icon: Calculator, color: "from-cyan-600 to-blue-600" },
+		{ name: "Artificial Intelligence", icon: Zap, color: "from-purple-600 to-fuchsia-600" },
+		{ name: "Civil Engineering", icon: Target, color: "from-amber-600 to-orange-600" },
+		{ name: "Operating Systems", icon: Calculator, color: "from-slate-600 to-gray-600" },
+		{ name: "Algorithms & Data Structures", icon: Target, color: "from-teal-600 to-cyan-600" },
+		{ name: "Networking", icon: Zap, color: "from-indigo-600 to-violet-600" },
+		{ name: "Database Systems", icon: Target, color: "from-rose-600 to-pink-600" },
+		{ name: "Machine Learning", icon: Zap, color: "from-violet-600 to-purple-600" },
+		{ name: "Electricity & Magnetism", icon: Zap, color: "from-yellow-600 to-amber-600" },
+		{ name: "Waves & Sound", icon: Atom, color: "from-sky-600 to-blue-600" },
+		{ name: "Forces & Motion", icon: Target, color: "from-emerald-600 to-teal-600" },
+		{ name: "Mechanics", icon: Target, color: "from-orange-600 to-amber-600" }
 	];
 
 	useEffect(() => {
@@ -146,7 +159,15 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 	};
 
 	const filteredSimulations = simulations.filter((sim) => {
-		const matchesSubjects = selectedSubjects.size === 0 || selectedSubjects.has(sim.subject);
+		// Check if filter matches either subject or category (case-insensitive)
+		const matchesSubjects = selectedSubjects.size === 0 || 
+			Array.from(selectedSubjects).some(selected => 
+				sim.subject.toLowerCase().includes(selected.toLowerCase()) ||
+				sim.category.toLowerCase().includes(selected.toLowerCase()) ||
+				selected.toLowerCase().includes(sim.subject.toLowerCase()) ||
+				selected.toLowerCase().includes(sim.category.toLowerCase())
+			);
+		
 		const matchesCategories = selectedCategories.size === 0 || selectedCategories.has(sim.category);
 		const matchesFilters = matchesSubjects && matchesCategories;
 
@@ -302,16 +323,30 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 					{/* Filters Section */}
 					{showFilters && (
 						<div className="mb-6 p-4 bg-white/5 rounded-xl border border-purple-500/20">
-							<h3 className="text-lg font-semibold text-white mb-4">
-								<AutoText>Filter by Subject</AutoText>
-							</h3>
-							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+							<div className="flex items-center justify-between mb-4">
+								<h3 className="text-lg font-semibold text-white">
+									<AutoText>Filter by Subject</AutoText>
+								</h3>
+								{selectedSubjects.size > 0 && (
+									<button
+										onClick={() => setSelectedSubjects(new Set())}
+										className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+									>
+										Clear All
+									</button>
+								)}
+							</div>
+							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
 								{subjects.map((subject) => {
 									const IconComponent = subject.icon;
 									return (
 										<label
 											key={subject.name}
-											className="flex items-center space-x-3 p-3 bg-white/10 rounded-lg cursor-pointer hover:bg-white/20 transition-all duration-300"
+											className={`flex items-center space-x-2 p-3 rounded-lg cursor-pointer transition-all duration-300 ${
+												selectedSubjects.has(subject.name)
+													? 'bg-gradient-to-r ' + subject.color + ' text-white shadow-lg scale-105'
+													: 'bg-white/10 hover:bg-white/20 text-white/90'
+											}`}
 										>
 											<input
 												type="checkbox"
@@ -319,12 +354,33 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 												onChange={(e) => handleSubjectChange(subject.name, e.target.checked)}
 												className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
 											/>
-											<IconComponent className="w-5 h-5 text-purple-400" />
-											<span className="text-white">{subject.name}</span>
+											<IconComponent className="w-4 h-4 flex-shrink-0" />
+											<span className="text-sm font-medium truncate">{subject.name}</span>
 										</label>
 									);
 								})}
 							</div>
+							{selectedSubjects.size > 0 && (
+								<div className="mt-4 flex items-center space-x-2">
+									<span className="text-white/70 text-sm">Active Filters:</span>
+									<div className="flex flex-wrap gap-2">
+										{Array.from(selectedSubjects).map((subject) => (
+											<span
+												key={subject}
+												className="px-3 py-1 bg-purple-600/30 text-purple-200 text-xs font-medium rounded-full flex items-center space-x-2"
+											>
+												<span>{subject}</span>
+												<button
+													onClick={() => handleSubjectChange(subject, false)}
+													className="hover:text-white transition-colors"
+												>
+													<X className="w-3 h-3" />
+												</button>
+											</span>
+										))}
+									</div>
+								</div>
+							)}
 						</div>
 					)}
 
