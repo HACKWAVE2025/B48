@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, Send, Video, Users, Clock, BookOpen, 
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
-  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil
+  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
+  Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
@@ -10,6 +11,7 @@ import VideoCall from './VideoCall';
 import InviteUsersModal from './InviteUsersModal';
 import SessionSummaryModal from './SessionSummaryModal';
 import Whiteboard from './Whiteboard';
+import resourcesData from '../data/resourcesData';
 
 const StudySessionRoom = ({ session, onBack }) => {
   const [messages, setMessages] = useState([]);
@@ -25,6 +27,14 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [uploading, setUploading] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [showWhiteboard, setShowWhiteboard] = useState(false);
+  const [activeTab, setActiveTab] = useState('chat');
+  const [simulations, setSimulations] = useState([]);
+  const [selectedSimulation, setSelectedSimulation] = useState(null);
+  const [simulationsLoading, setSimulationsLoading] = useState(false);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [isSimulationFullscreen, setIsSimulationFullscreen] = useState(false);
   
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
@@ -35,6 +45,38 @@ const StudySessionRoom = ({ session, onBack }) => {
 
   const getBackendUrl = () => {
     return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  };
+
+  // Fetch simulations when switching to simulations tab
+  useEffect(() => {
+    if (activeTab === 'simulations' && simulations.length === 0) {
+      fetchSimulations();
+    }
+  }, [activeTab]);
+
+  const fetchSimulations = async () => {
+    setSimulationsLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const backendUrl = getBackendUrl();
+      const response = await fetch(`${backendUrl}/api/simulations`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch simulations');
+      }
+
+      const data = await response.json();
+      setSimulations(data);
+    } catch (err) {
+      console.error('Error fetching simulations:', err);
+    } finally {
+      setSimulationsLoading(false);
+    }
   };
 
   // Calculate time remaining
@@ -427,6 +469,36 @@ const StudySessionRoom = ({ session, onBack }) => {
   const canInteract = session && !session.hasEnded;
   const isCreator = session?.createdBy?._id === user?.userId || session?.createdBy === user?.userId;
 
+  const getSubjectIcon = (subjectName) => {
+    switch (subjectName.toLowerCase()) {
+      case 'english':
+        return BookOpen;
+      case 'mathematics':
+        return GraduationCap;
+      case 'science':
+        return Library;
+      case 'social studies':
+        return FileText;
+      default:
+        return BookOpen;
+    }
+  };
+
+  const getSubjectColor = (subjectName) => {
+    switch (subjectName.toLowerCase()) {
+      case 'english':
+        return 'from-blue-500 to-cyan-500';
+      case 'mathematics':
+        return 'from-green-500 to-emerald-500';
+      case 'science':
+        return 'from-purple-500 to-pink-500';
+      case 'social studies':
+        return 'from-orange-500 to-red-500';
+      default:
+        return 'from-gray-500 to-slate-500';
+    }
+  };
+
   return (
     <div className="bg-white border border-[#93DA97]/30 rounded-xl overflow-hidden flex flex-col shadow-sm" style={{ height: 'calc(100vh - 200px)' }}>
       {/* Header */}
@@ -540,10 +612,58 @@ const StudySessionRoom = ({ session, onBack }) => {
       </div>
 
       <div className="flex-1 flex overflow-hidden">
-        {/* Chat Area */}
+        {/* Main Content Area with Tabs */}
         <div className={`flex flex-col ${showVideoCall ? 'w-2/3' : 'w-full'}`}>
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+          {/* Tab Navigation */}
+          <div className="flex items-center border-b border-[#93DA97]/30 bg-white">
+            <button
+              onClick={() => setActiveTab('chat')}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+                activeTab === 'chat'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Chat</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('simulations')}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+                activeTab === 'simulations'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <Beaker className="w-4 h-4" />
+              <span>Simulations</span>
+              <span className="bg-[#5E936C] text-white text-xs px-2 py-0.5 rounded-full">
+                {simulations.length || 'New'}
+              </span>
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('resources');
+                setSelectedClass(null);
+                setSelectedSubject(null);
+                setSelectedLesson(null);
+              }}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+                activeTab === 'resources'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <Library className="w-4 h-4" />
+              <span>Resources</span>
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'chat' && (
+            <>
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
             {messages.map((msg, index) => (
               <div
                 key={msg._id || index}
@@ -664,6 +784,330 @@ const StudySessionRoom = ({ session, onBack }) => {
                   <span>View AI Summary</span>
                 </button>
               </div>
+            </div>
+          )}
+          </>
+          )}
+
+          {activeTab === 'simulations' && (
+            // Simulations Tab Content
+            <div className="flex-1 overflow-y-auto bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+              {selectedSimulation ? (
+                // Simulation Viewer
+                <div className={`${isSimulationFullscreen ? 'fixed inset-0 z-50 bg-white' : 'h-full'} flex flex-col`}>
+                  <div className="p-4 border-b border-[#93DA97]/30 bg-[#E8FFD7] flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <button
+                        onClick={() => {
+                          setSelectedSimulation(null);
+                          setIsSimulationFullscreen(false);
+                        }}
+                        className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 transition-all duration-200"
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                        <span className="text-sm">Back</span>
+                      </button>
+                      <div>
+                        <h3 className="text-lg font-bold text-[#3E5F44]">{selectedSimulation.title}</h3>
+                        <p className="text-[#557063] text-sm">{selectedSimulation.subject} • {selectedSimulation.category}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setIsSimulationFullscreen(!isSimulationFullscreen)}
+                      className="flex items-center space-x-2 px-4 py-2 bg-[#5E936C] hover:bg-[#3E5F44] rounded-lg text-white transition-all duration-200 shadow-sm"
+                      title={isSimulationFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                    >
+                      {isSimulationFullscreen ? (
+                        <>
+                          <Minimize className="w-4 h-4" />
+                          <span className="text-sm">Exit Fullscreen</span>
+                        </>
+                      ) : (
+                        <>
+                          <Maximize className="w-4 h-4" />
+                          <span className="text-sm">Fullscreen</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <div className="flex-1 relative">
+                    <iframe
+                      src={selectedSimulation.iframeUrl}
+                      title={selectedSimulation.title}
+                      className="w-full h-full border-0"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              ) : (
+                // Simulations Grid
+                <div className="p-6">
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-[#3E5F44] mb-2 flex items-center space-x-2">
+                      <Beaker className="w-6 h-6" />
+                      <span>Interactive Simulations</span>
+                    </h3>
+                    <p className="text-[#557063]">
+                      Collaborate and learn together with interactive simulations
+                    </p>
+                  </div>
+
+                  {simulationsLoading ? (
+                    <div className="flex items-center justify-center py-12">
+                      <div className="w-8 h-8 border-4 border-[#5E936C]/30 border-t-[#5E936C] rounded-full animate-spin" />
+                    </div>
+                  ) : simulations.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {simulations.slice(0, 12).map((simulation) => (
+                        <div
+                          key={simulation._id}
+                          className="group p-5 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl transition-all duration-200 hover:shadow-md cursor-pointer"
+                          onClick={() => setSelectedSimulation(simulation)}
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg group-hover:scale-110 transition-transform duration-200">
+                              <Play className="w-5 h-5 text-white" />
+                            </div>
+                            <span className="px-2 py-1 bg-[#E8FFD7] border border-[#93DA97]/50 text-[#557063] text-xs font-medium rounded-full">
+                              {simulation.subject}
+                            </span>
+                          </div>
+                          <h4 className="text-base font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-200">
+                            {simulation.title}
+                          </h4>
+                          <p className="text-[#557063] text-sm mb-3 line-clamp-2">
+                            {simulation.description}
+                          </p>
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span>{simulation.category}</span>
+                            <button className="flex items-center space-x-1 text-[#5E936C] hover:text-[#3E5F44] font-medium">
+                              <Play className="w-3 h-3" />
+                              <span>Launch</span>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <Beaker className="w-16 h-16 text-gray-300 mb-4" />
+                      <h4 className="text-lg font-semibold text-[#557063] mb-2">
+                        No simulations available
+                      </h4>
+                      <p className="text-gray-500">
+                        Check back later for interactive learning experiences
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'resources' && (
+            // Resources Tab Content
+            <div className="flex-1 overflow-y-auto bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+              {selectedLesson ? (
+                // Lesson Resources View
+                <div className="p-6">
+                  <button
+                    onClick={() => setSelectedLesson(null)}
+                    className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 transition-all duration-200 mb-4"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm">Back to Lessons</span>
+                  </button>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-[#3E5F44] mb-2">{selectedLesson.title}</h3>
+                    <p className="text-[#557063]">Class {selectedClass} - {selectedSubject.name}</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Textbook */}
+                    <div className="bg-white border border-[#93DA97]/30 hover:border-blue-500 rounded-xl p-6 transition-all duration-200 hover:shadow-md">
+                      <div className="text-center">
+                        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-4 rounded-full shadow-sm mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                          <FileText className="w-7 h-7 text-white" />
+                        </div>
+                        <h4 className="text-lg font-bold text-[#3E5F44] mb-3">Textbook</h4>
+                        <p className="text-[#557063] text-sm mb-4">Official curriculum textbook</p>
+                        <a
+                          href={selectedLesson.resources.textbook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 text-sm font-medium"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          <span>Open</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Video */}
+                    <div className="bg-white border border-[#93DA97]/30 hover:border-red-500 rounded-xl p-6 transition-all duration-200 hover:shadow-md">
+                      <div className="text-center">
+                        <div className="bg-gradient-to-r from-red-500 to-pink-500 p-4 rounded-full shadow-sm mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                          <Video className="w-7 h-7 text-white" />
+                        </div>
+                        <h4 className="text-lg font-bold text-[#3E5F44] mb-3">Video Lesson</h4>
+                        <p className="text-[#557063] text-sm mb-4">Interactive video explanation</p>
+                        <a
+                          href={selectedLesson.resources.video}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-pink-600 transition-all duration-200 text-sm font-medium"
+                        >
+                          <Play className="w-4 h-4" />
+                          <span>Watch</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Notes */}
+                    <div className="bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl p-6 transition-all duration-200 hover:shadow-md">
+                      <div className="text-center">
+                        <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                          <BookOpen className="w-7 h-7 text-white" />
+                        </div>
+                        <h4 className="text-lg font-bold text-[#3E5F44] mb-3">Study Notes</h4>
+                        <p className="text-[#557063] text-sm mb-4">Comprehensive notes</p>
+                        <button
+                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white px-4 py-2 rounded-lg hover:from-[#3E5F44] hover:to-[#5E936C] transition-all duration-200 text-sm font-medium opacity-50 cursor-not-allowed"
+                        >
+                          <Download className="w-4 h-4" />
+                          <span>Coming Soon</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : selectedSubject ? (
+                // Lessons View
+                <div className="p-6">
+                  <button
+                    onClick={() => setSelectedSubject(null)}
+                    className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 transition-all duration-200 mb-4"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm">Back to Subjects</span>
+                  </button>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-[#3E5F44] mb-2 flex items-center space-x-2">
+                      <Library className="w-6 h-6" />
+                      <span>Class {selectedClass} - {selectedSubject.name}</span>
+                    </h3>
+                    <p className="text-[#557063]">Choose a lesson to access resources</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {selectedSubject.lessons.map((lesson, index) => {
+                      const colorClass = getSubjectColor(selectedSubject.name);
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => setSelectedLesson(lesson)}
+                          className="bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl p-5 cursor-pointer transition-all duration-200 hover:shadow-md"
+                        >
+                          <div className="flex items-start space-x-3">
+                            <div className={`bg-gradient-to-r ${colorClass} p-2.5 rounded-lg shadow-sm shrink-0`}>
+                              <BookOpen className="w-5 h-5 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="text-base font-bold text-[#3E5F44] mb-2 leading-tight">
+                                {lesson.title}
+                              </h4>
+                              <div className="flex items-center gap-3 text-xs text-[#557063]">
+                                <div className="flex items-center space-x-1">
+                                  <FileText className="w-3 h-3" />
+                                  <span>PDF</span>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Video className="w-3 h-3" />
+                                  <span>Video</span>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Download className="w-3 h-3" />
+                                  <span>Notes</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : selectedClass ? (
+                // Subjects View
+                <div className="p-6">
+                  <button
+                    onClick={() => setSelectedClass(null)}
+                    className="flex items-center space-x-2 px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 transition-all duration-200 mb-4"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm">Back to Classes</span>
+                  </button>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-[#3E5F44] mb-2 flex items-center space-x-2">
+                      <Library className="w-6 h-6" />
+                      <span>Class {selectedClass} - Subjects</span>
+                    </h3>
+                    <p className="text-[#557063]">Select a subject to explore lessons</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {resourcesData.classes[selectedClass].subjects.map((subject) => {
+                      const IconComponent = getSubjectIcon(subject.name);
+                      const colorClass = getSubjectColor(subject.name);
+                      return (
+                        <div
+                          key={subject.name}
+                          onClick={() => setSelectedSubject(subject)}
+                          className="bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-md text-center"
+                        >
+                          <div className={`bg-gradient-to-r ${colorClass} p-4 rounded-full shadow-sm mx-auto mb-3 w-16 h-16 flex items-center justify-center`}>
+                            <IconComponent className="w-7 h-7 text-white" />
+                          </div>
+                          <h4 className="text-lg font-bold text-[#3E5F44] mb-2">{subject.name}</h4>
+                          <p className="text-[#557063] text-sm">{subject.lessons.length} lessons</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                // Classes View
+                <div className="p-6">
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-[#3E5F44] mb-2 flex items-center space-x-2">
+                      <Library className="w-6 h-6" />
+                      <span>Learning Resources</span>
+                    </h3>
+                    <p className="text-[#557063]">Access textbooks, videos, and study materials together</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {Object.keys(resourcesData.classes).map((classNum) => (
+                      <div
+                        key={classNum}
+                        onClick={() => setSelectedClass(classNum)}
+                        className="bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-md text-center"
+                      >
+                        <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-5 rounded-full shadow-sm mx-auto mb-3 w-16 h-16 flex items-center justify-center">
+                          <span className="text-2xl font-bold text-white">{classNum}</span>
+                        </div>
+                        <h4 className="text-lg font-bold text-[#3E5F44] mb-2">Class {classNum}</h4>
+                        <p className="text-[#557063] text-sm">
+                          {resourcesData.classes[classNum].subjects.length} subjects
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
