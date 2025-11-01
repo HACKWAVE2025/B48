@@ -35,6 +35,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [customInterest, setCustomInterest] = useState('');
 
   // Available subjects for interests
   const subjects = ['Math', 'Science', 'English', 'Hindi', 'Social Studies', 'Computer Science', 'Art', 'Music'];
@@ -69,6 +70,31 @@ const Profile = () => {
       ...formData,
       interests: newInterests
     });
+  };
+
+  const handleAddCustomInterest = () => {
+    const trimmedInterest = customInterest.trim();
+    if (trimmedInterest && !formData.interests.includes(trimmedInterest)) {
+      setFormData({
+        ...formData,
+        interests: [...formData.interests, trimmedInterest]
+      });
+      setCustomInterest('');
+    }
+  };
+
+  const handleRemoveInterest = (interest) => {
+    setFormData({
+      ...formData,
+      interests: formData.interests.filter(i => i !== interest)
+    });
+  };
+
+  const handleCustomInterestKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddCustomInterest();
+    }
   };
 
   const handleSave = async () => {
@@ -446,30 +472,108 @@ const Profile = () => {
             </div>
 
             {/* Interests */}
-            <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-indigo-600/50 border border-indigo-400/80">
-                  <Star className="w-4 h-4" />
+            <div className="space-y-3">
+              <label className="flex items-center justify-between text-white/90 font-medium text-sm">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-lg bg-indigo-600/50 border border-indigo-400/80">
+                    <Star className="w-4 h-4" />
+                  </div>
+                  <span>Learning Interests</span>
+                  <span className="text-xs text-gray-400">
+                    ({formData.interests.length} selected)
+                  </span>
                 </div>
-                <span>Learning Interests</span>
+                {isEditing && (
+                  <span className="text-xs text-purple-300 animate-pulse">Click to toggle</span>
+                )}
               </label>
-              <div className="flex flex-wrap gap-2">
-                {subjects.map((subject) => (
-                  <button
-                    key={subject}
-                    type="button"
-                    onClick={() => isEditing && handleInterestToggle(subject)}
-                    disabled={!isEditing}
-                    className={`px-3 py-2 rounded-lg border transition-all duration-200 text-sm font-medium ${
-                      formData.interests.includes(subject)
-                        ? 'bg-purple-500/30 border-purple-400/60 text-purple-200'
-                        : 'bg-gray-700/30 border-gray-600/40 text-gray-300'
-                    } ${isEditing ? 'hover:bg-purple-500/20 cursor-pointer' : 'cursor-default opacity-60'}`}
-                  >
-                    {subject}
-                  </button>
-                ))}
+
+              {/* Predefined Subjects */}
+              <div>
+                <p className="text-xs text-gray-400 mb-2">Popular Subjects:</p>
+                <div className="flex flex-wrap gap-2">
+                  {subjects.map((subject) => (
+                    <button
+                      key={subject}
+                      type="button"
+                      onClick={() => isEditing && handleInterestToggle(subject)}
+                      disabled={!isEditing}
+                      className={`px-4 py-2 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
+                        formData.interests.includes(subject)
+                          ? 'bg-purple-600/40 border-purple-400/80 text-purple-100 shadow-lg shadow-purple-500/20'
+                          : 'bg-gray-800/40 border-gray-600/50 text-gray-300'
+                      } ${
+                        isEditing 
+                          ? 'hover:scale-105 hover:border-purple-400/80 cursor-pointer' 
+                          : 'cursor-default opacity-70'
+                      }`}
+                    >
+                      {formData.interests.includes(subject) && (
+                        <span className="mr-1">✓</span>
+                      )}
+                      {subject}
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              {/* Custom Interests */}
+              {formData.interests.filter(int => !subjects.includes(int)).length > 0 && (
+                <div>
+                  <p className="text-xs text-gray-400 mb-2">Your Custom Interests:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {formData.interests
+                      .filter(interest => !subjects.includes(interest))
+                      .map((interest) => (
+                        <div
+                          key={interest}
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 bg-blue-600/40 border-blue-400/80 text-blue-100 shadow-lg shadow-blue-500/20 text-sm font-medium"
+                        >
+                          <span>✓ {interest}</span>
+                          {isEditing && (
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveInterest(interest)}
+                              className="ml-1 text-red-300 hover:text-red-100 transition-colors"
+                              title="Remove"
+                            >
+                              ✕
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Add Custom Interest */}
+              {isEditing && (
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-400">Add Custom Interest:</p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={customInterest}
+                      onChange={(e) => setCustomInterest(e.target.value)}
+                      onKeyPress={handleCustomInterestKeyPress}
+                      placeholder="e.g., Robotics, Photography..."
+                      className="flex-1 px-4 py-2 bg-black/60 border border-gray-600/40 rounded-lg text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 text-sm"
+                      maxLength={30}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddCustomInterest}
+                      disabled={!customInterest.trim()}
+                      className="px-4 py-2 bg-green-600/40 hover:bg-green-600/60 border-2 border-green-400/80 text-green-100 rounded-lg transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Add +
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-400">
+                    💡 Tip: Add your unique interests or click on popular subjects above
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Join Date */}
