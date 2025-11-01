@@ -2,6 +2,7 @@ const express = require('express');
 const authenticateToken = require('../middleware/authMiddleware');
 const xpService = require('../services/xpService');
 const badgeService = require('../services/badgeService');
+const analyticsService = require('../services/analyticsService');
 const User = require('../models/User');
 
 const router = express.Router();
@@ -250,6 +251,85 @@ router.post('/reset-weekly', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to reset weekly XP',
+      error: error.message
+    });
+  }
+});
+
+// Get badge analytics for current user
+router.get('/analytics/badges', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const analytics = await analyticsService.getBadgeAnalytics(userId);
+    
+    res.json({
+      success: true,
+      data: analytics
+    });
+  } catch (error) {
+    console.error('Error getting badge analytics:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get badge analytics',
+      error: error.message
+    });
+  }
+});
+
+// Get badge analytics for specific user
+router.get('/analytics/badges/:userId', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const analytics = await analyticsService.getBadgeAnalytics(userId);
+    
+    res.json({
+      success: true,
+      data: analytics
+    });
+  } catch (error) {
+    console.error('Error getting badge analytics:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get badge analytics',
+      error: error.message
+    });
+  }
+});
+
+// Get leaderboard analytics
+router.get('/analytics/leaderboard', authenticateToken, async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const leaderboard = await analyticsService.getLeaderboardAnalytics(limit);
+    
+    res.json({
+      success: true,
+      data: leaderboard
+    });
+  } catch (error) {
+    console.error('Error getting leaderboard analytics:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get leaderboard analytics',
+      error: error.message
+    });
+  }
+});
+
+// Get global badge statistics
+router.get('/analytics/global', authenticateToken, async (req, res) => {
+  try {
+    const stats = await analyticsService.getGlobalBadgeStats();
+    
+    res.json({
+      success: true,
+      data: stats
+    });
+  } catch (error) {
+    console.error('Error getting global badge stats:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get global badge statistics',
       error: error.message
     });
   }
