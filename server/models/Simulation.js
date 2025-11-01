@@ -15,7 +15,8 @@ const simulationSchema = new mongoose.Schema({
 	subject: {
 		type: String,
 		required: true,
-		enum: ["Physics", "Chemistry", "Biology", "Mathematics"],
+		trim: true
+		// Removed enum to allow custom subjects based on user role
 	},
 	category: {
 		type: String,
