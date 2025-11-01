@@ -3,6 +3,7 @@ const Room = require('../models/Room');
 const Message = require('../models/Message');
 const User = require('../models/User');
 const authenticateToken = require('../middleware/authMiddleware');
+const aiSummaryService = require('../services/aiSummaryService');
 
 const router = express.Router();
 
@@ -234,6 +235,80 @@ router.get('/leaderboard', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Get leaderboard error:', error);
     res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Generate AI summary for a chat room
+router.post('/rooms/:roomId/generate-summary', authenticateToken, async (req, res) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.userId;
+
+    console.log(`[Community Routes] Generate summary request for room: ${roomId}`);
+
+    // Check if room exists
+    const room = await Room.findOne({ roomId });
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: 'Chat room not found'
+      });
+    }
+
+    // Generate summary
+    const summary = await aiSummaryService.generateChatRoomSummary(roomId);
+
+    res.json({
+      success: true,
+      message: 'Summary generated successfully',
+      summary: summary
+    });
+  } catch (error) {
+    console.error('Generate chat room summary error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to generate summary'
+    });
+  }
+});
+
+// Get AI summary for a chat room
+router.get('/rooms/:roomId/summary', authenticateToken, async (req, res) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.userId;
+
+    console.log(`[Community Routes] Get summary request for room: ${roomId}`);
+
+    // Check if room exists
+    const room = await Room.findOne({ roomId });
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: 'Chat room not found'
+      });
+    }
+
+    // Get summary (will generate if not exists)
+    const summary = await aiSummaryService.getChatRoomSummary(roomId);
+
+    if (!summary) {
+      return res.status(404).json({
+        success: false,
+        message: 'No summary available'
+      });
+    }
+
+    res.json({
+      success: true,
+      summary: summary
+    });
+  } catch (error) {
+    console.error('Get chat room summary error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to get summary'
+    });
   }
 });
 

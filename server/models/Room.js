@@ -54,6 +54,14 @@ const roomSchema = new mongoose.Schema({
     type: String,
     default: 'Be respectful and help each other learn!'
   },
+  aiSummary: {
+    summary: String,
+    keyTopics: [String],
+    participants: Number,
+    totalMessages: Number,
+    insights: [String],
+    generatedAt: Date
+  },
   createdAt: {
     type: Date,
     default: Date.now

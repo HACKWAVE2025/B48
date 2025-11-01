@@ -3,11 +3,12 @@ import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
 import { 
   Send, ArrowLeft, Users, Hash, Crown, 
-  Star, Zap, Smile, MoreVertical, Share2, Video, UserPlus 
+  Star, Zap, Smile, MoreVertical, Share2, Video, UserPlus, Sparkles 
 } from 'lucide-react';
 import ShareModal from './ShareModal';
 import VideoCall from './VideoCall';
 import VideoCallInvite from './VideoCallInvite';
+import ChatSummaryModal from './ChatSummaryModal';
 
 const ChatRoom = ({ room, onBack }) => {
   const [message, setMessage] = useState('');
@@ -15,6 +16,7 @@ const ChatRoom = ({ room, onBack }) => {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [videoCallActive, setVideoCallActive] = useState(false);
   const [videoInviteOpen, setVideoInviteOpen] = useState(false);
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
   
@@ -34,6 +36,7 @@ const ChatRoom = ({ room, onBack }) => {
         leaveRoom(room.roomId);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
   useEffect(() => {
@@ -158,6 +161,16 @@ const ChatRoom = ({ room, onBack }) => {
           </div>
           
           <div className="flex items-center space-x-2">
+            {/* AI Summary Button */}
+            <button
+              onClick={() => setSummaryModalOpen(true)}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white p-2 rounded-lg transition-all flex items-center space-x-2"
+              title="View AI Summary"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span className="hidden sm:inline text-sm">Summary</span>
+            </button>
+
             {/* Video Call Button */}
             <button
               onClick={startVideoCall}
@@ -346,6 +359,13 @@ const ChatRoom = ({ room, onBack }) => {
         isOpen={shareModalOpen}
         onClose={() => setShareModalOpen(false)}
         room={room}
+      />
+
+      {/* Chat Summary Modal */}
+      <ChatSummaryModal
+        room={room}
+        isOpen={summaryModalOpen}
+        onClose={() => setSummaryModalOpen(false)}
       />
     </>
   );

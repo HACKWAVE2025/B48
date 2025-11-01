@@ -346,7 +346,7 @@ router.post('/generate-animation', async (req, res) => {
     // Configure axios request
     const axiosConfig = {
       method: 'POST',
-      url: 'https://manim-api.onrender.com/generate-video',
+      url: 'https://manim-b79e.onrender.com/generate-video',
       data: { 
         prompt: prompt.trim()
       },

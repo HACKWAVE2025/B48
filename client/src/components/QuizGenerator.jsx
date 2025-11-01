@@ -627,6 +627,7 @@ const QuizGenerator = () => {
                       if (customSubject.trim()) {
                         handlePreferenceChange('subject', customSubject.trim());
                         setShowCustomInput(false);
+                        setCustomSubject('');
                       }
                     }
                   }}
@@ -640,6 +641,7 @@ const QuizGenerator = () => {
                     if (customSubject.trim()) {
                       handlePreferenceChange('subject', customSubject.trim());
                       setShowCustomInput(false);
+                      setCustomSubject('');
                     }
                   }}
                   disabled={!customSubject.trim()}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, Send, Video, Users, Clock, BookOpen, 
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
-  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil
+  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil, XCircle
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
@@ -25,6 +25,8 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [uploading, setUploading] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [showWhiteboard, setShowWhiteboard] = useState(false);
+  const [endingSession, setEndingSession] = useState(false);
+  const [showEndConfirmation, setShowEndConfirmation] = useState(false);
   
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
@@ -86,6 +88,7 @@ const StudySessionRoom = ({ session, onBack }) => {
         socket.emit('leave_session', { sessionId: session.sessionId });
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, connected, session]);
 
   // Socket event listeners
@@ -415,6 +418,45 @@ const StudySessionRoom = ({ session, onBack }) => {
     });
   };
 
+  const handleEndSession = async () => {
+    setEndingSession(true);
+    
+    try {
+      const token = localStorage.getItem('token');
+      const backendUrl = getBackendUrl();
+
+      const response = await fetch(
+        `${backendUrl}/api/sessions/sessions/${session.sessionId}/status`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: 'completed' })
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSessionStatus('completed');
+        setShowEndConfirmation(false);
+        // Show summary modal after ending session
+        setTimeout(() => {
+          setShowSummaryModal(true);
+        }, 500);
+      } else {
+        alert(data.message || 'Failed to end session');
+      }
+    } catch (error) {
+      console.error('Error ending session:', error);
+      alert('Failed to end session');
+    } finally {
+      setEndingSession(false);
+    }
+  };
+
   const getAvatarColor = (name) => {
     const colors = [
       'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500',
@@ -424,7 +466,7 @@ const StudySessionRoom = ({ session, onBack }) => {
     return colors[index];
   };
 
-  const canInteract = session && !session.hasEnded;
+  const canInteract = session && sessionStatus !== 'completed' && !session.hasEnded;
   const isCreator = session?.createdBy?._id === user?.userId || session?.createdBy === user?.userId;
 
   return (
@@ -448,6 +490,18 @@ const StudySessionRoom = ({ session, onBack }) => {
             
             {canInteract && (
               <>
+                {/* End Session Button - Only for creators */}
+                {isCreator && (
+                  <button
+                    onClick={() => setShowEndConfirmation(true)}
+                    className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all flex items-center space-x-2 shadow-sm"
+                    title="End Session"
+                  >
+                    <XCircle className="w-4 h-4" />
+                    <span className="text-sm font-medium">End Session</span>
+                  </button>
+                )}
+
                 <button
                   onClick={() => setShowInviteModal(true)}
                   className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
@@ -490,7 +544,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             )}
 
             {/* AI Summary Button - Show for completed sessions */}
-            {session?.status === 'completed' && (
+            {(session?.status === 'completed' || sessionStatus === 'completed') && (
               <button
                 onClick={() => setShowSummaryModal(true)}
                 className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-2 shadow-sm"
@@ -749,6 +803,74 @@ const StudySessionRoom = ({ session, onBack }) => {
           onClose={() => setShowWhiteboard(false)}
           isViewOnly={!canInteract}
         />
+      )}
+
+      {/* End Session Confirmation Modal */}
+      {showEndConfirmation && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-lg border border-[#93DA97]/30">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="p-3 bg-red-100 rounded-xl">
+                <XCircle className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#3E5F44]">End Study Session?</h3>
+                <p className="text-[#557063] text-sm">This action cannot be undone</p>
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <p className="text-[#3E5F44] mb-3">
+                Are you sure you want to end this study session? The session will be marked as completed and:
+              </p>
+              <ul className="space-y-2 text-sm text-[#557063]">
+                <li className="flex items-start space-x-2">
+                  <CheckCircle className="w-4 h-4 text-[#5E936C] mt-0.5 flex-shrink-0" />
+                  <span>All participants will be notified</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <CheckCircle className="w-4 h-4 text-[#5E936C] mt-0.5 flex-shrink-0" />
+                  <span>Chat history will be preserved</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <CheckCircle className="w-4 h-4 text-[#5E936C] mt-0.5 flex-shrink-0" />
+                  <span>AI summary will be generated</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <CheckCircle className="w-4 h-4 text-[#5E936C] mt-0.5 flex-shrink-0" />
+                  <span>No more messages can be sent</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowEndConfirmation(false)}
+                className="flex-1 px-4 py-3 bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] rounded-lg transition-all font-medium border border-[#93DA97]/40"
+                disabled={endingSession}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleEndSession}
+                disabled={endingSession}
+                className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-lg transition-all font-medium shadow-sm flex items-center justify-center space-x-2"
+              >
+                {endingSession ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Ending...</span>
+                  </>
+                ) : (
+                  <>
+                    <XCircle className="w-4 h-4" />
+                    <span>End Session</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
