@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, Send, Video, Users, Clock, BookOpen, 
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
-  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X
+  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
 import VideoCall from './VideoCall';
 import InviteUsersModal from './InviteUsersModal';
+import SessionSummaryModal from './SessionSummaryModal';
+import Whiteboard from './Whiteboard';
 
 const StudySessionRoom = ({ session, onBack }) => {
   const [messages, setMessages] = useState([]);
@@ -21,6 +23,8 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
+  const [showWhiteboard, setShowWhiteboard] = useState(false);
   
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
@@ -451,6 +455,14 @@ const StudySessionRoom = ({ session, onBack }) => {
                 >
                   <UserPlus className="w-5 h-5" />
                 </button>
+
+                <button
+                  onClick={() => setShowWhiteboard(true)}
+                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  title="Open Whiteboard"
+                >
+                  <Pencil className="w-5 h-5" />
+                </button>
                 
                 <button
                   onClick={() => setShowVideoCall(!showVideoCall)}
@@ -463,6 +475,30 @@ const StudySessionRoom = ({ session, onBack }) => {
                   <Video className="w-5 h-5" />
                 </button>
               </>
+            )}
+
+            {/* Whiteboard button for view-only (completed sessions) */}
+            {!canInteract && (
+              <button
+                onClick={() => setShowWhiteboard(true)}
+                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all flex items-center space-x-2"
+                title="View Whiteboard"
+              >
+                <Pencil className="w-4 h-4" />
+                <span className="text-sm font-medium">View Whiteboard</span>
+              </button>
+            )}
+
+            {/* AI Summary Button - Show for completed sessions */}
+            {session?.status === 'completed' && (
+              <button
+                onClick={() => setShowSummaryModal(true)}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-2 shadow-lg"
+                title="View AI Summary"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">AI Summary</span>
+              </button>
             )}
           </div>
         </div>
@@ -617,8 +653,17 @@ const StudySessionRoom = ({ session, onBack }) => {
               </form>
             </div>
           ) : (
-            <div className="p-4 border-t border-white/20 text-center">
-              <p className="text-white/60 text-sm">This session has ended. You can view the chat history.</p>
+            <div className="p-4 border-t border-white/20">
+              <div className="text-center mb-3">
+                <p className="text-white/60 text-sm mb-3">This session has ended. You can view the chat history.</p>
+                <button
+                  onClick={() => setShowSummaryModal(true)}
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-lg"
+                >
+                  <Sparkles className="w-5 h-5" />
+                  <span>View AI Summary</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -689,6 +734,22 @@ const StudySessionRoom = ({ session, onBack }) => {
         onClose={() => setShowInviteModal(false)}
         session={session}
       />
+
+      {/* AI Summary Modal */}
+      <SessionSummaryModal
+        session={session}
+        isOpen={showSummaryModal}
+        onClose={() => setShowSummaryModal(false)}
+      />
+
+      {/* Whiteboard Modal */}
+      {showWhiteboard && (
+        <Whiteboard
+          sessionId={session?.sessionId}
+          onClose={() => setShowWhiteboard(false)}
+          isViewOnly={!canInteract}
+        />
+      )}
     </div>
   );
 };

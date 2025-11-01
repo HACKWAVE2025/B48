@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const dailyQuestionService = require('./dailyQuestionService');
+const aiSummaryService = require('./aiSummaryService');
 const StudySession = require('../models/StudySession');
 
 class CronService {
@@ -111,7 +112,23 @@ class CronService {
         session.activeUsers = [];
         await session.save();
         console.log(`Completed session: ${session.title} (${session.sessionId})`);
+        
+        // Generate AI summary for the completed session (async, don't wait)
+        this.generateSummaryForSession(session.sessionId);
       }
+    }
+  }
+
+  /**
+   * Generate AI summary for a session (async)
+   */
+  async generateSummaryForSession(sessionId) {
+    try {
+      console.log(`Generating AI summary for session: ${sessionId}`);
+      await aiSummaryService.generateSessionSummary(sessionId);
+      console.log(`AI summary generated for session: ${sessionId}`);
+    } catch (error) {
+      console.error(`Error generating AI summary for session ${sessionId}:`, error);
     }
   }
 

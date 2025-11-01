@@ -255,20 +255,6 @@ const Community = () => {
               <span>Study Sessions</span>
             </button>
             
-            {selectedSession && (
-              <button
-                onClick={() => setActiveTab('session')}
-                className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
-                  activeTab === 'session'
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                    : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <Video className="w-4 h-4" />
-                <span>{selectedSession.title}</span>
-              </button>
-            )}
-            
             <button
               onClick={() => setActiveTab('rooms')}
               className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
@@ -280,20 +266,6 @@ const Community = () => {
               <MessageCircle className="w-4 h-4" />
               <span>Chat Rooms</span>
             </button>
-            
-            {selectedRoom && (
-              <button
-                onClick={() => setActiveTab('chat')}
-                className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
-                  activeTab === 'chat'
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                    : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <Video className="w-4 h-4" />
-                <span>{selectedRoom.name}</span>
-              </button>
-            )}
             
             <button
               onClick={() => setActiveTab('leaderboard')}
