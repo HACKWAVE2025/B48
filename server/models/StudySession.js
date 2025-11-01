@@ -108,6 +108,21 @@ const studySessionSchema = new mongoose.Schema({
     insights: [String],
     generatedAt: Date
   },
+  participantNotes: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    content: {
+      type: String,
+      required: true
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   completedAt: {
     type: Date
   },
