@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { MessageCircle, Users, Trophy, Plus, Video } from 'lucide-react';
+import { MessageCircle, Users, Trophy, Plus, Video, Calendar } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
 import RoomList from './RoomList';
 import ChatRoom from './ChatRoom';
 import CreateRoomModal from './CreateRoomModal';
+import SessionList from './SessionList';
+import StudySessionRoom from './StudySessionRoom';
+import CreateSessionModal from './CreateSessionModal';
 import Leaderboard from './Leaderboard';
 
 const Community = () => {
-  const [activeTab, setActiveTab] = useState('rooms');
+  const [activeTab, setActiveTab] = useState('sessions');
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [selectedSession, setSelectedSession] = useState(null);
   const [rooms, setRooms] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [userGrade, setUserGrade] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [createRoomModalOpen, setCreateRoomModalOpen] = useState(false);
+  const [createSessionModalOpen, setCreateSessionModalOpen] = useState(false);
   
   const { connected, connectionError } = useSocket();
   const { user } = useAuth();
@@ -40,6 +46,7 @@ const Community = () => {
 
   useEffect(() => {
     fetchRooms();
+    fetchSessions();
     fetchLeaderboard();
   }, []);
 
@@ -121,6 +128,44 @@ const Community = () => {
     }
   };
 
+  const fetchSessions = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        setError('No authentication token found');
+        return;
+      }
+
+      const backendUrl = getBackendUrl();
+      console.log('Fetching sessions from:', `${backendUrl}/api/sessions/sessions`);
+      
+      const response = await fetch(`${backendUrl}/api/sessions/sessions`, {
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Sessions response:', data);
+      
+      if (data.success) {
+        setSessions(data.sessions || []);
+      } else {
+        setError(data.message || 'Failed to fetch sessions');
+      }
+    } catch (error) {
+      console.error('Error fetching sessions:', error);
+      setError(`Failed to fetch sessions: ${error.message}`);
+      setSessions([]);
+    }
+  };
+
   const handleRoomSelect = (room) => {
     setSelectedRoom(room);
     setActiveTab('chat');
@@ -131,6 +176,18 @@ const Community = () => {
     setRooms(prev => [newRoom, ...prev]);
     // Automatically select and join the new room
     handleRoomSelect(newRoom);
+  };
+
+  const handleSessionSelect = (session) => {
+    setSelectedSession(session);
+    setActiveTab('session');
+  };
+
+  const handleSessionCreated = (newSession) => {
+    // Add the new session to the list
+    setSessions(prev => [newSession, ...prev]);
+    // Automatically select and join the new session
+    handleSessionSelect(newSession);
   };
 
   return (
@@ -165,6 +222,10 @@ const Community = () => {
           {/* Features */}
           <div className="mt-6 flex justify-center space-x-6 text-white/60">
             <div className="flex items-center space-x-2">
+              <Calendar className="w-4 h-4" />
+              <span className="text-sm">Study Sessions</span>
+            </div>
+            <div className="flex items-center space-x-2">
               <MessageCircle className="w-4 h-4" />
               <span className="text-sm">Real-time Chat</span>
             </div>
@@ -181,10 +242,36 @@ const Community = () => {
 
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-1 flex space-x-1">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-1 flex space-x-1 overflow-x-auto">
+            <button
+              onClick={() => setActiveTab('sessions')}
+              className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
+                activeTab === 'sessions'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Study Sessions</span>
+            </button>
+            
+            {selectedSession && (
+              <button
+                onClick={() => setActiveTab('session')}
+                className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
+                  activeTab === 'session'
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <Video className="w-4 h-4" />
+                <span>{selectedSession.title}</span>
+              </button>
+            )}
+            
             <button
               onClick={() => setActiveTab('rooms')}
-              className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 ${
+              className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === 'rooms'
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
@@ -197,7 +284,7 @@ const Community = () => {
             {selectedRoom && (
               <button
                 onClick={() => setActiveTab('chat')}
-                className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 ${
+                className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                   activeTab === 'chat'
                     ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
                     : 'text-white/60 hover:text-white hover:bg-white/10'
@@ -210,7 +297,7 @@ const Community = () => {
             
             <button
               onClick={() => setActiveTab('leaderboard')}
-              className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 ${
+              className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === 'leaderboard'
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
@@ -224,6 +311,46 @@ const Community = () => {
 
         {/* Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {activeTab === 'sessions' && (
+            <>
+              <SessionList 
+                sessions={sessions} 
+                onSessionSelect={handleSessionSelect}
+                onRefresh={fetchSessions}
+              />
+              
+              {/* Create Session Button */}
+              <div className="lg:col-span-1">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+                  <h3 className="text-white font-semibold mb-4">Quick Actions</h3>
+                  <button
+                    onClick={() => setCreateSessionModalOpen(true)}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Create Session</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('rooms')}
+                    className="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Chat Rooms</span>
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+
+          {activeTab === 'session' && selectedSession && (
+            <div className="lg:col-span-5">
+              <StudySessionRoom 
+                session={selectedSession} 
+                onBack={() => setActiveTab('sessions')}
+              />
+            </div>
+          )}
+          
           {activeTab === 'rooms' && (
             <>
               <RoomList 
@@ -238,10 +365,17 @@ const Community = () => {
                   <h3 className="text-white font-semibold mb-4">Quick Actions</h3>
                   <button
                     onClick={() => setCreateRoomModalOpen(true)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Create Room</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('sessions')}
+                    className="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Study Sessions</span>
                   </button>
                 </div>
               </div>
@@ -267,6 +401,13 @@ const Community = () => {
             </div>
           )}
         </div>
+
+        {/* Create Session Modal */}
+        <CreateSessionModal
+          isOpen={createSessionModalOpen}
+          onClose={() => setCreateSessionModalOpen(false)}
+          onSessionCreated={handleSessionCreated}
+        />
 
         {/* Create Room Modal */}
         <CreateRoomModal

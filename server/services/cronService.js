@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const dailyQuestionService = require('./dailyQuestionService');
+const StudySession = require('../models/StudySession');
 
 class CronService {
   constructor() {
@@ -11,6 +12,7 @@ class CronService {
    */
   startAllJobs() {
     this.startDailyQuestionGeneration();
+    this.startSessionStatusUpdater();
     console.log('All cron jobs started successfully');
   }
 
@@ -41,6 +43,76 @@ class CronService {
     // Generate questions immediately for testing (remove in production)
     // Uncomment the line below to generate questions right now for testing
     // dailyQuestionService.generateDailyQuestions();
+  }
+
+  /**
+   * Update study session statuses
+   * Runs every minute to check and update session statuses
+   */
+  startSessionStatusUpdater() {
+    // Run every minute
+    const job = cron.schedule('* * * * *', async () => {
+      try {
+        await this.updateSessionStatuses();
+      } catch (error) {
+        console.error('Error in session status updater cron job:', error);
+      }
+    }, {
+      scheduled: false
+    });
+
+    this.jobs.set('sessionStatusUpdater', job);
+    job.start();
+
+    console.log('Session status updater cron job started (runs every minute)');
+  }
+
+  /**
+   * Update session statuses based on current time
+   */
+  async updateSessionStatuses() {
+    const now = new Date();
+
+    // Activate scheduled sessions that should start now
+    const sessionsToActivate = await StudySession.find({
+      status: 'scheduled'
+    });
+
+    for (const session of sessionsToActivate) {
+      const sessionDate = new Date(session.date);
+      const [hours, minutes] = session.startTime.split(':').map(Number);
+      sessionDate.setHours(hours, minutes, 0, 0);
+
+      // Activate if current time is at or past start time
+      if (now >= sessionDate) {
+        session.status = 'active';
+        await session.save();
+        console.log(`Activated session: ${session.title} (${session.sessionId})`);
+      }
+    }
+
+    // Complete active sessions that have ended
+    const activeSessions = await StudySession.find({
+      status: 'active'
+    });
+
+    for (const session of activeSessions) {
+      const sessionDate = new Date(session.date);
+      const [startHours, startMinutes] = session.startTime.split(':').map(Number);
+      sessionDate.setHours(startHours, startMinutes, 0, 0);
+      
+      const endDate = new Date(sessionDate.getTime() + session.duration * 60000);
+
+      // Complete if current time is past end time
+      if (now > endDate) {
+        session.status = 'completed';
+        session.completedAt = endDate;
+        // Clear active users
+        session.activeUsers = [];
+        await session.save();
+        console.log(`Completed session: ${session.title} (${session.sessionId})`);
+      }
+    }
   }
 
   /**

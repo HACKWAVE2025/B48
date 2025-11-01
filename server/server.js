@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const http = require("http");
 const socketIo = require("socket.io");
+const path = require("path");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const quizRoutes = require("./routes/quizRoutes");
@@ -12,6 +13,7 @@ const profileRoutes = require("./routes/profileRoutes");
 const simulationRoutes = require("./routes/simulationRoutes"); // 1. Import the router
 const geminiRoutes = require("./routes/geminiRoutes");
 const communityRoutes = require("./routes/communityRoutes");
+const sessionRoutes = require("./routes/sessionRoutes");
 const SocketHandler = require("./socket/socketHandler");
 const dailyQuestionRoutes = require('./routes/dailyQuestionRoutes');
 const cronService = require('./services/cronService');
@@ -52,6 +54,9 @@ socketHandler.initialize();
 // Middleware
 app.use(express.json());
 
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 app.get("/", (req, res) => {
   res.send("Rural Learning Platform API 🚀");
@@ -65,6 +70,7 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/simulations', simulationRoutes); // FIX: Was '/api/simulation'
 app.use('/api/gemini', geminiRoutes);
 app.use('/api/community', communityRoutes);
+app.use('/api/sessions', sessionRoutes);
 app.use('/api/daily-question', dailyQuestionRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/xp', require('./routes/xpRoutes'));

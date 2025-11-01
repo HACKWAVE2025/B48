@@ -47,15 +47,21 @@ const XPNotification = ({ notification, onClose }) => {
   const getActionColor = (action) => {
     switch (action) {
       case 'daily_challenge_correct':
-        return 'from-yellow-400 to-orange-500';
+        return 'from-yellow-500 to-orange-600';
       case 'quiz_set_completed':
-        return 'from-blue-400 to-purple-500';
+        return 'from-blue-500 to-purple-600';
       case 'simulation_completed':
-        return 'from-green-400 to-teal-500';
+        return 'from-green-500 to-teal-600';
       case 'note_written':
-        return 'from-purple-400 to-pink-500';
+        return 'from-purple-500 to-pink-600';
+      case 'message':
+        return 'from-indigo-600 to-purple-700';
+      case 'join_room':
+        return 'from-cyan-600 to-blue-700';
+      case 'video_call':
+        return 'from-emerald-600 to-green-700';
       default:
-        return 'from-blue-400 to-purple-500';
+        return 'from-blue-600 to-purple-700';
     }
   };
 
@@ -75,6 +81,12 @@ const XPNotification = ({ notification, onClose }) => {
         return `Great reflection! +${xpAwarded} XP`;
       case 'chat_message':
         return `Community participation! +${xpAwarded} XP`;
+      case 'message':
+        return `Message sent! +${xpAwarded} XP`;
+      case 'join_room':
+        return `Joined session! +${xpAwarded} XP`;
+      case 'video_call':
+        return `Video call started! +${xpAwarded} XP`;
       case 'maintaining_streak_7':
         return `7-day streak bonus! +${xpAwarded} XP`;
       case 'maintaining_streak_30':
@@ -97,27 +109,27 @@ const XPNotification = ({ notification, onClose }) => {
       >
         <div className={`bg-gradient-to-r ${getActionColor(notification.action)} rounded-lg shadow-lg p-4 text-white min-w-[320px] max-w-md relative overflow-hidden`}>
           {/* Background decoration */}
-          <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
           
           {/* Content */}
           <div className="relative z-10">
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-white bg-opacity-20 rounded-full">
+                <div className="p-2 bg-white bg-opacity-30 rounded-full shadow-lg">
                   {getActionIcon(notification.action)}
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-sm">
+                  <p className="font-bold text-base drop-shadow-lg">
                     {getActionMessage(notification.action, notification.xpAwarded)}
                   </p>
-                  <p className="text-xs opacity-90 mt-1">
+                  <p className="text-sm font-medium opacity-95 mt-1 drop-shadow">
                     Total XP: {notification.totalXP?.toLocaleString()}
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleClose}
-                className="p-1 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
+                className="p-1 hover:bg-white hover:bg-opacity-30 rounded-full transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
