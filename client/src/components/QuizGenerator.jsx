@@ -360,14 +360,14 @@ const QuizGenerator = () => {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex justify-center mb-4">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg">
+          <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
             <Brain className="w-8 h-8 text-white" />
           </div>
         </div>
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">
+        <h1 className="text-3xl font-bold text-[#3E5F44] mb-2">
           AI Quiz Generator
         </h1>
-        <p className="text-white/80 text-lg">
+        <p className="text-[#557063] text-lg">
           10 questions • 10 minutes • Personalized AI quizzes
         </p>
       </div>
@@ -376,12 +376,12 @@ const QuizGenerator = () => {
       {!quiz && !showQuizForm && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Single Player Quiz */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Single Player</h2>
-            <p className="text-gray-300 mb-6">Practice with AI-generated personalized quizzes</p>
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#3E5F44] mb-4">Single Player</h2>
+            <p className="text-[#557063] mb-6">Practice with AI-generated personalized quizzes</p>
             <button
               onClick={() => setShowQuizForm(true)}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+              className="w-full bg-[#5E936C] hover:bg-[#3E5F44] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2"
             >
               <BookOpen className="w-5 h-5" />
               <span>Start Solo Quiz</span>
@@ -389,12 +389,12 @@ const QuizGenerator = () => {
           </div>
 
           {/* Micro Quiz Builder */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Micro-Quiz Builder</h2>
-            <p className="text-gray-300 mb-6">Create custom 5-10 question quizzes with AI feedback</p>
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#3E5F44] mb-4">Micro-Quiz Builder</h2>
+            <p className="text-[#557063] mb-6">Create custom 5-10 question quizzes with AI feedback</p>
             <button
               onClick={() => window.location.href = '/micro-quiz'}
-              className="w-full bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+              className="w-full bg-[#E8FFD7] hover:bg-[#93DA97]/20 border border-[#93DA97] text-[#3E5F44] font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2"
             >
               <Plus className="w-5 h-5" />
               <span>Create Micro-Quiz</span>
@@ -402,20 +402,20 @@ const QuizGenerator = () => {
           </div>
 
           {/* Multiplayer Quiz */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Multiplayer</h2>
-            <p className="text-gray-300 mb-6">Compete with friends in real-time quiz battles</p>
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-[#3E5F44] mb-4">Multiplayer</h2>
+            <p className="text-[#557063] mb-6">Compete with friends in real-time quiz battles</p>
             <div className="space-y-3">
               <button
                 onClick={() => setShowCreateRoomModal(true)}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                className="w-full bg-[#5E936C] hover:bg-[#3E5F44] text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create Room</span>
               </button>
               <button
                 onClick={() => setShowJoinRoomModal(true)}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                className="w-full bg-[#E8FFD7] hover:bg-[#93DA97]/20 border border-[#93DA97] text-[#3E5F44] font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 <Users className="w-5 h-5" />
                 <span>Join Room</span>
@@ -427,30 +427,30 @@ const QuizGenerator = () => {
 
       {/* User Profile Display */}
       {user && !quiz && !showQuizForm && (
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 mb-8">
-          <h2 className="text-white font-semibold mb-4">Your Profile</h2>
+        <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 mb-8 shadow-sm">
+          <h2 className="text-[#3E5F44] font-semibold mb-4">Your Profile</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
-              <p className="text-gray-400 text-sm">Level</p>
-              <p className="text-white font-bold text-lg">{user?.level || 1}</p>
+              <p className="text-[#557063] text-sm">Level</p>
+              <p className="text-[#3E5F44] font-bold text-lg">{user?.level || 1}</p>
             </div>
             <div className="text-center">
-              <p className="text-gray-400 text-sm">Class</p>
-              <p className="text-white font-bold text-lg">{getUserClassLevel()}</p>
+              <p className="text-[#557063] text-sm">Class</p>
+              <p className="text-[#3E5F44] font-bold text-lg">{getUserClassLevel()}</p>
             </div>
             <div className="text-center">
-              <p className="text-gray-400 text-sm">XP</p>
-              <p className="text-white font-bold text-lg">{user?.xp || 0}</p>
+              <p className="text-[#557063] text-sm">XP</p>
+              <p className="text-[#3E5F44] font-bold text-lg">{user?.xp || 0}</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 mt-4">
-            <span className="bg-blue-500/20 px-3 py-1 rounded-full text-sm text-blue-200">
+            <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
               Grade: {user?.grade || 'Not set'}
             </span>
-            <span className="bg-green-500/20 px-3 py-1 rounded-full text-sm text-green-200">
+            <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
               Location: {user?.location || 'Not set'}
             </span>
-            <span className="bg-yellow-500/20 px-3 py-1 rounded-full text-sm text-yellow-200">
+            <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
               Interests: {user?.interests?.join(', ') || 'Math'}
             </span>
           </div>
@@ -463,9 +463,8 @@ const QuizGenerator = () => {
           <div className="space-y-4 mb-6">
             <button
               onClick={() => setShowQuizForm(true)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl relative overflow-hidden group mr-4"
+              className="bg-[#E8FFD7] hover:bg-[#93DA97]/20 border border-[#93DA97] text-[#3E5F44] font-semibold py-4 px-8 rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-sm relative overflow-hidden mr-4"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               <div className="relative flex items-center justify-center space-x-3">
                 <BookOpen className="w-6 h-6" />
                 <span>Choose Subject & Difficulty</span>
@@ -475,9 +474,8 @@ const QuizGenerator = () => {
             <button
               onClick={generateQuiz}
               disabled={loading}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg hover:shadow-xl relative overflow-hidden group"
+              className="bg-[#5E936C] hover:bg-[#3E5F44] disabled:bg-gray-400 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 shadow-sm relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               <div className="relative flex items-center justify-center space-x-3">
                 {loading ? (
                   <>
@@ -496,21 +494,21 @@ const QuizGenerator = () => {
           </div>
           
           {/* User Info */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4">
-            <p className="text-white/80 text-sm mb-2">
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-4 shadow-sm">
+            <p className="text-[#557063] text-sm mb-2">
               Quiz will be generated based on your profile:
             </p>
-            <div className="flex justify-center space-x-4 mt-2">
-              <span className="bg-purple-500/20 px-3 py-1 rounded-full text-sm text-purple-200">
+            <div className="flex justify-center space-x-4 mt-2 flex-wrap gap-2">
+              <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
                 {getUserClassLevel()}
               </span>
-              <span className="bg-blue-500/20 px-3 py-1 rounded-full text-sm text-blue-200">
+              <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
                 Level: {user?.level || 1}
               </span>
-              <span className="bg-green-500/20 px-3 py-1 rounded-full text-sm text-green-200">
+              <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
                 Location: {user?.location || 'Not set'}
               </span>
-              <span className="bg-yellow-500/20 px-3 py-1 rounded-full text-sm text-yellow-200">
+              <span className="bg-[#E8FFD7] px-3 py-1 rounded-full text-sm text-[#3E5F44] border border-[#93DA97]/30">
                 Interests: {user?.interests?.join(', ') || 'Math'}
               </span>
             </div>
@@ -520,18 +518,18 @@ const QuizGenerator = () => {
 
       {/* Custom Quiz Form - Removed Class Level Selection */}
       {showQuizForm && !quiz && (
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl mb-8">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">Customize Your Quiz</h2>
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm mb-8">
+          <h2 className="text-2xl font-bold text-[#3E5F44] mb-6 text-center">Customize Your Quiz</h2>
           
           {/* User Class Info */}
-          <div className="bg-blue-500/20 border border-blue-500/40 rounded-xl p-4 mb-6">
+          <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-xl p-4 mb-6">
             <div className="text-center">
-              <p className="text-blue-200 text-sm mb-2">Quiz will be generated for:</p>
-              <div className="flex justify-center space-x-4">
-                <span className="bg-blue-600/30 px-4 py-2 rounded-full text-blue-200 font-medium">
+              <p className="text-[#557063] text-sm mb-2">Quiz will be generated for:</p>
+              <div className="flex justify-center space-x-4 flex-wrap gap-2">
+                <span className="bg-white px-4 py-2 rounded-full text-[#3E5F44] font-medium border border-[#93DA97]/30">
                   {getUserClassLevel()}
                 </span>
-                <span className="bg-green-600/30 px-4 py-2 rounded-full text-green-200 font-medium">
+                <span className="bg-white px-4 py-2 rounded-full text-[#3E5F44] font-medium border border-[#93DA97]/30">
                   {user?.location || 'Your location'}
                 </span>
               </div>
@@ -541,15 +539,15 @@ const QuizGenerator = () => {
           {/* Student Type Selection - Only for students */}
           {user?.role === 'student' && (
             <div className="mb-6">
-              <label className="block text-white/80 text-sm font-medium mb-3">Student Type*</label>
+              <label className="block text-[#3E5F44] text-sm font-medium mb-3">Student Type*</label>
               <div className="flex gap-4">
                 <button
                   type="button"
                   onClick={() => setStudentType('school')}
-                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-200 ${
                     studentType === 'school'
-                      ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
-                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50'
+                      ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                      : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#5E936C]'
                   }`}
                 >
                   <div className="text-center">
@@ -560,10 +558,10 @@ const QuizGenerator = () => {
                 <button
                   type="button"
                   onClick={() => setStudentType('college')}
-                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-200 ${
                     studentType === 'college'
-                      ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
-                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50'
+                      ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                      : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#5E936C]'
                   }`}
                 >
                   <div className="text-center">
@@ -577,7 +575,7 @@ const QuizGenerator = () => {
           
           {/* Subject Selection */}
           <div className="mb-6">
-            <label className="block text-white/80 text-sm font-medium mb-3">Select Subject</label>
+            <label className="block text-[#3E5F44] text-sm font-medium mb-3">Select Subject</label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {subjects.map((subject) => (
                 <button
@@ -586,10 +584,10 @@ const QuizGenerator = () => {
                     handlePreferenceChange('subject', subject.value);
                     setShowCustomInput(false);
                   }}
-                  className={`p-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                  className={`p-4 rounded-xl border-2 font-medium transition-all duration-200 ${
                     quizPreferences.subject === subject.value && !showCustomInput
-                      ? 'bg-purple-600/30 border-purple-400/80 text-purple-200 shadow-lg shadow-purple-500/20'
-                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50 hover:bg-gray-700/50'
+                      ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                      : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#5E936C]'
                   }`}
                 >
                   <div className="text-2xl mb-2">{subject.icon}</div>
@@ -602,10 +600,10 @@ const QuizGenerator = () => {
                   setShowCustomInput(true);
                   setQuizPreferences(prev => ({ ...prev, subject: '' }));
                 }}
-                className={`p-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                className={`p-4 rounded-xl border-2 font-medium transition-all duration-200 ${
                   showCustomInput
-                    ? 'bg-orange-600/30 border-orange-400/80 text-orange-200 shadow-lg shadow-orange-500/20'
-                    : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-orange-500/50 hover:bg-gray-700/50'
+                    ? 'bg-[#93DA97]/20 border-[#93DA97] text-[#3E5F44] shadow-sm'
+                    : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#93DA97]'
                 }`}
               >
                 <div className="text-2xl mb-2">➕</div>
@@ -617,7 +615,7 @@ const QuizGenerator = () => {
           {/* Custom Subject Input */}
           {showCustomInput && (
             <div className="mb-6">
-              <label className="block text-white/80 text-sm font-medium mb-3">Custom Subject*</label>
+              <label className="block text-[#3E5F44] text-sm font-medium mb-3">Custom Subject*</label>
               <div className="flex gap-3">
                 <input
                   type="text"
@@ -632,7 +630,7 @@ const QuizGenerator = () => {
                       }
                     }
                   }}
-                  className="flex-1 px-4 py-2 bg-gray-800/50 text-white rounded-lg border-2 border-gray-600/50 focus:border-purple-500 focus:outline-none"
+                  className="flex-1 px-4 py-2 bg-white text-[#0f172a] rounded-lg border-2 border-[#93DA97]/30 focus:border-[#5E936C] focus:outline-none"
                   placeholder="Enter your custom subject (e.g., Robotics, Creative Writing)"
                   autoFocus
                 />
@@ -645,7 +643,7 @@ const QuizGenerator = () => {
                     }
                   }}
                   disabled={!customSubject.trim()}
-                  className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2 bg-[#5E936C] text-white rounded-lg hover:bg-[#3E5F44] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Add
                 </button>
@@ -655,7 +653,7 @@ const QuizGenerator = () => {
                     setShowCustomInput(false);
                     setCustomSubject('');
                   }}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
                 >
                   Cancel
                 </button>
@@ -665,16 +663,20 @@ const QuizGenerator = () => {
 
           {/* Difficulty Selection */}
           <div className="mb-6">
-            <label className="block text-white/80 text-sm font-medium mb-3">Select Difficulty</label>
+            <label className="block text-[#3E5F44] text-sm font-medium mb-3">Select Difficulty</label>
             <div className="grid grid-cols-3 gap-3">
               {difficulties.map((difficulty) => (
                 <button
                   key={difficulty.value}
                   onClick={() => handlePreferenceChange('difficulty', difficulty.value)}
-                  className={`p-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                  className={`p-4 rounded-xl border-2 font-medium transition-all duration-200 ${
                     quizPreferences.difficulty === difficulty.value
-                      ? `bg-${difficulty.color}-600/30 border-${difficulty.color}-400/80 text-${difficulty.color}-200 shadow-lg shadow-${difficulty.color}-500/20`
-                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50 hover:bg-gray-700/50'
+                      ? difficulty.color === 'green'
+                        ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                        : difficulty.color === 'yellow'
+                        ? 'bg-yellow-100 border-yellow-500 text-yellow-800 shadow-sm'
+                        : 'bg-red-100 border-red-500 text-red-800 shadow-sm'
+                      : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#5E936C]'
                   }`}
                 >
                   {difficulty.label}
@@ -688,7 +690,7 @@ const QuizGenerator = () => {
             <button
               onClick={generateQuiz}
               disabled={loading || !quizPreferences.subject || !quizPreferences.difficulty}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg hover:shadow-xl disabled:opacity-50"
+              className="bg-[#5E936C] hover:bg-[#3E5F44] disabled:bg-gray-400 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 shadow-sm disabled:opacity-50"
             >
               <div className="flex items-center space-x-2">
                 {loading ? (
@@ -707,7 +709,7 @@ const QuizGenerator = () => {
             
             <button
               onClick={() => setShowQuizForm(false)}
-              className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+              className="bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-all duration-200"
             >
               Cancel
             </button>
@@ -717,28 +719,28 @@ const QuizGenerator = () => {
 
       {/* Quiz Display */}
       {quiz && !showResult && (
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm">
           {/* Quiz Header with Timer */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex space-x-4">
-              <div className="bg-purple-500/20 border border-purple-500/40 rounded-full px-4 py-2">
-                <span className="text-purple-200 text-sm font-medium">
+          <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+            <div className="flex space-x-4 flex-wrap gap-2">
+              <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-full px-4 py-2">
+                <span className="text-[#3E5F44] text-sm font-medium">
                   {quiz[0].subject.charAt(0).toUpperCase() + quiz[0].subject.slice(1)}
                 </span>
               </div>
-              <div className="bg-blue-500/20 border border-blue-500/40 rounded-full px-4 py-2">
-                <span className="text-blue-200 text-sm font-medium">
+              <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-full px-4 py-2">
+                <span className="text-[#3E5F44] text-sm font-medium">
                   Question {currentQuestionIndex + 1}/{quiz.length}
                 </span>
               </div>
-              <div className="bg-green-500/20 border border-green-500/40 rounded-full px-4 py-2">
-                <span className="text-green-200 text-sm font-medium">
+              <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-full px-4 py-2">
+                <span className="text-[#3E5F44] text-sm font-medium">
                   {getUserClassLevel()}
                 </span>
               </div>
             </div>
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-full border ${
-              timeLeft <= 60 ? 'bg-red-500/20 border-red-500/40 text-red-200' : 'bg-green-500/20 border-green-500/40 text-green-200'
+              timeLeft <= 60 ? 'bg-red-50 border-red-300 text-red-700' : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#3E5F44]'
             }`}>
               <Clock className="w-4 h-4" />
               <span className="font-mono font-bold">{formatTime(timeLeft)}</span>
@@ -747,9 +749,9 @@ const QuizGenerator = () => {
 
           {/* Progress Bar */}
           <div className="mb-6">
-            <div className="bg-gray-700 rounded-full h-2">
+            <div className="bg-gray-200 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentQuestionIndex + 1) / quiz.length) * 100}%` }}
               ></div>
             </div>
@@ -758,11 +760,11 @@ const QuizGenerator = () => {
           {/* Question */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
-              <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-full p-3">
-                <Target className="w-6 h-6 text-yellow-400" />
+              <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-full p-3">
+                <Target className="w-6 h-6 text-[#5E936C]" />
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="text-2xl font-bold text-[#3E5F44] mb-4">
               {quiz[currentQuestionIndex].question}
             </h2>
           </div>
@@ -773,17 +775,17 @@ const QuizGenerator = () => {
               <button
                 key={index}
                 onClick={() => selectAnswer(option)}
-                className={`w-full p-4 rounded-xl border-2 font-medium text-left transition-all duration-300 ${
+                className={`w-full p-4 rounded-xl border-2 font-medium text-left transition-all duration-200 ${
                   selectedAnswer === option
-                    ? 'bg-purple-600/30 border-purple-400/80 text-purple-200 shadow-lg shadow-purple-500/20'
-                    : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50 hover:bg-gray-700/50'
+                    ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                    : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063] hover:border-[#5E936C]'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                     selectedAnswer === option
-                      ? 'border-purple-400 bg-purple-500'
-                      : 'border-gray-500'
+                      ? 'border-[#5E936C] bg-[#5E936C]'
+                      : 'border-gray-400'
                   }`}>
                     {selectedAnswer === option && (
                       <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -800,7 +802,7 @@ const QuizGenerator = () => {
             <button
               onClick={prevQuestion}
               disabled={currentQuestionIndex === 0}
-              className="bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:opacity-50 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+              className="bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:opacity-50 border border-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-all duration-200"
             >
               Previous
             </button>
@@ -809,7 +811,7 @@ const QuizGenerator = () => {
               {currentQuestionIndex === quiz.length - 1 ? (
                 <button
                   onClick={submitQuiz}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white font-bold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-sm"
                 >
                   <div className="flex items-center space-x-2">
                     <Trophy className="w-5 h-5" />
@@ -819,7 +821,7 @@ const QuizGenerator = () => {
               ) : (
                 <button
                   onClick={nextQuestion}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="bg-[#5E936C] hover:bg-[#3E5F44] text-white font-bold py-3 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-sm"
                 >
                   Next Question
                 </button>
@@ -828,8 +830,8 @@ const QuizGenerator = () => {
           </div>
 
           {/* Answer Status Grid */}
-          <div className="mt-6 pt-6 border-t border-gray-600">
-            <p className="text-white/80 text-sm mb-3">Question Status:</p>
+          <div className="mt-6 pt-6 border-t border-[#93DA97]/30">
+            <p className="text-[#557063] text-sm mb-3">Question Status:</p>
             <div className="grid grid-cols-10 gap-2">
               {Array.from({ length: quiz.length }, (_, i) => (
                 <button
@@ -838,12 +840,12 @@ const QuizGenerator = () => {
                     setCurrentQuestionIndex(i);
                     setSelectedAnswer(userAnswers[i] || '');
                   }}
-                  className={`w-10 h-10 rounded-lg border-2 text-sm font-bold transition-all duration-300 ${
+                  className={`w-10 h-10 rounded-lg border-2 text-sm font-bold transition-all duration-200 ${
                     i === currentQuestionIndex
-                      ? 'bg-purple-600/50 border-purple-400 text-white'
+                      ? 'bg-[#5E936C]/30 border-[#5E936C] text-[#3E5F44]'
                       : userAnswers[i]
-                      ? 'bg-green-600/30 border-green-400/80 text-green-200'
-                      : 'bg-gray-700/50 border-gray-600 text-gray-400'
+                      ? 'bg-[#93DA97]/30 border-[#93DA97] text-[#3E5F44]'
+                      : 'bg-white border-gray-300 text-gray-600'
                   }`}
                 >
                   {i + 1}
@@ -856,93 +858,93 @@ const QuizGenerator = () => {
 
       {/* Final Results */}
       {showResult && finalResults && (
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
-              <div className={`p-6 rounded-full ${
+              <div className={`p-6 rounded-full border-2 ${
                 finalResults.score >= 80 
-                  ? 'bg-green-500/20 border border-green-500/40' 
+                  ? 'bg-[#93DA97]/30 border-[#5E936C]' 
                   : finalResults.score >= 60
-                  ? 'bg-yellow-500/20 border border-yellow-500/40'
-                  : 'bg-red-500/20 border border-red-500/40'
+                  ? 'bg-yellow-100 border-yellow-500'
+                  : 'bg-red-100 border-red-500'
               }`}>
                 <Trophy className={`w-16 h-16 ${
-                  finalResults.score >= 80 ? 'text-green-400' : 
-                  finalResults.score >= 60 ? 'text-yellow-400' : 'text-red-400'
+                  finalResults.score >= 80 ? 'text-[#3E5F44]' : 
+                  finalResults.score >= 60 ? 'text-yellow-600' : 'text-red-600'
                 }`} />
               </div>
             </div>
 
-            <h2 className="text-4xl font-bold text-white mb-2">Quiz Complete!</h2>
+            <h2 className="text-4xl font-bold text-[#3E5F44] mb-2">Quiz Complete!</h2>
             <p className={`text-2xl font-bold mb-4 ${getScoreColor(finalResults.score)}`}>
               {finalResults.score}%
             </p>
-            <p className="text-lg text-white/80 mb-6">
+            <p className="text-lg text-[#557063] mb-6">
               {getScoreMessage(finalResults.score)}
             </p>
 
             {finalResults.timeUp && (
-              <div className="bg-red-500/20 border border-red-500/40 rounded-xl p-4 mb-6">
-                <p className="text-red-200">⏰ Time's up! Quiz submitted automatically.</p>
+              <div className="bg-red-50 border border-red-300 rounded-xl p-4 mb-6">
+                <p className="text-red-700">⏰ Time's up! Quiz submitted automatically.</p>
               </div>
             )}
 
             {/* Score Summary */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-green-500/20 border border-green-500/40 rounded-xl p-4">
+              <div className="bg-[#93DA97]/20 border border-[#93DA97] rounded-xl p-4">
                 <div className="flex items-center justify-center space-x-2 mb-2">
-                  <CheckCircle className="w-6 h-6 text-green-400" />
-                  <span className="text-green-200 font-bold">Correct</span>
+                  <CheckCircle className="w-6 h-6 text-[#3E5F44]" />
+                  <span className="text-[#3E5F44] font-bold">Correct</span>
                 </div>
-                <p className="text-2xl font-bold text-green-400">{finalResults.correctAnswers}/{finalResults.totalQuestions}</p>
+                <p className="text-2xl font-bold text-[#3E5F44]">{finalResults.correctAnswers}/{finalResults.totalQuestions}</p>
               </div>
               
-              <div className="bg-red-500/20 border border-red-500/40 rounded-xl p-4">
+              <div className="bg-red-50 border border-red-300 rounded-xl p-4">
                 <div className="flex items-center justify-center space-x-2 mb-2">
-                  <XCircle className="w-6 h-6 text-red-400" />
-                  <span className="text-red-200 font-bold">Incorrect</span>
+                  <XCircle className="w-6 h-6 text-red-600" />
+                  <span className="text-red-700 font-bold">Incorrect</span>
                 </div>
-                <p className="text-2xl font-bold text-red-400">{finalResults.totalQuestions - finalResults.correctAnswers}/{finalResults.totalQuestions}</p>
+                <p className="text-2xl font-bold text-red-600">{finalResults.totalQuestions - finalResults.correctAnswers}/{finalResults.totalQuestions}</p>
               </div>
               
-              <div className="bg-blue-500/20 border border-blue-500/40 rounded-xl p-4">
+              <div className="bg-blue-50 border border-blue-300 rounded-xl p-4">
                 <div className="flex items-center justify-center space-x-2 mb-2">
-                  <Clock className="w-6 h-6 text-blue-400" />
-                  <span className="text-blue-200 font-bold">Time</span>
+                  <Clock className="w-6 h-6 text-blue-600" />
+                  <span className="text-blue-700 font-bold">Time</span>
                 </div>
-                <p className="text-2xl font-bold text-blue-400">{formatTime(finalResults.timeTaken)}</p>
+                <p className="text-2xl font-bold text-blue-600">{formatTime(finalResults.timeTaken)}</p>
               </div>
             </div>
           </div>
 
           {/* Detailed Results */}
           <div className="mb-8">
-            <h3 className="text-xl font-bold text-white mb-4">Question Review</h3>
+            <h3 className="text-xl font-bold text-[#3E5F44] mb-4">Question Review</h3>
             <div className="space-y-4 max-h-96 overflow-y-auto">
               {finalResults.results.map((result, index) => (
                 <div 
                   key={index}
                   className={`p-4 rounded-xl border-2 ${
                     result.isCorrect 
-                      ? 'bg-green-600/20 border-green-500/40' 
-                      : 'bg-red-600/20 border-red-500/40'
+                      ? 'bg-[#93DA97]/20 border-[#93DA97]' 
+                      : 'bg-red-50 border-red-300'
                   }`}
                 >
                   <div className="flex items-start space-x-3 mb-2">
                     {result.isCorrect ? (
-                      <CheckCircle className="w-6 h-6 text-green-400 mt-1" />
+                      <CheckCircle className="w-6 h-6 text-[#3E5F44] mt-1" />
                     ) : (
-                      <XCircle className="w-6 h-6 text-red-400 mt-1" />
+                      <XCircle className="w-6 h-6 text-red-600 mt-1" />
                     )}
                     <div className="flex-1">
-                      <p className="text-white font-medium mb-2">
-                        <span className="text-gray-400">Q{index + 1}:</span> {result.question}
+                      <p className="text-[#3E5F44] font-medium mb-2">
+                        <span className="text-gray-500">Q{index + 1}:</span> {result.question}
                       </p>
                       <div className="text-sm space-y-1">
-                        <p className="text-green-400">
+                        <p className="text-[#3E5F44]">
                           <span className="font-medium">Correct Answer:</span> {result.correctAnswer}
                         </p>
-                        <p className={result.isCorrect ? 'text-green-400' : 'text-red-400'}>
+                        <p className={result.isCorrect ? 'text-[#3E5F44]' : 'text-red-600'}>
                           <span className="font-medium">Your Answer:</span> {result.userAnswer}
                         </p>
                       </div>
@@ -957,7 +959,7 @@ const QuizGenerator = () => {
           <div className="flex justify-center space-x-4">
             <button
               onClick={() => setShowQuizForm(true)}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg"
+              className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm"
             >
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-5 h-5" />
@@ -966,7 +968,7 @@ const QuizGenerator = () => {
             </button>
             <button
               onClick={resetQuiz}
-              className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+              className="bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition-all duration-200"
             >
               Back to Menu
             </button>

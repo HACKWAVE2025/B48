@@ -144,15 +144,15 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-purple-500/30 rounded-2xl w-full max-w-md shadow-2xl max-h-[90vh] flex flex-col">
+      <div className="bg-white border border-[#93DA97]/30 rounded-2xl w-full max-w-md shadow-2xl max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-purple-500/20 flex-shrink-0">
+        <div className="flex items-center justify-between p-6 border-b border-[#93DA97]/30 flex-shrink-0 bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-t-2xl">
           <h2 className="text-xl font-bold text-white">
             {roomCreated ? 'Room Created!' : 'Create Quiz Room'}
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-white/80 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -160,15 +160,15 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
         {!roomCreated ? (
           /* Room Creation Form */
-          <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto flex-1">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto flex-1 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
             {error && (
               <div className="bg-red-500/20 border border-red-500/40 rounded-lg p-3">
-                <p className="text-red-200 text-sm">{error}</p>
+                <p className="text-red-600 text-sm">{error}</p>
               </div>
             )}
 
             <div>
-              <label className="block text-white font-medium mb-2">
+              <label className="block text-[#3E5F44] font-medium mb-2">
                 Room Name
               </label>
               <input
@@ -177,14 +177,14 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                 value={formData.roomName}
                 onChange={handleInputChange}
                 placeholder="Enter room name"
-                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white border border-[#93DA97]/50 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] transition-colors"
                 required
                 maxLength={50}
               />
             </div>
 
             <div>
-              <label className="block text-white font-medium mb-2">
+              <label className="block text-[#3E5F44] font-medium mb-2">
                 Your Name (Host)
               </label>
               <input
@@ -193,7 +193,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                 value={formData.hostName}
                 onChange={handleInputChange}
                 placeholder="Enter your name"
-                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white border border-[#93DA97]/50 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] transition-colors"
                 required
                 maxLength={30}
               />
@@ -202,15 +202,15 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
             {/* Student Type Selection - Only for students */}
             {user?.role === 'student' && (
               <div>
-                <label className="block text-white font-medium mb-2">Student Type</label>
+                <label className="block text-[#3E5F44] font-medium mb-2">Student Type</label>
                 <div className="flex gap-3">
                   <button
                     type="button"
                     onClick={() => setStudentType('school')}
                     className={`flex-1 px-3 py-2 rounded-lg border-2 transition-all duration-300 ${
                       studentType === 'school'
-                        ? 'bg-purple-600/40 border-purple-400 text-white'
-                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                        ? 'bg-[#E8FFD7] border-[#5E936C] text-[#3E5F44]'
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]/50'
                     }`}
                   >
                     <div className="text-center">
@@ -223,8 +223,8 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                     onClick={() => setStudentType('college')}
                     className={`flex-1 px-3 py-2 rounded-lg border-2 transition-all duration-300 ${
                       studentType === 'college'
-                        ? 'bg-purple-600/40 border-purple-400 text-white'
-                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                        ? 'bg-[#E8FFD7] border-[#5E936C] text-[#3E5F44]'
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]/50'
                     }`}
                   >
                     <div className="text-center">
@@ -238,7 +238,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
             {/* Subject Selection */}
             <div>
-              <label className="block text-white font-medium mb-2">Quiz Subject</label>
+              <label className="block text-[#3E5F44] font-medium mb-2">Quiz Subject</label>
               <div className="grid grid-cols-3 gap-2">
                 {subjects.map((subject) => (
                   <button
@@ -250,8 +250,8 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                     }}
                     className={`p-2 rounded-lg border-2 transition-all duration-300 ${
                       formData.subject === subject.value && !showCustomInput
-                        ? 'bg-purple-600/30 border-purple-400 text-white'
-                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                        ? 'bg-[#E8FFD7] border-[#5E936C] text-[#3E5F44]'
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]/50'
                     }`}
                   >
                     <div className="text-center">
@@ -269,8 +269,8 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                   }}
                   className={`p-2 rounded-lg border-2 transition-all duration-300 ${
                     showCustomInput
-                      ? 'bg-orange-600/30 border-orange-400 text-white'
-                      : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-orange-500/50'
+                      ? 'bg-orange-100 border-orange-400 text-orange-700'
+                      : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-orange-400'
                   }`}
                 >
                   <div className="text-center">
@@ -284,7 +284,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
             {/* Custom Subject Input */}
             {showCustomInput && (
               <div>
-                <label className="block text-white font-medium mb-2">Custom Subject</label>
+                <label className="block text-[#3E5F44] font-medium mb-2">Custom Subject</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
@@ -299,7 +299,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                         }
                       }
                     }}
-                    className="flex-1 px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+                    className="flex-1 px-3 py-2 bg-white border border-[#93DA97]/50 rounded-lg text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C]"
                     placeholder="Enter custom subject"
                     autoFocus
                   />
@@ -312,7 +312,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                       }
                     }}
                     disabled={!customSubject.trim()}
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
+                    className="px-4 py-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white rounded-lg hover:from-[#4a7554] hover:to-[#7fc281] transition-all disabled:opacity-50"
                   >
                     Add
                   </button>
@@ -322,7 +322,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
             {/* Difficulty Selection */}
             <div>
-              <label className="block text-white font-medium mb-2">Difficulty</label>
+              <label className="block text-[#3E5F44] font-medium mb-2">Difficulty</label>
               <div className="grid grid-cols-3 gap-2">
                 {difficulties.map((difficulty) => (
                   <button
@@ -331,8 +331,8 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                     onClick={() => setFormData({ ...formData, difficulty: difficulty.value })}
                     className={`p-3 rounded-lg border-2 transition-all duration-300 ${
                       formData.difficulty === difficulty.value
-                        ? `bg-${difficulty.color}-600/30 border-${difficulty.color}-400 text-white`
-                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                        ? `bg-${difficulty.color}-100 border-${difficulty.color}-400 text-${difficulty.color}-700`
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]/50'
                     }`}
                   >
                     <div className="text-sm font-medium">{difficulty.label}</div>
@@ -346,14 +346,14 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
               <button
                 type="button"
                 onClick={handleClose}
-                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+                className="flex-1 bg-white border border-[#93DA97]/50 hover:bg-[#E8FFD7] text-[#3E5F44] font-medium py-3 px-4 rounded-lg transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                className="flex-1 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 {isLoading ? (
                   <>
@@ -371,41 +371,41 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
           </form>
         ) : (
           /* Room Created Success */
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
             <div className="text-center">
-              <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="w-8 h-8 text-green-400" />
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-[#3E5F44] mb-2">
                 Room "{roomCreated.roomName}" Created!
               </h3>
-              <p className="text-gray-400 text-sm">
+              <p className="text-[#557063] text-sm">
                 Share the room ID or invite link with participants
               </p>
             </div>
 
             <div className="space-y-4">
-              <div className="bg-gray-700/50 rounded-lg p-4">
+              <div className="bg-white border border-[#93DA97]/30 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-gray-300 text-sm">Room ID</span>
-                  <Hash className="w-4 h-4 text-purple-400" />
+                  <span className="text-[#557063] text-sm">Room ID</span>
+                  <Hash className="w-4 h-4 text-[#5E936C]" />
                 </div>
-                <p className="text-white font-mono text-lg font-bold">
+                <p className="text-[#3E5F44] font-mono text-lg font-bold">
                   {roomCreated.roomId}
                 </p>
               </div>
 
-              <div className="bg-gray-700/50 rounded-lg p-4">
+              <div className="bg-white border border-[#93DA97]/30 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-gray-300 text-sm">Invite Link</span>
+                  <span className="text-[#557063] text-sm">Invite Link</span>
                   <button
                     onClick={handleCopyInvite}
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                    className="text-[#5E936C] hover:text-[#4a7554] transition-colors"
                   >
                     {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
-                <p className="text-white text-sm break-all">
+                <p className="text-[#3E5F44] text-sm break-all">
                   {roomCreated.inviteLink}
                 </p>
               </div>
@@ -413,7 +413,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
             <button
               onClick={handleJoinRoom}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200"
+              className="w-full bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] text-white font-medium py-3 px-4 rounded-lg transition-all duration-200"
             >
               Join Room Now
             </button>

@@ -18,22 +18,22 @@ const Simulations = () => {
 const beurl=import.meta.env.VITE_BACKEND_URL;
 	// Filter options - these will match both subject and category fields
 	const subjects = [
-		{ name: "Physics", icon: Atom, color: "from-blue-600 to-indigo-600" },
-		{ name: "Chemistry", icon: Beaker, color: "from-green-600 to-emerald-600" },
-		{ name: "Biology", icon: Dna, color: "from-purple-600 to-pink-600" },
-		{ name: "Mathematics", icon: Calculator, color: "from-orange-600 to-red-600" },
-		{ name: "Computer Science", icon: Calculator, color: "from-cyan-600 to-blue-600" },
-		{ name: "Artificial Intelligence", icon: Zap, color: "from-purple-600 to-fuchsia-600" },
-		{ name: "Civil Engineering", icon: Target, color: "from-amber-600 to-orange-600" },
-		{ name: "Operating Systems", icon: Calculator, color: "from-slate-600 to-gray-600" },
-		{ name: "Algorithms & Data Structures", icon: Target, color: "from-teal-600 to-cyan-600" },
-		{ name: "Networking", icon: Zap, color: "from-indigo-600 to-violet-600" },
-		{ name: "Database Systems", icon: Target, color: "from-rose-600 to-pink-600" },
-		{ name: "Machine Learning", icon: Zap, color: "from-violet-600 to-purple-600" },
-		{ name: "Electricity & Magnetism", icon: Zap, color: "from-yellow-600 to-amber-600" },
-		{ name: "Waves & Sound", icon: Atom, color: "from-sky-600 to-blue-600" },
-		{ name: "Forces & Motion", icon: Target, color: "from-emerald-600 to-teal-600" },
-		{ name: "Mechanics", icon: Target, color: "from-orange-600 to-amber-600" }
+		{ name: "Physics", icon: Atom, color: "bg-blue-500" },
+		{ name: "Chemistry", icon: Beaker, color: "bg-green-500" },
+		{ name: "Biology", icon: Dna, color: "bg-purple-500" },
+		{ name: "Mathematics", icon: Calculator, color: "bg-orange-500" },
+		{ name: "Computer Science", icon: Calculator, color: "bg-cyan-500" },
+		{ name: "Artificial Intelligence", icon: Zap, color: "bg-purple-500" },
+		{ name: "Civil Engineering", icon: Target, color: "bg-amber-500" },
+		{ name: "Operating Systems", icon: Calculator, color: "bg-slate-500" },
+		{ name: "Algorithms & Data Structures", icon: Target, color: "bg-teal-500" },
+		{ name: "Networking", icon: Zap, color: "bg-indigo-500" },
+		{ name: "Database Systems", icon: Target, color: "bg-rose-500" },
+		{ name: "Machine Learning", icon: Zap, color: "bg-violet-500" },
+		{ name: "Electricity & Magnetism", icon: Zap, color: "bg-yellow-500" },
+		{ name: "Waves & Sound", icon: Atom, color: "bg-sky-500" },
+		{ name: "Forces & Motion", icon: Target, color: "bg-emerald-500" },
+		{ name: "Mechanics", icon: Target, color: "bg-orange-500" }
 	];
 
 	useEffect(() => {
@@ -183,36 +183,18 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 	if (loading) {
 		return (
 			<div className="w-full h-full flex items-center justify-center p-4 relative">
-				{/* Animated particles */}
-				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					{[...Array(20)].map((_, i) => (
-						<div
-							key={i}
-							className="absolute animate-pulse"
-							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-								animationDelay: `${Math.random() * 3}s`,
-								animationDuration: `${2 + Math.random() * 2}s`
-							}}
-						>
-							<Star className="w-2 h-2 text-pink-400 opacity-60" />
-						</div>
-					))}
-				</div>
-
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm w-full max-w-md">
 					<div className="flex items-center justify-center space-x-3 mb-4">
-						<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300">
+						<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
 							<Zap className="w-8 h-8 text-white" />
 						</div>
 					</div>
 					<div className="text-center">
-						<AutoText className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">
+						<h2 className="text-3xl font-bold text-[#3E5F44] mb-2">
 							Loading Simulations
-						</AutoText>
-						<div className="w-full bg-white/20 rounded-full h-2 overflow-hidden mt-4">
-							<div className="bg-gradient-to-r from-purple-600 to-pink-600 h-full rounded-full animate-pulse"></div>
+						</h2>
+						<div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden mt-4">
+							<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] h-full rounded-full animate-pulse"></div>
 						</div>
 					</div>
 				</div>
@@ -223,35 +205,17 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 	if (error) {
 		return (
 			<div className="w-full h-full flex items-center justify-center p-4 relative">
-				{/* Animated particles */}
-				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					{[...Array(20)].map((_, i) => (
-						<div
-							key={i}
-							className="absolute animate-pulse"
-							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-								animationDelay: `${Math.random() * 3}s`,
-								animationDuration: `${2 + Math.random() * 2}s`
-							}}
-						>
-							<Star className="w-2 h-2 text-pink-400 opacity-60" />
-						</div>
-					))}
-				</div>
-
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden w-full max-w-md">
+				<div className="bg-white border border-red-300 rounded-3xl p-8 shadow-sm w-full max-w-md">
 					<div className="flex items-center justify-center space-x-3 mb-4">
-						<div className="bg-gradient-to-r from-red-600 to-pink-600 p-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300">
+						<div className="bg-gradient-to-r from-red-600 to-pink-600 p-4 rounded-full shadow-sm">
 							<X className="w-8 h-8 text-white" />
 						</div>
 					</div>
 					<div className="text-center">
-						<AutoText className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">
+						<h2 className="text-3xl font-bold text-red-700 mb-2">
 							Error Loading
-						</AutoText>
-						<p className="text-white/80">{error}</p>
+						</h2>
+						<p className="text-gray-600">{error}</p>
 					</div>
 				</div>
 			</div>
@@ -259,49 +223,31 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 	}
 
 	return (
-		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
-			{/* Animated particles */}
-			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				{[...Array(30)].map((_, i) => (
-					<div
-						key={i}
-						className="absolute animate-pulse"
-						style={{
-							left: `${Math.random() * 100}%`,
-							top: `${Math.random() * 100}%`,
-							animationDelay: `${Math.random() * 3}s`,
-							animationDuration: `${2 + Math.random() * 2}s`
-						}}
-					>
-						<Star className="w-2 h-2 text-pink-400 opacity-60" />
-					</div>
-				))}
-			</div>
-
+		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white">
 			{!selectedSimulation ? (
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden w-full">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm w-full">
 					{/* Header */}
 					<div className="flex items-center justify-between mb-8">
 						<div className="flex items-center space-x-4">
-							<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300">
+							<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
 								<Beaker className="w-8 h-8 text-white" />
 							</div>
 							<div>
-								<h1 className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+								<h1 className="text-3xl font-bold text-[#3E5F44]">
 									<AutoText>Educational Simulations</AutoText>
 								</h1>
-								<p className="text-white/80">
+								<p className="text-[#557063]">
 									<AutoText>Explore interactive learning experiences</AutoText>
 								</p>
 							</div>
 						</div>
 						<button
 							onClick={() => setShowFilters(!showFilters)}
-							className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 ${
+							className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-200 ${
 								showFilters 
-									? 'bg-purple-600/30 border-purple-500/50 text-purple-200' 
-									: 'bg-white/10 hover:bg-white/20 border-white/20 text-white'
-							} border backdrop-blur-sm`}
+									? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44]' 
+									: 'bg-[#E8FFD7] hover:bg-[#93DA97]/30 border-[#93DA97]/30 text-[#557063]'
+							} border shadow-sm`}
 						>
 							<Filter className="w-4 h-4" />
 							<AutoText>Filters</AutoText>
@@ -310,27 +256,27 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 
 					{/* Search Bar */}
 					<div className="relative mb-6">
-						<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
+						<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
 						<input
 							type="text"
 							placeholder="Search simulations..."
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
-							className="w-full pl-12 pr-4 py-3 bg-white/10 border border-purple-500/30 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300"
+							className="w-full pl-12 pr-4 py-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#3E5F44] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#5E936C]/20 focus:border-[#5E936C] transition-all duration-200"
 						/>
 					</div>
 
 					{/* Filters Section */}
 					{showFilters && (
-						<div className="mb-6 p-4 bg-white/5 rounded-xl border border-purple-500/20">
+						<div className="mb-6 p-4 bg-[#E8FFD7] rounded-xl border border-[#93DA97]/30">
 							<div className="flex items-center justify-between mb-4">
-								<h3 className="text-lg font-semibold text-white">
+								<h3 className="text-lg font-semibold text-[#3E5F44]">
 									<AutoText>Filter by Subject</AutoText>
 								</h3>
 								{selectedSubjects.size > 0 && (
 									<button
 										onClick={() => setSelectedSubjects(new Set())}
-										className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+										className="text-sm text-[#5E936C] hover:text-[#3E5F44] transition-colors"
 									>
 										Clear All
 									</button>
@@ -342,17 +288,17 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 									return (
 										<label
 											key={subject.name}
-											className={`flex items-center space-x-2 p-3 rounded-lg cursor-pointer transition-all duration-300 ${
+											className={`flex items-center space-x-2 p-3 rounded-lg cursor-pointer transition-all duration-200 ${
 												selectedSubjects.has(subject.name)
-													? 'bg-gradient-to-r ' + subject.color + ' text-white shadow-lg scale-105'
-													: 'bg-white/10 hover:bg-white/20 text-white/90'
+													? subject.color + ' text-white shadow-sm scale-105'
+													: 'bg-white hover:bg-gray-50 text-[#557063] border border-gray-200'
 											}`}
 										>
 											<input
 												type="checkbox"
 												checked={selectedSubjects.has(subject.name)}
 												onChange={(e) => handleSubjectChange(subject.name, e.target.checked)}
-												className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
+												className="w-4 h-4 text-[#5E936C] rounded focus:ring-[#5E936C]"
 											/>
 											<IconComponent className="w-4 h-4 flex-shrink-0" />
 											<span className="text-sm font-medium truncate">{subject.name}</span>
@@ -362,17 +308,17 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 							</div>
 							{selectedSubjects.size > 0 && (
 								<div className="mt-4 flex items-center space-x-2">
-									<span className="text-white/70 text-sm">Active Filters:</span>
+									<span className="text-[#557063] text-sm">Active Filters:</span>
 									<div className="flex flex-wrap gap-2">
 										{Array.from(selectedSubjects).map((subject) => (
 											<span
 												key={subject}
-												className="px-3 py-1 bg-purple-600/30 text-purple-200 text-xs font-medium rounded-full flex items-center space-x-2"
+												className="px-3 py-1 bg-[#5E936C]/20 text-[#3E5F44] text-xs font-medium rounded-full flex items-center space-x-2 border border-[#5E936C]/30"
 											>
 												<span>{subject}</span>
 												<button
 													onClick={() => handleSubjectChange(subject, false)}
-													className="hover:text-white transition-colors"
+													className="hover:text-[#5E936C] transition-colors"
 												>
 													<X className="w-3 h-3" />
 												</button>
@@ -390,45 +336,45 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 							filteredSimulations.map((simulation) => (
 								<div
 									key={simulation._id}
-									className="group p-6 bg-white/10 hover:bg-white/20 border border-purple-500/30 hover:border-purple-400/50 rounded-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 hover:shadow-xl"
+									className="group p-6 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl transition-all duration-200 hover:shadow-md"
 								>
 									<div className="flex items-start justify-between mb-4">
-										<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+										<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg group-hover:scale-110 transition-transform duration-200">
 											<Play className="w-6 h-6 text-white" />
 										</div>
-										<span className="px-3 py-1 bg-purple-600/30 text-purple-200 text-xs font-medium rounded-full">
+										<span className="px-3 py-1 bg-white border border-[#93DA97]/50 text-[#557063] text-xs font-medium rounded-full">
 											{simulation.subject}
 										</span>
 									</div>
 									<h3 
 										onClick={() => handleSimulationClick(simulation)}
-										className="text-xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors duration-300 cursor-pointer"
+										className="text-xl font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-200 cursor-pointer"
 									>
 										{simulation.title}
 									</h3>
-									<p className="text-white/70 text-sm mb-4 line-clamp-2">
+									<p className="text-[#557063] text-sm mb-4 line-clamp-2">
 										{simulation.description}
 									</p>
 									<div className="flex items-center justify-between mb-3">
-										<span className="text-white/50 text-xs">
+										<span className="text-gray-500 text-xs">
 											{simulation.category}
 										</span>
 										<div className="flex items-center space-x-1">
-											<Star className="w-4 h-4 text-yellow-400" />
-											<span className="text-white/70 text-sm">4.5</span>
+											<Star className="w-4 h-4 text-yellow-500" />
+											<span className="text-[#557063] text-sm">4.5</span>
 										</div>
 									</div>
 									<div className="flex items-center justify-between gap-2">
 										<button
 											onClick={() => handleSimulationClick(simulation)}
-											className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-3 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex items-center justify-center gap-2"
+											className="flex-1 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 shadow-sm"
 										>
 											<Play className="w-4 h-4" />
 											Quick View
 										</button>
 										<button
 											onClick={() => navigate(`/simulation/${simulation.slug}`)}
-											className="bg-white/20 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-white/30 transition-all duration-200 flex items-center justify-center gap-2"
+											className="bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2"
 										>
 											<ExternalLink className="w-4 h-4" />
 											Full Page
@@ -438,11 +384,11 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 							))
 						) : (
 							<div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
-								<Target className="w-16 h-16 text-white/30 mb-4" />
-								<h3 className="text-xl font-semibold text-white/70 mb-2">
+								<Target className="w-16 h-16 text-gray-300 mb-4" />
+								<h3 className="text-xl font-semibold text-[#557063] mb-2">
 									<AutoText>No simulations found</AutoText>
 								</h3>
-								<p className="text-white/50">
+								<p className="text-gray-500">
 									<AutoText>Try adjusting your search or filters</AutoText>
 								</p>
 							</div>
@@ -450,38 +396,31 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 					</div>
 				</div>
 			) : (
-				// Full-screen Simulation Viewer with glassmorphic design
-				<div className={`${isFullscreen ? 'fixed inset-0 z-50' : 'w-full h-full'} backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl shadow-2xl relative overflow-hidden`}>
+				// Full-screen Simulation Viewer with clean design
+				<div className={`${isFullscreen ? 'fixed inset-0 z-50' : 'w-full h-full'} bg-white border border-[#93DA97]/30 rounded-3xl shadow-sm overflow-hidden`}>
 					{/* Header */}
-					<div className="flex items-center justify-between p-4 border-b border-purple-500/30 bg-black/20">
+					<div className="flex items-center justify-between p-4 border-b border-[#93DA97]/30 bg-[#E8FFD7]">
 						<div className="flex items-center space-x-4">
 							<button
 								onClick={handleCloseSimulation}
-								className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-purple-500/30 rounded-xl text-white transition-all duration-300 backdrop-blur-sm"
+								className="flex items-center space-x-2 px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-xl text-gray-700 transition-all duration-200"
 							>
 								<ArrowLeft className="w-4 h-4" />
 								<AutoText>Back</AutoText>
 							</button>
 							<div>
-								<h2 className="text-xl font-bold text-white">{selectedSimulation.title}</h2>
-								<p className="text-white/70 text-sm">{selectedSimulation.subject} • {selectedSimulation.category}</p>
+								<h2 className="text-xl font-bold text-[#3E5F44]">{selectedSimulation.title}</h2>
+								<p className="text-[#557063] text-sm">{selectedSimulation.subject} • {selectedSimulation.category}</p>
 							</div>
 						</div>
 						<div className="flex items-center space-x-3">
 							<button
 								onClick={handleDownload}
-								className="flex items-center space-x-2 px-4 py-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 rounded-xl text-green-200 transition-all duration-300 backdrop-blur-sm"
+								className="flex items-center space-x-2 px-4 py-2 bg-[#5E936C] hover:bg-[#3E5F44] rounded-xl text-white transition-all duration-200 shadow-sm"
 							>
 								<Download className="w-4 h-4" />
 								<AutoText>Download</AutoText>
 							</button>
-							{/* <button
-								onClick={toggleFullscreen}
-								className="flex items-center space-x-2 px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 rounded-xl text-blue-200 transition-all duration-300 backdrop-blur-sm"
-							>
-								{!isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-								<AutoText>{isFullscreen ? 'Fullscreen' : 'Exit Fullscreen'}</AutoText>
-							</button> */}
 						</div>
 					</div>
 
@@ -490,7 +429,7 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 						{isFullscreen && (
 							<button
 								onClick={toggleFullscreen}
-								className="absolute top-4 right-4 z-50 p-2 bg-black/70 hover:bg-black/90 text-white rounded-lg transition-all duration-300 border border-white/20"
+								className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white text-gray-700 rounded-lg transition-all duration-200 border border-gray-300 shadow-sm"
 								title="Exit Fullscreen (ESC)"
 							>
 								<X className="w-6 h-6" />
@@ -506,11 +445,11 @@ const beurl=import.meta.env.VITE_BACKEND_URL;
 
 					{/* Description - Only show when not fullscreen */}
 					{!isFullscreen && (
-						<div className="p-6 bg-black/10">
-							<h3 className="text-lg font-semibold text-white mb-3">
+						<div className="p-6 bg-[#E8FFD7] border-t border-[#93DA97]/30">
+							<h3 className="text-lg font-semibold text-[#3E5F44] mb-3">
 								<AutoText>About this Simulation</AutoText>
 							</h3>
-							<p className="text-white/80 leading-relaxed">
+							<p className="text-[#557063] leading-relaxed">
 								{selectedSimulation.description}
 							</p>
 						</div>

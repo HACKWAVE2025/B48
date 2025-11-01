@@ -269,13 +269,13 @@ const LearnViaAnimations = () => {
       <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-6`}>
         <div className={`flex items-start space-x-3 max-w-3xl ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
           {/* Avatar */}
-          <div className={`p-3 rounded-full ${
+          <div className={`p-3 rounded-full shadow-sm ${
             isUser 
-              ? 'bg-gradient-to-r from-purple-600 to-pink-600' 
+              ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97]' 
               : message.type === 'bot-animation'
-              ? 'bg-gradient-to-r from-blue-600 to-cyan-600'
-              : 'bg-gradient-to-r from-green-600 to-emerald-600'
-          } shadow-lg`}>
+              ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
+              : 'bg-gradient-to-r from-[#5E936C] to-emerald-500'
+          }`}>
             {isUser ? (
               <User className="w-5 h-5 text-white" />
             ) : message.type === 'bot-animation' ? (
@@ -286,53 +286,53 @@ const LearnViaAnimations = () => {
           </div>
 
           {/* Message Content */}
-          <div className={`backdrop-blur-xl border rounded-3xl p-6 shadow-2xl ${
+          <div className={`border rounded-3xl p-6 shadow-sm ${
             isUser
-              ? 'bg-purple-600/20 border-purple-500/30 text-white'
+              ? 'bg-[#E8FFD7] border-[#93DA97] text-[#3E5F44]'
               : message.error
-              ? 'bg-red-500/20 border-red-500/30 text-red-200'
-              : 'bg-gray-800/40 border-gray-600/30 text-white'
+              ? 'bg-red-50 border-red-300 text-red-700'
+              : 'bg-white border-[#93DA97]/30 text-[#3E5F44]'
           }`}>
             {message.type === 'bot-animation' && message.loading ? (
               <div className="space-y-4">
-                <div className="flex items-center space-x-2 text-cyan-300 mb-3">
+                <div className="flex items-center space-x-2 text-blue-600 mb-3">
                   <Video className="w-4 h-4" />
                   <span className="text-sm font-medium">Generating Animation...</span>
                 </div>
-                <div className="flex items-center justify-center p-8 border border-cyan-500/30 rounded-2xl bg-cyan-500/5">
+                <div className="flex items-center justify-center p-8 border border-blue-300 rounded-2xl bg-blue-50">
                   <div className="text-center space-y-3">
-                    <Loader className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
-                    <p className="text-cyan-300 text-sm">Creating your animated visualization...</p>
-                    <p className="text-cyan-400/70 text-xs">This may take 1-2 minutes</p>
+                    <Loader className="w-8 h-8 text-blue-600 animate-spin mx-auto" />
+                    <p className="text-blue-600 text-sm">Creating your animated visualization...</p>
+                    <p className="text-blue-500 text-xs">This may take 1-2 minutes</p>
                   </div>
                 </div>
               </div>
             ) : message.type === 'bot-animation' && message.content ? (
               <div className="space-y-4">
-                <div className="flex items-center space-x-2 text-cyan-300 mb-3">
+                <div className="flex items-center space-x-2 text-blue-600 mb-3">
                   <Video className="w-4 h-4" />
                   <span className="text-sm font-medium">Animation Response</span>
                 </div>
                 {message.message && (
-                  <p className="text-cyan-200 text-sm mb-3 italic">"{message.message}"</p>
+                  <p className="text-blue-700 text-sm mb-3 italic">"{message.message}"</p>
                 )}
                 <video 
                   controls 
-                  className="w-full max-w-lg rounded-2xl border border-cyan-500/30"
+                  className="w-full max-w-lg rounded-2xl border border-blue-300"
                   poster="/api/placeholder/400/300"
                 >
                   <source src={message.content} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="flex space-x-2">
-                  <button className="flex items-center space-x-2 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 rounded-xl px-3 py-2 text-cyan-300 hover:text-cyan-200 transition-all duration-200">
+                  <button className="flex items-center space-x-2 bg-blue-50 hover:bg-blue-100 border border-blue-300 rounded-xl px-3 py-2 text-blue-700 hover:text-blue-800 transition-all duration-200">
                     <Play className="w-4 h-4" />
                     <span className="text-sm">Play</span>
                   </button>
                   <a 
                     href={message.content} 
                     download
-                    className="flex items-center space-x-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 rounded-xl px-3 py-2 text-purple-300 hover:text-purple-200 transition-all duration-200"
+                    className="flex items-center space-x-2 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-xl px-3 py-2 text-[#3E5F44] hover:text-[#3E5F44] transition-all duration-200"
                   >
                     <Download className="w-4 h-4" />
                     <span className="text-sm">Download</span>
@@ -341,16 +341,16 @@ const LearnViaAnimations = () => {
               </div>
             ) : message.type === 'bot-animation' && message.error ? (
               <div className="space-y-2">
-                <div className="flex items-center space-x-2 text-red-300 mb-2">
+                <div className="flex items-center space-x-2 text-red-600 mb-2">
                   <Video className="w-4 h-4" />
                   <span className="text-sm font-medium">Animation Error</span>
                 </div>
-                <p className="text-red-200">{message.error}</p>
+                <p className="text-red-600">{message.error}</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {!isUser && (
-                  <div className="flex items-center space-x-2 text-green-300 mb-2">
+                  <div className="flex items-center space-x-2 text-[#5E936C] mb-2">
                     <Type className="w-4 h-4" />
                     <span className="text-sm font-medium">Text Response</span>
                   </div>
@@ -362,19 +362,19 @@ const LearnViaAnimations = () => {
                 {/* Related Simulations */}
                 {!isUser && message.relatedSimulations && message.relatedSimulations.length > 0 && (
                   <div className="mt-4 space-y-3">
-                    <div className="flex items-center space-x-2 text-purple-300">
+                    <div className="flex items-center space-x-2 text-[#5E936C]">
                       <Gamepad2 className="w-4 h-4" />
                       <span className="text-sm font-medium">Related Simulations</span>
                     </div>
                     <div className="space-y-2">
                       {message.relatedSimulations.map((simulation, index) => (
-                        <div key={index} className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 hover:bg-purple-500/20 transition-all duration-200">
+                        <div key={index} className="bg-[#E8FFD7]/50 border border-[#93DA97] rounded-xl p-3 hover:bg-[#E8FFD7] transition-all duration-200">
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
-                              <h4 className="font-medium text-purple-200 text-sm">{simulation.title}</h4>
-                              <p className="text-xs text-purple-300/70 mt-1">{simulation.subject} • {simulation.category}</p>
+                              <h4 className="font-medium text-[#3E5F44] text-sm">{simulation.title}</h4>
+                              <p className="text-xs text-[#557063] mt-1">{simulation.subject} • {simulation.category}</p>
                               {simulation.description && (
-                                <p className="text-xs text-white/60 mt-1 line-clamp-2">{simulation.description}</p>
+                                <p className="text-xs text-[#557063] mt-1 line-clamp-2">{simulation.description}</p>
                               )}
                             </div>
                             <div className="ml-3 flex flex-col gap-2">
@@ -382,7 +382,7 @@ const LearnViaAnimations = () => {
                                 href={simulation.iframeUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 rounded-lg px-3 py-1 text-xs text-purple-200 hover:text-white transition-all duration-200 flex items-center space-x-1"
+                                className="bg-[#5E936C] hover:bg-[#3E5F44] border border-[#5E936C] rounded-lg px-3 py-1 text-xs text-white transition-all duration-200 flex items-center space-x-1"
                               >
                                 <Play className="w-3 h-3" />
                                 <span>Try It</span>
@@ -390,7 +390,7 @@ const LearnViaAnimations = () => {
                               {simulation.slug && (
                                 <button
                                   onClick={() => window.open(`/simulation/${simulation.slug}`, '_blank')}
-                                  className="bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg px-3 py-1 text-xs text-white/70 hover:text-white transition-all duration-200 flex items-center space-x-1"
+                                  className="bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-lg px-3 py-1 text-xs text-[#3E5F44] transition-all duration-200 flex items-center space-x-1"
                                 >
                                   <ExternalLink className="w-3 h-3" />
                                   <span>Details</span>
@@ -417,7 +417,7 @@ const LearnViaAnimations = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white flex flex-col relative overflow-hidden">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating Particles */}
@@ -432,7 +432,7 @@ const LearnViaAnimations = () => {
               animationDuration: `${3 + Math.random() * 4}s`
             }}
           >
-            <Star className="w-1 h-1 text-pink-400 opacity-60" />
+            <Star className="w-1 h-1 text-[#5E936C] opacity-40" />
           </div>
         ))}
         
@@ -447,8 +447,8 @@ const LearnViaAnimations = () => {
               width: `${50 + Math.random() * 100}px`,
               height: `${50 + Math.random() * 100}px`,
               background: `radial-gradient(circle, ${
-                i % 3 === 0 ? 'rgba(147, 51, 234, 0.1)' :
-                i % 3 === 1 ? 'rgba(236, 72, 153, 0.1)' : 'rgba(147, 51, 234, 0.1)'
+                i % 3 === 0 ? 'rgba(94, 147, 108, 0.05)' :
+                i % 3 === 1 ? 'rgba(147, 218, 151, 0.05)' : 'rgba(62, 95, 68, 0.05)'
               } 0%, transparent 70%)`,
               animationDelay: `${Math.random() * 3}s`,
               animationDuration: `${6 + Math.random() * 4}s`
@@ -457,17 +457,17 @@ const LearnViaAnimations = () => {
         ))}
         
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-pink-900/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#E8FFD7]/10 to-[#93DA97]/10" />
       </div>
 
       {/* History Controls - Left Side */}
       {user && user._id && (
         <div className="absolute top-6 left-6 z-30">
-          <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-2xl p-2 shadow-2xl">
+          <div className="bg-white border border-[#93DA97]/30 rounded-2xl p-2 shadow-sm">
             <div className="flex items-center space-x-1">
               <button
                 onClick={() => setShowHistory(!showHistory)}
-                className="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 text-white/70 hover:text-white hover:bg-white/10"
+                className="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]"
               >
                 <div className="flex items-center space-x-2">
                   <History className="w-4 h-4" />
@@ -476,7 +476,7 @@ const LearnViaAnimations = () => {
               </button>
               <button
                 onClick={startNewChat}
-                className="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 text-white/70 hover:text-white hover:bg-white/10"
+                className="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]"
               >
                 <div className="flex items-center space-x-2">
                   <MessageCircle className="w-4 h-4" />
@@ -491,14 +491,14 @@ const LearnViaAnimations = () => {
       {/* Response Type Selector - Right Side */}
       <div className="absolute top-6 right-6 z-30">
         {/* Response Type Selector */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-2xl p-2 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-2xl p-2 shadow-sm">
           <div className="flex items-center space-x-1">
             <button
               onClick={() => setResponseType('text')}
               className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                 responseType === 'text'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#5E936C] text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <div className="flex items-center space-x-2">
@@ -510,8 +510,8 @@ const LearnViaAnimations = () => {
               onClick={() => setResponseType('animation')}
               className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                 responseType === 'animation'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#5E936C] text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <div className="flex items-center space-x-2">
@@ -523,8 +523,8 @@ const LearnViaAnimations = () => {
               onClick={() => setResponseType('both')}
               className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                 responseType === 'both'
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <div className="flex items-center space-x-2">
@@ -538,16 +538,16 @@ const LearnViaAnimations = () => {
 
       {/* History Sidebar */}
       {showHistory && user && user._id && (
-        <div className="absolute top-0 left-0 h-full w-96 bg-black/40 backdrop-blur-xl border-r border-purple-500/30 z-40 overflow-y-auto">
+        <div className="absolute top-0 left-0 h-full w-96 bg-white border-r border-[#93DA97]/30 z-40 overflow-y-auto shadow-lg">
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-white flex items-center space-x-2">
+              <h2 className="text-xl font-bold text-[#3E5F44] flex items-center space-x-2">
                 <History className="w-5 h-5" />
                 <span>Chat History</span>
               </h2>
               <button
                 onClick={() => setShowHistory(false)}
-                className="p-2 rounded-lg hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                className="p-2 rounded-lg hover:bg-[#E8FFD7] text-[#557063] hover:text-[#3E5F44] transition-colors"
               >
                 ✕
               </button>
@@ -557,14 +557,14 @@ const LearnViaAnimations = () => {
             <div className="flex items-center space-x-2 mb-6">
               <button
                 onClick={startNewChat}
-                className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 border border-purple-500/30 rounded-xl px-4 py-2 text-white/80 hover:text-white transition-all duration-200"
+                className="flex-1 flex items-center justify-center space-x-2 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-xl px-4 py-2 text-[#3E5F44] hover:text-[#3E5F44] transition-all duration-200"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>New Chat</span>
               </button>
               <button
                 onClick={fetchChatHistory}
-                className="flex items-center justify-center space-x-2 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 hover:from-cyan-500/30 hover:to-teal-500/30 border border-cyan-500/30 rounded-xl px-4 py-2 text-white/80 hover:text-white transition-all duration-200"
+                className="flex items-center justify-center space-x-2 bg-[#5E936C] hover:bg-[#3E5F44] border border-[#5E936C] rounded-xl px-4 py-2 text-white transition-all duration-200"
               >
                 <Clock className="w-4 h-4" />
                 <span>Refresh</span>
@@ -573,10 +573,10 @@ const LearnViaAnimations = () => {
 
             {historyLoading ? (
               <div className="flex items-center justify-center py-8">
-                <Loader className="w-6 h-6 text-white animate-spin" />
+                <Loader className="w-6 h-6 text-[#5E936C] animate-spin" />
               </div>
             ) : chatHistory.length === 0 ? (
-              <div className="text-center py-8 text-white/60">
+              <div className="text-center py-8 text-[#557063]">
                 <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>No chat history yet</p>
                 <p className="text-sm">Start a conversation to see it here!</p>
@@ -584,19 +584,19 @@ const LearnViaAnimations = () => {
             ) : (
               <div className="space-y-3">
                 {chatHistory.map((chat) => (
-                  <div key={chat.sessionId} className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-all duration-200 cursor-pointer" onClick={() => loadChatSession(chat.sessionId)}>
+                  <div key={chat.sessionId} className="bg-[#E8FFD7]/30 border border-[#93DA97]/30 rounded-xl p-4 hover:bg-[#E8FFD7]/50 transition-all duration-200 cursor-pointer" onClick={() => loadChatSession(chat.sessionId)}>
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2 mb-2">
-                          <Clock className="w-4 h-4 text-white/60" />
-                          <span className="text-sm text-white/60">
+                          <Clock className="w-4 h-4 text-[#557063]" />
+                          <span className="text-sm text-[#557063]">
                             {new Date(chat.updatedAt).toLocaleDateString()}
                           </span>
                         </div>
-                        <p className="text-white text-sm truncate">
+                        <p className="text-[#3E5F44] text-sm truncate">
                           {chat.messages[0]?.content || 'Empty conversation'}
                         </p>
-                        <p className="text-white/50 text-xs mt-1">
+                        <p className="text-[#557063] text-xs mt-1">
                           {chat.messages.length} messages
                         </p>
                       </div>
@@ -606,7 +606,7 @@ const LearnViaAnimations = () => {
                             e.stopPropagation();
                             deleteChatSession(chat.sessionId);
                           }}
-                          className="p-2 rounded-lg hover:bg-red-500/20 text-white/70 hover:text-red-300 transition-colors"
+                          className="p-2 rounded-lg hover:bg-red-100 text-[#557063] hover:text-red-600 transition-colors"
                           title="Delete conversation"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -632,13 +632,13 @@ const LearnViaAnimations = () => {
                 <div className="space-y-4">
                   <AutoText 
                     tag="h1"
-                    className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent leading-tight"
+                    className="text-5xl md:text-6xl font-bold text-[#3E5F44] leading-tight"
                   >
                     AI Learning
                   </AutoText>
                   <AutoText 
                     tag="h2"
-                    className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+                    className="text-2xl md:text-3xl font-semibold text-[#5E936C]"
                   >
                     Assistant
                   </AutoText>
@@ -646,41 +646,41 @@ const LearnViaAnimations = () => {
                 
                 <AutoText 
                   tag="p"
-                  className="text-xl text-white/80 leading-relaxed max-w-xl mx-auto"
+                  className="text-xl text-[#557063] leading-relaxed max-w-xl mx-auto"
                 >
                   Ask me anything about math, science, history, or any subject. I'll provide detailed explanations and create stunning animated visualizations to help you learn!
                 </AutoText>
 
                 {/* Feature Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
-                    <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 p-3 rounded-xl w-fit mb-3">
-                      <Type className="w-6 h-6 text-green-400" />
+                  <div className="bg-white border border-[#93DA97]/30 rounded-2xl p-6 hover:shadow-md transition-all duration-300 transform hover:scale-105">
+                    <div className="bg-gradient-to-br from-[#5E936C]/20 to-emerald-500/20 p-3 rounded-xl w-fit mb-3">
+                      <Type className="w-6 h-6 text-[#5E936C]" />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Smart Explanations</h3>
-                    <p className="text-white/60 text-sm">Get detailed, easy-to-understand explanations powered by advanced AI</p>
+                    <h3 className="text-lg font-semibold text-[#3E5F44] mb-2">Smart Explanations</h3>
+                    <p className="text-[#557063] text-sm">Get detailed, easy-to-understand explanations powered by advanced AI</p>
                   </div>
 
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
-                    <div className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 p-3 rounded-xl w-fit mb-3">
-                      <Video className="w-6 h-6 text-cyan-400" />
+                  <div className="bg-white border border-blue-300 rounded-2xl p-6 hover:shadow-md transition-all duration-300 transform hover:scale-105">
+                    <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-3 rounded-xl w-fit mb-3">
+                      <Video className="w-6 h-6 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Animated Learning</h3>
-                    <p className="text-white/60 text-sm">Watch concepts come to life with custom animations and visualizations</p>
+                    <h3 className="text-lg font-semibold text-[#3E5F44] mb-2">Animated Learning</h3>
+                    <p className="text-[#557063] text-sm">Watch concepts come to life with custom animations and visualizations</p>
                   </div>
 
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <div className="bg-white border border-purple-300 rounded-2xl p-6 hover:shadow-md transition-all duration-300 transform hover:scale-105">
                     <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-3 rounded-xl w-fit mb-3">
-                      <Brain className="w-6 h-6 text-purple-400" />
+                      <Brain className="w-6 h-6 text-purple-600" />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2">Adaptive Learning</h3>
-                    <p className="text-white/60 text-sm">Personalized content that adapts to your learning style and pace</p>
+                    <h3 className="text-lg font-semibold text-[#3E5F44] mb-2">Adaptive Learning</h3>
+                    <p className="text-[#557063] text-sm">Personalized content that adapts to your learning style and pace</p>
                   </div>
                 </div>
 
                 {/* Quick Start Examples */}
                 <div className="mt-8">
-                  <p className="text-white/60 text-sm mb-4">Try asking me about:</p>
+                  <p className="text-[#557063] text-sm mb-4">Try asking me about:</p>
                   <div className="flex flex-wrap gap-3 justify-center">
                     {[
                       "How does photosynthesis work?",
@@ -691,7 +691,7 @@ const LearnViaAnimations = () => {
                       <button
                         key={index}
                         onClick={() => setInputMessage(example)}
-                        className="backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/20 rounded-full px-4 py-2 text-white/80 hover:text-white text-sm transition-all duration-300 transform hover:scale-105"
+                        className="bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-full px-4 py-2 text-[#3E5F44] text-sm transition-all duration-300 transform hover:scale-105"
                       >
                         {example}
                       </button>
@@ -707,13 +707,13 @@ const LearnViaAnimations = () => {
             {isLoading && (
               <div className="flex justify-start mb-6">
                 <div className="flex items-start space-x-3 max-w-3xl">
-                  <div className="bg-gradient-to-r from-gray-600 to-gray-700 p-3 rounded-full shadow-lg animate-pulse">
+                  <div className="bg-gradient-to-r from-[#5E936C] to-emerald-500 p-3 rounded-full shadow-sm animate-pulse">
                     <Bot className="w-5 h-5 text-white" />
                   </div>
-                  <div className="backdrop-blur-xl bg-gray-800/40 border border-gray-600/30 rounded-3xl p-6 shadow-2xl">
+                  <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-6 shadow-sm">
                     <div className="flex items-center space-x-3">
-                      <Loader className="w-5 h-5 text-purple-400 animate-spin" />
-                      <AutoText className="text-white/80">
+                      <Loader className="w-5 h-5 text-[#5E936C] animate-spin" />
+                      <AutoText className="text-[#557063]">
                         {responseType === 'both' ? 'Generating text explanation and creating animation (this may take 1-2 minutes)...' :
                          responseType === 'animation' ? 'Creating your animation (this may take 1-2 minutes)...' :
                          'Thinking and generating response...'}
@@ -731,7 +731,7 @@ const LearnViaAnimations = () => {
       <div className={`fixed bottom-0 left-0 right-0 p-6 z-20 transition-all duration-300 ${showHistory && user && user._id ? 'ml-96' : ''}`}>
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit}>
-            <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-2 shadow-2xl hover:shadow-purple-500/25 transition-all duration-300">
+            <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-2 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-end space-x-3">
                 <div className="flex-1 relative">
                   <textarea
@@ -740,7 +740,7 @@ const LearnViaAnimations = () => {
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Ask me anything..."
-                    className="w-full bg-transparent border-0 rounded-2xl px-6 py-4 text-white placeholder-white/50 focus:outline-none resize-none min-h-[60px] max-h-32 text-lg"
+                    className="w-full bg-transparent border-0 rounded-2xl px-6 py-4 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none resize-none min-h-[60px] max-h-32 text-lg"
                     rows="1"
                     disabled={isLoading}
                     style={{ 
@@ -754,12 +754,12 @@ const LearnViaAnimations = () => {
                   />
                   
                   {/* Animated Border */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-pink-500/20 opacity-0 hover:opacity-100 transition-all duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#5E936C]/20 via-[#93DA97]/20 to-[#5E936C]/20 opacity-0 hover:opacity-100 transition-all duration-500 pointer-events-none" />
                   
                   {/* Floating Sparkles */}
                   {inputMessage && (
                     <div className="absolute -top-2 -right-2">
-                      <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
+                      <Sparkles className="w-4 h-4 text-[#5E936C] animate-pulse" />
                     </div>
                   )}
                 </div>
@@ -767,7 +767,7 @@ const LearnViaAnimations = () => {
                 <button
                   type="submit"
                   disabled={isLoading || !inputMessage.trim()}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white p-4 rounded-2xl transition-all duration-500 transform hover:scale-110 disabled:scale-100 shadow-xl hover:shadow-2xl hover:shadow-purple-500/50 relative overflow-hidden group"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-4 rounded-2xl transition-all duration-500 transform hover:scale-110 disabled:scale-100 shadow-sm hover:shadow-md relative overflow-hidden group"
                 >
                   {/* Animated Background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>

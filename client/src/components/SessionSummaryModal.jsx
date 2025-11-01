@@ -84,41 +84,41 @@ const SessionSummaryModal = ({ session, isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-white/10">
+      <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-lg border border-[#93DA97]/30">
         {/* Header */}
-        <div className="p-6 border-b border-white/10 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
+        <div className="p-6 border-b border-[#93DA97]/30 bg-gradient-to-r from-[#5E936C] to-[#93DA97]">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
+              <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-white">AI Session Summary</h2>
-                <p className="text-purple-300 text-sm mt-1">{session?.title}</p>
+                <p className="text-[#E8FFD7] text-sm mt-1">{session?.title}</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
             >
-              <X className="w-5 h-5 text-white/60 hover:text-white" />
+              <X className="w-5 h-5 text-white/80 hover:text-white" />
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)] bg-gradient-to-br from-[#E8FFD7]/30 to-white">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-12">
-              <Loader className="w-12 h-12 text-purple-500 animate-spin mb-4" />
-              <p className="text-white/60">Generating AI summary...</p>
+              <Loader className="w-12 h-12 text-[#5E936C] animate-spin mb-4" />
+              <p className="text-[#557063]">Generating AI summary...</p>
             </div>
           ) : error ? (
             <div className="text-center py-12">
-              <p className="text-red-400 mb-4">{error}</p>
+              <p className="text-red-600 mb-4">{error}</p>
               <button
                 onClick={generateSummary}
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto"
+                className="px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-sm"
               >
                 <RefreshCw className="w-5 h-5" />
                 <span>Generate Summary</span>
@@ -128,60 +128,60 @@ const SessionSummaryModal = ({ session, isOpen, onClose }) => {
             <div className="space-y-6">
               {/* Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="bg-white rounded-xl p-4 border border-[#93DA97]/30 shadow-sm">
                   <div className="flex items-center space-x-2 mb-2">
-                    <Users className="w-4 h-4 text-blue-400" />
-                    <span className="text-white/60 text-sm">Participants</span>
+                    <Users className="w-4 h-4 text-blue-500" />
+                    <span className="text-[#557063] text-sm">Participants</span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{summary.participants}</p>
+                  <p className="text-2xl font-bold text-[#3E5F44]">{summary.participants}</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="bg-white rounded-xl p-4 border border-[#93DA97]/30 shadow-sm">
                   <div className="flex items-center space-x-2 mb-2">
-                    <MessageCircle className="w-4 h-4 text-green-400" />
-                    <span className="text-white/60 text-sm">Messages</span>
+                    <MessageCircle className="w-4 h-4 text-[#5E936C]" />
+                    <span className="text-[#557063] text-sm">Messages</span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{summary.totalMessages}</p>
+                  <p className="text-2xl font-bold text-[#3E5F44]">{summary.totalMessages}</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="bg-white rounded-xl p-4 border border-[#93DA97]/30 shadow-sm">
                   <div className="flex items-center space-x-2 mb-2">
-                    <FileText className="w-4 h-4 text-purple-400" />
-                    <span className="text-white/60 text-sm">Files</span>
+                    <FileText className="w-4 h-4 text-purple-500" />
+                    <span className="text-[#557063] text-sm">Files</span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{summary.filesShared}</p>
+                  <p className="text-2xl font-bold text-[#3E5F44]">{summary.filesShared}</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="bg-white rounded-xl p-4 border border-[#93DA97]/30 shadow-sm">
                   <div className="flex items-center space-x-2 mb-2">
-                    <Clock className="w-4 h-4 text-yellow-400" />
-                    <span className="text-white/60 text-sm">Duration</span>
+                    <Clock className="w-4 h-4 text-yellow-500" />
+                    <span className="text-[#557063] text-sm">Duration</span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{session?.duration}m</p>
+                  <p className="text-2xl font-bold text-[#3E5F44]">{session?.duration}m</p>
                 </div>
               </div>
 
               {/* Summary */}
-              <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 rounded-xl p-6 border border-purple-500/20">
+              <div className="bg-gradient-to-br from-[#E8FFD7] to-white rounded-xl p-6 border border-[#93DA97]/30 shadow-sm">
                 <div className="flex items-center space-x-2 mb-4">
-                  <BookOpen className="w-5 h-5 text-purple-400" />
-                  <h3 className="text-lg font-semibold text-white">Session Overview</h3>
+                  <BookOpen className="w-5 h-5 text-[#5E936C]" />
+                  <h3 className="text-lg font-semibold text-[#3E5F44]">Session Overview</h3>
                 </div>
-                <p className="text-white/80 leading-relaxed">{summary.summary}</p>
+                <p className="text-[#3E5F44] leading-relaxed">{summary.summary}</p>
               </div>
 
               {/* Key Topics */}
               {summary.keyTopics && summary.keyTopics.length > 0 && (
                 <div>
                   <div className="flex items-center space-x-2 mb-4">
-                    <Sparkles className="w-5 h-5 text-yellow-400" />
-                    <h3 className="text-lg font-semibold text-white">Key Topics Discussed</h3>
+                    <Sparkles className="w-5 h-5 text-[#5E936C]" />
+                    <h3 className="text-lg font-semibold text-[#3E5F44]">Key Topics Discussed</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {summary.keyTopics.map((topic, index) => (
                       <span
                         key={index}
-                        className="px-4 py-2 bg-gradient-to-r from-indigo-600/30 to-purple-600/30 border border-indigo-500/30 rounded-full text-white text-sm font-medium"
+                        className="px-4 py-2 bg-[#E8FFD7] border border-[#93DA97]/50 rounded-full text-[#3E5F44] text-sm font-medium"
                       >
                         {topic}
                       </span>
@@ -194,19 +194,19 @@ const SessionSummaryModal = ({ session, isOpen, onClose }) => {
               {summary.insights && summary.insights.length > 0 && (
                 <div>
                   <div className="flex items-center space-x-2 mb-4">
-                    <Lightbulb className="w-5 h-5 text-yellow-400" />
-                    <h3 className="text-lg font-semibold text-white">Key Insights & Takeaways</h3>
+                    <Lightbulb className="w-5 h-5 text-yellow-500" />
+                    <h3 className="text-lg font-semibold text-[#3E5F44]">Key Insights & Takeaways</h3>
                   </div>
                   <div className="space-y-3">
                     {summary.insights.map((insight, index) => (
                       <div
                         key={index}
-                        className="flex items-start space-x-3 bg-white/5 rounded-lg p-4 border border-white/10"
+                        className="flex items-start space-x-3 bg-white rounded-lg p-4 border border-[#93DA97]/30 shadow-sm"
                       >
                         <div className="w-6 h-6 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-white text-xs font-bold">{index + 1}</span>
                         </div>
-                        <p className="text-white/80 flex-1">{insight}</p>
+                        <p className="text-[#3E5F44] flex-1">{insight}</p>
                       </div>
                     ))}
                   </div>
@@ -214,19 +214,19 @@ const SessionSummaryModal = ({ session, isOpen, onClose }) => {
               )}
 
               {/* Generated At */}
-              <div className="text-center pt-4 border-t border-white/10">
-                <p className="text-white/40 text-sm">
+              <div className="text-center pt-4 border-t border-[#93DA97]/30">
+                <p className="text-[#557063] text-sm">
                   Summary generated on {new Date(summary.generatedAt).toLocaleString()}
                 </p>
               </div>
             </div>
           ) : (
             <div className="text-center py-12">
-              <Sparkles className="w-16 h-16 text-purple-500/50 mx-auto mb-4" />
-              <p className="text-white/60 mb-6">No summary available yet.</p>
+              <Sparkles className="w-16 h-16 text-[#5E936C]/50 mx-auto mb-4" />
+              <p className="text-[#557063] mb-6">No summary available yet.</p>
               <button
                 onClick={generateSummary}
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto"
+                className="px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-sm"
               >
                 <Sparkles className="w-5 h-5" />
                 <span>Generate AI Summary</span>

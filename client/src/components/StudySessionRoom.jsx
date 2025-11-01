@@ -312,15 +312,15 @@ const StudySessionRoom = ({ session, onBack }) => {
       return (
         <div className="max-w-sm">
           {msg.content && (
-            <p className="text-white mb-2">{msg.content}</p>
+            <p className="text-[#3E5F44] mb-2">{msg.content}</p>
           )}
           <img 
             src={fileUrl} 
             alt={msg.fileName}
-            className="rounded-lg max-w-full h-auto cursor-pointer hover:opacity-90 transition"
+            className="rounded-lg max-w-full h-auto cursor-pointer hover:opacity-90 transition border border-[#93DA97]/30"
             onClick={() => window.open(fileUrl, '_blank')}
           />
-          <p className="text-white/60 text-xs mt-1">{msg.fileName}</p>
+          <p className="text-[#557063] text-xs mt-1">{msg.fileName}</p>
         </div>
       );
     }
@@ -329,16 +329,16 @@ const StudySessionRoom = ({ session, onBack }) => {
       return (
         <div className="max-w-md">
           {msg.content && (
-            <p className="text-white mb-2">{msg.content}</p>
+            <p className="text-[#3E5F44] mb-2">{msg.content}</p>
           )}
           <video 
             controls 
-            className="rounded-lg max-w-full h-auto"
+            className="rounded-lg max-w-full h-auto border border-[#93DA97]/30"
             src={fileUrl}
           >
             Your browser does not support the video tag.
           </video>
-          <p className="text-white/60 text-xs mt-1">{msg.fileName}</p>
+          <p className="text-[#557063] text-xs mt-1">{msg.fileName}</p>
         </div>
       );
     }
@@ -347,34 +347,34 @@ const StudySessionRoom = ({ session, onBack }) => {
       return (
         <div className="max-w-sm">
           {msg.content && (
-            <p className="text-white mb-2">{msg.content}</p>
+            <p className="text-[#3E5F44] mb-2">{msg.content}</p>
           )}
           <audio controls className="w-full" src={fileUrl}>
             Your browser does not support the audio tag.
           </audio>
-          <p className="text-white/60 text-xs mt-1">{msg.fileName}</p>
+          <p className="text-[#557063] text-xs mt-1">{msg.fileName}</p>
         </div>
       );
     }
 
     // Generic file
     return (
-      <div className="bg-white/5 rounded-lg p-3 max-w-sm">
+      <div className="bg-[#E8FFD7] border border-[#93DA97]/30 rounded-lg p-3 max-w-sm">
         {msg.content && (
-          <p className="text-white mb-2">{msg.content}</p>
+          <p className="text-[#3E5F44] mb-2">{msg.content}</p>
         )}
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-white/10 rounded">
+          <div className="p-2 bg-white rounded border border-[#93DA97]/30">
             {getFileIcon(msg.mimeType)}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-white text-sm truncate">{msg.fileName}</p>
-            <p className="text-white/60 text-xs">{formatFileSize(msg.fileSize)}</p>
+            <p className="text-[#3E5F44] text-sm truncate">{msg.fileName}</p>
+            <p className="text-[#557063] text-xs">{formatFileSize(msg.fileSize)}</p>
           </div>
           <a
             href={fileUrl}
             download={msg.fileName}
-            className="p-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition"
+            className="p-2 bg-[#5E936C] hover:bg-[#3E5F44] rounded-lg transition"
           >
             <Download className="w-4 h-4 text-white" />
           </a>
@@ -428,20 +428,20 @@ const StudySessionRoom = ({ session, onBack }) => {
   const isCreator = session?.createdBy?._id === user?.userId || session?.createdBy === user?.userId;
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden flex flex-col" style={{ height: 'calc(100vh - 200px)' }}>
+    <div className="bg-white border border-[#93DA97]/30 rounded-xl overflow-hidden flex flex-col shadow-sm" style={{ height: 'calc(100vh - 200px)' }}>
       {/* Header */}
-      <div className="p-4 border-b border-white/20 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
+      <div className="p-4 border-b border-[#93DA97]/30 bg-gradient-to-r from-[#5E936C] to-[#93DA97]">
         <div className="flex items-center justify-between mb-3">
           <button
             onClick={onBack}
-            className="text-white/60 hover:text-white transition-colors flex items-center space-x-2"
+            className="text-white/80 hover:text-white transition-colors flex items-center space-x-2"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back</span>
           </button>
           
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2 px-3 py-1 bg-white/10 rounded-full text-white/80 text-sm">
+            <div className="flex items-center space-x-2 px-3 py-1 bg-white/20 rounded-full text-white text-sm">
               <Clock className="w-4 h-4" />
               <span>{timeRemaining}</span>
             </div>
@@ -450,7 +450,7 @@ const StudySessionRoom = ({ session, onBack }) => {
               <>
                 <button
                   onClick={() => setShowInviteModal(true)}
-                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
                   title="Invite users"
                 >
                   <UserPlus className="w-5 h-5" />
@@ -458,7 +458,7 @@ const StudySessionRoom = ({ session, onBack }) => {
 
                 <button
                   onClick={() => setShowWhiteboard(true)}
-                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
                   title="Open Whiteboard"
                 >
                   <Pencil className="w-5 h-5" />
@@ -468,8 +468,8 @@ const StudySessionRoom = ({ session, onBack }) => {
                   onClick={() => setShowVideoCall(!showVideoCall)}
                   className={`p-2 rounded-lg transition-colors ${
                     showVideoCall
-                      ? 'bg-green-600 text-white'
-                      : 'bg-white/10 hover:bg-white/20 text-white'
+                      ? 'bg-green-700 text-white'
+                      : 'bg-white/20 hover:bg-white/30 text-white'
                   }`}
                 >
                   <Video className="w-5 h-5" />
@@ -481,7 +481,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             {!canInteract && (
               <button
                 onClick={() => setShowWhiteboard(true)}
-                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all flex items-center space-x-2"
+                className="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-all flex items-center space-x-2"
                 title="View Whiteboard"
               >
                 <Pencil className="w-4 h-4" />
@@ -493,7 +493,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             {session?.status === 'completed' && (
               <button
                 onClick={() => setShowSummaryModal(true)}
-                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-2 shadow-lg"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all flex items-center space-x-2 shadow-sm"
                 title="View AI Summary"
               >
                 <Sparkles className="w-4 h-4" />
@@ -506,9 +506,9 @@ const StudySessionRoom = ({ session, onBack }) => {
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <h2 className="text-2xl font-bold text-white mb-1">{session?.title}</h2>
-            <p className="text-purple-300 mb-2">{session?.topic}</p>
+            <p className="text-[#E8FFD7] mb-2">{session?.topic}</p>
             {session?.description && (
-              <p className="text-white/70 text-sm">{session.description}</p>
+              <p className="text-white/80 text-sm">{session.description}</p>
             )}
           </div>
           
@@ -523,16 +523,16 @@ const StudySessionRoom = ({ session, onBack }) => {
         {/* Session Info */}
         <div className="flex flex-wrap gap-2 mt-3">
           {session?.objectives && session.objectives.length > 0 && (
-            <div className="flex items-center space-x-1 px-3 py-1 bg-white/10 rounded-full text-white/80 text-xs">
+            <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
               <Target className="w-3 h-3" />
               <span>{session.objectives.length} objective{session.objectives.length !== 1 ? 's' : ''}</span>
             </div>
           )}
-          <div className="flex items-center space-x-1 px-3 py-1 bg-white/10 rounded-full text-white/80 text-xs">
+          <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
             <Calendar className="w-3 h-3" />
             <span>{new Date(session?.date).toLocaleDateString()}</span>
           </div>
-          <div className="flex items-center space-x-1 px-3 py-1 bg-white/10 rounded-full text-white/80 text-xs">
+          <div className="flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-white text-xs">
             <Clock className="w-3 h-3" />
             <span>{session?.startTime} ({session?.duration}m)</span>
           </div>
@@ -543,7 +543,7 @@ const StudySessionRoom = ({ session, onBack }) => {
         {/* Chat Area */}
         <div className={`flex flex-col ${showVideoCall ? 'w-2/3' : 'w-full'}`}>
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
             {messages.map((msg, index) => (
               <div
                 key={msg._id || index}
@@ -552,7 +552,7 @@ const StudySessionRoom = ({ session, onBack }) => {
                 }`}
               >
                 {msg.isSystem ? (
-                  <div className="text-white/50 text-sm italic">{msg.message}</div>
+                  <div className="text-[#557063] text-sm italic">{msg.message}</div>
                 ) : (
                   <>
                     <div className={`w-8 h-8 rounded-full ${getAvatarColor(msg.userId?.name || 'U')} flex items-center justify-center text-white font-semibold text-sm flex-shrink-0`}>
@@ -560,17 +560,17 @@ const StudySessionRoom = ({ session, onBack }) => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="text-white font-medium text-sm">
+                        <span className="text-[#3E5F44] font-medium text-sm">
                           {msg.userId?.name || 'Unknown'}
                         </span>
-                        <span className="text-white/40 text-xs">
+                        <span className="text-[#557063]/60 text-xs">
                           {formatTime(msg.createdAt)}
                         </span>
                       </div>
                       {msg.messageType && msg.messageType !== 'text' && msg.messageType !== 'system' ? (
                         renderFileMessage(msg)
                       ) : (
-                        <div className="bg-white/10 rounded-lg px-3 py-2 text-white">
+                        <div className="bg-white border border-[#93DA97]/30 rounded-lg px-3 py-2 text-[#3E5F44] shadow-sm">
                           {msg.content || msg.message}
                         </div>
                       )}
@@ -581,7 +581,7 @@ const StudySessionRoom = ({ session, onBack }) => {
             ))}
             
             {typingUsers.size > 0 && (
-              <div className="text-white/50 text-sm italic">
+              <div className="text-[#557063] text-sm italic">
                 {Array.from(typingUsers).join(', ')} {typingUsers.size === 1 ? 'is' : 'are'} typing...
               </div>
             )}
@@ -591,25 +591,25 @@ const StudySessionRoom = ({ session, onBack }) => {
 
           {/* Message Input */}
           {canInteract ? (
-            <div className="p-4 border-t border-white/20">
+            <div className="p-4 border-t border-[#93DA97]/30 bg-white">
               {/* File Preview */}
               {selectedFile && (
-                <div className="mb-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                <div className="mb-3 p-3 bg-[#E8FFD7] rounded-lg border border-[#93DA97]/30">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-purple-600/30 rounded">
+                      <div className="p-2 bg-[#5E936C]/30 rounded">
                         {getFileIcon(selectedFile.type)}
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">{selectedFile.name}</p>
-                        <p className="text-white/60 text-xs">{formatFileSize(selectedFile.size)}</p>
+                        <p className="text-[#3E5F44] text-sm font-medium">{selectedFile.name}</p>
+                        <p className="text-[#557063] text-xs">{formatFileSize(selectedFile.size)}</p>
                       </div>
                     </div>
                     <button
                       onClick={handleCancelFile}
-                      className="p-1 hover:bg-white/10 rounded transition"
+                      className="p-1 hover:bg-white rounded transition"
                     >
-                      <X className="w-4 h-4 text-white/60" />
+                      <X className="w-4 h-4 text-[#557063]" />
                     </button>
                   </div>
                 </div>
@@ -626,7 +626,7 @@ const StudySessionRoom = ({ session, onBack }) => {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg transition-all"
+                  className="bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] p-3 rounded-lg transition-all border border-[#93DA97]/30"
                   disabled={!connected || uploading}
                 >
                   <Paperclip className="w-5 h-5" />
@@ -636,13 +636,13 @@ const StudySessionRoom = ({ session, onBack }) => {
                   value={newMessage}
                   onChange={handleTyping}
                   placeholder={selectedFile ? "Add a caption (optional)..." : "Type your message..."}
-                  className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-purple-500"
+                  className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C]"
                   disabled={!connected || uploading}
                 />
                 <button
                   type="submit"
                   disabled={(!newMessage.trim() && !selectedFile) || !connected || uploading}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white p-3 rounded-lg transition-all disabled:cursor-not-allowed min-w-[52px] flex items-center justify-center"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-3 rounded-lg transition-all disabled:cursor-not-allowed min-w-[52px] flex items-center justify-center shadow-sm"
                 >
                   {uploading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -653,12 +653,12 @@ const StudySessionRoom = ({ session, onBack }) => {
               </form>
             </div>
           ) : (
-            <div className="p-4 border-t border-white/20">
+            <div className="p-4 border-t border-[#93DA97]/30 bg-white">
               <div className="text-center mb-3">
-                <p className="text-white/60 text-sm mb-3">This session has ended. You can view the chat history.</p>
+                <p className="text-[#557063] text-sm mb-3">This session has ended. You can view the chat history.</p>
                 <button
                   onClick={() => setShowSummaryModal(true)}
-                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-lg"
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-medium transition-all flex items-center space-x-2 mx-auto shadow-sm"
                 >
                   <Sparkles className="w-5 h-5" />
                   <span>View AI Summary</span>
@@ -670,32 +670,32 @@ const StudySessionRoom = ({ session, onBack }) => {
 
         {/* Video Call */}
         {showVideoCall && canInteract && (
-          <div className="w-1/3 border-l border-white/20">
+          <div className="w-1/3 border-l border-[#93DA97]/30">
             <VideoCall roomId={session?.sessionId} />
           </div>
         )}
 
         {/* Participants Sidebar - Show when not in video call */}
         {!showVideoCall && (
-          <div className="w-64 border-l border-white/20 p-4 overflow-y-auto">
+          <div className="w-64 border-l border-[#93DA97]/30 p-4 overflow-y-auto bg-white">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-semibold flex items-center space-x-2">
+              <h3 className="text-[#3E5F44] font-semibold flex items-center space-x-2">
                 <Users className="w-4 h-4" />
                 <span>Participants</span>
               </h3>
-              <span className="text-white/60 text-sm">{activeUsers.length}/{session?.maxUsers}</span>
+              <span className="text-[#557063] text-sm">{activeUsers.length}/{session?.maxUsers}</span>
             </div>
             
             {/* Learning Objectives */}
             {session?.objectives && session.objectives.length > 0 && (
-              <div className="mb-4 pb-4 border-b border-white/10">
-                <h4 className="text-white/80 text-sm font-medium mb-2 flex items-center space-x-1">
+              <div className="mb-4 pb-4 border-b border-[#93DA97]/30">
+                <h4 className="text-[#3E5F44] text-sm font-medium mb-2 flex items-center space-x-1">
                   <Target className="w-3 h-3" />
                   <span>Objectives</span>
                 </h4>
                 <ul className="space-y-1">
                   {session.objectives.map((obj, index) => (
-                    <li key={index} className="text-white/60 text-xs flex items-start space-x-2">
+                    <li key={index} className="text-[#557063] text-xs flex items-start space-x-2">
                       <CheckCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
                       <span>{obj}</span>
                     </li>
@@ -709,17 +709,17 @@ const StudySessionRoom = ({ session, onBack }) => {
               {activeUsers.map((participant) => (
                 <div
                   key={participant._id}
-                  className="flex items-center space-x-2 p-2 bg-white/5 rounded-lg"
+                  className="flex items-center space-x-2 p-2 bg-[#E8FFD7]/50 hover:bg-[#E8FFD7] border border-[#93DA97]/30 rounded-lg transition-colors"
                 >
                   <div className={`w-8 h-8 rounded-full ${getAvatarColor(participant.name)} flex items-center justify-center text-white font-semibold text-sm`}>
                     {participant.name[0].toUpperCase()}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-white text-sm truncate">{participant.name}</p>
-                    <p className="text-white/60 text-xs">Level {participant.level || 1}</p>
+                    <p className="text-[#3E5F44] text-sm truncate">{participant.name}</p>
+                    <p className="text-[#557063] text-xs">Level {participant.level || 1}</p>
                   </div>
                   {participant._id === session?.createdBy?._id && (
-                    <Crown className="w-4 h-4 text-yellow-400" />
+                    <Crown className="w-4 h-4 text-yellow-500" />
                   )}
                 </div>
               ))}

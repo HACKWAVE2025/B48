@@ -49,82 +49,65 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 relative">
-      {/* Animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          >
-            <Star className="w-2 h-2 text-pink-400 opacity-60" />
-          </div>
-        ))}
-      </div>
-
-      {/* Glass morphism container */}
-      <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl m-10 p-7 shadow-2xl relative overflow-hidden w-full max-w-2xl">
-        {/* Top gaming badge */}
-        <div className="relative z-10 flex justify-center mb-6">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300">
+    <div className="w-full min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white flex items-center justify-center p-4">
+      {/* Clean container */}
+      <div className="bg-white border border-[#93DA97]/30 rounded-2xl p-8 shadow-lg w-full max-w-2xl">
+        {/* Logo/Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-[#5E936C] p-4 rounded-xl shadow-sm">
             <Gamepad2 className="w-8 h-8 text-white" />
           </div>
         </div>
 
         {/* Title Section */}
-        <div className="relative z-10 text-center mb-6">
+        <div className="text-center mb-6">
           <AutoText 
             tag="h2"
-            className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-3"
+            className="text-3xl font-semibold text-[#3E5F44] mb-2"
           >
-            Create Your Character!
+            Create Your Account
           </AutoText>
+          <p className="text-[#556b5b]">Join the learning community today</p>
           {/* Achievement badges */}
           <div className="flex justify-center space-x-2 mt-4">
-            <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-full p-2">
-              <Trophy className="w-4 h-4 text-yellow-400" />
+            <div className="bg-[#E8FFD7] border border-[#93DA97]/40 rounded-full p-2">
+              <Trophy className="w-4 h-4 text-[#5E936C]" />
             </div>
-            <div className="bg-blue-500/20 border border-blue-500/40 rounded-full p-2">
-              <Shield className="w-4 h-4 text-blue-400" />
+            <div className="bg-[#E8FFD7] border border-[#93DA97]/40 rounded-full p-2">
+              <Shield className="w-4 h-4 text-[#5E936C]" />
             </div>
-            <div className="bg-green-500/20 border border-green-500/40 rounded-full p-2">
-              <Zap className="w-4 h-4 text-green-400" />
+            <div className="bg-[#E8FFD7] border border-[#93DA97]/40 rounded-full p-2">
+              <Zap className="w-4 h-4 text-[#5E936C]" />
             </div>
           </div>
         </div>
 
         {/* Error Display */}
         {error && (
-          <div className="relative z-10 mb-6 p-4 bg-red-500/20 border border-red-500/40 rounded-2xl backdrop-blur-sm">
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
             <div className="flex items-center space-x-3">
               <div className="bg-red-500 p-1 rounded-full">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <AutoText className="text-red-200 font-medium">{error}</AutoText>
+              <AutoText className="text-red-700 font-medium">{error}</AutoText>
             </div>
           </div>
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* First Row - Name and Email */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Name Field */}
             <div className="space-y-3">
               <label 
                 htmlFor="name" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
+                className="flex items-center space-x-3 text-[#3E5F44] font-medium text-base"
               >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <User className="w-5 h-5" />
+                <div className="p-2.5 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <User className="w-5 h-5 text-[#5E936C]" />
                 </div>
-                <AutoText>Character Name</AutoText>
+                <AutoText>Full name</AutoText>
               </label>
               <input
                 type="text"
@@ -132,7 +115,7 @@ const Register = () => {
                 id="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
+                className="w-full bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 text-[#0f172a] text-base placeholder-gray-400 focus:outline-none focus:border-[#5E936C] focus:ring-[#5E936C]/20 transition-all duration-200"
                 placeholder="Enter your name"
                 required
               />
@@ -142,10 +125,10 @@ const Register = () => {
             <div className="space-y-3">
               <label 
                 htmlFor="email" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
+                className="flex items-center space-x-3 text-[#3E5F44] font-medium text-base"
               >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <Mail className="w-5 h-5" />
+                <div className="p-2.5 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Mail className="w-5 h-5 text-[#5E936C]" />
                 </div>
                 <AutoText>Email Address</AutoText>
               </label>
@@ -155,7 +138,7 @@ const Register = () => {
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
+                className="w-full bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 text-[#0f172a] text-base placeholder-gray-400 focus:outline-none focus:border-[#5E936C] focus:ring-[#5E936C]/20 transition-all duration-200"
                 placeholder="Enter your email"
                 required
               />
@@ -168,10 +151,10 @@ const Register = () => {
             <div className="space-y-3">
               <label 
                 htmlFor="password" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
+                className="flex items-center space-x-3 text-[#3E5F44] font-medium text-base"
               >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <Lock className="w-5 h-5" />
+                <div className="p-2.5 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Lock className="w-5 h-5 text-[#5E936C]" />
                 </div>
                 <AutoText>Secret Code</AutoText>
               </label>
@@ -182,14 +165,14 @@ const Register = () => {
                   id="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 pr-12 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
+                  className="w-full bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 pr-12 text-[#0f172a] text-base placeholder-gray-400 focus:outline-none focus:border-[#5E936C] focus:ring-[#5E936C]/20 transition-all duration-200"
                   placeholder="Create a password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-colors duration-200"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#5E936C] hover:text-[#3E5F44] transition-colors duration-150"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -200,10 +183,10 @@ const Register = () => {
             <div className="space-y-3">
               <label 
                 htmlFor="confirmPassword" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
+                className="flex items-center space-x-3 text-[#3E5F44] font-medium text-base"
               >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <Shield className="w-5 h-5" />
+                <div className="p-2.5 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Shield className="w-5 h-5 text-[#5E936C]" />
                 </div>
                 <AutoText>Confirm Code</AutoText>
               </label>
@@ -214,14 +197,14 @@ const Register = () => {
                   id="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 pr-12 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
+                  className="w-full bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 pr-12 text-[#0f172a] text-base placeholder-gray-400 focus:outline-none focus:border-[#5E936C] focus:ring-[#5E936C]/20 transition-all duration-200"
                   placeholder="Confirm your password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white transition-colors duration-200"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#5E936C] hover:text-[#3E5F44] transition-colors duration-150"
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -233,12 +216,12 @@ const Register = () => {
           <div className="space-y-3">
             <label 
               htmlFor="location" 
-              className="flex items-center space-x-3 text-white/90 font-medium text-base"
+              className="flex items-center space-x-3 text-[#3E5F44] font-medium text-base"
             >
-              <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                <MapPin className="w-5 h-5" />
+              <div className="p-2.5 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                <MapPin className="w-5 h-5 text-[#5E936C]" />
               </div>
-              <AutoText>Home Base</AutoText>
+              <AutoText>Location</AutoText>
             </label>
             <input
               type="text"
@@ -246,8 +229,8 @@ const Register = () => {
               id="location"
               value={formData.location}
               onChange={handleChange}
-              className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
-              placeholder="Your village/city"
+              className="w-full bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 text-[#0f172a] text-base placeholder-gray-400 focus:outline-none focus:border-[#5E936C] focus:ring-[#5E936C]/20 transition-all duration-200"
+              placeholder="City / Town"
               required
             />
           </div>
@@ -255,40 +238,40 @@ const Register = () => {
           {/* Role Selection */}
           <div className="space-y-4">
             <AutoText 
-              tag="label"
-              className="text-white/90 font-medium text-base text-center block"
-            >
-              Select Your Role
-            </AutoText>
+                tag="label"
+                className="text-[#3E5F44] font-medium text-base text-center block"
+              >
+                Select Your Role
+              </AutoText>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Student Role */}
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, role: 'student' })}
-                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   formData.role === 'student'
-                    ? 'bg-gradient-to-br from-purple-600/40 to-pink-600/40 border-purple-400 shadow-lg shadow-purple-500/30'
-                    : 'bg-gray-800/50 border-gray-600/50 hover:border-purple-500/50'
+                    ? 'bg-gradient-to-br from-[#5E936C]/20 to-[#93DA97]/20 border-[#5E936C] shadow-sm'
+                    : 'bg-[#E8FFD7] border-[#93DA97]/30 hover:border-[#5E936C]'
                 }`}
               >
                 <div className="flex flex-col items-center space-y-3">
                   <div className={`p-4 rounded-full ${
                     formData.role === 'student' 
-                      ? 'bg-purple-500/30 border-2 border-purple-400' 
-                      : 'bg-gray-700/50 border-2 border-gray-600'
+                      ? 'bg-[#5E936C]/20 border-2 border-[#5E936C]' 
+                      : 'bg-[#E8FFD7] border-2 border-[#93DA97]'
                   }`}>
-                    <BookOpen className="w-8 h-8 text-white" />
+                    <BookOpen className="w-8 h-8 text-[#3E5F44]" />
                   </div>
                   <div className="text-center">
-                    <AutoText tag="h3" className="text-xl font-bold text-white mb-2">
+                    <AutoText tag="h3" className="text-xl font-bold text-[#3E5F44] mb-2">
                       Student
                     </AutoText>
-                    <AutoText className="text-sm text-gray-300">
+                    <AutoText className="text-sm text-[#557063]">
                       Learn, practice, and complete quizzes
                     </AutoText>
                   </div>
                   {formData.role === 'student' && (
-                    <div className="flex items-center gap-2 text-purple-300">
+                    <div className="flex items-center gap-2 text-[#5E936C]">
                       <Sparkles className="w-4 h-4" />
                       <span className="text-sm font-semibold">Selected</span>
                     </div>
@@ -300,30 +283,30 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, role: 'researcher' })}
-                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   formData.role === 'researcher'
-                    ? 'bg-gradient-to-br from-blue-600/40 to-cyan-600/40 border-blue-400 shadow-lg shadow-blue-500/30'
-                    : 'bg-gray-800/50 border-gray-600/50 hover:border-blue-500/50'
+                    ? 'bg-gradient-to-br from-[#5E936C]/20 to-[#93DA97]/20 border-[#5E936C] shadow-sm'
+                    : 'bg-[#E8FFD7] border-[#93DA97]/30 hover:border-[#5E936C]'
                 }`}
               >
                 <div className="flex flex-col items-center space-y-3">
                   <div className={`p-4 rounded-full ${
                     formData.role === 'researcher' 
-                      ? 'bg-blue-500/30 border-2 border-blue-400' 
-                      : 'bg-gray-700/50 border-2 border-gray-600'
+                      ? 'bg-[#5E936C]/20 border-2 border-[#5E936C]' 
+                      : 'bg-[#E8FFD7] border-2 border-[#93DA97]'
                   }`}>
-                    <Zap className="w-8 h-8 text-white" />
+                    <Zap className="w-8 h-8 text-[#3E5F44]" />
                   </div>
                   <div className="text-center">
-                    <AutoText tag="h3" className="text-xl font-bold text-white mb-2">
+                    <AutoText tag="h3" className="text-xl font-bold text-[#3E5F44] mb-2">
                       Researcher
                     </AutoText>
-                    <AutoText className="text-sm text-gray-300">
+                    <AutoText className="text-sm text-[#557063]">
                       Create content and explore advanced topics
                     </AutoText>
                   </div>
                   {formData.role === 'researcher' && (
-                    <div className="flex items-center gap-2 text-blue-300">
+                    <div className="flex items-center gap-2 text-[#5E936C]">
                       <Sparkles className="w-4 h-4" />
                       <span className="text-sm font-semibold">Selected</span>
                     </div>
@@ -334,18 +317,18 @@ const Register = () => {
           </div>
 
           {/* Progress Bar */}
-          <div className="bg-white/10 rounded-full h-3 overflow-hidden">
+          <div className="bg-[#f1fbef] rounded-full h-3 overflow-hidden border border-[#e6f6e6]">
             <div 
-              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500 relative"
+              className="h-full bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-full transition-all duration-500 relative"
               style={{ 
                 width: `${
                   formData.name && formData.email && formData.password && formData.confirmPassword && formData.location
                     ? '100' 
-                    : Object.values(formData).filter(v => Array.isArray(v) ? v.length > 0 : v).length * 18
+                    : Math.min(100, Object.values(formData).filter(v => Array.isArray(v) ? v.length > 0 : v).length * 18)
                 }%` 
               }}
             >
-              <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-white/10"></div>
             </div>
           </div>
 
@@ -353,20 +336,19 @@ const Register = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg hover:shadow-xl relative overflow-hidden group"
+            className="w-full bg-[#5E936C] hover:bg-[#3E5F44] disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 shadow-sm relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             <div className="relative flex items-center justify-center space-x-3">
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
-                  <AutoText>Creating Character...</AutoText>
+                  <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                  <AutoText>Creating account...</AutoText>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-6 h-6" />
-                  <AutoText>Join the Adventure!</AutoText>
-                  <Trophy className="w-6 h-6" />
+                  <Sparkles className="w-5 h-5 text-white" />
+                  <AutoText>Get Started</AutoText>
+                  <Trophy className="w-5 h-5 text-white" />
                 </>
               )}
             </div>
@@ -375,11 +357,11 @@ const Register = () => {
 
         {/* Login Link */}
         <div className="relative z-10 mt-8 text-center">
-          <p className="text-white/80 text-lg">
+          <p className="text-[#3E5F44] text-lg">
             <AutoText>Already have an account? </AutoText>
             <Link 
               to="/login" 
-              className="text-purple-300 hover:text-purple-200 font-semibold transition-colors duration-200 hover:underline"
+              className="text-[#5E936C] hover:text-[#3E5F44] font-semibold transition-colors duration-200 hover:underline"
             >
               <AutoText>Continue Your Adventure</AutoText>
             </Link>

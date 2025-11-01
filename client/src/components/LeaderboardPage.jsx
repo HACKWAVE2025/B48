@@ -44,69 +44,47 @@ const LeaderboardPage = () => {
   const getPositionIcon = (position) => {
     switch (position) {
       case 1:
-        return <Crown className="w-6 h-6 text-yellow-400" />;
+        return <Crown className="w-6 h-6 text-yellow-500" />;
       case 2:
-        return <Medal className="w-6 h-6 text-gray-300" />;
+        return <Medal className="w-6 h-6 text-gray-400" />;
       case 3:
-        return <Award className="w-6 h-6 text-amber-500" />;
+        return <Award className="w-6 h-6 text-amber-600" />;
       default:
-        return <Star className="w-5 h-5 text-blue-400" />;
+        return <Star className="w-5 h-5 text-[#5E936C]" />;
     }
   };
 
   const getPositionGradient = (position) => {
     switch (position) {
       case 1:
-        return 'from-yellow-500 to-orange-500';
+        return 'from-yellow-400 to-orange-400';
       case 2:
-        return 'from-gray-400 to-gray-600';
+        return 'from-gray-300 to-gray-400';
       case 3:
-        return 'from-amber-500 to-yellow-500';
+        return 'from-amber-400 to-orange-500';
       default:
-        return 'from-purple-500/30 to-blue-500/30';
+        return 'from-[#E8FFD7] to-[#93DA97]/30';
     }
   };
 
   const getLevelBadgeColor = (level) => {
-    if (level >= 10) return 'from-purple-500 to-pink-500';
-    if (level >= 7) return 'from-yellow-500 to-orange-500';
-    if (level >= 5) return 'from-gray-400 to-gray-600';
-    if (level >= 3) return 'from-amber-500 to-yellow-500';
-    return 'from-blue-500 to-cyan-500';
+    return 'bg-blue-500'; // Consistent blue for all levels
   };
 
   if (loading) {
     return (
-      <div className="w-full h-full flex items-center justify-center p-4 relative">
-        {/* Animated particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`
-              }}
-            >
-              <Star className="w-2 h-2 text-purple-400 opacity-60" />
-            </div>
-          ))}
-        </div>
-
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl w-full max-w-4xl">
-          <div className="h-8 bg-white/20 rounded w-1/3 mb-6 animate-pulse"></div>
+      <div className="w-full min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#E8FFD7] to-white">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm w-full max-w-4xl">
+          <div className="h-8 bg-gray-200 rounded w-1/3 mb-6 animate-pulse"></div>
           <div className="space-y-4">
             {[...Array(10)].map((_, i) => (
-              <div key={i} className="flex items-center space-x-4 p-4 bg-white/10 rounded-xl animate-pulse">
-                <div className="w-12 h-12 bg-white/20 rounded-full"></div>
+              <div key={i} className="flex items-center space-x-4 p-4 bg-[#E8FFD7]/30 rounded-xl animate-pulse">
+                <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
                 <div className="flex-1">
-                  <div className="h-4 bg-white/20 rounded w-1/2 mb-2"></div>
-                  <div className="h-3 bg-white/20 rounded w-1/3"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/3"></div>
                 </div>
-                <div className="h-4 bg-white/20 rounded w-16"></div>
+                <div className="h-4 bg-gray-200 rounded w-16"></div>
               </div>
             ))}
           </div>
@@ -117,13 +95,13 @@ const LeaderboardPage = () => {
 
   if (error) {
     return (
-      <div className="w-full h-full flex items-center justify-center p-4">
-        <div className="backdrop-blur-xl bg-red-500/20 border border-red-500/40 rounded-3xl p-8 shadow-2xl text-center">
-          <Trophy className="w-16 h-16 mx-auto mb-4 text-red-400 opacity-50" />
-          <p className="text-red-200 text-lg mb-4">Error loading leaderboard: {error}</p>
+      <div className="w-full min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#E8FFD7] to-white">
+        <div className="bg-white border border-red-300 rounded-3xl p-8 shadow-sm text-center">
+          <Trophy className="w-16 h-16 mx-auto mb-4 text-red-500 opacity-50" />
+          <p className="text-red-700 text-lg mb-4">Error loading leaderboard: {error}</p>
           <button 
             onClick={fetchLeaderboard}
-            className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 font-medium shadow-lg"
+            className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-200 font-medium shadow-sm"
           >
             Try Again
           </button>
@@ -133,45 +111,27 @@ const LeaderboardPage = () => {
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 relative">
-      {/* Animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(40)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          >
-            <Sparkles className="w-2 h-2 text-purple-400 opacity-60" />
-          </div>
-        ))}
-      </div>
-
-      <div className="w-full max-w-6xl relative z-10">
+    <div className="w-full min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#E8FFD7] to-white">
+      <div className="w-full max-w-6xl">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 mb-8 shadow-2xl relative overflow-hidden">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg">
+              <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h1 className="text-4xl font-bold text-[#3E5F44]">
                   <AutoText>Weekly Leaderboard</AutoText>
                 </h1>
-                <p className="text-white/80 text-lg">
+                <p className="text-[#557063] text-lg">
                   <AutoText>Top learners competing this week</AutoText>
                 </p>
               </div>
             </div>
             <button
               onClick={() => navigate('/dashboard')}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white px-6 py-3 rounded-xl transition-all duration-200 font-medium shadow-sm"
             >
               <AutoText>Back to Dashboard</AutoText>
             </button>
@@ -179,24 +139,26 @@ const LeaderboardPage = () => {
         </div>
 
         {/* Leaderboard */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl shadow-sm overflow-hidden">
           {leaderboard.length === 0 ? (
             <div className="p-12 text-center">
-              <Trophy className="w-20 h-20 mx-auto mb-4 text-purple-400 opacity-50" />
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <Trophy className="w-20 h-20 mx-auto mb-4 text-gray-300" />
+              <h3 className="text-2xl font-bold text-[#3E5F44] mb-2">
                 <AutoText>No Competition Data</AutoText>
               </h3>
-              <p className="text-white/70">
+              <p className="text-[#557063]">
                 <AutoText>Complete some challenges to see the leaderboard!</AutoText>
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-gray-200">
               {leaderboard.map((entry, index) => (
                 <div
                   key={entry.user.id}
-                  className={`p-6 transition-all duration-300 hover:bg-white/5 ${
-                    entry.position <= 3 ? `bg-gradient-to-r ${getPositionGradient(entry.position)}/20` : ''
+                  className={`p-6 transition-all duration-200 ${
+                    entry.position <= 3 
+                      ? `bg-gradient-to-r ${getPositionGradient(entry.position)}` 
+                      : 'hover:bg-[#E8FFD7]/30'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -205,11 +167,11 @@ const LeaderboardPage = () => {
                       <div className="flex items-center space-x-3">
                         <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                           entry.position <= 3 
-                            ? `bg-gradient-to-r ${getPositionGradient(entry.position)} shadow-lg` 
-                            : 'bg-white/10 border border-white/20'
+                            ? 'bg-white/30 backdrop-blur-sm' 
+                            : 'bg-[#E8FFD7] border border-[#93DA97]/30'
                         }`}>
                           <span className={`font-bold text-lg ${
-                            entry.position <= 3 ? 'text-white' : 'text-white/80'
+                            entry.position <= 3 ? 'text-white' : 'text-[#3E5F44]'
                           }`}>
                             #{entry.position}
                           </span>
@@ -219,7 +181,7 @@ const LeaderboardPage = () => {
 
                       {/* User Info */}
                       <div className="flex items-center space-x-4">
-                        <div className="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+                        <div className="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-sm overflow-hidden">
                           {entry.user.avatar ? (
                             <img
                               src={entry.user.avatar}
@@ -234,17 +196,20 @@ const LeaderboardPage = () => {
                         </div>
                         
                         <div>
-                          <h3 className="font-bold text-xl text-white">
+                          <h3 className={`font-bold text-xl ${
+                            entry.position <= 3 ? 'text-white' : 'text-[#3E5F44]'
+                          }`}>
                             {entry.user.name}
                           </h3>
                           <div className="flex items-center space-x-3 mt-1">
-                            <span className={`px-3 py-1 text-sm font-medium rounded-full bg-gradient-to-r ${getLevelBadgeColor(entry.level)} text-white shadow-lg`}>
+                            <span className={`px-3 py-1 text-sm font-medium rounded-full ${getLevelBadgeColor(entry.level)} text-white shadow-sm`}>
                               Level {entry.level}
                             </span>
                             {entry.streak > 0 && (
-                              <span className="flex items-center space-x-1 text-orange-300">
-                                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-                                <span className="text-sm font-medium">{entry.streak} day streak</span>
+                              <span className={`flex items-center space-x-1 ${
+                                entry.position <= 3 ? 'text-white' : 'text-orange-500'
+                              }`}>
+                                <span className="text-sm font-medium">🔥 {entry.streak} day streak</span>
                               </span>
                             )}
                           </div>
@@ -254,17 +219,25 @@ const LeaderboardPage = () => {
 
                     {/* Stats */}
                     <div className="text-right">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <Zap className="w-5 h-5 text-yellow-400" />
-                        <p className="font-bold text-2xl text-white">
+                      <div className="flex items-center justify-end space-x-2 mb-1">
+                        <Zap className="w-5 h-5 text-yellow-500" />
+                        <p className={`font-bold text-2xl ${
+                          entry.position <= 3 ? 'text-white' : 'text-[#3E5F44]'
+                        }`}>
                           {entry.xp.toLocaleString()}
                         </p>
                       </div>
-                      <p className="text-white/70 text-sm">Total XP</p>
+                      <p className={`text-sm ${
+                        entry.position <= 3 ? 'text-white/90' : 'text-[#557063]'
+                      }`}>
+                        Total XP
+                      </p>
                       {entry.badgeCount > 0 && (
                         <div className="flex items-center justify-end space-x-1 mt-2">
                           <Award className="w-4 h-4 text-purple-400" />
-                          <p className="text-purple-300 text-sm font-medium">
+                          <p className={`text-sm font-medium ${
+                            entry.position <= 3 ? 'text-white/90' : 'text-purple-500'
+                          }`}>
                             {entry.badgeCount} badges
                           </p>
                         </div>
@@ -277,8 +250,8 @@ const LeaderboardPage = () => {
           )}
 
           {/* Footer */}
-          <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-t border-white/10 px-6 py-4 text-center">
-            <p className="text-white/80 text-sm">
+          <div className="bg-[#E8FFD7]/30 px-6 py-4 text-center border-t border-[#93DA97]/30">
+            <p className="text-[#557063] text-sm">
               <AutoText>Leaderboard updates weekly. Keep learning to climb the ranks!</AutoText> 🚀
             </p>
           </div>

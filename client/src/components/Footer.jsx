@@ -15,37 +15,37 @@ import AutoText from './AutoText';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 border-t border-purple-500/30">
+    <footer className="bg-gradient-to-r from-[#3E5F44] via-[#5E936C] to-[#3E5F44] border-t border-[#93DA97]/30">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg">
+              <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg shadow-sm">
                 <Gamepad2 className="w-6 h-6 text-white" />
               </div>
               <AutoText 
                 tag="span"
-                className="text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+                className="text-xl font-bold text-white"
               >
                 Rural Quest
               </AutoText>
             </div>
             <AutoText 
               tag="p"
-              className="text-gray-300 text-sm"
+              className="text-[#E8FFD7] text-sm"
             >
               Gamifying rural education for the next generation of learners. Adventure awaits in every lesson!
             </AutoText>
             <div className="flex space-x-3">
-              <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-full p-2">
-                <Trophy className="w-4 h-4 text-yellow-400" />
+              <div className="bg-yellow-500/20 border border-yellow-400/40 rounded-full p-2">
+                <Trophy className="w-4 h-4 text-yellow-300" />
               </div>
-              <div className="bg-blue-500/20 border border-blue-500/40 rounded-full p-2">
-                <Shield className="w-4 h-4 text-blue-400" />
+              <div className="bg-blue-500/20 border border-blue-400/40 rounded-full p-2">
+                <Shield className="w-4 h-4 text-blue-300" />
               </div>
-              <div className="bg-green-500/20 border border-green-500/40 rounded-full p-2">
-                <Zap className="w-4 h-4 text-green-400" />
+              <div className="bg-[#93DA97]/30 border border-[#93DA97]/60 rounded-full p-2">
+                <Zap className="w-4 h-4 text-[#E8FFD7]" />
               </div>
             </div>
           </div>
@@ -53,27 +53,27 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white flex items-center space-x-2">
-              <Star className="w-5 h-5 text-purple-400" />
+              <Star className="w-5 h-5 text-[#93DA97]" />
               <AutoText>Quick Quest</AutoText>
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/dashboard" className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm">
+                <Link to="/dashboard" className="text-[#E8FFD7] hover:text-[#93DA97] transition-colors duration-300 text-sm">
                   <AutoText>Dashboard</AutoText>
                 </Link>
               </li>
               <li>
-                <Link to="/leaderboard" className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm">
+                <Link to="/leaderboard" className="text-[#E8FFD7] hover:text-[#93DA97] transition-colors duration-300 text-sm">
                   <AutoText>Leaderboard</AutoText>
                 </Link>
               </li>
               <li>
-                <Link to="/achievements" className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm">
+                <Link to="/achievements" className="text-[#E8FFD7] hover:text-[#93DA97] transition-colors duration-300 text-sm">
                   <AutoText>Achievements</AutoText>
                 </Link>
               </li>
               <li>
-                <Link to="/profile" className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm">
+                <Link to="/profile" className="text-[#E8FFD7] hover:text-[#93DA97] transition-colors duration-300 text-sm">
                   <AutoText>Profile</AutoText>
                 </Link>
               </li>
@@ -83,49 +83,49 @@ const Footer = () => {
           {/* Learning Areas */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white flex items-center space-x-2">
-              <Shield className="w-5 h-5 text-blue-400" />
+              <Shield className="w-5 h-5 text-blue-300" />
               <AutoText>Learning Realms</AutoText>
             </h3>
             <ul className="space-y-2">
-              <AutoText tag="li" className="text-gray-300 text-sm">Mathematics Kingdom</AutoText>
-              <AutoText tag="li" className="text-gray-300 text-sm">Science Laboratory</AutoText>
-              <AutoText tag="li" className="text-gray-300 text-sm">Language Arts</AutoText>
-              <AutoText tag="li" className="text-gray-300 text-sm">Social Studies</AutoText>
-              <AutoText tag="li" className="text-gray-300 text-sm">Creative Arts</AutoText>
+              <AutoText tag="li" className="text-[#E8FFD7] text-sm">Mathematics Kingdom</AutoText>
+              <AutoText tag="li" className="text-[#E8FFD7] text-sm">Science Laboratory</AutoText>
+              <AutoText tag="li" className="text-[#E8FFD7] text-sm">Language Arts</AutoText>
+              <AutoText tag="li" className="text-[#E8FFD7] text-sm">Social Studies</AutoText>
+              <AutoText tag="li" className="text-[#E8FFD7] text-sm">Creative Arts</AutoText>
             </ul>
           </div>
 
           {/* Connect Section */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white flex items-center space-x-2">
-              <Heart className="w-5 h-5 text-pink-400" />
+              <Heart className="w-5 h-5 text-pink-300" />
               <AutoText>Connect</AutoText>
             </h3>
             <div className="space-y-3">
               <div className="flex space-x-3">
                 <a 
                   href="#" 
-                  className="bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 rounded-lg p-2 transition-all duration-300"
+                  className="bg-[#93DA97]/20 hover:bg-[#93DA97]/30 border border-[#93DA97]/40 rounded-lg p-2 transition-all duration-300"
                 >
-                  <Github className="w-5 h-5 text-purple-400" />
+                  <Github className="w-5 h-5 text-[#E8FFD7]" />
                 </a>
                 <a 
                   href="#" 
-                  className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 rounded-lg p-2 transition-all duration-300"
+                  className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-400/40 rounded-lg p-2 transition-all duration-300"
                 >
-                  <Twitter className="w-5 h-5 text-blue-400" />
+                  <Twitter className="w-5 h-5 text-blue-300" />
                 </a>
                 <a 
                   href="#" 
-                  className="bg-pink-600/20 hover:bg-pink-600/30 border border-pink-500/40 rounded-lg p-2 transition-all duration-300"
+                  className="bg-pink-600/20 hover:bg-pink-600/30 border border-pink-400/40 rounded-lg p-2 transition-all duration-300"
                 >
-                  <Mail className="w-5 h-5 text-pink-400" />
+                  <Mail className="w-5 h-5 text-pink-300" />
                 </a>
               </div>
-              <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-lg p-3">
+              <div className="bg-gradient-to-r from-[#5E936C]/30 to-[#93DA97]/30 border border-[#93DA97]/30 rounded-lg p-3">
                 <AutoText 
                   tag="p"
-                  className="text-sm text-gray-300"
+                  className="text-sm text-[#E8FFD7]"
                 >
                   Join our quest to transform rural education!
                 </AutoText>
@@ -135,21 +135,21 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-purple-500/30">
+        <div className="mt-12 pt-8 border-t border-[#93DA97]/30">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 text-gray-400 text-sm">
+            <div className="flex items-center space-x-2 text-[#E8FFD7]/80 text-sm">
               <AutoText tag="span">© 2025 Rural Quest.</AutoText>
               <AutoText tag="span">All adventures reserved.</AutoText>
-              <Star className="w-4 h-4 text-yellow-400 animate-pulse" />
+              <Star className="w-4 h-4 text-yellow-300 animate-pulse" />
             </div>
             <div className="flex items-center space-x-6 text-sm">
-              <Link to="/privacy" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+              <Link to="/privacy" className="text-[#E8FFD7]/80 hover:text-[#93DA97] transition-colors duration-300">
                 <AutoText>Privacy Policy</AutoText>
               </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+              <Link to="/terms" className="text-[#E8FFD7]/80 hover:text-[#93DA97] transition-colors duration-300">
                 <AutoText>Terms of Service</AutoText>
               </Link>
-              <Link to="/help" className="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+              <Link to="/help" className="text-[#E8FFD7]/80 hover:text-[#93DA97] transition-colors duration-300">
                 <AutoText>Help Center</AutoText>
               </Link>
             </div>

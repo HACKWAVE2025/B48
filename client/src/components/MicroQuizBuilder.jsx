@@ -620,16 +620,16 @@ const MicroQuizBuilder = () => {
   // List View
   if (mode === 'list') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
-              <BookOpen className="text-purple-400" size={40} />
+            <h1 className="text-4xl font-bold text-[#3E5F44] flex items-center gap-3">
+              <BookOpen className="text-[#5E936C]" size={40} />
               Micro-Quiz Builder
             </h1>
             <button
               onClick={() => setMode('create')}
-              className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] text-white rounded-lg transition-all"
             >
               <Plus size={20} />
               Create New Quiz
@@ -638,22 +638,22 @@ const MicroQuizBuilder = () => {
 
           {/* My Quizzes */}
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">My Quizzes</h2>
+            <h2 className="text-2xl font-bold text-[#3E5F44] mb-4">My Quizzes</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {myQuizzes.map(quiz => (
-                <div key={quiz._id} className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
+                <div key={quiz._id} className="bg-white rounded-lg p-6 border border-[#93DA97]/30 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white">{quiz.title}</h3>
+                    <h3 className="text-xl font-bold text-[#3E5F44]">{quiz.title}</h3>
                     <span className={`px-2 py-1 rounded text-xs ${
-                      quiz.difficulty === 'easy' ? 'bg-green-500/20 text-green-300' :
-                      quiz.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-300' :
-                      'bg-red-500/20 text-red-300'
+                      quiz.difficulty === 'easy' ? 'bg-green-100 text-green-700' :
+                      quiz.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
                     }`}>
                       {quiz.difficulty}
                     </span>
                   </div>
-                  <p className="text-gray-400 text-sm mb-3">{quiz.description}</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                  <p className="text-[#557063] text-sm mb-3">{quiz.description}</p>
+                  <div className="flex items-center gap-4 text-sm text-[#557063] mb-4">
                     <span>{subjects.find(s => s.value === quiz.subject)?.icon} {quiz.subject}</span>
                     <span>📝 {quiz.questions.length} questions</span>
                     <span>👥 {quiz.totalAttempts} attempts</span>
@@ -661,14 +661,14 @@ const MicroQuizBuilder = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleTakeQuiz(quiz._id)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] text-white rounded-lg transition-all"
                     >
                       <Play size={16} />
                       Take Quiz
                     </button>
                     <button
                       onClick={() => handleShareQuiz(quiz)}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
                       title="Share quiz"
                     >
                       <Share2 size={16} />
@@ -681,29 +681,29 @@ const MicroQuizBuilder = () => {
 
           {/* Available Quizzes */}
           <div>
-            <h2 className="text-2xl font-bold text-white mb-4">Available Quizzes</h2>
+            <h2 className="text-2xl font-bold text-[#3E5F44] mb-4">Available Quizzes</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {availableQuizzes.filter(q => q.createdBy._id !== user._id).map(quiz => (
-                <div key={quiz._id} className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-blue-500/30">
+                <div key={quiz._id} className="bg-white rounded-lg p-6 border border-blue-300 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white">{quiz.title}</h3>
+                    <h3 className="text-xl font-bold text-[#3E5F44]">{quiz.title}</h3>
                     <span className={`px-2 py-1 rounded text-xs ${
-                      quiz.difficulty === 'easy' ? 'bg-green-500/20 text-green-300' :
-                      quiz.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-300' :
-                      'bg-red-500/20 text-red-300'
+                      quiz.difficulty === 'easy' ? 'bg-green-100 text-green-700' :
+                      quiz.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
                     }`}>
                       {quiz.difficulty}
                     </span>
                   </div>
-                  <p className="text-gray-400 text-sm mb-2">By: {quiz.createdBy.name}</p>
-                  <p className="text-gray-400 text-sm mb-3">{quiz.description}</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                  <p className="text-[#557063] text-sm mb-2">By: {quiz.createdBy.name}</p>
+                  <p className="text-[#557063] text-sm mb-3">{quiz.description}</p>
+                  <div className="flex items-center gap-4 text-sm text-[#557063] mb-4">
                     <span>{subjects.find(s => s.value === quiz.subject)?.icon} {quiz.subject}</span>
                     <span>📝 {quiz.questions.length} questions</span>
                   </div>
                   <button
                     onClick={() => handleTakeQuiz(quiz._id)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
                   >
                     <Play size={16} />
                     Take Quiz
@@ -728,40 +728,40 @@ const MicroQuizBuilder = () => {
   // Create View
   if (mode === 'create') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold text-white">Create Micro-Quiz</h1>
+            <h1 className="text-4xl font-bold text-[#3E5F44]">Create Micro-Quiz</h1>
             <button
               onClick={() => {
                 resetBuilder();
                 setMode('list');
               }}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-[#3E5F44] rounded-lg transition-colors"
             >
               Cancel
             </button>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30">
+          <div className="bg-white backdrop-blur-sm rounded-lg p-8 border border-[#93DA97]/30 shadow-md">
             {/* Quiz Details */}
             <div className="mb-6">
-              <label className="block text-white font-semibold mb-2">Quiz Title*</label>
+              <label className="block text-[#3E5F44] font-semibold mb-2">Quiz Title*</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                className="w-full px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
                 placeholder="Enter quiz title"
               />
             </div>
 
             <div className="mb-6">
-              <label className="block text-white font-semibold mb-2">Description</label>
+              <label className="block text-[#3E5F44] font-semibold mb-2">Description</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                className="w-full px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
                 placeholder="Enter quiz description"
                 rows="3"
               />
@@ -770,15 +770,15 @@ const MicroQuizBuilder = () => {
             {/* Student Type Selection - Only for students */}
             {user?.role === 'student' && (
               <div className="mb-6">
-                <label className="block text-white font-semibold mb-2">Student Type*</label>
+                <label className="block text-[#3E5F44] font-semibold mb-2">Student Type*</label>
                 <div className="flex gap-4">
                   <button
                     type="button"
                     onClick={() => setStudentType('school')}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
                       studentType === 'school'
-                        ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
-                        : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-purple-500/50'
+                        ? 'bg-[#93DA97]/40 border-[#5E936C] text-[#3E5F44] shadow-lg'
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]'
                     }`}
                   >
                     <div className="text-center">
@@ -791,8 +791,8 @@ const MicroQuizBuilder = () => {
                     onClick={() => setStudentType('college')}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
                       studentType === 'college'
-                        ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
-                        : 'bg-slate-700/50 border-slate-600 text-gray-300 hover:border-purple-500/50'
+                        ? 'bg-[#93DA97]/40 border-[#5E936C] text-[#3E5F44] shadow-lg'
+                        : 'bg-white border-[#93DA97]/50 text-[#557063] hover:border-[#5E936C]'
                     }`}
                   >
                     <div className="text-center">
@@ -806,7 +806,7 @@ const MicroQuizBuilder = () => {
 
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
-                <label className="block text-white font-semibold mb-2">Subject*</label>
+                <label className="block text-[#3E5F44] font-semibold mb-2">Subject*</label>
                 <select
                   value={subject}
                   onChange={(e) => {
@@ -818,7 +818,7 @@ const MicroQuizBuilder = () => {
                       setSubject(e.target.value);
                     }
                   }}
-                  className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                  className="w-full px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
                 >
                   <option value="">Select Subject</option>
                   {subjects.map(s => (
@@ -829,11 +829,11 @@ const MicroQuizBuilder = () => {
               </div>
 
               <div>
-                <label className="block text-white font-semibold mb-2">Difficulty*</label>
+                <label className="block text-[#3E5F44] font-semibold mb-2">Difficulty*</label>
                 <select
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                  className="w-full px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
                 >
                   {difficulties.map(d => (
                     <option key={d.value} value={d.value}>{d.label}</option>
@@ -845,7 +845,7 @@ const MicroQuizBuilder = () => {
             {/* Custom Subject Input */}
             {showCustomInput && (
               <div className="mb-6">
-                <label className="block text-white font-semibold mb-2">Custom Subject*</label>
+                <label className="block text-[#3E5F44] font-semibold mb-2">Custom Subject*</label>
                 <div className="flex gap-3">
                   <input
                     type="text"
@@ -860,7 +860,7 @@ const MicroQuizBuilder = () => {
                         }
                       }
                     }}
-                    className="flex-1 px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                    className="flex-1 px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
                     placeholder="Enter your custom subject (e.g., Robotics, Creative Writing)"
                     autoFocus
                   />
@@ -873,7 +873,7 @@ const MicroQuizBuilder = () => {
                       }
                     }}
                     disabled={!customSubject.trim()}
-                    className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-6 py-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Add
                   </button>
@@ -883,7 +883,7 @@ const MicroQuizBuilder = () => {
                       setShowCustomInput(false);
                       setCustomSubject('');
                     }}
-                    className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
+                    className="px-4 py-2 bg-gray-100 text-[#3E5F44] rounded-lg hover:bg-gray-200 transition-colors"
                   >
                     Cancel
                   </button>
@@ -892,11 +892,11 @@ const MicroQuizBuilder = () => {
             )}
 
             <div className="mb-6">
-              <label className="block text-white font-semibold mb-2">Number of Questions*</label>
+              <label className="block text-[#3E5F44] font-semibold mb-2">Number of Questions*</label>
               <select
                 value={questionCount}
                 onChange={(e) => setQuestionCount(Number(e.target.value))}
-                className="w-full px-4 py-2 bg-slate-700 text-white rounded-lg border border-purple-500/30 focus:border-purple-500 focus:outline-none"
+                className="w-full px-4 py-2 bg-[#E8FFD7]/30 text-[#3E5F44] rounded-lg border border-[#93DA97]/50 focus:border-[#5E936C] focus:outline-none"
               >
                 {[5, 6, 7, 8, 9, 10].map(num => (
                   <option key={num} value={num}>{num} questions</option>
@@ -905,12 +905,12 @@ const MicroQuizBuilder = () => {
             </div>
 
             <div className="mb-6">
-              <label className="flex items-center gap-2 text-white">
+              <label className="flex items-center gap-2 text-[#3E5F44]">
                 <input
                   type="checkbox"
                   checked={isPublic}
                   onChange={(e) => setIsPublic(e.target.checked)}
-                  className="w-4 h-4"
+                  className="w-4 h-4 accent-[#5E936C]"
                 />
                 Make this quiz public
               </label>
@@ -922,7 +922,7 @@ const MicroQuizBuilder = () => {
                 <button
                   onClick={generateQuestionsWithAI}
                   disabled={generatingQuestions || !title.trim()}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:shadow-lg text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg"
                 >
                   {generatingQuestions ? (
                     <>
@@ -936,7 +936,7 @@ const MicroQuizBuilder = () => {
                     </>
                   )}
                 </button>
-                <p className="text-sm text-gray-400 mt-2 text-center">
+                <p className="text-sm text-[#557063] mt-2 text-center">
                   AI will generate {questionCount} high-quality questions based on your subject and difficulty
                 </p>
               </div>
@@ -946,10 +946,10 @@ const MicroQuizBuilder = () => {
             {questions.length > 0 && (
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-2xl font-bold text-white">AI Generated Questions ({questions.length})</h2>
+                  <h2 className="text-2xl font-bold text-[#3E5F44]">AI Generated Questions ({questions.length})</h2>
                   <button
                     onClick={() => setQuestions([])}
-                    className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
                   >
                     <Trash2 size={16} />
                     Clear All & Regenerate
@@ -957,14 +957,14 @@ const MicroQuizBuilder = () => {
                 </div>
 
                 {questions.map((q, qIndex) => (
-                  <div key={qIndex} className="bg-slate-700/50 rounded-lg p-6 mb-4 border border-purple-500/20">
+                  <div key={qIndex} className="bg-[#E8FFD7]/30 rounded-lg p-6 mb-4 border border-[#93DA97]/50">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-white">Question {qIndex + 1}</h3>
+                      <h3 className="text-xl font-bold text-[#3E5F44]">Question {qIndex + 1}</h3>
                       <div className="flex gap-2">
                         <button
                           onClick={() => regenerateQuestion(qIndex)}
                           disabled={generatingQuestions}
-                          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors disabled:opacity-50"
+                          className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded transition-colors disabled:opacity-50"
                           title="Regenerate this question"
                         >
                           <Sparkles size={14} />
@@ -972,7 +972,7 @@ const MicroQuizBuilder = () => {
                         {questions.length > 5 && (
                           <button
                             onClick={() => removeQuestion(qIndex)}
-                            className="text-red-400 hover:text-red-300"
+                            className="text-red-500 hover:text-red-600"
                             title="Remove this question"
                           >
                             <Trash2 size={20} />
@@ -982,7 +982,7 @@ const MicroQuizBuilder = () => {
                     </div>
 
                     <div className="mb-4">
-                      <p className="text-white text-lg mb-3">{q.question}</p>
+                      <p className="text-[#3E5F44] text-lg mb-3">{q.question}</p>
                     </div>
 
                     <div className="space-y-2">
@@ -991,14 +991,14 @@ const MicroQuizBuilder = () => {
                           key={oIndex}
                           className={`flex items-center gap-3 px-4 py-2 rounded-lg ${
                             q.correctAnswer === opt
-                              ? 'bg-green-600/20 border border-green-500/50'
-                              : 'bg-slate-600/50 border border-slate-500/30'
+                              ? 'bg-green-100 border border-green-400'
+                              : 'bg-white border border-[#93DA97]/50'
                           }`}
                         >
-                          <span className="text-purple-400 font-bold">{String.fromCharCode(65 + oIndex)}.</span>
-                          <span className="text-white">{opt}</span>
+                          <span className="text-[#5E936C] font-bold">{String.fromCharCode(65 + oIndex)}.</span>
+                          <span className="text-[#3E5F44]">{opt}</span>
                           {q.correctAnswer === opt && (
-                            <span className="ml-auto text-green-400 text-sm font-semibold">✓ Correct</span>
+                            <span className="ml-auto text-green-600 text-sm font-semibold">✓ Correct</span>
                           )}
                         </div>
                       ))}
@@ -1015,14 +1015,14 @@ const MicroQuizBuilder = () => {
                   resetBuilder();
                   setMode('list');
                 }}
-                className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-[#3E5F44] rounded-lg transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveQuiz}
                 disabled={loading}
-                className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:shadow-lg text-white rounded-lg transition-all disabled:opacity-50"
               >
                 <Save size={20} />
                 {loading ? 'Saving...' : 'Save Quiz'}
@@ -1039,26 +1039,26 @@ const MicroQuizBuilder = () => {
     const question = currentQuiz.questions[currentQuestionIndex];
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-6">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30">
+          <div className="bg-white backdrop-blur-sm rounded-lg p-8 border border-[#93DA97]/30 shadow-md">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-3xl font-bold text-white">{currentQuiz.title}</h1>
-              <div className="text-2xl font-bold text-purple-400">
+              <h1 className="text-3xl font-bold text-[#3E5F44]">{currentQuiz.title}</h1>
+              <div className="text-2xl font-bold text-[#5E936C]">
                 ⏱️ {formatTime(timeLeft)}
               </div>
             </div>
 
             {/* Progress */}
             <div className="mb-6">
-              <div className="flex justify-between text-sm text-gray-400 mb-2">
+              <div className="flex justify-between text-sm text-[#557063] mb-2">
                 <span>Question {currentQuestionIndex + 1} of {currentQuiz.questions.length}</span>
                 <span>{Math.round(((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100)}% Complete</span>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2">
+              <div className="w-full bg-[#E8FFD7] rounded-full h-2">
                 <div
-                  className="bg-purple-500 h-2 rounded-full transition-all duration-300"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100}%` }}
                 />
               </div>
@@ -1066,7 +1066,7 @@ const MicroQuizBuilder = () => {
 
             {/* Question */}
             <div className="mb-6">
-              <h2 className="text-2xl text-white mb-6">{question.question}</h2>
+              <h2 className="text-2xl text-[#3E5F44] mb-6">{question.question}</h2>
               
               <div className="space-y-3">
                 {question.options.map((option, index) => (
@@ -1075,12 +1075,12 @@ const MicroQuizBuilder = () => {
                     onClick={() => handleAnswerSelect(option)}
                     className={`w-full text-left px-6 py-4 rounded-lg border-2 transition-all ${
                       userAnswers[currentQuestionIndex] === option
-                        ? 'border-purple-500 bg-purple-500/20 text-white'
-                        : 'border-slate-600 bg-slate-700/50 text-gray-300 hover:border-purple-400'
+                        ? 'border-[#5E936C] bg-[#93DA97]/20 text-[#3E5F44] shadow-md'
+                        : 'border-[#93DA97]/50 bg-[#E8FFD7]/20 text-[#557063] hover:border-[#5E936C]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl font-bold text-purple-400">{String.fromCharCode(65 + index)}.</span>
+                      <span className="text-xl font-bold text-[#5E936C]">{String.fromCharCode(65 + index)}.</span>
                       <span>{option}</span>
                     </div>
                   </button>
@@ -1093,7 +1093,7 @@ const MicroQuizBuilder = () => {
               <button
                 onClick={() => setCurrentQuestionIndex(prev => prev - 1)}
                 disabled={currentQuestionIndex === 0}
-                className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-[#3E5F44] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
@@ -1101,14 +1101,14 @@ const MicroQuizBuilder = () => {
               {currentQuestionIndex === currentQuiz.questions.length - 1 ? (
                 <button
                   onClick={() => handleSubmitQuiz(false)}
-                  className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-semibold"
+                  className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-semibold shadow-md"
                 >
                   Submit Quiz
                 </button>
               ) : (
                 <button
                   onClick={() => setCurrentQuestionIndex(prev => prev + 1)}
-                  className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                  className="px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:shadow-lg text-white rounded-lg transition-all"
                 >
                   Next
                 </button>
@@ -1123,23 +1123,23 @@ const MicroQuizBuilder = () => {
   // Results View
   if (mode === 'take' && results) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-6">
         {newBadges.length > 0 && (
           <BadgeNotification badges={newBadges} onClose={() => setNewBadges([])} />
         )}
         
         <div className="max-w-4xl mx-auto">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 mb-6">
+          <div className="bg-white backdrop-blur-sm rounded-lg p-8 border border-[#93DA97]/30 shadow-md mb-6">
             {/* Auto-Play Info Banner */}
             {autoPlayEnabled && !hasAutoPlayed && playingExplanationIndex === null && (
-              <div className="mb-6 bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
-                <div className="flex items-center justify-center gap-2 text-blue-300">
+              <div className="mb-6 bg-blue-50 border border-blue-300 rounded-lg p-4">
+                <div className="flex items-center justify-center gap-2 text-blue-700">
                   <Volume2 size={20} />
                   <p className="text-sm">
                     🎧 Voice explanations will start automatically in a moment... 
                     <button 
                       onClick={stopAllSpeech}
-                      className="ml-2 underline hover:text-blue-200"
+                      className="ml-2 underline hover:text-blue-800 font-semibold"
                     >
                       Skip
                     </button>
@@ -1149,8 +1149,8 @@ const MicroQuizBuilder = () => {
             )}
 
             {playingExplanationIndex !== null && (
-              <div className="mb-6 bg-purple-900/30 border border-purple-500/50 rounded-lg p-4">
-                <div className="flex items-center justify-center gap-2 text-purple-300">
+              <div className="mb-6 bg-[#93DA97]/20 border border-[#5E936C]/50 rounded-lg p-4">
+                <div className="flex items-center justify-center gap-2 text-[#3E5F44]">
                   <Volume2 size={20} className="animate-pulse" />
                   <p className="text-sm">
                     🔊 Currently playing explanation {playingExplanationIndex + 1}...
@@ -1161,18 +1161,18 @@ const MicroQuizBuilder = () => {
 
             {/* Score Summary */}
             <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-white mb-4">Quiz Complete! 🎉</h1>
+              <h1 className="text-4xl font-bold text-[#3E5F44] mb-4">Quiz Complete! 🎉</h1>
               <div className={`text-6xl font-bold ${getScoreColor(results.score)} mb-4`}>
                 {results.score}%
               </div>
-              <p className="text-xl text-gray-300 mb-2">
+              <p className="text-xl text-[#3E5F44] mb-2">
                 {results.correctAnswers} out of {results.totalQuestions} correct
               </p>
-              <p className="text-gray-400">Time taken: {formatTime(results.timeTaken)}</p>
+              <p className="text-[#557063]">Time taken: {formatTime(results.timeTaken)}</p>
               
               {results.xpAwarded > 0 && (
-                <div className="mt-4 inline-block px-6 py-3 bg-purple-600/20 border border-purple-500/30 rounded-lg">
-                  <span className="text-purple-300 font-semibold">+{results.xpAwarded} XP Earned!</span>
+                <div className="mt-4 inline-block px-6 py-3 bg-[#93DA97]/20 border border-[#5E936C]/50 rounded-lg">
+                  <span className="text-[#3E5F44] font-semibold">+{results.xpAwarded} XP Earned!</span>
                 </div>
               )}
             </div>
@@ -1182,7 +1182,7 @@ const MicroQuizBuilder = () => {
               <div className="flex justify-center mb-6">
                 <button
                   onClick={toggleVoicePlayback}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
                 >
                   {isPlayingVoice ? <VolumeX size={20} /> : <Volume2 size={20} />}
                   {isPlayingVoice ? 'Stop' : 'Play'} Voice Summary
@@ -1194,7 +1194,7 @@ const MicroQuizBuilder = () => {
             <div className="flex justify-center gap-4 mb-6 flex-wrap">
               <button
                 onClick={() => setShowExplanations(!showExplanations)}
-                className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-[#3E5F44] rounded-lg transition-colors"
               >
                 {showExplanations ? 'Hide' : 'Show'} Explanations
               </button>
@@ -1203,8 +1203,8 @@ const MicroQuizBuilder = () => {
                 onClick={() => setAutoPlayEnabled(!autoPlayEnabled)}
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                   autoPlayEnabled 
-                    ? 'bg-green-600 hover:bg-green-700' 
-                    : 'bg-gray-600 hover:bg-gray-700'
+                    ? 'bg-green-500 hover:bg-green-600' 
+                    : 'bg-gray-400 hover:bg-gray-500'
                 } text-white`}
               >
                 {autoPlayEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
@@ -1214,7 +1214,7 @@ const MicroQuizBuilder = () => {
               {playingExplanationIndex !== null && (
                 <button
                   onClick={stopAllSpeech}
-                  className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors animate-pulse"
+                  className="flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors animate-pulse"
                 >
                   <VolumeX size={20} />
                   Stop Voice
@@ -1224,7 +1224,7 @@ const MicroQuizBuilder = () => {
               {!hasAutoPlayed && autoPlayEnabled && (
                 <button
                   onClick={() => autoPlayExplanations(results)}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
                 >
                   <Play size={20} />
                   Play All Explanations
@@ -1235,18 +1235,18 @@ const MicroQuizBuilder = () => {
 
           {/* AI Performance Analysis */}
           {results.suggestions && (
-            <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 mb-6">
+            <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] backdrop-blur-sm rounded-lg p-8 border border-[#93DA97]/50 shadow-md mb-6">
               <div className="flex items-center gap-3 mb-6">
-                <div className="bg-purple-600 p-3 rounded-full">
-                  <Sparkles className="text-white" size={24} />
+                <div className="bg-white p-3 rounded-full">
+                  <Sparkles className="text-[#5E936C]" size={24} />
                 </div>
                 <h2 className="text-3xl font-bold text-white">AI Performance Analysis</h2>
               </div>
 
               {/* Overall Assessment */}
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-purple-300 mb-3">📊 Overall Assessment</h3>
-                <p className="text-white text-lg leading-relaxed bg-slate-800/50 p-4 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-3">📊 Overall Assessment</h3>
+                <p className="text-white text-lg leading-relaxed bg-white/20 p-4 rounded-lg">
                   {results.suggestions.overallAssessment}
                 </p>
               </div>
@@ -1254,12 +1254,12 @@ const MicroQuizBuilder = () => {
               {/* Strengths */}
               {results.suggestions.strengths && results.suggestions.strengths.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-green-300 mb-3">💪 Your Strengths</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">💪 Your Strengths</h3>
                   <div className="space-y-2">
                     {results.suggestions.strengths.map((strength, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-green-900/20 p-4 rounded-lg border border-green-500/30">
-                        <CheckCircle className="text-green-400 flex-shrink-0 mt-1" size={20} />
-                        <p className="text-white">{strength}</p>
+                      <div key={index} className="flex items-start gap-3 bg-green-100 p-4 rounded-lg border border-green-300">
+                        <CheckCircle className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                        <p className="text-green-800">{strength}</p>
                       </div>
                     ))}
                   </div>
@@ -1269,12 +1269,12 @@ const MicroQuizBuilder = () => {
               {/* Weak Areas */}
               {results.suggestions.weakAreas && results.suggestions.weakAreas.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-yellow-300 mb-3">🎯 Areas to Focus On</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">🎯 Areas to Focus On</h3>
                   <div className="space-y-2">
                     {results.suggestions.weakAreas.map((area, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-yellow-900/20 p-4 rounded-lg border border-yellow-500/30">
-                        <div className="text-yellow-400 flex-shrink-0 mt-1 font-bold">{index + 1}.</div>
-                        <p className="text-white">{area}</p>
+                      <div key={index} className="flex items-start gap-3 bg-yellow-100 p-4 rounded-lg border border-yellow-300">
+                        <div className="text-yellow-700 flex-shrink-0 mt-1 font-bold">{index + 1}.</div>
+                        <p className="text-yellow-800">{area}</p>
                       </div>
                     ))}
                   </div>
@@ -1284,12 +1284,12 @@ const MicroQuizBuilder = () => {
               {/* Recommendations */}
               {results.suggestions.recommendations && results.suggestions.recommendations.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-blue-300 mb-3">📚 Study Recommendations</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">📚 Study Recommendations</h3>
                   <div className="space-y-2">
                     {results.suggestions.recommendations.map((rec, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
-                        <BookOpen className="text-blue-400 flex-shrink-0 mt-1" size={20} />
-                        <p className="text-white">{rec}</p>
+                      <div key={index} className="flex items-start gap-3 bg-blue-100 p-4 rounded-lg border border-blue-300">
+                        <BookOpen className="text-blue-600 flex-shrink-0 mt-1" size={20} />
+                        <p className="text-blue-800">{rec}</p>
                       </div>
                     ))}
                   </div>
@@ -1299,11 +1299,11 @@ const MicroQuizBuilder = () => {
               {/* Next Steps */}
               {results.suggestions.nextSteps && results.suggestions.nextSteps.length > 0 && (
                 <div>
-                  <h3 className="text-xl font-bold text-purple-300 mb-3">🚀 Next Steps</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">🚀 Next Steps</h3>
                   <div className="space-y-2">
                     {results.suggestions.nextSteps.map((step, index) => (
-                      <div key={index} className="flex items-start gap-3 bg-purple-900/20 p-4 rounded-lg border border-purple-500/30">
-                        <div className="bg-purple-600 text-white flex-shrink-0 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+                      <div key={index} className="flex items-start gap-3 bg-white/20 p-4 rounded-lg border border-white/40">
+                        <div className="bg-white text-[#5E936C] flex-shrink-0 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
                           {index + 1}
                         </div>
                         <p className="text-white">{step}</p>
@@ -1319,44 +1319,44 @@ const MicroQuizBuilder = () => {
           {showExplanations && (
             <div className="space-y-4 mb-6">
               {results.results.map((result, index) => (
-                <div key={index} className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
+                <div key={index} className="bg-white backdrop-blur-sm rounded-lg p-6 border border-[#93DA97]/30 shadow-md">
                   <div className="flex items-start gap-3 mb-3">
                     {result.isCorrect ? (
-                      <CheckCircle className="text-green-400 flex-shrink-0 mt-1" size={24} />
+                      <CheckCircle className="text-green-500 flex-shrink-0 mt-1" size={24} />
                     ) : (
-                      <XCircle className="text-red-400 flex-shrink-0 mt-1" size={24} />
+                      <XCircle className="text-red-500 flex-shrink-0 mt-1" size={24} />
                     )}
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3 className="text-xl font-bold text-[#3E5F44] mb-2">
                         Question {index + 1}
                       </h3>
-                      <p className="text-gray-300 mb-4">{result.question}</p>
+                      <p className="text-[#557063] mb-4">{result.question}</p>
                       
                       <div className="space-y-2 mb-4">
                         <div className="flex items-center gap-2">
-                          <span className="text-gray-400">Your answer:</span>
-                          <span className={result.isCorrect ? 'text-green-400' : 'text-red-400'}>
+                          <span className="text-[#557063]">Your answer:</span>
+                          <span className={result.isCorrect ? 'text-green-600' : 'text-red-600'}>
                             {result.userAnswer}
                           </span>
                         </div>
                         {!result.isCorrect && (
                           <div className="flex items-center gap-2">
-                            <span className="text-gray-400">Correct answer:</span>
-                            <span className="text-green-400">{result.correctAnswer}</span>
+                            <span className="text-[#557063]">Correct answer:</span>
+                            <span className="text-green-600">{result.correctAnswer}</span>
                           </div>
                         )}
                       </div>
 
                       {result.explanation && (
-                        <div className="bg-slate-700/50 rounded-lg p-4 border border-purple-500/20">
+                        <div className="bg-[#E8FFD7]/50 rounded-lg p-4 border border-[#93DA97]/50">
                           <div className="flex items-center justify-between mb-2">
-                            <p className="text-sm font-semibold text-purple-300">AI Explanation:</p>
+                            <p className="text-sm font-semibold text-[#5E936C]">AI Explanation:</p>
                             <button
                               onClick={() => playExplanation(result.explanation, index)}
                               className={`flex items-center gap-1 px-3 py-1 rounded-lg transition-colors ${
                                 playingExplanationIndex === index
-                                  ? 'bg-red-600 hover:bg-red-700 text-white'
-                                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                  ? 'bg-red-500 hover:bg-red-600 text-white'
+                                  : 'bg-blue-500 hover:bg-blue-600 text-white'
                               }`}
                               title={playingExplanationIndex === index ? 'Stop explanation' : 'Play explanation'}
                             >
@@ -1373,7 +1373,7 @@ const MicroQuizBuilder = () => {
                               )}
                             </button>
                           </div>
-                          <p className="text-gray-300">{result.explanation}</p>
+                          <p className="text-[#3E5F44]">{result.explanation}</p>
                         </div>
                       )}
                     </div>
@@ -1391,13 +1391,13 @@ const MicroQuizBuilder = () => {
                 setCurrentQuiz(null);
                 setResults(null);
               }}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:shadow-lg text-white rounded-lg transition-all"
             >
               Back to Quizzes
             </button>
             <button
               onClick={() => handleTakeQuiz(currentQuiz._id)}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
             >
               Retake Quiz
             </button>

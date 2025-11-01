@@ -67,30 +67,30 @@ const JoinQuizRoomModal = ({ isOpen, onClose, onRoomJoined, initialRoomId = '' }
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-purple-500/30 rounded-2xl w-full max-w-md shadow-2xl">
+      <div className="bg-white border border-[#93DA97]/30 rounded-2xl w-full max-w-md shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-purple-500/20">
+        <div className="flex items-center justify-between p-6 border-b border-[#93DA97]/30 bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-t-2xl">
           <h2 className="text-xl font-bold text-white">Join Quiz Room</h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-white/80 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
           {error && (
             <div className="bg-red-500/20 border border-red-500/40 rounded-lg p-3">
-              <p className="text-red-200 text-sm">{error}</p>
+              <p className="text-red-600 text-sm">{error}</p>
             </div>
           )}
 
           <div>
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-[#3E5F44] font-medium mb-2">
               <div className="flex items-center space-x-2">
-                <Hash className="w-4 h-4 text-purple-400" />
+                <Hash className="w-4 h-4 text-[#5E936C]" />
                 <span>Room ID</span>
               </div>
             </label>
@@ -100,16 +100,16 @@ const JoinQuizRoomModal = ({ isOpen, onClose, onRoomJoined, initialRoomId = '' }
               value={formData.roomId}
               onChange={handleInputChange}
               placeholder="Enter room ID (e.g., ABC12345)"
-              className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors font-mono"
+              className="w-full bg-white border border-[#93DA97]/50 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] transition-colors font-mono"
               required
               maxLength={8}
             />
           </div>
 
           <div>
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-[#3E5F44] font-medium mb-2">
               <div className="flex items-center space-x-2">
-                <Users className="w-4 h-4 text-purple-400" />
+                <Users className="w-4 h-4 text-[#5E936C]" />
                 <span>Your Name</span>
               </div>
             </label>
@@ -119,7 +119,7 @@ const JoinQuizRoomModal = ({ isOpen, onClose, onRoomJoined, initialRoomId = '' }
               value={formData.participantName}
               onChange={handleNameChange}
               placeholder="Enter your name"
-              className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+              className="w-full bg-white border border-[#93DA97]/50 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] transition-colors"
               required
               maxLength={30}
             />
@@ -129,14 +129,14 @@ const JoinQuizRoomModal = ({ isOpen, onClose, onRoomJoined, initialRoomId = '' }
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              className="flex-1 bg-white border border-[#93DA97]/50 hover:bg-[#E8FFD7] text-[#3E5F44] font-medium py-3 px-4 rounded-lg transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+              className="flex-1 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
             >
               {isLoading ? (
                 <>

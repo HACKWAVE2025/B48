@@ -56,31 +56,31 @@ const ShareModal = ({ isOpen, onClose, room }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 border border-white/20 rounded-2xl max-w-md w-full">
+      <div className="bg-white border border-[#93DA97]/30 rounded-2xl max-w-md w-full shadow-xl">
         {/* Header */}
-        <div className="p-6 border-b border-white/20 flex items-center justify-between">
+        <div className="p-6 border-b border-[#93DA97]/30 flex items-center justify-between bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-t-2xl">
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg">
+            <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
               <Share2 className="w-5 h-5 text-white" />
             </div>
             <h2 className="text-xl font-bold text-white">Share Room</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-white/80 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
           {/* Room Info */}
-          <div className="bg-white/10 rounded-lg p-4">
-            <h3 className="text-white font-medium mb-1">{room.name}</h3>
-            <p className="text-white/60 text-sm">{room.subject}</p>
+          <div className="bg-white border border-[#93DA97]/30 rounded-lg p-4">
+            <h3 className="text-[#3E5F44] font-medium mb-1">{room.name}</h3>
+            <p className="text-[#557063] text-sm">{room.subject}</p>
             {room.description && (
-              <p className="text-white/80 text-sm mt-2">{room.description}</p>
+              <p className="text-[#557063] text-sm mt-2">{room.description}</p>
             )}
           </div>
 
@@ -88,17 +88,17 @@ const ShareModal = ({ isOpen, onClose, room }) => {
           <div className="space-y-4">
             {/* Copy Link */}
             <div>
-              <label className="block text-white font-medium mb-2">Share Link</label>
+              <label className="block text-[#3E5F44] font-medium mb-2">Share Link</label>
               <div className="flex space-x-2">
                 <input
                   type="text"
                   value={shareUrl}
                   readOnly
-                  className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm"
+                  className="flex-1 bg-white border border-[#93DA97]/50 rounded-lg px-3 py-2 text-[#3E5F44] text-sm focus:outline-none focus:border-[#5E936C]"
                 />
                 <button
                   onClick={handleCopyLink}
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2"
+                  className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] text-white px-4 py-2 rounded-lg transition-all flex items-center space-x-2"
                 >
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   <span className="text-sm">{copied ? 'Copied!' : 'Copy'}</span>
@@ -110,7 +110,7 @@ const ShareModal = ({ isOpen, onClose, room }) => {
             {navigator.share && (
               <button
                 onClick={handleNativeShare}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 <Share2 className="w-5 h-5" />
                 <span>Share via Device</span>
@@ -119,13 +119,13 @@ const ShareModal = ({ isOpen, onClose, room }) => {
 
             {/* Social Share Options */}
             <div>
-              <label className="block text-white font-medium mb-3">Share via</label>
+              <label className="block text-[#3E5F44] font-medium mb-3">Share via</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => handleShare('email')}
-                  className="bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg p-3 flex items-center space-x-2 text-white transition-all duration-200"
+                  className="bg-white border border-[#93DA97]/50 hover:bg-[#E8FFD7] rounded-lg p-3 flex items-center space-x-2 text-[#3E5F44] transition-all duration-200"
                 >
-                  <Mail className="w-5 h-5" />
+                  <Mail className="w-5 h-5 text-gray-600" />
                   <span className="text-sm">Email</span>
                 </button>
                 
@@ -159,7 +159,7 @@ const ShareModal = ({ isOpen, onClose, room }) => {
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="w-full bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+            className="w-full bg-white border border-[#93DA97]/50 hover:bg-[#E8FFD7] text-[#3E5F44] font-medium py-3 px-4 rounded-lg transition-colors duration-200"
           >
             Close
           </button>

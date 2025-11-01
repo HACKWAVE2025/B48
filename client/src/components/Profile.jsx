@@ -219,34 +219,16 @@ const Profile = () => {
   const averageScore = user?.averageScore || 0;
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4 relative">
-      {/* Animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          >
-            <Star className="w-2 h-2 text-pink-400 opacity-60" />
-          </div>
-        ))}
-      </div>
-
+    <div className="w-full h-full flex items-center justify-center p-4 relative bg-gradient-to-br from-[#E8FFD7] to-white">
       {/* Profile Container */}
-      <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden w-full max-w-4xl">
+      <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-lg relative overflow-hidden w-full max-w-4xl">
         
         {/* Header Section */}
         <div className="relative z-10 flex items-center justify-between mb-8">
           <div className="flex items-center space-x-6">
             {/* Avatar */}
             <div className="relative">
-              <div className="w-24 h-24 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+              <div className="w-24 h-24 bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-full flex items-center justify-center shadow-sm overflow-hidden">
                 {user?.avatar ? (
                   <img 
                     src={user.avatar} 
@@ -267,7 +249,7 @@ const Profile = () => {
               />
               <label
                 htmlFor="avatar-upload"
-                className={`absolute -bottom-2 -right-2 bg-blue-500 hover:bg-blue-600 rounded-full p-2 shadow-lg transition-colors duration-200 cursor-pointer ${
+                className={`absolute -bottom-2 -right-2 bg-[#5E936C] hover:bg-[#3E5F44] rounded-full p-2 shadow-sm transition-colors duration-200 cursor-pointer ${
                   isLoading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
@@ -277,7 +259,7 @@ const Profile = () => {
                 <button
                   onClick={handleAvatarRemove}
                   disabled={isLoading}
-                  className={`absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 rounded-full p-1 shadow-lg transition-colors duration-200 ${
+                  className={`absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 rounded-full p-1 shadow-sm transition-colors duration-200 ${
                     isLoading ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                   title="Remove avatar"
@@ -289,12 +271,12 @@ const Profile = () => {
 
             {/* User Info */}
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">
+              <h1 className="text-3xl font-bold text-[#3E5F44] mb-2">
                 {user?.name || 'Explorer'}
               </h1>
-              <p className="text-white/80 text-lg flex items-center">
-                <Crown className="w-5 h-5 text-yellow-400 mr-2" />
-                Level {userLevel} Adventurer
+              <p className="text-[#557063] text-lg flex items-center">
+                <Crown className="w-5 h-5 text-[#5E936C] mr-2" />
+                Level {userLevel} Learner
               </p>
             </div>
           </div>
@@ -303,7 +285,7 @@ const Profile = () => {
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="flex items-center space-x-2 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 rounded-lg text-purple-200 hover:text-purple-100 font-medium transition-all duration-300 backdrop-blur-sm"
+              className="flex items-center space-x-2 px-4 py-2 bg-[#E8FFD7] hover:bg-[#93DA97]/20 border border-[#93DA97] rounded-lg text-[#3E5F44] hover:text-[#3E5F44] font-medium transition-all duration-200"
             >
               <Edit className="w-4 h-4" />
               <span>Edit Profile</span>
@@ -313,14 +295,14 @@ const Profile = () => {
               <button
                 onClick={handleSave}
                 disabled={isLoading}
-                className="flex items-center space-x-2 px-4 py-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/40 rounded-lg text-green-200 hover:text-green-100 font-medium transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center space-x-2 px-4 py-2 bg-[#5E936C] hover:bg-[#3E5F44] border border-[#5E936C] rounded-lg text-white font-medium transition-all duration-200"
               >
                 <Save className="w-4 h-4" />
                 <span>{isLoading ? 'Saving...' : 'Save'}</span>
               </button>
               <button
                 onClick={handleCancel}
-                className="flex items-center space-x-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 rounded-lg text-red-200 hover:text-red-100 font-medium transition-all duration-300 backdrop-blur-sm"
+                className="flex items-center space-x-2 px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 font-medium transition-all duration-200"
               >
                 <X className="w-4 h-4" />
                 <span>Cancel</span>
@@ -331,40 +313,40 @@ const Profile = () => {
 
         {/* Error Display */}
         {error && (
-          <div className="relative z-10 mb-6 p-4 bg-red-500/20 border border-red-500/40 rounded-2xl backdrop-blur-sm">
+          <div className="relative z-10 mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
             <div className="flex items-center space-x-3">
               <div className="bg-red-500 p-1 rounded-full">
                 <X className="w-4 h-4 text-white" />
               </div>
-              <span className="text-red-200 font-medium">{error}</span>
+              <span className="text-red-700 font-medium">{error}</span>
             </div>
           </div>
         )}
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/40 rounded-xl p-4 text-center">
-            <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-yellow-300">{userAchievements}</div>
-            <div className="text-yellow-200/80 text-sm">Achievements</div>
+          <div className="bg-gradient-to-br from-[#E8FFD7] to-white border border-[#93DA97]/30 rounded-xl p-4 text-center">
+            <Trophy className="w-8 h-8 text-[#5E936C] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-[#3E5F44]">{userAchievements}</div>
+            <div className="text-[#557063] text-sm">Achievements</div>
           </div>
           
-          <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/40 rounded-xl p-4 text-center">
-            <Star className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-blue-300">{userXP}</div>
-            <div className="text-blue-200/80 text-sm">Experience Points</div>
+          <div className="bg-gradient-to-br from-[#E8FFD7] to-white border border-[#93DA97]/30 rounded-xl p-4 text-center">
+            <Star className="w-8 h-8 text-[#5E936C] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-[#3E5F44]">{userXP}</div>
+            <div className="text-[#557063] text-sm">Experience Points</div>
           </div>
           
-          <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/40 rounded-xl p-4 text-center">
-            <Target className="w-8 h-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-300">{completedQuizzes}</div>
-            <div className="text-green-200/80 text-sm">Quizzes Completed</div>
+          <div className="bg-gradient-to-br from-[#E8FFD7] to-white border border-[#93DA97]/30 rounded-xl p-4 text-center">
+            <Target className="w-8 h-8 text-[#5E936C] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-[#3E5F44]">{completedQuizzes}</div>
+            <div className="text-[#557063] text-sm">Quizzes Completed</div>
           </div>
           
-          <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/40 rounded-xl p-4 text-center">
-            <Zap className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-300">{averageScore}%</div>
-            <div className="text-purple-200/80 text-sm">Average Score</div>
+          <div className="bg-gradient-to-br from-[#E8FFD7] to-white border border-[#93DA97]/30 rounded-xl p-4 text-center">
+            <Zap className="w-8 h-8 text-[#5E936C] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-[#3E5F44]">{averageScore}%</div>
+            <div className="text-[#557063] text-sm">Average Score</div>
           </div>
         </div>
 
@@ -374,11 +356,11 @@ const Profile = () => {
           <div className="space-y-6">
             {/* Name */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-purple-600/50 border border-purple-400/80">
-                  <User className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <User className="w-4 h-4 text-[#5E936C]" />
                 </div>
-                <span>Character Name</span>
+                <span>Full Name</span>
               </label>
               <input
                 type="text"
@@ -386,16 +368,16 @@ const Profile = () => {
                 value={formData.name}
                 onChange={handleChange}
                 disabled={!isEditing}
-                className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 disabled:opacity-60"
+                className="w-full p-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#0f172a] placeholder-gray-400 focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 disabled:opacity-60 disabled:bg-gray-50"
                 placeholder="Enter your name"
               />
             </div>
 
             {/* Email */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-blue-600/50 border border-blue-400/80">
-                  <Mail className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Mail className="w-4 h-4 text-[#5E936C]" />
                 </div>
                 <span>Email</span>
               </label>
@@ -405,18 +387,18 @@ const Profile = () => {
                 value={formData.email}
                 onChange={handleChange}
                 disabled={!isEditing}
-                className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 disabled:opacity-60"
+                className="w-full p-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#0f172a] placeholder-gray-400 focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 disabled:opacity-60 disabled:bg-gray-50"
                 placeholder="Enter your email"
               />
             </div>
 
             {/* Location */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-green-600/50 border border-green-400/80">
-                  <MapPin className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <MapPin className="w-4 h-4 text-[#5E936C]" />
                 </div>
-                <span>Home Base</span>
+                <span>Location</span>
               </label>
               <input
                 type="text"
@@ -424,16 +406,16 @@ const Profile = () => {
                 value={formData.location}
                 onChange={handleChange}
                 disabled={!isEditing}
-                className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 disabled:opacity-60"
-                placeholder="Your village/city"
+                className="w-full p-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#0f172a] placeholder-gray-400 focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 disabled:opacity-60 disabled:bg-gray-50"
+                placeholder="Your city"
               />
             </div>
 
             {/* Role */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-cyan-600/50 border border-cyan-400/80">
-                  <Shield className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Shield className="w-4 h-4 text-[#5E936C]" />
                 </div>
                 <span>Role</span>
               </label>
@@ -442,10 +424,10 @@ const Profile = () => {
                 value={formData.role}
                 onChange={handleChange}
                 disabled={!isEditing}
-                className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors duration-200 disabled:opacity-60"
+                className="w-full p-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#0f172a] focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 disabled:opacity-60 disabled:bg-gray-50"
               >
-                <option value="student" className="bg-gray-800">🎓 Student - Learn and practice</option>
-                <option value="researcher" className="bg-gray-800">🔬 Researcher - Create and explore</option>
+                <option value="student" className="bg-white">🎓 Student - Learn and practice</option>
+                <option value="researcher" className="bg-white">🔬 Researcher - Create and explore</option>
               </select>
             </div>
           </div>
@@ -454,9 +436,9 @@ const Profile = () => {
           <div className="space-y-6">
             {/* Bio */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-pink-600/50 border border-pink-400/80">
-                  <Badge className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Badge className="w-4 h-4 text-[#5E936C]" />
                 </div>
                 <span>About Me</span>
               </label>
@@ -466,31 +448,31 @@ const Profile = () => {
                 onChange={handleChange}
                 disabled={!isEditing}
                 rows="4"
-                className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 resize-none disabled:opacity-60"
+                className="w-full p-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#0f172a] placeholder-gray-400 focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 resize-none disabled:opacity-60 disabled:bg-gray-50"
                 placeholder="Tell us about your learning journey..."
               />
             </div>
 
             {/* Interests */}
             <div className="space-y-3">
-              <label className="flex items-center justify-between text-white/90 font-medium text-sm">
+              <label className="flex items-center justify-between text-[#3E5F44] font-medium text-sm">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-indigo-600/50 border border-indigo-400/80">
-                    <Star className="w-4 h-4" />
+                  <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                    <Star className="w-4 h-4 text-[#5E936C]" />
                   </div>
                   <span>Learning Interests</span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-gray-500">
                     ({formData.interests.length} selected)
                   </span>
                 </div>
                 {isEditing && (
-                  <span className="text-xs text-purple-300 animate-pulse">Click to toggle</span>
+                  <span className="text-xs text-[#5E936C]">Click to toggle</span>
                 )}
               </label>
 
               {/* Predefined Subjects */}
               <div>
-                <p className="text-xs text-gray-400 mb-2">Popular Subjects:</p>
+                <p className="text-xs text-gray-500 mb-2">Popular Subjects:</p>
                 <div className="flex flex-wrap gap-2">
                   {subjects.map((subject) => (
                     <button
@@ -500,11 +482,11 @@ const Profile = () => {
                       disabled={!isEditing}
                       className={`px-4 py-2 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                         formData.interests.includes(subject)
-                          ? 'bg-purple-600/40 border-purple-400/80 text-purple-100 shadow-lg shadow-purple-500/20'
-                          : 'bg-gray-800/40 border-gray-600/50 text-gray-300'
+                          ? 'bg-[#5E936C]/20 border-[#5E936C] text-[#3E5F44] shadow-sm'
+                          : 'bg-[#E8FFD7] border-[#93DA97]/30 text-[#557063]'
                       } ${
                         isEditing 
-                          ? 'hover:scale-105 hover:border-purple-400/80 cursor-pointer' 
+                          ? 'hover:scale-105 hover:border-[#5E936C] cursor-pointer' 
                           : 'cursor-default opacity-70'
                       }`}
                     >
@@ -520,21 +502,21 @@ const Profile = () => {
               {/* Custom Interests */}
               {formData.interests.filter(int => !subjects.includes(int)).length > 0 && (
                 <div>
-                  <p className="text-xs text-gray-400 mb-2">Your Custom Interests:</p>
+                  <p className="text-xs text-gray-500 mb-2">Your Custom Interests:</p>
                   <div className="flex flex-wrap gap-2">
                     {formData.interests
                       .filter(interest => !subjects.includes(interest))
                       .map((interest) => (
                         <div
                           key={interest}
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 bg-blue-600/40 border-blue-400/80 text-blue-100 shadow-lg shadow-blue-500/20 text-sm font-medium"
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 bg-[#93DA97]/20 border-[#93DA97] text-[#3E5F44] shadow-sm text-sm font-medium"
                         >
                           <span>✓ {interest}</span>
                           {isEditing && (
                             <button
                               type="button"
                               onClick={() => handleRemoveInterest(interest)}
-                              className="ml-1 text-red-300 hover:text-red-100 transition-colors"
+                              className="ml-1 text-red-500 hover:text-red-700 transition-colors"
                               title="Remove"
                             >
                               ✕
@@ -549,7 +531,7 @@ const Profile = () => {
               {/* Add Custom Interest */}
               {isEditing && (
                 <div className="space-y-2">
-                  <p className="text-xs text-gray-400">Add Custom Interest:</p>
+                  <p className="text-xs text-gray-500">Add Custom Interest:</p>
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -557,19 +539,19 @@ const Profile = () => {
                       onChange={(e) => setCustomInterest(e.target.value)}
                       onKeyPress={handleCustomInterestKeyPress}
                       placeholder="e.g., Robotics, Photography..."
-                      className="flex-1 px-4 py-2 bg-black/60 border border-gray-600/40 rounded-lg text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors duration-200 text-sm"
+                      className="flex-1 px-4 py-2 bg-white border border-[#93DA97]/30 rounded-lg text-[#0f172a] placeholder-gray-400 focus:border-[#5E936C] focus:ring-[#5E936C]/20 focus:outline-none transition-colors duration-200 text-sm"
                       maxLength={30}
                     />
                     <button
                       type="button"
                       onClick={handleAddCustomInterest}
                       disabled={!customInterest.trim()}
-                      className="px-4 py-2 bg-green-600/40 hover:bg-green-600/60 border-2 border-green-400/80 text-green-100 rounded-lg transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 py-2 bg-[#5E936C] hover:bg-[#3E5F44] border-2 border-[#5E936C] text-white rounded-lg transition-all duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Add +
                     </button>
                   </div>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-500">
                     💡 Tip: Add your unique interests or click on popular subjects above
                   </p>
                 </div>
@@ -578,29 +560,20 @@ const Profile = () => {
 
             {/* Join Date */}
             <div className="space-y-2">
-              <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-teal-600/50 border border-teal-400/80">
-                  <Calendar className="w-4 h-4" />
+              <label className="flex items-center space-x-3 text-[#3E5F44] font-medium text-sm">
+                <div className="p-2 rounded-lg bg-[#E8FFD7] border border-[#93DA97]/40">
+                  <Calendar className="w-4 h-4 text-[#5E936C]" />
                 </div>
-                <span>Quest Started</span>
+                <span>Member Since</span>
               </label>
-              <div className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white/80">
+              <div className="w-full p-3 bg-gray-50 border border-[#93DA97]/30 rounded-xl text-[#557063]">
                 {joinDate}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Decorative elements */}
-        <div className="absolute top-6 right-6 opacity-30">
-          <Shield className="w-8 h-8 text-blue-400 animate-pulse" />
-        </div>
-        <div className="absolute bottom-6 left-6 opacity-30">
-          <Crown className="w-8 h-8 text-yellow-400 animate-bounce" />
-        </div>
-        <div className="absolute top-1/2 right-8 opacity-20">
-          <Zap className="w-6 h-6 text-purple-400 animate-pulse" />
-        </div>
+        {/* Decorative elements - removed for clean look */}
       </div>
 
       {/* Confirmation Modal */}

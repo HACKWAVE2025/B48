@@ -110,14 +110,14 @@ const BadgeAnalytics = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#5E936C] border-t-transparent"></div>
       </div>
     );
   }
 
   if (!analytics) {
     return (
-      <div className="text-center py-12 text-white/70">
+      <div className="text-center py-12 text-[#557063]">
         <AlertCircle className="w-12 h-12 mx-auto mb-4" />
         <p>Failed to load analytics</p>
       </div>
@@ -153,8 +153,8 @@ const BadgeAnalytics = () => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-gray-900/95 border border-purple-500/50 rounded-lg p-3 shadow-xl">
-          <p className="text-white font-semibold mb-1">{label}</p>
+        <div className="bg-white border border-[#93DA97]/30 rounded-lg p-3 shadow-xl">
+          <p className="text-[#3E5F44] font-semibold mb-1">{label}</p>
           {payload.map((entry, index) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {entry.value}{entry.name.includes('Rate') || entry.name.includes('Score') ? '%' : ''}
@@ -171,14 +171,14 @@ const BadgeAnalytics = () => {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex justify-center items-center gap-4 mb-4">
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 rounded-full shadow-lg">
+          <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-lg">
             <BarChart3 className="w-8 h-8 text-white" />
           </div>
         </div>
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent mb-2">
+        <h2 className="text-3xl font-bold text-[#3E5F44] mb-2">
           Your Learning Analytics
         </h2>
-        <p className="text-white/70 mb-3">
+        <p className="text-[#557063] mb-3">
           Track your progress and achievements
         </p>
         
@@ -189,15 +189,15 @@ const BadgeAnalytics = () => {
             disabled={refreshing}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
               refreshing 
-                ? 'bg-gray-600/40 text-gray-400 cursor-not-allowed' 
-                : 'bg-purple-600/40 border border-purple-400/80 text-white hover:bg-purple-600/60'
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-[#5E936C] text-white hover:bg-[#3E5F44] shadow-sm'
             }`}
           >
             <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
             {refreshing ? 'Refreshing...' : 'Refresh Data'}
           </button>
           {lastUpdated && (
-            <span className="text-xs text-white/50">
+            <span className="text-xs text-[#557063]">
               Last updated: {lastUpdated.toLocaleTimeString()}
             </span>
           )}
@@ -216,8 +216,8 @@ const BadgeAnalytics = () => {
             onClick={() => setActiveTab(tab.key)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
               activeTab === tab.key
-                ? 'bg-purple-600/40 border border-purple-400/80 text-white'
-                : 'bg-white/10 border border-white/20 text-gray-300 hover:bg-purple-500/20'
+                ? 'bg-[#5E936C] text-white shadow-sm'
+                : 'bg-[#E8FFD7] border border-[#93DA97] text-[#3E5F44] hover:bg-[#93DA97]/30'
             }`}
           >
             <tab.icon className="w-4 h-4" />
@@ -227,25 +227,25 @@ const BadgeAnalytics = () => {
       </div>
 
       {/* Key Insights Banner */}
-      <div className="bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-blue-600/20 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-[#E8FFD7] to-[#93DA97]/30 border border-[#93DA97]/30 rounded-xl p-6">
         <div className="flex items-start gap-4">
-          <div className="bg-purple-500/20 p-3 rounded-lg">
-            <Star className="w-8 h-8 text-yellow-400" />
+          <div className="bg-[#5E936C]/20 p-3 rounded-lg">
+            <Star className="w-8 h-8 text-[#5E936C]" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white mb-2">Your Learning Journey</h3>
+            <h3 className="text-xl font-bold text-[#3E5F44] mb-2">Your Learning Journey</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div>
-                <span className="text-white/70">Progress: </span>
-                <span className="text-white font-semibold">{overview.completionRate}% Complete</span>
+                <span className="text-[#557063]">Progress: </span>
+                <span className="text-[#3E5F44] font-semibold">{overview.completionRate}% Complete</span>
               </div>
               <div>
-                <span className="text-white/70">Performance: </span>
-                <span className="text-white font-semibold">{quizPerformance.averageScore}% Average Score</span>
+                <span className="text-[#557063]">Performance: </span>
+                <span className="text-[#3E5F44] font-semibold">{quizPerformance.averageScore}% Average Score</span>
               </div>
               <div>
-                <span className="text-white/70">Streak: </span>
-                <span className="text-white font-semibold">{streakAnalytics.currentStreak} Days</span>
+                <span className="text-[#557063]">Streak: </span>
+                <span className="text-[#3E5F44] font-semibold">{streakAnalytics.currentStreak} Days</span>
               </div>
             </div>
           </div>
@@ -287,9 +287,9 @@ const BadgeAnalytics = () => {
           {/* Charts Row */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Category Distribution Pie Chart */}
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <PieChart className="w-6 h-6 text-purple-400" />
+            <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <PieChart className="w-6 h-6 text-[#5E936C]" />
                 Category Distribution
               </h3>
               <ResponsiveContainer width="100%" height={350}>
@@ -299,7 +299,7 @@ const BadgeAnalytics = () => {
                     cx="50%"
                     cy="50%"
                     labelLine={{
-                      stroke: '#ffffff40',
+                      stroke: '#3E5F44',
                       strokeWidth: 1
                     }}
                     label={({
@@ -322,7 +322,7 @@ const BadgeAnalytics = () => {
                         <text
                           x={x}
                           y={y}
-                          fill="white"
+                          fill="#3E5F44"
                           textAnchor={x > cx ? 'start' : 'end'}
                           dominantBaseline="central"
                           fontSize={12}
@@ -344,24 +344,24 @@ const BadgeAnalytics = () => {
                   <Legend 
                     verticalAlign="bottom" 
                     height={36}
-                    wrapperStyle={{ fontSize: '12px', color: '#ffffff' }}
+                    wrapperStyle={{ fontSize: '12px', color: '#3E5F44' }}
                   />
                 </RechartsPieChart>
               </ResponsiveContainer>
             </div>
 
             {/* Category Progress Radar Chart */}
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Activity className="w-6 h-6 text-cyan-400" />
+            <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <Activity className="w-6 h-6 text-[#5E936C]" />
                 Category Mastery
               </h3>
               <ResponsiveContainer width="100%" height={300}>
                 <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarChartData}>
-                  <PolarGrid stroke="#ffffff20" />
-                  <PolarAngleAxis dataKey="category" tick={{ fill: '#ffffff', fontSize: 12 }} />
-                  <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: '#ffffff80' }} />
-                  <Radar name="Completion %" dataKey="value" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.6} />
+                  <PolarGrid stroke="#93DA97" />
+                  <PolarAngleAxis dataKey="category" tick={{ fill: '#3E5F44', fontSize: 12 }} />
+                  <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: '#557063' }} />
+                  <Radar name="Completion %" dataKey="value" stroke="#5E936C" fill="#5E936C" fillOpacity={0.6} />
                   <Tooltip content={<CustomTooltip />} />
                 </RadarChart>
               </ResponsiveContainer>
@@ -369,18 +369,18 @@ const BadgeAnalytics = () => {
           </div>
 
           {/* Category Breakdown Bar Chart */}
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <BarChart3 className="w-6 h-6 text-purple-400" />
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+            <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+              <BarChart3 className="w-6 h-6 text-[#5E936C]" />
               Category Progress Overview
             </h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={categoryChartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                <XAxis dataKey="name" tick={{ fill: '#ffffff' }} />
-                <YAxis tick={{ fill: '#ffffff' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#93DA97" />
+                <XAxis dataKey="name" tick={{ fill: '#3E5F44' }} />
+                <YAxis tick={{ fill: '#3E5F44' }} />
                 <Tooltip content={<CustomTooltip />} />
-                <Legend wrapperStyle={{ color: '#ffffff' }} />
+                <Legend wrapperStyle={{ color: '#3E5F44' }} />
                 <Bar dataKey="earned" fill="#10b981" name="Earned" />
                 <Bar dataKey="inProgress" fill="#f59e0b" name="In Progress" />
                 <Bar dataKey="total" fill="#6b7280" name="Total" />
@@ -390,18 +390,18 @@ const BadgeAnalytics = () => {
 
           {/* Recent Achievements */}
           {achievements.recentlyEarned.length > 0 && (
-            <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Calendar className="w-6 h-6 text-yellow-400" />
+            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-300 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <Calendar className="w-6 h-6 text-yellow-600" />
                 Recently Earned
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {achievements.recentlyEarned.map(badge => (
-                  <div key={badge.id} className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
+                  <div key={badge.id} className="flex items-center gap-3 bg-white/70 rounded-lg p-3 border border-yellow-200">
                     <div className="text-3xl">{badge.icon}</div>
                     <div className="flex-1">
-                      <div className="font-semibold text-white">{badge.name}</div>
-                      <div className="text-xs text-white/70">
+                      <div className="font-semibold text-[#3E5F44]">{badge.name}</div>
+                      <div className="text-xs text-[#557063]">
                         {new Date(badge.earnedAt).toLocaleDateString()}
                       </div>
                     </div>
@@ -418,9 +418,9 @@ const BadgeAnalytics = () => {
         <div className="space-y-6">
           {/* Progress Bar Chart */}
           {progressTracking.length > 0 && (
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Target className="w-6 h-6 text-green-400" />
+            <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <Target className="w-6 h-6 text-[#5E936C]" />
                 Badges Near Completion
               </h3>
               <ResponsiveContainer width="100%" height={Math.max(300, progressChartData.length * 55)}>
@@ -429,17 +429,17 @@ const BadgeAnalytics = () => {
                   layout="vertical"
                   margin={{ top: 5, right: 60, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#93DA97" />
                   <XAxis 
                     type="number" 
                     domain={[0, 100]} 
-                    tick={{ fill: '#ffffff' }}
-                    label={{ value: 'Progress %', position: 'insideBottom', offset: -5, fill: '#ffffff80' }}
+                    tick={{ fill: '#3E5F44' }}
+                    label={{ value: 'Progress %', position: 'insideBottom', offset: -5, fill: '#557063' }}
                   />
                   <YAxis 
                     type="category" 
                     dataKey="name" 
-                    tick={{ fill: '#ffffff', fontSize: 12 }} 
+                    tick={{ fill: '#3E5F44', fontSize: 12 }} 
                     width={150}
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -449,7 +449,7 @@ const BadgeAnalytics = () => {
                     radius={[0, 8, 8, 0]}
                     label={{ 
                       position: 'right', 
-                      fill: '#ffffff',
+                      fill: '#3E5F44',
                       formatter: (value) => `${Math.round(value)}%`,
                       fontSize: 12
                     }}
@@ -466,15 +466,15 @@ const BadgeAnalytics = () => {
               <div className="mt-4 flex items-center justify-center gap-6 text-xs">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-[#10b981]"></div>
-                  <span className="text-white/70">75%+ (Almost there!)</span>
+                  <span className="text-[#557063]">75%+ (Almost there!)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-[#f59e0b]"></div>
-                  <span className="text-white/70">50-74% (Good progress)</span>
+                  <span className="text-[#557063]">50-74% (Good progress)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-[#3b82f6]"></div>
-                  <span className="text-white/70">&lt;50% (Getting started)</span>
+                  <span className="text-[#557063]">&lt;50% (Getting started)</span>
                 </div>
               </div>
             </div>
@@ -482,9 +482,9 @@ const BadgeAnalytics = () => {
 
           {/* Progress Details */}
           {progressTracking.length > 0 && (
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <TrendingUp className="w-6 h-6 text-blue-400" />
+            <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-[#5E936C]" />
                 Detailed Progress
               </h3>
               <div className="space-y-4">
@@ -496,7 +496,7 @@ const BadgeAnalytics = () => {
           )}
 
           {progressTracking.length === 0 && (
-            <div className="text-center py-12 text-white/70">
+            <div className="text-center py-12 text-[#557063]">
               <TrendingDown className="w-12 h-12 mx-auto mb-4 opacity-50" />
               <p>Complete more activities to see your progress</p>
             </div>
@@ -504,9 +504,9 @@ const BadgeAnalytics = () => {
 
           {/* Streak Analytics */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Flame className="w-6 h-6 text-orange-400" />
+            <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-300 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <Flame className="w-6 h-6 text-orange-500" />
                 Streak Stats
               </h3>
               <div className="grid grid-cols-2 gap-4">
@@ -518,9 +518,9 @@ const BadgeAnalytics = () => {
             </div>
 
             {/* Streak Visualization */}
-            <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm border border-orange-500/30 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <Activity className="w-6 h-6 text-orange-400" />
+            <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-300 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+                <Activity className="w-6 h-6 text-orange-500" />
                 Streak Comparison
               </h3>
               <ResponsiveContainer width="100%" height={200}>
@@ -529,9 +529,9 @@ const BadgeAnalytics = () => {
                   { name: 'Longest', value: streakAnalytics.longestStreak },
                   { name: 'Quiz', value: streakAnalytics.quizStreak }
                 ]}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                  <XAxis dataKey="name" tick={{ fill: '#ffffff' }} />
-                  <YAxis tick={{ fill: '#ffffff' }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#93DA97" />
+                  <XAxis dataKey="name" tick={{ fill: '#3E5F44' }} />
+                  <YAxis tick={{ fill: '#3E5F44' }} />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar dataKey="value" fill="#f97316" name="Streak Count" />
                 </BarChart>
@@ -544,9 +544,9 @@ const BadgeAnalytics = () => {
       {/* Recommendations Tab */}
       {activeTab === 'recommendations' && (
         <div className="space-y-4">
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Star className="w-6 h-6 text-yellow-400" />
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+            <h3 className="text-xl font-bold text-[#3E5F44] mb-4 flex items-center gap-2">
+              <Star className="w-6 h-6 text-[#5E936C]" />
               Personalized Tips
             </h3>
             {recommendations.length > 0 ? (
@@ -556,7 +556,7 @@ const BadgeAnalytics = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-white/70 text-center py-8">
+              <p className="text-[#557063] text-center py-8">
                 Keep learning to get personalized recommendations!
               </p>
             )}
@@ -577,7 +577,7 @@ const MetricCard = ({ icon: Icon, label, value, total, color }) => {
   };
 
   return (
-    <div className={`bg-gradient-to-br ${colors[color]} backdrop-blur-sm border rounded-xl p-4`}>
+    <div className={`bg-gradient-to-br ${colors[color]} border rounded-xl p-4 shadow-sm`}>
       <Icon className="w-6 h-6 text-white mb-2" />
       <div className="text-2xl font-bold text-white">
         {value}{total && <span className="text-lg text-white/80">/{total}</span>}
@@ -608,20 +608,20 @@ const CategoryProgress = ({ category, data }) => {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Icon className="w-5 h-5 text-purple-400" />
-          <span className="text-white font-medium capitalize">{category}</span>
+          <Icon className="w-5 h-5 text-[#5E936C]" />
+          <span className="text-[#3E5F44] font-medium capitalize">{category}</span>
         </div>
-        <div className="text-sm text-white/70">
+        <div className="text-sm text-[#557063]">
           {data.earned}/{data.total}
         </div>
       </div>
-      <div className="relative bg-white/10 rounded-full h-2 overflow-hidden">
+      <div className="relative bg-[#E8FFD7] rounded-full h-2 overflow-hidden border border-[#93DA97]/30">
         <div 
-          className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-500"
+          className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] h-full transition-all duration-500"
           style={{ width: `${data.completionRate}%` }}
         />
       </div>
-      <div className="text-xs text-white/60">
+      <div className="text-xs text-[#557063]">
         {data.completionRate}% complete • {data.inProgress} in progress
       </div>
     </div>
@@ -630,24 +630,24 @@ const CategoryProgress = ({ category, data }) => {
 
 const ProgressItem = ({ badge }) => {
   return (
-    <div className="bg-white/5 rounded-lg p-4">
+    <div className="bg-[#E8FFD7]/30 border border-[#93DA97]/30 rounded-lg p-4">
       <div className="flex items-start gap-3 mb-3">
         <div className="text-3xl">{badge.icon}</div>
         <div className="flex-1">
-          <div className="font-semibold text-white">{badge.name}</div>
-          <div className="text-sm text-white/70">{badge.description}</div>
+          <div className="font-semibold text-[#3E5F44]">{badge.name}</div>
+          <div className="text-sm text-[#557063]">{badge.description}</div>
         </div>
         <div className="text-right">
-          <div className="text-lg font-bold text-purple-400">{badge.progress}%</div>
+          <div className="text-lg font-bold text-[#5E936C]">{badge.progress}%</div>
         </div>
       </div>
-      <div className="relative bg-white/10 rounded-full h-2 overflow-hidden mb-2">
+      <div className="relative bg-white rounded-full h-2 overflow-hidden border border-[#93DA97]/30 mb-2">
         <div 
-          className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-500"
+          className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] h-full transition-all duration-500"
           style={{ width: `${badge.progress}%` }}
         />
       </div>
-      <div className="flex justify-between text-xs text-white/60">
+      <div className="flex justify-between text-xs text-[#557063]">
         <span>{badge.current} / {badge.requirement}</span>
         <span>{badge.remaining} remaining</span>
       </div>
@@ -657,11 +657,11 @@ const ProgressItem = ({ badge }) => {
 
 const StatBox = ({ label, value, unit }) => {
   return (
-    <div className="bg-white/5 rounded-lg p-4 text-center">
-      <div className="text-2xl font-bold text-white">
+    <div className="bg-white/70 border border-orange-200 rounded-lg p-4 text-center">
+      <div className="text-2xl font-bold text-[#3E5F44]">
         {value}{unit && <span className="text-sm ml-1">{unit}</span>}
       </div>
-      <div className="text-xs text-white/70 mt-1">{label}</div>
+      <div className="text-xs text-[#557063] mt-1">{label}</div>
     </div>
   );
 };
@@ -669,9 +669,9 @@ const StatBox = ({ label, value, unit }) => {
 const RecommendationCard = ({ recommendation }) => {
   const getPriorityColor = (priority) => {
     const colors = {
-      high: 'border-red-500/50 bg-red-500/10',
-      medium: 'border-yellow-500/50 bg-yellow-500/10',
-      low: 'border-blue-500/50 bg-blue-500/10'
+      high: 'border-red-300 bg-red-50',
+      medium: 'border-yellow-300 bg-yellow-50',
+      low: 'border-blue-300 bg-blue-50'
     };
     return colors[priority] || colors.low;
   };
@@ -683,12 +683,12 @@ const RecommendationCard = ({ recommendation }) => {
           <div className="text-2xl">{recommendation.badge.icon}</div>
         )}
         <div className="flex-1">
-          <p className="text-white">{recommendation.message}</p>
+          <p className="text-[#3E5F44]">{recommendation.message}</p>
           {recommendation.badge && (
-            <div className="text-xs text-white/60 mt-1">{recommendation.badge.category}</div>
+            <div className="text-xs text-[#557063] mt-1">{recommendation.badge.category}</div>
           )}
         </div>
-        <ChevronRight className="w-5 h-5 text-white/50" />
+        <ChevronRight className="w-5 h-5 text-[#557063]" />
       </div>
     </div>
   );

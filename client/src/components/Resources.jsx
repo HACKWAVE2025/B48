@@ -77,7 +77,7 @@ const Resources = () => {
   };
 
   const renderClasses = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
       {/* Animated particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(30)].map((_, i) => (
@@ -91,23 +91,23 @@ const Resources = () => {
               animationDuration: `${2 + Math.random() * 2}s`
             }}
           >
-            <BookOpen className="w-2 h-2 text-purple-400 opacity-60" />
+            <BookOpen className="w-2 h-2 text-[#5E936C] opacity-60" />
           </div>
         ))}
       </div>
 
       <div className="w-full relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
           <div className="flex items-center space-x-4 mb-4">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg">
+            <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-sm">
               <Library className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold text-[#3E5F44]">
                 <AutoText>Learning Resources</AutoText>
               </h1>
-              <p className="text-white/80 text-lg mt-2">
+              <p className="text-[#557063] text-lg mt-2">
                 <AutoText>Choose your class to access comprehensive study materials</AutoText>
               </p>
             </div>
@@ -120,18 +120,18 @@ const Resources = () => {
             <div
               key={classNum}
               onClick={() => handleClassSelect(classNum)}
-              className="group backdrop-blur-xl bg-black/40 border border-purple-500/30 hover:border-purple-400/60 rounded-2xl p-8 shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105 hover:bg-black/50"
+              className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
             >
               <div className="text-center">
-                <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-full shadow-lg mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-sm mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl font-bold text-white">
                     {classNum}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300">
                   <AutoText>Class {classNum}</AutoText>
                 </h3>
-                <p className="text-white/70 text-sm">
+                <p className="text-[#557063] text-sm">
                   <AutoText>
                     {resourcesData.classes[classNum].subjects.length} subjects available
                   </AutoText>
@@ -145,23 +145,23 @@ const Resources = () => {
   );
 
   const renderSubjects = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
       <div className="w-full relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleBack}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
               >
                 <ArrowLeft className="w-6 h-6 text-white" />
               </button>
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h1 className="text-4xl font-bold text-[#3E5F44]">
                   <AutoText>Class {selectedClass} - Subjects</AutoText>
                 </h1>
-                <p className="text-white/80 text-lg mt-2">
+                <p className="text-[#557063] text-lg mt-2">
                   <AutoText>Select a subject to explore lessons</AutoText>
                 </p>
               </div>
@@ -179,16 +179,16 @@ const Resources = () => {
               <div
                 key={subject.name}
                 onClick={() => handleSubjectSelect(subject)}
-                className="group backdrop-blur-xl bg-black/40 border border-purple-500/30 hover:border-purple-400/60 rounded-2xl p-8 shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105 hover:bg-black/50"
+                className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
               >
                 <div className="text-center">
-                  <div className={`bg-gradient-to-r ${colorClass} p-6 rounded-full shadow-lg mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`bg-gradient-to-r ${colorClass} p-6 rounded-full shadow-sm mx-auto mb-4 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300">
                     <AutoText>{subject.name}</AutoText>
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-[#557063] text-sm">
                     <AutoText>
                       {subject.lessons.length} lessons available
                     </AutoText>
@@ -203,23 +203,23 @@ const Resources = () => {
   );
 
   const renderLessons = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
       <div className="w-full relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleBack}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
               >
                 <ArrowLeft className="w-6 h-6 text-white" />
               </button>
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h1 className="text-4xl font-bold text-[#3E5F44]">
                   <AutoText>Class {selectedClass} - {selectedSubject.name}</AutoText>
                 </h1>
-                <p className="text-white/80 text-lg mt-2">
+                <p className="text-[#557063] text-lg mt-2">
                   <AutoText>Choose a lesson to access resources</AutoText>
                 </p>
               </div>
@@ -236,17 +236,17 @@ const Resources = () => {
               <div
                 key={index}
                 onClick={() => handleLessonSelect(lesson)}
-                className="group backdrop-blur-xl bg-black/40 border border-purple-500/30 hover:border-purple-400/60 rounded-2xl p-6 shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105 hover:bg-black/50"
+                className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-6 shadow-sm cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
               >
                 <div className="flex items-start space-x-4">
-                  <div className={`bg-gradient-to-r ${colorClass} p-3 rounded-lg shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+                  <div className={`bg-gradient-to-r ${colorClass} p-3 rounded-lg shadow-sm group-hover:scale-110 transition-transform duration-300 shrink-0`}>
                     <BookOpen className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-200 transition-colors duration-300 leading-tight">
+                    <h3 className="text-lg font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300 leading-tight">
                       <AutoText>{lesson.title}</AutoText>
                     </h3>
-                    <div className="flex items-center space-x-4 text-sm text-white/70">
+                    <div className="flex items-center space-x-4 text-sm text-[#557063]">
                       <div className="flex items-center space-x-1">
                         <FileText className="w-4 h-4" />
                         <span><AutoText>Textbook</AutoText></span>
@@ -271,23 +271,23 @@ const Resources = () => {
   );
 
   const renderResources = () => (
-    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+    <div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
       <div className="w-full relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 mb-8 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleBack}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+                className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-3 rounded-full shadow-sm hover:scale-110 transition-transform duration-300"
               >
                 <ArrowLeft className="w-6 h-6 text-white" />
               </button>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold text-[#3E5F44]">
                   <AutoText>{selectedLesson.title}</AutoText>
                 </h1>
-                <p className="text-white/80 text-lg mt-2">
+                <p className="text-[#557063] text-lg mt-2">
                   <AutoText>Class {selectedClass} - {selectedSubject.name}</AutoText>
                 </p>
               </div>
@@ -298,22 +298,22 @@ const Resources = () => {
         {/* Resources Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Textbook */}
-          <div className="group backdrop-blur-xl bg-black/40 border border-blue-500/30 hover:border-blue-400/60 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-black/50">
+          <div className="group bg-white border border-[#93DA97]/30 hover:border-blue-500 rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
             <div className="text-center">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 rounded-full shadow-lg mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <FileText className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-blue-600 transition-colors duration-300">
                 <AutoText>Textbook</AutoText>
               </h3>
-              <p className="text-white/70 mb-6 text-sm">
+              <p className="text-[#557063] mb-6 text-sm">
                 <AutoText>Official curriculum textbook in PDF format</AutoText>
               </p>
               <a
                 href={selectedLesson.resources.textbook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
               >
                 <Download className="w-5 h-5" />
                 <span><AutoText>View Textbook</AutoText></span>
@@ -322,15 +322,15 @@ const Resources = () => {
           </div>
 
           {/* Video */}
-          <div className="group backdrop-blur-xl bg-black/40 border border-red-500/30 hover:border-red-400/60 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-black/50">
+          <div className="group bg-white border border-[#93DA97]/30 hover:border-red-500 rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
             <div className="text-center">
-              <div className="bg-gradient-to-r from-red-500 to-pink-500 p-6 rounded-full shadow-lg mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-gradient-to-r from-red-500 to-pink-500 p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Video className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-red-200 transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-red-600 transition-colors duration-300">
                 <AutoText>Video Lesson</AutoText>
               </h3>
-              <p className="text-white/70 mb-6 text-sm">
+              <p className="text-[#557063] mb-6 text-sm">
                 <AutoText>Interactive video explanation with animations</AutoText>
               </p>
               {selectedLesson.resources.video.includes('youtube.com') ? (
@@ -338,7 +338,7 @@ const Resources = () => {
                   href={selectedLesson.resources.video}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
                 >
                   <Video className="w-5 h-5" />
                   <span><AutoText>Watch Video</AutoText></span>
@@ -346,7 +346,7 @@ const Resources = () => {
               ) : (
                 <button
                   onClick={() => showResourceNotification('video')}
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
                 >
                   <Video className="w-5 h-5" />
                   <span><AutoText>Coming Soon</AutoText></span>
@@ -356,20 +356,20 @@ const Resources = () => {
           </div>
 
           {/* Notes */}
-          <div className="group backdrop-blur-xl bg-black/40 border border-green-500/30 hover:border-green-400/60 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-black/50">
+          <div className="group bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-2xl p-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md">
             <div className="text-center">
-              <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-6 rounded-full shadow-lg mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-sm mx-auto mb-6 w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <BookOpen className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-200 transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-[#3E5F44] mb-4 group-hover:text-[#5E936C] transition-colors duration-300">
                 <AutoText>Study Notes</AutoText>
               </h3>
-              <p className="text-white/70 mb-6 text-sm">
+              <p className="text-[#557063] mb-6 text-sm">
                 <AutoText>Comprehensive study notes and key points</AutoText>
               </p>
               <button
                 onClick={() => showResourceNotification('notes')}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white px-6 py-3 rounded-xl hover:from-[#3E5F44] hover:to-[#5E936C] transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-105"
               >
                 <Download className="w-5 h-5" />
                 <span><AutoText>Coming Soon</AutoText></span>

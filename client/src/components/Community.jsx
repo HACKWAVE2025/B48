@@ -191,36 +191,36 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full shadow-lg">
+            <div className="bg-[#5E936C] p-4 rounded-xl shadow-sm">
               <MessageCircle className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-semibold text-[#3E5F44] mb-2">
             Learning Community
           </h1>
-          <p className="text-white/80 text-lg">
+          <p className="text-gray-600 text-lg">
             Connect, learn, and grow with fellow students
           </p>
           
           {/* Connection Status */}
           <div className="mt-4 flex justify-center">
             <div className={`flex items-center space-x-2 px-4 py-2 rounded-full ${
-              connected ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'
+              connected ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'
             }`}>
-              <div className={`w-2 h-2 rounded-full ${connected ? 'bg-green-400' : 'bg-red-400'}`}></div>
-              <span className="text-sm">
+              <div className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+              <span className="text-sm font-medium">
                 {connected ? 'Connected' : connectionError || 'Disconnected'}
               </span>
             </div>
           </div>
 
           {/* Features */}
-          <div className="mt-6 flex justify-center space-x-6 text-white/60">
+          <div className="mt-6 flex justify-center space-x-6 text-gray-600">
             <div className="flex items-center space-x-2">
               <Calendar className="w-4 h-4" />
               <span className="text-sm">Study Sessions</span>
@@ -242,13 +242,13 @@ const Community = () => {
 
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-1 flex space-x-1 overflow-x-auto">
+          <div className="bg-white border border-[#93DA97]/30 rounded-xl p-1 flex space-x-1 overflow-x-auto shadow-sm">
             <button
               onClick={() => setActiveTab('sessions')}
               className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === 'sessions'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#5E936C] text-white shadow-sm'
+                  : 'text-gray-600 hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <Calendar className="w-4 h-4" />
@@ -259,8 +259,8 @@ const Community = () => {
               onClick={() => setActiveTab('rooms')}
               className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === 'rooms'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#5E936C] text-white shadow-sm'
+                  : 'text-gray-600 hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <MessageCircle className="w-4 h-4" />
@@ -271,8 +271,8 @@ const Community = () => {
               onClick={() => setActiveTab('leaderboard')}
               className={`px-6 py-3 rounded-lg transition-all duration-200 flex items-center space-x-2 whitespace-nowrap ${
                 activeTab === 'leaderboard'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#5E936C] text-white shadow-sm'
+                  : 'text-gray-600 hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <Trophy className="w-4 h-4" />
@@ -293,18 +293,18 @@ const Community = () => {
               
               {/* Create Session Button */}
               <div className="lg:col-span-1">
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-                  <h3 className="text-white font-semibold mb-4">Quick Actions</h3>
+                <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+                  <h3 className="text-[#3E5F44] font-semibold mb-4">Quick Actions</h3>
                   <button
                     onClick={() => setCreateSessionModalOpen(true)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3"
+                    className="w-full bg-[#5E936C] hover:bg-[#3E5F44] text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3 shadow-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Create Session</span>
                   </button>
                   <button
                     onClick={() => setActiveTab('rooms')}
-                    className="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                    className="w-full bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 border border-[#93DA97]/40"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>Chat Rooms</span>
@@ -333,18 +333,18 @@ const Community = () => {
               
               {/* Create Room Button */}
               <div className="lg:col-span-1">
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-                  <h3 className="text-white font-semibold mb-4">Quick Actions</h3>
+                <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 shadow-sm">
+                  <h3 className="text-[#3E5F44] font-semibold mb-4">Quick Actions</h3>
                   <button
                     onClick={() => setCreateRoomModalOpen(true)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3"
+                    className="w-full bg-[#5E936C] hover:bg-[#3E5F44] text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 mb-3 shadow-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Create Room</span>
                   </button>
                   <button
                     onClick={() => setActiveTab('sessions')}
-                    className="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                    className="w-full bg-[#E8FFD7] hover:bg-[#93DA97]/30 text-[#3E5F44] px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 border border-[#93DA97]/40"
                   >
                     <Calendar className="w-4 h-4" />
                     <span>Study Sessions</span>
@@ -390,21 +390,21 @@ const Community = () => {
 
         {/* Loading State */}
         {loading && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-              <p className="text-white">Loading community...</p>
+          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white border border-[#93DA97]/30 rounded-xl p-8 text-center shadow-lg">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5E936C] mx-auto mb-4"></div>
+              <p className="text-[#3E5F44] font-medium">Loading community...</p>
             </div>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="fixed bottom-4 right-4 bg-red-500/20 border border-red-500/30 rounded-lg p-4 text-red-300 max-w-md">
+          <div className="fixed bottom-4 right-4 bg-red-50 border border-red-300 rounded-lg p-4 text-red-700 max-w-md shadow-lg">
             <p className="text-sm">{error}</p>
             <button 
               onClick={() => setError(null)}
-              className="mt-2 text-xs text-red-200 hover:text-red-100"
+              className="mt-2 text-xs text-red-600 hover:text-red-800 underline"
             >
               Dismiss
             </button>

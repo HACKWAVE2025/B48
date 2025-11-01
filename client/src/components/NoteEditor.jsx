@@ -450,7 +450,7 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 	};
 
 	return (
-		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
 			{/* Background particles */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				{[...Array(15)].map((_, i) => (
@@ -463,20 +463,20 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 							animationDelay: `${Math.random() * 3}s`,
 							animationDuration: `${2 + Math.random() * 2}s`,
 						}}>
-						<Star className="w-2 h-2 text-purple-400 opacity-40" />
+						<Star className="w-2 h-2 text-[#5E936C] opacity-40" />
 					</div>
 				))}
 			</div>
 
 			<div className="w-full relative z-10 m-4 max-w-4xl">
 				{/* Header */}
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-6 mb-6 shadow-2xl">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-6 mb-6 shadow-sm">
 					<div className="flex flex-col lg:flex-row items-center justify-between gap-4">
 						<div className="flex items-center space-x-3">
-							<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg shadow-lg">
+							<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg shadow-sm">
 								<FileText className="w-6 h-6 text-white" />
 							</div>
-							<h1 className="text-2xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+							<h1 className="text-2xl font-bold text-[#3E5F44]">
 								<AutoText>Edit Note</AutoText>
 							</h1>
 						</div>
@@ -484,7 +484,7 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 						<div className="flex items-center space-x-3">
 							<button
 								onClick={onCancel}
-								className="flex items-center space-x-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-xl transition-all duration-300">
+								className="flex items-center space-x-2 bg-white border border-[#93DA97]/30 hover:border-[#5E936C] text-[#557063] hover:text-[#3E5F44] px-4 py-2 rounded-xl transition-all duration-300">
 								<ArrowLeft className="w-4 h-4" />
 								<AutoText>Back</AutoText>
 							</button>
@@ -492,7 +492,7 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 							<button
 								onClick={handleSave}
 								disabled={saving}
-								className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+								className="flex items-center space-x-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white px-6 py-2 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
 								<Save className="w-4 h-4" />
 								<AutoText>{saving ? "Saving..." : "Save"}</AutoText>
 							</button>
@@ -501,12 +501,12 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 				</div>
 
 				{/* Editor */}
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm">
 					<div className="space-y-6" onKeyDown={handleKeyDown}>
 						{/* Title and Meta */}
 						<div className="space-y-4">
 							<div>
-								<label className="block text-white/80 text-sm font-medium mb-2">
+								<label className="block text-[#3E5F44] text-sm font-medium mb-2">
 									<AutoText>Title</AutoText>
 								</label>
 								<input
@@ -514,22 +514,22 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
 									placeholder="Enter note title..."
-									className="w-full px-4 py-3 bg-white/10 border border-purple-500/30 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300 text-lg font-medium"
+									className="w-full px-4 py-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#3E5F44] placeholder:text-[#557063]/50 focus:outline-none focus:ring-2 focus:ring-[#5E936C]/20 focus:border-[#5E936C] transition-all duration-300 text-lg font-medium"
 									autoFocus
 								/>
 							</div>
 
 							<div className="flex flex-col sm:flex-row gap-4">
 								<div className="flex-1">
-									<label className="block text-white/80 text-sm font-medium mb-2">
+									<label className="block text-[#3E5F44] text-sm font-medium mb-2">
 										<AutoText>Subject</AutoText>
 									</label>
 									<select
 										value={subject}
 										onChange={(e) => setSubject(e.target.value)}
-										className="w-full px-4 py-3 bg-white/10 border border-purple-500/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300">
+										className="w-full px-4 py-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#3E5F44] focus:outline-none focus:ring-2 focus:ring-[#5E936C]/20 focus:border-[#5E936C] transition-all duration-300">
 										{subjects.map((sub) => (
-											<option key={sub} value={sub} className="bg-gray-800">
+											<option key={sub} value={sub}>
 												{sub}
 											</option>
 										))}
@@ -542,8 +542,8 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 										onClick={() => setIsFavorite(!isFavorite)}
 										className={`flex items-center space-x-2 px-4 py-3 rounded-xl border transition-all duration-300 ${
 											isFavorite
-												? "bg-yellow-500/20 border-yellow-500/50 text-yellow-200"
-												: "bg-white/10 border-purple-500/30 text-white/70 hover:bg-white/20"
+												? "bg-yellow-50 border-yellow-400 text-yellow-700"
+												: "bg-white border-[#93DA97]/30 text-[#557063] hover:bg-[#E8FFD7]"
 										}`}>
 										<Star
 											className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
@@ -556,7 +556,7 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 
 						{/* Content */}
 						<div>
-							<label className="block text-white/80 text-sm font-medium mb-2">
+							<label className="block text-[#3E5F44] text-sm font-medium mb-2">
 								<AutoText>Content</AutoText>
 							</label>
 							<textarea
@@ -564,12 +564,12 @@ const NoteEditor = ({ note, onSave, onCancel }) => {
 								onChange={(e) => setContent(e.target.value)}
 								placeholder="Start writing your note..."
 								rows={20}
-								className="w-full px-4 py-4 bg-white/10 border border-purple-500/30 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300 resize-none font-mono text-sm leading-relaxed"
+								className="w-full px-4 py-4 bg-white border border-[#93DA97]/30 rounded-xl text-[#3E5F44] placeholder:text-[#557063]/50 focus:outline-none focus:ring-2 focus:ring-[#5E936C]/20 focus:border-[#5E936C] transition-all duration-300 resize-none font-mono text-sm leading-relaxed"
 							/>
 						</div>
 
 						{/* Save Shortcut Info */}
-						<div className="text-center text-white/50 text-sm">
+						<div className="text-center text-[#557063] text-sm">
 							<AutoText>Press Ctrl+S (Cmd+S on Mac) to save quickly</AutoText>
 						</div>
 					</div>

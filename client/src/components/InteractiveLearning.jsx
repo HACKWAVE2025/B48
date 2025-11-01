@@ -555,30 +555,30 @@ const InteractiveLearning = () => {
       <div className="text-center space-y-4">
         <AutoText 
           tag="h2"
-          className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+          className="text-3xl font-bold text-[#3E5F44]"
         >
           Interactive Flashcards
         </AutoText>
-        <p className="text-white/70">Master concepts with spaced repetition</p>
+        <p className="text-[#557063]">Master concepts with spaced repetition</p>
       </div>
 
       {/* Stats Bar */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="backdrop-blur-xl bg-white/5 border border-purple-500/30 rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-purple-400">{studyStats.cardsReviewed}</div>
-          <div className="text-xs text-white/60">Cards Reviewed</div>
+        <div className="bg-white border border-[#93DA97]/30 rounded-xl p-4 text-center shadow-sm">
+          <div className="text-2xl font-bold text-[#5E936C]">{studyStats.cardsReviewed}</div>
+          <div className="text-xs text-[#557063]">Cards Reviewed</div>
         </div>
-        <div className="backdrop-blur-xl bg-white/5 border border-green-500/30 rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-green-400">{studyStats.accuracy}%</div>
-          <div className="text-xs text-white/60">Accuracy</div>
+        <div className="bg-white border border-green-500/30 rounded-xl p-4 text-center shadow-sm">
+          <div className="text-2xl font-bold text-green-600">{studyStats.accuracy}%</div>
+          <div className="text-xs text-[#557063]">Accuracy</div>
         </div>
-        <div className="backdrop-blur-xl bg-white/5 border border-orange-500/30 rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-orange-400">{studyStats.streak}</div>
-          <div className="text-xs text-white/60">Current Streak</div>
+        <div className="bg-white border border-orange-500/30 rounded-xl p-4 text-center shadow-sm">
+          <div className="text-2xl font-bold text-orange-600">{studyStats.streak}</div>
+          <div className="text-xs text-[#557063]">Current Streak</div>
         </div>
-        <div className="backdrop-blur-xl bg-white/5 border border-cyan-500/30 rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-cyan-400">{flashcards.length}</div>
-          <div className="text-xs text-white/60">Total Cards</div>
+        <div className="bg-white border border-cyan-500/30 rounded-xl p-4 text-center shadow-sm">
+          <div className="text-2xl font-bold text-cyan-600">{flashcards.length}</div>
+          <div className="text-xs text-[#557063]">Total Cards</div>
         </div>
       </div>
 
@@ -586,7 +586,7 @@ const InteractiveLearning = () => {
       <div className="flex justify-center space-x-4">
         <button
           onClick={shuffleCards}
-          className="flex items-center space-x-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 rounded-xl px-4 py-2 text-purple-300 hover:text-purple-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-xl px-4 py-2 text-[#5E936C] hover:text-[#3E5F44] transition-all duration-200"
         >
           <Shuffle className="w-4 h-4" />
           <span>Shuffle</span>
@@ -595,8 +595,8 @@ const InteractiveLearning = () => {
           onClick={() => setAutoAdvance(!autoAdvance)}
           className={`flex items-center space-x-2 border rounded-xl px-4 py-2 transition-all duration-200 ${
             autoAdvance 
-              ? 'bg-green-600/20 border-green-500/40 text-green-300' 
-              : 'bg-gray-600/20 border-gray-500/40 text-gray-300'
+              ? 'bg-green-50 border-green-500 text-green-700' 
+              : 'bg-white border-[#93DA97] text-[#557063]'
           }`}
         >
           <Zap className="w-4 h-4" />
@@ -610,7 +610,7 @@ const InteractiveLearning = () => {
           <div className="relative">
             {/* Card Counter */}
             <div className="text-center mb-4">
-              <span className="text-white/60">
+              <span className="text-[#557063]">
                 {currentCard + 1} of {flashcards.length}
               </span>
             </div>
@@ -623,28 +623,28 @@ const InteractiveLearning = () => {
               onClick={() => setIsFlipped(!isFlipped)}
             >
               {/* Front of card */}
-              <div className="absolute inset-0 backface-hidden backdrop-blur-xl bg-purple-600/20 border border-purple-500/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div className="absolute inset-0 backface-hidden bg-white border border-[#93DA97]/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-md transition-shadow duration-200">
                 <div className="mb-4">
-                  <span className="bg-purple-500/30 text-purple-200 px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-[#E8FFD7] text-[#5E936C] px-3 py-1 rounded-full text-xs font-medium border border-[#93DA97]/30">
                     {flashcards[currentCard]?.subject}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-4">
+                <h3 className="text-xl font-semibold text-[#3E5F44] mb-4">
                   {flashcards[currentCard]?.question}
                 </h3>
-                <p className="text-white/60 text-sm">Click to reveal answer</p>
+                <p className="text-[#557063] text-sm">Click to reveal answer</p>
               </div>
 
               {/* Back of card */}
-              <div className="absolute inset-0 backface-hidden rotate-y-180 backdrop-blur-xl bg-green-600/20 border border-green-500/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-white border border-green-500/30 rounded-2xl p-8 flex flex-col justify-center items-center text-center shadow-sm">
                 <div className="mb-4">
-                  <Lightbulb className="w-8 h-8 text-green-400 mx-auto" />
+                  <Lightbulb className="w-8 h-8 text-green-600 mx-auto" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-4">
+                <h3 className="text-lg font-semibold text-[#3E5F44] mb-4">
                 
                   {flashcards[currentCard]?.answer}
                 </h3>
-                <p className="text-white/60 text-sm">How did you do?</p>
+                <p className="text-[#557063] text-sm">How did you do?</p>
               </div>
             </div>
 
@@ -652,7 +652,7 @@ const InteractiveLearning = () => {
             <div className="flex justify-between items-center mt-6">
               <button
                 onClick={prevCard}
-                className="flex items-center space-x-2 bg-gray-600/20 hover:bg-gray-600/30 border border-gray-500/40 rounded-xl px-4 py-2 text-gray-300 hover:text-white transition-all duration-200"
+                className="flex items-center space-x-2 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 rounded-xl px-4 py-2 text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Previous</span>
@@ -663,14 +663,14 @@ const InteractiveLearning = () => {
                 <div className="flex space-x-3">
                   <button
                     onClick={() => handleCardResponse(false)}
-                    className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 rounded-xl px-4 py-2 text-red-300 hover:text-red-200 transition-all duration-200"
+                    className="flex items-center space-x-2 bg-red-50 hover:bg-red-100 border border-red-300 rounded-xl px-4 py-2 text-red-700 hover:text-red-800 transition-all duration-200"
                   >
                     <X className="w-4 h-4" />
                     <span>Hard</span>
                   </button>
                   <button
                     onClick={() => handleCardResponse(true)}
-                    className="flex items-center space-x-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 rounded-xl px-4 py-2 text-green-300 hover:text-green-200 transition-all duration-200"
+                    className="flex items-center space-x-2 bg-green-50 hover:bg-green-100 border border-green-300 rounded-xl px-4 py-2 text-green-700 hover:text-green-800 transition-all duration-200"
                   >
                     <Check className="w-4 h-4" />
                     <span>Easy</span>
@@ -680,7 +680,7 @@ const InteractiveLearning = () => {
 
               <button
                 onClick={nextCard}
-                className="flex items-center space-x-2 bg-gray-600/20 hover:bg-gray-600/30 border border-gray-500/40 rounded-xl px-4 py-2 text-gray-300 hover:text-white transition-all duration-200"
+                className="flex items-center space-x-2 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 rounded-xl px-4 py-2 text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />
@@ -699,24 +699,24 @@ const InteractiveLearning = () => {
       <div className="text-center space-y-4">
         <AutoText 
           tag="h2"
-          className="text-3xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent"
+          className="text-3xl font-bold text-[#3E5F44]"
         >
           Pomodoro Timer
         </AutoText>
-        <p className="text-white/70">Stay focused with timed study sessions</p>
+        <p className="text-[#557063]">Stay focused with timed study sessions</p>
       </div>
 
       {/* Timer Display */}
       <div className="max-w-md mx-auto">
-        <div className="backdrop-blur-xl bg-white/5 border border-purple-500/30 rounded-3xl p-8 text-center space-y-6">
+        <div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 text-center space-y-6 shadow-sm">
           {/* Mode Indicator */}
           <div className="flex justify-center">
             <span className={`px-4 py-2 rounded-full text-sm font-medium ${
               timerMode === 'work' 
-                ? 'bg-red-500/30 text-red-200'
+                ? 'bg-red-50 text-red-700 border border-red-300'
                 : timerMode === 'break'
-                ? 'bg-green-500/30 text-green-200'
-                : 'bg-blue-500/30 text-blue-200'
+                ? 'bg-green-50 text-green-700 border border-green-300'
+                : 'bg-blue-50 text-blue-700 border border-blue-300'
             }`}>
               {timerMode === 'work' ? 'Work Time' : timerMode === 'break' ? 'Short Break' : 'Long Break'}
             </span>
@@ -724,14 +724,14 @@ const InteractiveLearning = () => {
 
           {/* Timer */}
           <div className="relative">
-            <div className="text-6xl font-mono font-bold text-white">
+            <div className="text-6xl font-mono font-bold text-[#3E5F44]">
               {formatTime(timeLeft)}
             </div>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div 
-                className="w-32 h-32 rounded-full border-4 border-purple-500/30"
+                className="w-32 h-32 rounded-full border-4 border-[#93DA97]/30"
                 style={{
-                  background: `conic-gradient(from 0deg, purple ${((timerMode === 'work' ? 25*60 : timerMode === 'break' ? 5*60 : 15*60) - timeLeft) / (timerMode === 'work' ? 25*60 : timerMode === 'break' ? 5*60 : 15*60) * 360}deg, transparent 0deg)`
+                  background: `conic-gradient(from 0deg, #5E936C ${((timerMode === 'work' ? 25*60 : timerMode === 'break' ? 5*60 : 15*60) - timeLeft) / (timerMode === 'work' ? 25*60 : timerMode === 'break' ? 5*60 : 15*60) * 360}deg, transparent 0deg)`
                 }}
               />
             </div>
@@ -743,8 +743,8 @@ const InteractiveLearning = () => {
               onClick={() => setIsRunning(!isRunning)}
               className={`p-4 rounded-full transition-all duration-200 ${
                 isRunning 
-                  ? 'bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 text-red-300'
-                  : 'bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 text-green-300'
+                  ? 'bg-red-50 hover:bg-red-100 border border-red-300 text-red-700'
+                  : 'bg-green-50 hover:bg-green-100 border border-green-300 text-green-700'
               }`}
             >
               {isRunning ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
@@ -755,7 +755,7 @@ const InteractiveLearning = () => {
                 setIsRunning(false);
                 setTimeLeft(timerMode === 'work' ? 25*60 : timerMode === 'break' ? 5*60 : 15*60);
               }}
-              className="p-4 rounded-full bg-gray-600/20 hover:bg-gray-600/30 border border-gray-500/40 text-gray-300 hover:text-white transition-all duration-200"
+              className="p-4 rounded-full bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
             >
               <RotateCcw className="w-6 h-6" />
             </button>
@@ -764,8 +764,8 @@ const InteractiveLearning = () => {
               onClick={() => setSoundEnabled(!soundEnabled)}
               className={`p-4 rounded-full border transition-all duration-200 ${
                 soundEnabled 
-                  ? 'bg-purple-600/20 border-purple-500/40 text-purple-300'
-                  : 'bg-gray-600/20 border-gray-500/40 text-gray-300'
+                  ? 'bg-[#E8FFD7] border-[#5E936C] text-[#5E936C]'
+                  : 'bg-white border-[#93DA97]/30 text-[#557063]'
               }`}
             >
               {soundEnabled ? <Volume2 className="w-6 h-6" /> : <VolumeX className="w-6 h-6" />}
@@ -775,12 +775,12 @@ const InteractiveLearning = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-purple-400">{cycles}</div>
-              <div className="text-xs text-white/60">Cycles Complete</div>
+              <div className="text-2xl font-bold text-[#5E936C]">{cycles}</div>
+              <div className="text-xs text-[#557063]">Cycles Complete</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-cyan-400">{Math.floor(studyStats.totalStudyTime / 60)}</div>
-              <div className="text-xs text-white/60">Minutes Studied</div>
+              <div className="text-2xl font-bold text-cyan-600">{Math.floor(studyStats.totalStudyTime / 60)}</div>
+              <div className="text-xs text-[#557063]">Minutes Studied</div>
             </div>
           </div>
         </div>
@@ -795,11 +795,11 @@ const InteractiveLearning = () => {
       <div className="text-center space-y-4">
         <AutoText 
           tag="h2"
-          className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+          className="text-3xl font-bold text-[#3E5F44]"
         >
           Interactive Mind Map
         </AutoText>
-        <p className="text-white/70">Visualize and connect your ideas</p>
+        <p className="text-[#557063]">Visualize and connect your ideas</p>
       </div>
 
       {/* Enhanced Toolbar */}
@@ -813,7 +813,7 @@ const InteractiveLearning = () => {
             const randomY = centerY + (Math.random() - 0.5) * 300;
             addNode(randomX, randomY);
           }}
-          className="flex items-center space-x-2 bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/40 rounded-xl px-4 py-2 text-cyan-300 hover:text-cyan-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-xl px-4 py-2 text-[#5E936C] hover:text-[#3E5F44] transition-all duration-200"
         >
           <Plus className="w-4 h-4" />
           <span>Add Node</span>
@@ -831,8 +831,8 @@ const InteractiveLearning = () => {
           }}
           className={`flex items-center space-x-2 border rounded-xl px-4 py-2 transition-all duration-200 ${
             isConnecting 
-              ? 'bg-green-600/20 border-green-500/40 text-green-300 ring-2 ring-green-500/50' 
-              : 'bg-blue-600/20 border-blue-500/40 text-blue-300 hover:bg-blue-600/30'
+              ? 'bg-green-50 border-green-500 text-green-700 ring-2 ring-green-500/50' 
+              : 'bg-white border-blue-500 text-blue-700 hover:bg-blue-50'
           }`}
         >
           <Link className="w-4 h-4" />
@@ -841,7 +841,7 @@ const InteractiveLearning = () => {
 
         {/* Connection info */}
         {isConnecting && (
-          <div className="flex items-center space-x-2 bg-yellow-600/20 border border-yellow-500/40 rounded-xl px-4 py-2 text-yellow-300">
+          <div className="flex items-center space-x-2 bg-yellow-50 border border-yellow-400 rounded-xl px-4 py-2 text-yellow-700">
             <span className="animate-pulse">●</span>
             <span className="text-sm">
               {connectingFrom ? 'Select target node' : 'Select first node'}
@@ -852,7 +852,7 @@ const InteractiveLearning = () => {
         {selectedNode && !isConnecting && (
           <button
             onClick={() => deleteNode(selectedNode)}
-            className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 rounded-xl px-4 py-2 text-red-300 hover:text-red-200 transition-all duration-200"
+            className="flex items-center space-x-2 bg-red-50 hover:bg-red-100 border border-red-300 rounded-xl px-4 py-2 text-red-700 hover:text-red-800 transition-all duration-200"
           >
             <Trash2 className="w-4 h-4" />
             <span>Delete Node</span>
@@ -860,7 +860,7 @@ const InteractiveLearning = () => {
         )}
 
         {connections.length > 0 && (
-          <div className="flex items-center space-x-2 bg-purple-600/20 border border-purple-500/40 rounded-xl px-4 py-2 text-purple-300">
+          <div className="flex items-center space-x-2 bg-purple-50 border border-purple-300 rounded-xl px-4 py-2 text-purple-700">
             <Link className="w-4 h-4" />
             <span className="text-sm">{connections.length} connections</span>
           </div>
@@ -869,16 +869,16 @@ const InteractiveLearning = () => {
         <div className="flex items-center space-x-2">
           <button
             onClick={() => setMindMapScale(Math.max(0.5, mindMapScale - 0.1))}
-            className="p-2 bg-gray-600/20 hover:bg-gray-600/30 border border-gray-500/40 rounded-lg text-gray-300 hover:text-white transition-all duration-200"
+            className="p-2 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 rounded-lg text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="text-white/70 text-sm min-w-[60px] text-center">
+          <span className="text-[#557063] text-sm min-w-[60px] text-center">
             {Math.round(mindMapScale * 100)}%
           </span>
           <button
             onClick={() => setMindMapScale(Math.min(2, mindMapScale + 0.1))}
-            className="p-2 bg-gray-600/20 hover:bg-gray-600/30 border border-gray-500/40 rounded-lg text-gray-300 hover:text-white transition-all duration-200"
+            className="p-2 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/30 rounded-lg text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -886,7 +886,7 @@ const InteractiveLearning = () => {
 
         <button
           onClick={saveMindMap}
-          className="flex items-center space-x-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 rounded-xl px-4 py-2 text-purple-300 hover:text-purple-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-purple-50 hover:bg-purple-100 border border-purple-300 rounded-xl px-4 py-2 text-purple-700 hover:text-purple-800 transition-all duration-200"
         >
           <Save className="w-4 h-4" />
           <span>Save</span>
@@ -894,7 +894,7 @@ const InteractiveLearning = () => {
 
         <button
           onClick={loadMindMap}
-          className="flex items-center space-x-2 bg-orange-600/20 hover:bg-orange-600/30 border border-orange-500/40 rounded-xl px-4 py-2 text-orange-300 hover:text-orange-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-orange-50 hover:bg-orange-100 border border-orange-300 rounded-xl px-4 py-2 text-orange-700 hover:text-orange-800 transition-all duration-200"
         >
           <Upload className="w-4 h-4" />
           <span>Load</span>
@@ -902,7 +902,7 @@ const InteractiveLearning = () => {
 
         <button
           onClick={exportMindMap}
-          className="flex items-center space-x-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/40 rounded-xl px-4 py-2 text-green-300 hover:text-green-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-green-50 hover:bg-green-100 border border-green-300 rounded-xl px-4 py-2 text-green-700 hover:text-green-800 transition-all duration-200"
         >
           <Download className="w-4 h-4" />
           <span>Export</span>
@@ -910,7 +910,7 @@ const InteractiveLearning = () => {
 
         <button
           onClick={clearMindMap}
-          className="flex items-center space-x-2 bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 rounded-xl px-4 py-2 text-red-300 hover:text-red-200 transition-all duration-200"
+          className="flex items-center space-x-2 bg-red-50 hover:bg-red-100 border border-red-300 rounded-xl px-4 py-2 text-red-700 hover:text-red-800 transition-all duration-200"
         >
           <Trash2 className="w-4 h-4" />
           <span>Clear</span>
@@ -918,11 +918,11 @@ const InteractiveLearning = () => {
       </div>
 
       {/* Enhanced Instructions */}
-      <div className="text-center text-white/60 text-sm space-y-1">
+      <div className="text-center text-[#557063] text-sm space-y-1">
         <p>🎯 Double-click canvas to add nodes • Double-click nodes to edit • Drag to move</p>
         <p>🔗 Click "Connect Nodes" then click two nodes to link them • Click connection lines to delete</p>
         {isConnecting && (
-          <p className="text-yellow-400 font-medium animate-pulse">
+          <p className="text-yellow-700 font-medium animate-pulse">
             Connection mode active! {connectingFrom ? 'Select target node' : 'Select first node'}
           </p>
         )}
@@ -932,7 +932,7 @@ const InteractiveLearning = () => {
       <div className="relative">
         <div 
           ref={mindMapRef}
-          className="backdrop-blur-xl bg-white/5 border border-cyan-500/30 rounded-2xl relative overflow-hidden"
+          className="bg-white border border-[#93DA97]/30 rounded-2xl relative overflow-hidden shadow-sm"
           style={{ 
             height: '600px',
             cursor: isConnecting ? 'crosshair' : 'default'
@@ -1055,13 +1055,13 @@ const InteractiveLearning = () => {
 
           {/* Enhanced status indicators */}
           {selectedNode && !isConnecting && (
-            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 text-white text-sm">
+            <div className="absolute top-4 left-4 bg-white border border-[#93DA97]/30 rounded-lg px-3 py-2 text-[#3E5F44] text-sm shadow-sm">
               Selected: {mindMapNodes.find(n => n.id === selectedNode)?.text}
             </div>
           )}
 
           {isConnecting && (
-            <div className="absolute top-4 right-4 bg-yellow-600/80 backdrop-blur-sm rounded-lg px-3 py-2 text-white text-sm flex items-center space-x-2">
+            <div className="absolute top-4 right-4 bg-yellow-50 border border-yellow-400 rounded-lg px-3 py-2 text-yellow-700 text-sm flex items-center space-x-2 shadow-sm">
               <span className="animate-pulse">⚡</span>
               <span>
                 {connectingFrom 
@@ -1074,7 +1074,7 @@ const InteractiveLearning = () => {
 
           {/* Debug info for connections */}
           {connections.length > 0 && (
-            <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 text-white text-xs">
+            <div className="absolute bottom-4 left-4 bg-white border border-[#93DA97]/30 rounded-lg px-3 py-2 text-[#557063] text-xs shadow-sm">
               Connections: {connections.length}
             </div>
           )}
@@ -1083,23 +1083,23 @@ const InteractiveLearning = () => {
 
       {/* Enhanced Legend */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
-        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl px-4 py-2 text-cyan-300">
+        <div className="bg-cyan-50 border border-cyan-300 rounded-xl px-4 py-2 text-cyan-700">
           🎯 Interactive Nodes
         </div>
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl px-4 py-2 text-purple-300">
+        <div className="bg-purple-50 border border-purple-300 rounded-xl px-4 py-2 text-purple-700">
           🔗 Smart Connections
         </div>
-        <div className="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-2 text-green-300">
+        <div className="bg-green-50 border border-green-300 rounded-xl px-4 py-2 text-green-700">
           ✨ Drag & Drop
         </div>
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl px-4 py-2 text-blue-300">
+        <div className="bg-blue-50 border border-blue-300 rounded-xl px-4 py-2 text-blue-700">
           💾 Save & Export
         </div>
       </div>
 
       {/* Connection Statistics */}
       {connections.length > 0 && (
-        <div className="text-center text-white/60 text-sm">
+        <div className="text-center text-[#557063] text-sm">
           <p>Mind map has {mindMapNodes.length} nodes and {connections.length} connections</p>
         </div>
       )}
@@ -1136,13 +1136,13 @@ const InteractiveLearning = () => {
 
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-purple-500/20 rounded-full animate-float"
+            className="absolute w-2 h-2 bg-[#5E936C]/20 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -1151,7 +1151,7 @@ const InteractiveLearning = () => {
             }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-pink-900/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#5E936C]/5 to-[#93DA97]/5" />
       </div>
 
       {/* Header */}
@@ -1159,7 +1159,7 @@ const InteractiveLearning = () => {
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center space-x-2 bg-white/5 hover:bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white/70 hover:text-white transition-all duration-200"
+            className="flex items-center space-x-2 bg-white border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl px-4 py-2 text-[#557063] hover:text-[#3E5F44] transition-all duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back</span>
@@ -1167,7 +1167,7 @@ const InteractiveLearning = () => {
           
           <AutoText 
             tag="h1"
-            className="text-2xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-[#3E5F44]"
           >
             Interactive Learning Tools
           </AutoText>
@@ -1179,13 +1179,13 @@ const InteractiveLearning = () => {
       {/* Navigation Tabs */}
       <div className="relative z-10 px-6 mb-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center space-x-2 backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-2xl p-2">
+          <div className="flex justify-center space-x-2 bg-white border border-[#93DA97]/30 rounded-2xl p-2 shadow-sm">
             <button
               onClick={() => setActiveTab('flashcards')}
               className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 activeTab === 'flashcards'
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <Brain className="w-4 h-4" />
@@ -1196,8 +1196,8 @@ const InteractiveLearning = () => {
               onClick={() => setActiveTab('pomodoro')}
               className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 activeTab === 'pomodoro'
-                  ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <Timer className="w-4 h-4" />
@@ -1208,8 +1208,8 @@ const InteractiveLearning = () => {
               onClick={() => setActiveTab('mindmap')}
               className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 activeTab === 'mindmap'
-                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-sm'
+                  : 'text-[#557063] hover:text-[#3E5F44] hover:bg-[#E8FFD7]'
               }`}
             >
               <Layers className="w-4 h-4" />

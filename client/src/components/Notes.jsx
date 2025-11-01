@@ -698,7 +698,7 @@ const Notes = () => {
 	}
 
 	return (
-		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative">
+		<div className="w-full h-full flex items-center justify-center px-5 py-4 relative bg-gradient-to-br from-[#E8FFD7] to-white min-h-screen">
 			{/* Background particles */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				{[...Array(20)].map((_, i) => (
@@ -711,34 +711,34 @@ const Notes = () => {
 							animationDelay: `${Math.random() * 3}s`,
 							animationDuration: `${2 + Math.random() * 2}s`,
 						}}>
-						<Star className="w-2 h-2 text-purple-400 opacity-60" />
+						<Star className="w-2 h-2 text-[#5E936C] opacity-60" />
 					</div>
 				))}
 			</div>
 
 			<div className="w-full relative z-10 m-4">
 				{/* Header */}
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-6 mb-8 shadow-2xl">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-6 mb-8 shadow-sm">
 					<div className="flex flex-col lg:flex-row items-center gap-4">
 						{/* Title */}
 						<div className="flex items-center space-x-3 flex-shrink-0">
-							<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg shadow-lg">
+							<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg shadow-sm">
 								<FileText className="w-6 h-6 text-white" />
 							</div>
-							<h1 className="text-2xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+							<h1 className="text-2xl font-bold text-[#3E5F44]">
 								<AutoText>My Notes</AutoText>
 							</h1>
 						</div>
 
 						{/* Search */}
 						<div className="relative flex-1 min-w-0">
-							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
+							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#557063]/50" />
 							<input
 								type="text"
 								placeholder="Search notes..."
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
-								className="w-full pl-10 pr-4 py-3 bg-white/10 border border-purple-500/30 rounded-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300"
+								className="w-full pl-10 pr-4 py-3 bg-white border border-[#93DA97]/30 rounded-xl text-[#3E5F44] placeholder:text-[#557063]/50 focus:outline-none focus:ring-2 focus:ring-[#5E936C]/20 focus:border-[#5E936C] transition-all duration-300"
 							/>
 						</div>
 
@@ -747,12 +747,12 @@ const Notes = () => {
 							<select
 								value={selectedSubject}
 								onChange={(e) => setSelectedSubject(e.target.value)}
-								className="bg-white/10 border border-purple-500/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500/50 backdrop-blur-sm transition-all duration-300 min-w-[140px]">
-								<option value="all" className="bg-gray-800">
+								className="bg-white border border-[#93DA97]/30 rounded-xl px-4 py-3 text-[#3E5F44] focus:outline-none focus:border-[#5E936C] transition-all duration-300 min-w-[140px]">
+								<option value="all">
 									All Subjects
 								</option>
 								{subjects.map((subject) => (
-									<option key={subject} value={subject} className="bg-gray-800">
+									<option key={subject} value={subject}>
 										{subject}
 									</option>
 								))}
@@ -762,10 +762,10 @@ const Notes = () => {
 						{/* Favorites Filter Button */}
 						<button
 							onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-							className={`flex items-center space-x-2 px-4 py-3 rounded-xl border transition-all duration-300 backdrop-blur-sm flex-shrink-0 ${
+							className={`flex items-center space-x-2 px-4 py-3 rounded-xl border transition-all duration-300 flex-shrink-0 ${
 								showFavoritesOnly
-									? "bg-yellow-500/20 border-yellow-500/50 text-yellow-200"
-									: "bg-white/10 border-purple-500/30 text-white hover:bg-white/20"
+									? "bg-yellow-50 border-yellow-400 text-yellow-700"
+									: "bg-white border-[#93DA97]/30 text-[#557063] hover:bg-[#E8FFD7]"
 							}`}>
 							<Star
 								className={`w-4 h-4 ${showFavoritesOnly ? "fill-current" : ""}`}
@@ -776,7 +776,7 @@ const Notes = () => {
 						{/* New Note Button */}
 						<button
 							onClick={createNewNote}
-							className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex-shrink-0">
+							className="flex items-center space-x-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] text-white px-6 py-3 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 flex-shrink-0">
 							<Plus className="w-5 h-5" />
 							<AutoText>New Note</AutoText>
 						</button>
@@ -784,22 +784,22 @@ const Notes = () => {
 				</div>
 
 				{/* Notes Grid */}
-				<div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl">
+				<div className="bg-white border border-[#93DA97]/30 rounded-3xl p-8 shadow-sm">
 					{loading ? (
 						<div className="flex justify-center items-center h-64">
-							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5E936C]"></div>
 						</div>
 					) : error ? (
-						<div className="text-center text-red-400 py-8">
+						<div className="text-center text-red-600 py-8">
 							<AutoText>{error}</AutoText>
 						</div>
 					) : notes.length === 0 ? (
-						<div className="text-center text-white/60 py-12">
+						<div className="text-center text-[#557063] py-12">
 							<FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
-							<h3 className="text-xl font-medium mb-2">
+							<h3 className="text-xl font-medium mb-2 text-[#3E5F44]">
 								<AutoText>No notes found</AutoText>
 							</h3>
-							<p className="text-white/40">
+							<p className="text-[#557063]">
 								<AutoText>Create your first note to get started</AutoText>
 							</p>
 						</div>
@@ -808,11 +808,11 @@ const Notes = () => {
 							{notes.map((note) => (
 								<div
 									key={note._id}
-									className="group p-6 bg-white/10 hover:bg-white/20 border border-purple-500/30 hover:border-purple-400/50 rounded-xl transition-all duration-300 backdrop-blur-sm hover:scale-105 hover:shadow-xl cursor-pointer"
+									className="group p-6 bg-white hover:bg-[#E8FFD7]/30 border border-[#93DA97]/30 hover:border-[#5E936C] rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
 									onClick={() => selectNote(note._id)}>
 									{/* Note Header */}
 									<div className="flex items-start justify-between mb-4">
-										<div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
+										<div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
 											<FileText className="w-5 h-5 text-white" />
 										</div>
 										<div className="flex items-center space-x-1 opacity-70 group-hover:opacity-100 transition-opacity">
@@ -823,8 +823,8 @@ const Notes = () => {
 												}}
 												className={`p-2 rounded-lg transition-all duration-200 ${
 													note.isFavorite
-														? "text-yellow-400 bg-yellow-400/20"
-														: "text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10"
+														? "text-yellow-600 bg-yellow-50"
+														: "text-[#557063] hover:text-yellow-600 hover:bg-yellow-50"
 												}`}>
 												<Star
 													className="w-4 h-4"
@@ -836,37 +836,37 @@ const Notes = () => {
 													e.stopPropagation();
 													deleteNote(note._id);
 												}}
-												className="p-2 rounded-lg text-white/60 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200">
+												className="p-2 rounded-lg text-[#557063] hover:text-red-600 hover:bg-red-50 transition-all duration-200">
 												<Trash2 className="w-4 h-4" />
 											</button>
 										</div>
 									</div>
 
-									<h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-200 transition-colors duration-300 line-clamp-2">
+									<h3 className="text-lg font-bold text-[#3E5F44] mb-2 group-hover:text-[#5E936C] transition-colors duration-300 line-clamp-2">
 										<AutoText>{note.title}</AutoText>
 									</h3>
 
 									{/* Note Preview */}
-									<p className="text-white/70 text-sm mb-4 line-clamp-3">
+									<p className="text-[#557063] text-sm mb-4 line-clamp-3">
 										<AutoText>{getContentPreview(note.content)}</AutoText>
 									</p>
 
 									{/* Subject Badge */}
 									<div className="flex items-center justify-between mb-3">
-										<span className="px-3 py-1 bg-purple-600/30 text-purple-200 text-xs font-medium rounded-full">
+										<span className="px-3 py-1 bg-[#E8FFD7] text-[#5E936C] text-xs font-medium rounded-full border border-[#93DA97]/30">
 											<AutoText>{note.subject}</AutoText>
 										</span>
 									</div>
 
 									{/* Date */}
 									<div className="flex items-center justify-between">
-										<span className="text-white/50 text-xs flex items-center gap-1">
+										<span className="text-[#557063] text-xs flex items-center gap-1">
 											<Calendar className="w-3 h-3" />
 											<AutoText>
 												{new Date(note.updatedAt).toLocaleDateString()}
 											</AutoText>
 										</span>
-										<Edit3 className="w-4 h-4 text-white/40 group-hover:text-purple-400 transition-colors" />
+										<Edit3 className="w-4 h-4 text-[#557063]/40 group-hover:text-[#5E936C] transition-colors" />
 									</div>
 								</div>
 							))}

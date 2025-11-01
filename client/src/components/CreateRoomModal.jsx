@@ -82,46 +82,46 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 border border-white/20 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white border border-[#93DA97]/30 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-xl">
         {/* Header */}
-        <div className="p-6 border-b border-white/20 flex items-center justify-between">
+        <div className="p-6 border-b border-[#93DA97]/30 flex items-center justify-between bg-gradient-to-r from-[#5E936C] to-[#93DA97] rounded-t-2xl">
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-lg">
+            <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
               <Plus className="w-5 h-5 text-white" />
             </div>
             <h2 className="text-xl font-bold text-white">Create New Room</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-white/80 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
           {/* Error Display */}
           {error && (
-            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 text-red-300 text-sm">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 text-red-600 text-sm">
               {error}
             </div>
           )}
 
           {/* Room Name */}
           <div>
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-[#3E5F44] font-medium mb-2">
               Room Name *
             </label>
             <div className="relative">
-              <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
+              <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#557063]" />
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Enter room name"
-                className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-purple-500"
+                className="w-full bg-white border border-[#93DA97]/50 rounded-lg pl-10 pr-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C]"
                 required
                 maxLength={50}
               />
@@ -130,20 +130,20 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
           {/* Subject */}
           <div>
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-[#3E5F44] font-medium mb-2">
               Subject *
             </label>
             <div className="relative">
-              <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
+              <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#557063]" />
               <select
                 name="subject"
                 value={formData.subject}
                 onChange={handleInputChange}
-                className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white focus:outline-none focus:border-purple-500 appearance-none"
+                className="w-full bg-white border border-[#93DA97]/50 rounded-lg pl-10 pr-4 py-3 text-[#3E5F44] focus:outline-none focus:border-[#5E936C] appearance-none"
                 required
               >
                 {subjects.map(subject => (
-                  <option key={subject} value={subject} className="bg-gray-800">
+                  <option key={subject} value={subject} className="bg-white text-[#3E5F44]">
                     {subject}
                   </option>
                 ))}
@@ -152,19 +152,19 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
           </div>
 
           {/* Subject Preview */}
-          <div className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+          <div className="flex items-center space-x-3 p-3 bg-white border border-[#93DA97]/30 rounded-lg">
             <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${subjectColors[formData.subject]} flex items-center justify-center`}>
               <Hash className="w-4 h-4 text-white" />
             </div>
             <div>
-              <p className="text-white font-medium">{formData.name || 'Room Preview'}</p>
-              <p className="text-white/60 text-sm">{formData.subject}</p>
+              <p className="text-[#3E5F44] font-medium">{formData.name || 'Room Preview'}</p>
+              <p className="text-[#557063] text-sm">{formData.subject}</p>
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-white font-medium mb-2">
+            <label className="block text-[#3E5F44] font-medium mb-2">
               Description
             </label>
             <textarea
@@ -172,32 +172,32 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
               value={formData.description}
               onChange={handleInputChange}
               placeholder="Describe what this room is about..."
-              className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-purple-500 resize-none"
+              className="w-full bg-white border border-[#93DA97]/50 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none"
               rows={3}
               maxLength={200}
             />
-            <p className="text-white/60 text-xs mt-1">
+            <p className="text-[#557063] text-xs mt-1">
               {formData.description.length}/200 characters
             </p>
           </div>
 
           {/* Room Settings */}
           <div className="space-y-4">
-            <h3 className="text-white font-medium">Room Settings</h3>
+            <h3 className="text-[#3E5F44] font-medium">Room Settings</h3>
             
             {/* Privacy */}
-            <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-white border border-[#93DA97]/30 rounded-lg">
               <div className="flex items-center space-x-3">
                 {formData.isPrivate ? (
-                  <Lock className="w-4 h-4 text-yellow-400" />
+                  <Lock className="w-4 h-4 text-yellow-600" />
                 ) : (
-                  <Globe className="w-4 h-4 text-green-400" />
+                  <Globe className="w-4 h-4 text-green-600" />
                 )}
                 <div>
-                  <p className="text-white font-medium">
+                  <p className="text-[#3E5F44] font-medium">
                     {formData.isPrivate ? 'Private Room' : 'Public Room'}
                   </p>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-[#557063] text-sm">
                     {formData.isPrivate 
                       ? 'Only invited users can join' 
                       : 'Anyone can discover and join'
@@ -213,13 +213,13 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                   onChange={handleInputChange}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-[#5E936C] peer-checked:to-[#93DA97]"></div>
               </label>
             </div>
 
             {/* Max Users */}
             <div>
-              <label className="block text-white font-medium mb-2">
+              <label className="block text-[#3E5F44] font-medium mb-2">
                 <Users className="inline w-4 h-4 mr-2" />
                 Maximum Users: {formData.maxUsers}
               </label>
@@ -231,9 +231,9 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
                 min="10"
                 max="100"
                 step="10"
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+                className="w-full h-2 bg-[#E8FFD7] rounded-lg appearance-none cursor-pointer slider accent-[#5E936C]"
               />
-              <div className="flex justify-between text-white/60 text-xs mt-1">
+              <div className="flex justify-between text-[#557063] text-xs mt-1">
                 <span>10</span>
                 <span>50</span>
                 <span>100</span>
@@ -246,14 +246,14 @@ const CreateRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+              className="flex-1 bg-white border border-[#93DA97]/50 hover:bg-[#E8FFD7] text-[#3E5F44] font-medium py-3 px-4 rounded-lg transition-colors duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading || !formData.name.trim()}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 disabled:cursor-not-allowed"
+              className="flex-1 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#4a7554] hover:to-[#7fc281] disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center space-x-2">

@@ -8,18 +8,18 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, confirm
     switch (type) {
       case 'danger':
         return {
-          icon: <AlertTriangle className="w-12 h-12 text-red-400" />,
-          confirmButton: "bg-red-500/20 hover:bg-red-500/30 border-red-500/40 text-red-200 hover:text-red-100"
+          icon: <AlertTriangle className="w-12 h-12 text-red-500" />,
+          confirmButton: "bg-red-100 hover:bg-red-200 border-red-300 text-red-700 hover:text-red-800"
         };
       case 'warning':
         return {
-          icon: <AlertTriangle className="w-12 h-12 text-yellow-400" />,
-          confirmButton: "bg-yellow-500/20 hover:bg-yellow-500/30 border-yellow-500/40 text-yellow-200 hover:text-yellow-100"
+          icon: <AlertTriangle className="w-12 h-12 text-yellow-500" />,
+          confirmButton: "bg-yellow-100 hover:bg-yellow-200 border-yellow-300 text-yellow-700 hover:text-yellow-800"
         };
       default:
         return {
-          icon: <AlertTriangle className="w-12 h-12 text-blue-400" />,
-          confirmButton: "bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/40 text-blue-200 hover:text-blue-100"
+          icon: <AlertTriangle className="w-12 h-12 text-blue-500" />,
+          confirmButton: "bg-blue-100 hover:bg-blue-200 border-blue-300 text-blue-700 hover:text-blue-800"
         };
     }
   };
@@ -29,32 +29,14 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, confirm
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
       <div className="relative w-full max-w-md">
-        {/* Animated particles background */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
-              }}
-            >
-              <div className="w-1 h-1 bg-white/30 rounded-full"></div>
-            </div>
-          ))}
-        </div>
-
         {/* Modal Content */}
-        <div className="relative bg-gradient-to-br from-purple-900/80 via-blue-900/70 to-indigo-900/80 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-6">
+        <div className="relative bg-white border border-[#93DA97]/30 backdrop-blur-xl rounded-2xl shadow-2xl p-6">
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
+            className="absolute top-4 right-4 p-2 hover:bg-[#E8FFD7] rounded-lg transition-colors duration-200"
           >
-            <X className="w-5 h-5 text-white/70 hover:text-white" />
+            <X className="w-5 h-5 text-[#557063] hover:text-[#3E5F44]" />
           </button>
 
           {/* Content */}
@@ -65,12 +47,12 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, confirm
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-white mb-3">
+            <h3 className="text-xl font-bold text-[#3E5F44] mb-3">
               {title}
             </h3>
 
             {/* Message */}
-            <p className="text-white/80 mb-6 leading-relaxed">
+            <p className="text-[#557063] mb-6 leading-relaxed">
               {message}
             </p>
 
@@ -78,13 +60,13 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, confirm
             <div className="flex space-x-3">
               <button
                 onClick={onClose}
-                className="flex-1 px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-medium transition-all duration-300 backdrop-blur-sm"
+                className="flex-1 px-4 py-3 bg-white hover:bg-[#E8FFD7] border border-[#93DA97]/50 rounded-lg text-[#3E5F44] font-medium transition-all duration-300"
               >
                 {cancelText}
               </button>
               <button
                 onClick={onConfirm}
-                className={`flex-1 px-4 py-3 border rounded-lg font-medium transition-all duration-300 backdrop-blur-sm ${typeStyles.confirmButton}`}
+                className={`flex-1 px-4 py-3 border rounded-lg font-medium transition-all duration-300 ${typeStyles.confirmButton}`}
               >
                 {confirmText}
               </button>

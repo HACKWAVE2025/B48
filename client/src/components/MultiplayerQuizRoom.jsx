@@ -254,24 +254,24 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
     if (!leaderboard) {
       return (
         <div className="max-w-4xl mx-auto p-6 text-center">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-400 border-t-transparent mx-auto mb-6"></div>
-            <h1 className="text-3xl font-bold text-white mb-2">Quiz Submitted!</h1>
-            <p className="text-gray-300 text-lg mb-6">⏳ Waiting for other participants to finish…</p>
+          <div className="bg-white backdrop-blur-sm border border-[#93DA97]/30 rounded-xl p-8 shadow-md">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#5E936C] border-t-transparent mx-auto mb-6"></div>
+            <h1 className="text-3xl font-bold text-[#3E5F44] mb-2">Quiz Submitted!</h1>
+            <p className="text-[#557063] text-lg mb-6">⏳ Waiting for other participants to finish…</p>
             
             {/* Live progress of who has finished */}
             <div className="text-left max-w-md mx-auto space-y-2">
-              <h3 className="text-white font-semibold mb-3">Live Status:</h3>
+              <h3 className="text-[#3E5F44] font-semibold mb-3">Live Status:</h3>
               {liveResults.map(player => (
-                <div key={player.id} className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${player.finished ? 'bg-green-500/20' : 'bg-gray-500/10'}`}>
-                  <span className="text-white">{player.name}</span>
+                <div key={player.id} className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${player.finished ? 'bg-green-100' : 'bg-gray-100'}`}>
+                  <span className="text-[#3E5F44]">{player.name}</span>
                   {player.finished ? (
-                    <span className="flex items-center space-x-2 text-green-400 font-bold">
+                    <span className="flex items-center space-x-2 text-green-600 font-bold">
                       <CheckCircle className="w-5 h-5" />
                       <span>Finished</span>
                     </span>
                   ) : (
-                    <span className="flex items-center space-x-2 text-gray-400">
+                    <span className="flex items-center space-x-2 text-gray-500">
                       <Clock className="w-5 h-5" />
                       <span>Playing...</span>
                     </span>
@@ -288,23 +288,23 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
     return (
       <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-8">
-          <div className="bg-gradient-to-r from-yellow-600 to-orange-600 p-4 rounded-full shadow-lg mx-auto w-16 h-16 flex items-center justify-center mb-4">
+          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 rounded-full shadow-lg mx-auto w-16 h-16 flex items-center justify-center mb-4">
             <Trophy className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Quiz Over!</h1>
-          <p className="text-gray-300">Final Leaderboard for Room: {room.roomId}</p>
+          <h1 className="text-3xl font-bold text-[#3E5F44] mb-2">Quiz Over!</h1>
+          <p className="text-[#557063]">Final Leaderboard for Room: {room.roomId}</p>
         </div>
 
         {/* Winner Display */}
         {leaderboard && leaderboard.length > 0 && (
-            <div className="bg-yellow-500/20 border-2 border-yellow-400 rounded-xl p-6 mb-8 text-center shadow-lg">
-                <h2 className="text-xl font-bold text-yellow-300 mb-2 flex items-center justify-center space-x-2">
+            <div className="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-6 mb-8 text-center shadow-lg">
+                <h2 className="text-xl font-bold text-yellow-700 mb-2 flex items-center justify-center space-x-2">
                     <Crown className="w-6 h-6" />
                     <span>WINNER</span>
                     <Crown className="w-6 h-6" />
                 </h2>
-                <p className="text-3xl font-bold text-white">{leaderboard[0].name}</p>
-                <div className="flex justify-center space-x-6 mt-2 text-white">
+                <p className="text-3xl font-bold text-[#3E5F44]">{leaderboard[0].name}</p>
+                <div className="flex justify-center space-x-6 mt-2 text-[#557063]">
                     <span>Score: <span className="font-bold">{leaderboard[0].score}%</span></span>
                     <span>Time: <span className="font-bold">{leaderboard[0].time.toFixed(2)}s</span></span>
                 </div>
@@ -312,25 +312,25 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
         )}
 
         {/* Full Leaderboard */}
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 mb-8">
-          <h3 className="text-xl font-bold text-white mb-4">Final Standings</h3>
+        <div className="bg-white backdrop-blur-sm border border-[#93DA97]/30 rounded-xl p-6 mb-8 shadow-md">
+          <h3 className="text-xl font-bold text-[#3E5F44] mb-4">Final Standings</h3>
           <div className="space-y-3">
             {leaderboard.map((player, index) => (
               <div
                 key={player.id}
                 className={`flex items-center justify-between p-4 rounded-lg transition-all duration-500 ${
                   index === 0
-                    ? 'bg-yellow-500/20 border border-yellow-400' 
-                    : 'bg-white/5 border border-white/10'
+                    ? 'bg-yellow-100 border border-yellow-400' 
+                    : 'bg-[#E8FFD7]/30 border border-[#93DA97]/50'
                 }`}
               >
                 <div className="flex items-center space-x-4">
-                  <span className={`text-2xl font-bold w-8 text-center ${index === 0 ? 'text-yellow-300' : 'text-white'}`}>#{index + 1}</span>
-                  <span className="text-white font-semibold text-lg">{player.name}</span>
+                  <span className={`text-2xl font-bold w-8 text-center ${index === 0 ? 'text-yellow-600' : 'text-[#3E5F44]'}`}>#{index + 1}</span>
+                  <span className="text-[#3E5F44] font-semibold text-lg">{player.name}</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-white font-bold text-xl">{player.score}%</p>
-                  <p className="text-gray-400 text-sm">Time: {player.time.toFixed(2)}s</p>
+                  <p className="text-[#3E5F44] font-bold text-xl">{player.score}%</p>
+                  <p className="text-[#557063] text-sm">Time: {player.time.toFixed(2)}s</p>
                 </div>
               </div>
             ))}
@@ -340,7 +340,7 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
         <div className="flex justify-center">
           <button
             onClick={onLeave}
-            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl flex items-center space-x-2"
+            className="bg-gray-100 hover:bg-gray-200 text-[#3E5F44] font-bold py-3 px-6 rounded-xl flex items-center space-x-2 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Quiz Menu</span>
@@ -353,11 +353,11 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       {/* Room Header */}
-      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 mb-8">
+      <div className="bg-white backdrop-blur-sm border border-[#93DA97]/30 rounded-xl p-6 mb-8 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Quiz Room</h1>
-            <div className="flex items-center space-x-4 text-gray-300">
+            <h1 className="text-2xl font-bold text-[#3E5F44]">Quiz Room</h1>
+            <div className="flex items-center space-x-4 text-[#557063]">
               <div className="flex items-center space-x-2">
                 <Hash className="w-4 h-4" />
                 <span className="font-mono">{room.roomId}</span>
@@ -370,7 +370,7 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
           </div>
           <button
             onClick={onLeave}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+            className="bg-gray-100 hover:bg-gray-200 text-[#3E5F44] px-4 py-2 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
@@ -378,25 +378,25 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
 
         {/* Room Message */}
         {roomMessage && (
-          <div className="mb-4 bg-green-500/20 border border-green-500/40 rounded-lg p-3 animate-fade-in">
+          <div className="mb-4 bg-green-100 border border-green-300 rounded-lg p-3 animate-fade-in">
             <div className="flex items-center space-x-2">
-              <UserPlus className="w-4 h-4 text-green-400" />
-              <p className="text-green-200 text-sm">{roomMessage}</p>
+              <UserPlus className="w-4 h-4 text-green-600" />
+              <p className="text-green-700 text-sm">{roomMessage}</p>
             </div>
           </div>
         )}
 
         {/* Host Info */}
         {host && (
-          <div className="mb-4 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+          <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Crown className="w-5 h-5 text-blue-400" />
-                <span className="text-blue-200">Host: {host.name}</span>
-                <Wifi className="w-4 h-4 text-green-400" />
+                <Crown className="w-5 h-5 text-blue-500" />
+                <span className="text-blue-700">Host: {host.name}</span>
+                <Wifi className="w-4 h-4 text-green-500" />
               </div>
               {isHost && (
-                <span className="bg-blue-500/20 px-2 py-1 rounded text-blue-200 text-sm">
+                <span className="bg-blue-100 px-2 py-1 rounded text-blue-700 text-sm">
                   You are the host
                 </span>
               )}
@@ -406,17 +406,17 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
 
         {/* Live Participants List */}
         <div className="mb-6">
-          <h3 className="text-white font-semibold mb-3 flex items-center space-x-2">
+          <h3 className="text-[#3E5F44] font-semibold mb-3 flex items-center space-x-2">
             <Users className="w-4 h-4" />
             <span>Participants ({participants?.length || 0})</span>
           </h3>
           
           {!participants || participants.length === 0 ? (
-            <div className="bg-gray-500/10 border border-gray-500/30 rounded-lg p-4 text-center">
+            <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 text-center">
               <AlertCircle className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-400">No participants yet</p>
+              <p className="text-gray-500">No participants yet</p>
               {isHost && (
-                <p className="text-gray-500 text-sm mt-1">Share the room ID with others to invite them</p>
+                <p className="text-gray-400 text-sm mt-1">Share the room ID with others to invite them</p>
               )}
             </div>
           ) : (
@@ -424,14 +424,14 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
               {participants.map((participant, index) => (
                 <div
                   key={`${participant.id}-${index}`}
-                  className="bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2 flex items-center justify-between transition-all duration-300"
+                  className="bg-green-100 border border-green-300 rounded-lg px-3 py-2 flex items-center justify-between transition-all duration-300"
                 >
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-white">
+                    <span className="text-sm font-medium text-[#3E5F44]">
                       {participant.name}
                     </span>
                   </div>
-                  <Wifi className="w-4 h-4 text-green-400" />
+                  <Wifi className="w-4 h-4 text-green-500" />
                 </div>
               ))}
             </div>
@@ -444,10 +444,10 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
             {isHost ? (
               <div className="space-y-3">
                 {(!participants || participants.length < 1) && (
-                  <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-lg p-3">
+                  <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-3">
                     <div className="flex items-center space-x-2">
-                      <AlertCircle className="w-4 h-4 text-yellow-400" />
-                      <p className="text-yellow-200 text-sm">
+                      <AlertCircle className="w-4 h-4 text-yellow-600" />
+                      <p className="text-yellow-700 text-sm">
                         💡 You can start the quiz now, or wait for more participants to join...
                       </p>
                     </div>
@@ -455,10 +455,10 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
                 )}
                 
                 {participants && participants.length >= 1 && (
-                  <div className="bg-green-500/20 border border-green-500/40 rounded-lg p-3">
+                  <div className="bg-green-100 border border-green-300 rounded-lg p-3">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-400" />
-                      <p className="text-green-200 text-sm">
+                      <CheckCircle className="w-4 h-4 text-green-600" />
+                      <p className="text-green-700 text-sm">
                         🎉 Great! You have {participants.length + 1} member{participants.length > 0 ? 's' : ''} ready to start!
                       </p>
                     </div>
@@ -468,7 +468,7 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
                 <button
                   onClick={startQuiz}
                   disabled={startingQuiz}
-                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   {startingQuiz ? (
                     <>
@@ -486,14 +486,14 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
                 </button>
               </div>
             ) : (
-              <div className="bg-blue-500/20 border border-blue-500/40 rounded-lg p-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-blue-400" />
-                  <p className="text-blue-200">
+                  <Clock className="w-5 h-5 text-blue-500" />
+                  <p className="text-blue-700">
                     Waiting for <span className="font-semibold">{host?.name || 'host'}</span> to start the quiz...
                   </p>
                 </div>
-                <p className="text-blue-300 text-sm mt-1">
+                <p className="text-blue-600 text-sm mt-1">
                   {(participants?.length || 0) + 1} member{(participants?.length || 0) > 0 ? 's' : ''} in room
                 </p>
               </div>
@@ -504,30 +504,30 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
 
       {/* Quiz Component - Reusing existing quiz logic */}
       {quizStarted && quiz && (
-        <div className="backdrop-blur-xl bg-black/40 border border-purple-500/30 rounded-3xl p-8 shadow-2xl">
+        <div className="backdrop-blur-xl bg-white/90 border border-[#93DA97]/50 rounded-3xl p-8 shadow-2xl">
           {/* Quiz Header with Timer */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex space-x-4">
-              <div className="bg-purple-600/30 border border-purple-500/50 rounded-lg px-4 py-2">
-                <span className="text-purple-200 text-sm">Question</span>
-                <p className="text-white font-bold">{currentQuestionIndex + 1} of {quiz.length}</p>
+              <div className="bg-[#93DA97]/30 border border-[#5E936C]/50 rounded-lg px-4 py-2">
+                <span className="text-[#557063] text-sm">Question</span>
+                <p className="text-[#3E5F44] font-bold">{currentQuestionIndex + 1} of {quiz.length}</p>
               </div>
-              <div className="bg-blue-600/30 border border-blue-500/50 rounded-lg px-4 py-2">
-                <span className="text-blue-200 text-sm">Room</span>
-                <p className="text-white font-bold">{room.roomId}</p>
+              <div className="bg-blue-100 border border-blue-300 rounded-lg px-4 py-2">
+                <span className="text-blue-700 text-sm">Room</span>
+                <p className="text-[#3E5F44] font-bold">{room.roomId}</p>
               </div>
             </div>
             
-            <div className="bg-red-600/30 border border-red-500/50 rounded-lg px-4 py-2 flex items-center space-x-2">
-              <Clock className="w-4 h-4 text-red-200" />
-              <span className="text-red-200 text-sm">Time Left</span>
-              <p className="text-white font-bold">{formatTime(timeLeft)}</p>
+            <div className="bg-red-100 border border-red-300 rounded-lg px-4 py-2 flex items-center space-x-2">
+              <Clock className="w-4 h-4 text-red-600" />
+              <span className="text-red-700 text-sm">Time Left</span>
+              <p className="text-[#3E5F44] font-bold">{formatTime(timeLeft)}</p>
             </div>
           </div>
 
           {/* Question */}
           <div className="mb-8">
-            <h2 className="text-xl font-bold text-white mb-6 leading-relaxed">
+            <h2 className="text-xl font-bold text-[#3E5F44] mb-6 leading-relaxed">
               {quiz[currentQuestionIndex]?.question}
             </h2>
 
@@ -539,8 +539,8 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
                   onClick={() => selectAnswer(option)}
                   className={`p-4 rounded-xl border-2 text-left transition-all duration-300 ${
                     selectedAnswer === option
-                      ? 'bg-purple-600/50 border-purple-400 text-white transform scale-105'
-                      : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-purple-400'
+                      ? 'bg-[#93DA97]/50 border-[#5E936C] text-[#3E5F44] transform scale-105 shadow-md'
+                      : 'bg-[#E8FFD7]/30 border-[#93DA97]/50 text-[#3E5F44] hover:bg-[#93DA97]/20 hover:border-[#5E936C]'
                   }`}
                 >
                   <span className="font-medium">{String.fromCharCode(65 + index)}. </span>
@@ -555,7 +555,7 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
             <button
               onClick={prevQuestion}
               disabled={currentQuestionIndex === 0}
-              className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+              className="bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-[#3E5F44] font-bold py-3 px-6 rounded-xl transition-all duration-300"
             >
               Previous
             </button>
@@ -566,10 +566,10 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
                   key={i}
                   className={`w-3 h-3 rounded-full ${
                     i === currentQuestionIndex
-                      ? 'bg-purple-500'
+                      ? 'bg-[#5E936C]'
                       : userAnswers[i]
                       ? 'bg-green-500'
-                      : 'bg-gray-600'
+                      : 'bg-gray-300'
                   }`}
                 />
               ))}
@@ -577,7 +577,7 @@ const MultiplayerQuizRoom = ({ room, onLeave }) => {
 
             <button
               onClick={nextQuestion}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
+              className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:shadow-lg text-white font-bold py-3 px-6 rounded-xl transition-all duration-300"
             >
               {currentQuestionIndex === quiz.length - 1 ? 'Submit Quiz' : 'Next'}
             </button>

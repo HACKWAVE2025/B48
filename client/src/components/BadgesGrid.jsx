@@ -110,25 +110,25 @@ const BadgesGrid = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#5E936C] border-t-transparent"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#E8FFD7] to-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 rounded-full shadow-lg animate-pulse">
+            <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-4 rounded-full shadow-lg">
               <Trophy className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-yellow-200 bg-clip-text text-transparent mb-2">
+          <h2 className="text-4xl font-bold text-[#3E5F44] mb-2">
             Badges & Achievements
           </h2>
-          <p className="text-white/70 text-lg">
+          <p className="text-[#557063] text-lg">
             Unlock badges by completing quizzes, challenges, and reaching new levels
           </p>
         </div>
@@ -137,10 +137,10 @@ const BadgesGrid = () => {
         <div className="flex justify-center gap-3 mb-6">
           <button
             onClick={() => handleShowAnalytics(false)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
               !showAnalytics
-                ? 'bg-purple-600/40 border border-purple-400/80 text-white shadow-lg'
-                : 'bg-white/10 border border-white/20 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/20'
+                ? 'bg-[#5E936C] text-white shadow-sm'
+                : 'bg-[#E8FFD7] border border-[#93DA97] text-[#3E5F44] hover:bg-[#93DA97]/30'
             }`}
           >
             <Trophy className="w-5 h-5" />
@@ -148,10 +148,10 @@ const BadgesGrid = () => {
           </button>
           <button
             onClick={() => handleShowAnalytics(true)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
               showAnalytics
-                ? 'bg-cyan-600/40 border border-cyan-400/80 text-white shadow-lg'
-                : 'bg-white/10 border border-white/20 text-gray-300 hover:border-cyan-500/50 hover:bg-cyan-500/20'
+                ? 'bg-[#5E936C] text-white shadow-sm'
+                : 'bg-[#E8FFD7] border border-[#93DA97] text-[#3E5F44] hover:bg-[#93DA97]/30'
             }`}
           >
             <BarChart3 className="w-5 h-5" />
@@ -166,22 +166,22 @@ const BadgesGrid = () => {
           <>
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 text-center">
-                <Award className="w-10 h-10 text-green-400 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-green-300">{stats.earned}</div>
-                <div className="text-green-200/80 text-sm font-medium">Badges Earned</div>
+              <div className="bg-white border border-[#93DA97]/30 rounded-xl p-6 text-center shadow-sm">
+                <Award className="w-10 h-10 text-[#5E936C] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-[#3E5F44]">{stats.earned}</div>
+                <div className="text-[#557063] text-sm font-medium">Badges Earned</div>
               </div>
               
-              <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 backdrop-blur-sm border border-yellow-500/30 rounded-xl p-6 text-center">
-                <Trophy className="w-10 h-10 text-yellow-400 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-yellow-300">{stats.inProgress}</div>
-                <div className="text-yellow-200/80 text-sm font-medium">In Progress</div>
+              <div className="bg-white border border-yellow-300 rounded-xl p-6 text-center shadow-sm">
+                <Trophy className="w-10 h-10 text-yellow-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-[#3E5F44]">{stats.inProgress}</div>
+                <div className="text-[#557063] text-sm font-medium">In Progress</div>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 text-center">
-                <Filter className="w-10 h-10 text-purple-400 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-purple-300">{stats.total}</div>
-                <div className="text-purple-200/80 text-sm font-medium">Total Badges</div>
+              <div className="bg-white border border-purple-300 rounded-xl p-6 text-center shadow-sm">
+                <Filter className="w-10 h-10 text-purple-600 mx-auto mb-3" />
+                <div className="text-3xl font-bold text-[#3E5F44]">{stats.total}</div>
+                <div className="text-[#557063] text-sm font-medium">Total Badges</div>
               </div>
             </div>
 
@@ -196,10 +196,10 @@ const BadgesGrid = () => {
                 <button
                   key={filterOption.key}
                   onClick={() => setFilter(filterOption.key)}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm ${
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     filter === filterOption.key
-                      ? 'bg-purple-600/40 border border-purple-400/80 text-white shadow-lg'
-                      : 'bg-white/10 border border-white/20 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/20'
+                      ? 'bg-[#5E936C] text-white shadow-sm'
+                      : 'bg-[#E8FFD7] border border-[#93DA97] text-[#3E5F44] hover:bg-[#93DA97]/30'
                   }`}
                 >
                   {filterOption.label} ({filterOption.count})
@@ -213,14 +213,14 @@ const BadgesGrid = () => {
                 <div key={badge.id} className="flex flex-col items-center group">
                   <Badge badge={badge} size="lg" showProgress={!badge.isEarned} />
                   <div className="text-center mt-3 transition-all duration-300 group-hover:scale-105">
-                    <div className={`text-sm font-semibold ${badge.isEarned ? 'text-white' : 'text-gray-400'}`}>
+                    <div className={`text-sm font-semibold ${badge.isEarned ? 'text-[#3E5F44]' : 'text-[#557063]'}`}>
                       {badge.name}
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 max-w-[120px]">
+                    <div className="text-xs text-[#557063] mt-1 max-w-[120px]">
                       {badge.description}
                     </div>
                     {!badge.isEarned && (
-                      <div className="text-xs text-purple-300 mt-2 font-medium">
+                      <div className="text-xs text-[#5E936C] mt-2 font-medium">
                         {badge.current}/{badge.requirement}
                       </div>
                     )}
@@ -231,8 +231,8 @@ const BadgesGrid = () => {
 
             {filteredBadges.length === 0 && (
               <div className="text-center py-20">
-                <div className="text-gray-400 text-xl mb-2">No badges found for this filter</div>
-                <div className="text-gray-500">Complete activities to start earning badges!</div>
+                <div className="text-[#557063] text-xl mb-2">No badges found for this filter</div>
+                <div className="text-[#557063]/70">Complete activities to start earning badges!</div>
               </div>
             )}
           </>
