@@ -21,6 +21,7 @@ import NoteView from './components/NoteView';
 import BadgesGrid from './components/BadgesGrid';
 import InteractiveLearning from './components/InteractiveLearning';
 import LeaderboardPage from './components/LeaderboardPage';
+import MicroQuizBuilder from './components/MicroQuizBuilder';
 import './App.css';
 
 function App() {
@@ -90,6 +91,11 @@ function App() {
         {
           path: 'quiz',
           element: isAuthenticated ? <QuizGenerator /> : <Navigate to="/login" />,
+          loader: protectedLoader
+        },
+        {
+          path: 'micro-quiz',
+          element: isAuthenticated ? <MicroQuizBuilder /> : <Navigate to="/login" />,
           loader: protectedLoader
         },
         {

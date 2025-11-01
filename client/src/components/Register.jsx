@@ -14,7 +14,7 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     location: '',
-    grade: '',
+    role: 'student',
     interests: []
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -24,23 +24,6 @@ const Register = () => {
   const { register, error, setError } = useAuth();
   const navigate = useNavigate();
 
-  const grades = [
-    { key: '5th', label: '5th Grade' },
-    { key: '6th', label: '6th Grade' },
-    { key: '7th', label: '7th Grade' },
-    { key: '8th', label: '8th Grade' },
-    { key: '9th', label: '9th Grade' },
-    { key: '10th', label: '10th Grade' }
-  ];
-
-  const subjects = [
-    { key: 'math', label: 'Math' },
-    { key: 'science', label: 'Science' },
-    { key: 'english', label: 'English' },
-    { key: 'hindi', label: 'Hindi' },
-    { key: 'socialStudies', label: 'Social Studies' }
-  ];
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -49,25 +32,11 @@ const Register = () => {
     if (error) setError('');
   };
 
-  const handleInterestToggle = (interest) => {
-    setFormData(prev => ({
-      ...prev,
-      interests: prev.interests.includes(interest)
-        ? prev.interests.filter(i => i !== interest)
-        : [...prev.interests, interest]
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
-      return;
-    }
-
-    if (formData.interests.length === 0) {
-      setError('Please select at least one learning skill');
       return;
     }
 
@@ -260,83 +229,107 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Third Row - Location and Grade */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Location Field */}
-            <div className="space-y-3">
-              <label 
-                htmlFor="location" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
-              >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <AutoText>Home Base</AutoText>
-              </label>
-              <input
-                type="text"
-                name="location"
-                id="location"
-                value={formData.location}
-                onChange={handleChange}
-                className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
-                placeholder="Your village/city"
-                required
-              />
-            </div>
-
-            {/* Grade Field */}
-            <div className="space-y-3">
-              <label 
-                htmlFor="grade" 
-                className="flex items-center space-x-3 text-white/90 font-medium text-base"
-              >
-                <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <AutoText>Level</AutoText>
-              </label>
-              <select
-                name="grade"
-                id="grade"
-                value={formData.grade}
-                onChange={handleChange}
-                className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
-                required
-              >
-                <option value="">Select your grade</option>
-                {grades.map(grade => (
-                  <option key={grade.key} value={grade.key} className="bg-gray-800">
-                    <AutoText>{grade.label}</AutoText>
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* Location Field */}
+          <div className="space-y-3">
+            <label 
+              htmlFor="location" 
+              className="flex items-center space-x-3 text-white/90 font-medium text-base"
+            >
+              <div className="p-2.5 rounded-lg bg-gray-800/60 border border-gray-600/40">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <AutoText>Home Base</AutoText>
+            </label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={formData.location}
+              onChange={handleChange}
+              className="w-full bg-gray-900/70 border border-gray-600/60 rounded-xl px-4 py-4 text-white text-base placeholder-gray-300 focus:outline-none focus:border-purple-400/80 focus:bg-gray-800/80 transition-all duration-300 backdrop-blur-sm"
+              placeholder="Your village/city"
+              required
+            />
           </div>
 
-          {/* Interests Section */}
+          {/* Role Selection */}
           <div className="space-y-4">
             <AutoText 
               tag="label"
               className="text-white/90 font-medium text-base text-center block"
             >
-              Choose Your Learning Skills
+              Select Your Role
             </AutoText>
-            <div className="flex flex-wrap justify-center gap-3">
-              {subjects.map(subject => (
-                <button
-                  key={subject.key}
-                  type="button"
-                  onClick={() => handleInterestToggle(subject.key)}
-                  className={`px-4 py-2.5 rounded-xl border-2 font-medium text-base transition-all duration-300 ${
-                    formData.interests.includes(subject.key)
-                      ? 'bg-purple-600/30 border-purple-400/80 text-purple-200 shadow-lg shadow-purple-500/20'
-                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50'
-                  }`}
-                >
-                  <AutoText>{subject.label}</AutoText>
-                </button>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Student Role */}
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, role: 'student' })}
+                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                  formData.role === 'student'
+                    ? 'bg-gradient-to-br from-purple-600/40 to-pink-600/40 border-purple-400 shadow-lg shadow-purple-500/30'
+                    : 'bg-gray-800/50 border-gray-600/50 hover:border-purple-500/50'
+                }`}
+              >
+                <div className="flex flex-col items-center space-y-3">
+                  <div className={`p-4 rounded-full ${
+                    formData.role === 'student' 
+                      ? 'bg-purple-500/30 border-2 border-purple-400' 
+                      : 'bg-gray-700/50 border-2 border-gray-600'
+                  }`}>
+                    <BookOpen className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <AutoText tag="h3" className="text-xl font-bold text-white mb-2">
+                      Student
+                    </AutoText>
+                    <AutoText className="text-sm text-gray-300">
+                      Learn, practice, and complete quizzes
+                    </AutoText>
+                  </div>
+                  {formData.role === 'student' && (
+                    <div className="flex items-center gap-2 text-purple-300">
+                      <Sparkles className="w-4 h-4" />
+                      <span className="text-sm font-semibold">Selected</span>
+                    </div>
+                  )}
+                </div>
+              </button>
+
+              {/* Researcher Role */}
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, role: 'researcher' })}
+                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                  formData.role === 'researcher'
+                    ? 'bg-gradient-to-br from-blue-600/40 to-cyan-600/40 border-blue-400 shadow-lg shadow-blue-500/30'
+                    : 'bg-gray-800/50 border-gray-600/50 hover:border-blue-500/50'
+                }`}
+              >
+                <div className="flex flex-col items-center space-y-3">
+                  <div className={`p-4 rounded-full ${
+                    formData.role === 'researcher' 
+                      ? 'bg-blue-500/30 border-2 border-blue-400' 
+                      : 'bg-gray-700/50 border-2 border-gray-600'
+                  }`}>
+                    <Zap className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="text-center">
+                    <AutoText tag="h3" className="text-xl font-bold text-white mb-2">
+                      Researcher
+                    </AutoText>
+                    <AutoText className="text-sm text-gray-300">
+                      Create content and explore advanced topics
+                    </AutoText>
+                  </div>
+                  {formData.role === 'researcher' && (
+                    <div className="flex items-center gap-2 text-blue-300">
+                      <Sparkles className="w-4 h-4" />
+                      <span className="text-sm font-semibold">Selected</span>
+                    </div>
+                  )}
+                </div>
+              </button>
             </div>
           </div>
 
@@ -346,9 +339,9 @@ const Register = () => {
               className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500 relative"
               style={{ 
                 width: `${
-                  formData.name && formData.email && formData.password && formData.confirmPassword && formData.location && formData.grade
+                  formData.name && formData.email && formData.password && formData.confirmPassword && formData.location
                     ? '100' 
-                    : Object.values(formData).filter(v => Array.isArray(v) ? v.length > 0 : v).length * 15
+                    : Object.values(formData).filter(v => Array.isArray(v) ? v.length > 0 : v).length * 18
                 }%` 
               }}
             >

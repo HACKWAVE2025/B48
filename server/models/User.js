@@ -5,7 +5,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   location: { type: String, required: true },
-  grade: { type: String, required: true },
+  role: { 
+    type: String, 
+    enum: ['student', 'researcher'],
+    default: 'student',
+    required: true 
+  },
   interests: [String],
   bio: { type: String, default: '' },
   level: {

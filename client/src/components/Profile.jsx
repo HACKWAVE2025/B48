@@ -5,7 +5,6 @@ import {
   User, 
   Mail, 
   MapPin, 
-  BookOpen, 
   Trophy, 
   Star, 
   Crown, 
@@ -29,7 +28,7 @@ const Profile = () => {
     name: '',
     email: '',
     location: '',
-    grade: '',
+    role: 'student',
     interests: [],
     bio: ''
   });
@@ -39,7 +38,6 @@ const Profile = () => {
 
   // Available subjects for interests
   const subjects = ['Math', 'Science', 'English', 'Hindi', 'Social Studies', 'Computer Science', 'Art', 'Music'];
-  const grades = ['5th Grade', '6th Grade', '7th Grade', '8th Grade', '9th Grade', '10th Grade', '11th Grade', '12th Grade'];
 
   useEffect(() => {
     if (user) {
@@ -47,7 +45,7 @@ const Profile = () => {
         name: user.name || '',
         email: user.email || '',
         location: user.location || '',
-        grade: user.grade || '',
+        role: user.role || 'student',
         interests: user.interests || [],
         bio: user.bio || ''
       });
@@ -97,7 +95,7 @@ const Profile = () => {
         name: user.name || '',
         email: user.email || '',
         location: user.location || '',
-        grade: user.grade || '',
+        role: user.role || 'student',
         interests: user.interests || [],
         bio: user.bio || ''
       });
@@ -405,27 +403,23 @@ const Profile = () => {
               />
             </div>
 
-            {/* Grade */}
+            {/* Role */}
             <div className="space-y-2">
               <label className="flex items-center space-x-3 text-white/90 font-medium text-sm">
-                <div className="p-2 rounded-lg bg-yellow-600/50 border border-yellow-400/80">
-                  <BookOpen className="w-4 h-4" />
+                <div className="p-2 rounded-lg bg-cyan-600/50 border border-cyan-400/80">
+                  <Shield className="w-4 h-4" />
                 </div>
-                <span>Learning Level</span>
+                <span>Role</span>
               </label>
               <select
-                name="grade"
-                value={formData.grade}
+                name="role"
+                value={formData.role}
                 onChange={handleChange}
                 disabled={!isEditing}
                 className="w-full p-4 bg-black/60 border border-gray-600/40 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors duration-200 disabled:opacity-60"
               >
-                <option value="">Select your grade</option>
-                {grades.map((grade) => (
-                  <option key={grade} value={grade} className="bg-gray-800">
-                    {grade}
-                  </option>
-                ))}
+                <option value="student" className="bg-gray-800">🎓 Student - Learn and practice</option>
+                <option value="researcher" className="bg-gray-800">🔬 Researcher - Create and explore</option>
               </select>
             </div>
           </div>

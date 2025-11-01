@@ -9,10 +9,15 @@ const router = express.Router();
 // Register
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, location, grade, interests } = req.body;
+    const { name, email, password, location, interests, role } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "User already exists" });
+
+    // Validate role
+    if (role && !['student', 'researcher'].includes(role)) {
+      return res.status(400).json({ message: "Invalid role. Must be 'student' or 'researcher'" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -21,7 +26,7 @@ router.post("/register", async (req, res) => {
       email,
       password: hashedPassword,
       location,
-      grade,
+      role: role || 'student', // Default to 'student' if not provided
       interests: interests || []
     });
 
@@ -96,7 +101,7 @@ router.get("/profile", authenticateToken, async (req, res) => {
 // Update user profile
 router.put("/profile", authenticateToken, async (req, res) => {
   try {
-    const { name, email, location, grade, interests, bio } = req.body;
+    const { name, email, location, interests, bio, role } = req.body;
     const userId = req.user.userId;
 
     // Check if email is being changed and if it's already taken by another user
@@ -107,6 +112,11 @@ router.put("/profile", authenticateToken, async (req, res) => {
       }
     }
 
+    // Validate role if provided
+    if (role && !['student', 'researcher'].includes(role)) {
+      return res.status(400).json({ message: "Invalid role. Must be 'student' or 'researcher'" });
+    }
+
     // Prepare update data
     const updateData = {
       updatedAt: Date.now()
@@ -115,7 +125,7 @@ router.put("/profile", authenticateToken, async (req, res) => {
     if (name) updateData.name = name;
     if (email) updateData.email = email;
     if (location) updateData.location = location;
-    if (grade) updateData.grade = grade;
+    if (role) updateData.role = role;
     if (interests) updateData.interests = interests;
     if (bio !== undefined) updateData.bio = bio;
 

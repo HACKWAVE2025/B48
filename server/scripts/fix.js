@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const Animation = require('../models/Animation'); // adjust path if needed
 
 // 🔹 MongoDB connection string
-const MONGO_URI = 'mongodb+srv://mdarbazking7_db_user:Mdarbaz123@cluster0.fkvjubg.mongodb.net/demodb123'; // replace with your DB URI
+// const MONGO_URI = 'mongodb+srv://mdarbazking7_db_user:Mdarbaz123@cluster0.fkvjubg.mongodb.net/demodb123'; // replace with your DB URI
 
 // 🔹 Helper function to generate hash from prompt
 function generateHash(prompt) {

@@ -2,12 +2,22 @@ const User = require("../models/User");
 dotenv = require("dotenv");
 dotenv.config();
 
+/**
+ * QuizService - Handles AI-powered quiz generation and analysis
+ * 
+ * Rate Limit Handling Strategy:
+ * - Uses gemini-2.0-flash-exp model for higher rate limits
+ * - Implements exponential backoff retry mechanism
+ * - Sequential processing with delays for batch operations
+ * - Fallback responses when API limits are exceeded
+ */
 class QuizService {
   constructor() {
     this.geminiApiKey = process.env.GEMINI_API_KEY;
-    this.geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.geminiApiKey}`;
+    // Use gemini-2.0-flash-exp for better rate limits and performance
+    this.geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${this.geminiApiKey}`;
     this.maxRetries = 3;
-    this.retryDelay = 2000; // 2 seconds
+    this.retryDelay = 3000; // 3 seconds for rate limit handling
   }
 
   /**
@@ -549,6 +559,369 @@ Format:
       return { success: false, message: "A server error occurred during quiz generation." };
     }
   }
+
+  /**
+   * Generate AI-powered explanations for quiz answers
+   * @param {string} question - The question text
+   * @param {Array} options - Array of answer options
+   * @param {string} correctAnswer - The correct answer
+   * @param {string} userAnswer - The user's selected answer
+   * @param {string} subject - Subject of the question
+   * @returns {Promise<Object>} Explanation object with detailed feedback
+   */
+  async generateExplanation(question, options, correctAnswer, userAnswer, subject) {
+    try {
+      const isCorrect = userAnswer === correctAnswer;
+      
+      const prompt = `You are an expert teacher in ${subject}. 
+      
+Question: ${question}
+Options: ${options.join(', ')}
+Correct Answer: ${correctAnswer}
+User's Answer: ${userAnswer}
+Result: ${isCorrect ? 'Correct' : 'Incorrect'}
+
+Provide a clear, concise explanation (2-3 sentences) that:
+${isCorrect ? 
+  '- Reinforces why the answer is correct\n- Explains the key concept\n- Provides additional context or related information' : 
+  '- Explains why the user\'s answer is incorrect\n- Clearly explains why the correct answer is right\n- Provides the key concept to remember'}
+
+Keep the explanation educational, encouraging, and easy to understand. Use simple language suitable for students.
+
+Respond ONLY with the explanation text, no JSON formatting or extra text.`;
+
+      const requestBody = {
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 256,
+        }
+      };
+
+      // Try with retry logic for rate limits
+      let response;
+      let retries = 0;
+      
+      while (retries < this.maxRetries) {
+        try {
+          response = await fetch(this.geminiApiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+          });
+
+          if (response.ok) {
+            break; // Success, exit retry loop
+          }
+
+          // If rate limited (429), retry with exponential backoff
+          if (response.status === 429) {
+            retries++;
+            if (retries < this.maxRetries) {
+              const delay = this.retryDelay * Math.pow(2, retries - 1);
+              console.log(`Rate limited. Retrying in ${delay}ms... (attempt ${retries}/${this.maxRetries})`);
+              await this.sleep(delay);
+              continue;
+            }
+          }
+
+          throw new Error(`Gemini API error: ${response.status}`);
+        } catch (fetchError) {
+          if (retries < this.maxRetries - 1) {
+            retries++;
+            await this.sleep(this.retryDelay);
+            continue;
+          }
+          throw fetchError;
+        }
+      }
+
+      const data = await response.json();
+      const explanation = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+
+      return {
+        isCorrect,
+        explanation: explanation || this.getFallbackExplanation(isCorrect, correctAnswer, subject),
+        correctAnswer,
+        userAnswer
+      };
+
+    } catch (error) {
+      console.error("Failed to generate explanation:", error);
+      return {
+        isCorrect: userAnswer === correctAnswer,
+        explanation: this.getFallbackExplanation(userAnswer === correctAnswer, correctAnswer, subject),
+        correctAnswer,
+        userAnswer
+      };
+    }
+  }
+
+  /**
+   * Generate explanations for multiple questions in batch
+   * @param {Array} results - Array of question results with question, options, correctAnswer, userAnswer
+   * @param {string} subject - Subject of the quiz
+   * @returns {Promise<Array>} Array of results with explanations
+   */
+  async generateBatchExplanations(results, subject) {
+    try {
+      const explanations = [];
+      
+      // Process explanations sequentially with delay to avoid rate limits
+      for (let i = 0; i < results.length; i++) {
+        const result = results[i];
+        
+        try {
+          const explanation = await this.generateExplanation(
+            result.question,
+            result.options,
+            result.correctAnswer,
+            result.userAnswer,
+            subject
+          );
+          explanations.push(explanation);
+          
+          // Add delay between requests to avoid rate limiting (except for last item)
+          if (i < results.length - 1) {
+            await this.sleep(500); // 500ms delay between requests
+          }
+        } catch (error) {
+          console.error(`Failed to generate explanation for question ${i + 1}:`, error);
+          // Use fallback for this specific question
+          explanations.push({
+            isCorrect: result.userAnswer === result.correctAnswer,
+            explanation: this.getFallbackExplanation(
+              result.userAnswer === result.correctAnswer,
+              result.correctAnswer,
+              subject
+            ),
+            correctAnswer: result.correctAnswer,
+            userAnswer: result.userAnswer
+          });
+        }
+      }
+
+      return results.map((result, index) => ({
+        ...result,
+        ...explanations[index]
+      }));
+
+    } catch (error) {
+      console.error("Failed to generate batch explanations:", error);
+      return results.map(result => ({
+        ...result,
+        isCorrect: result.userAnswer === result.correctAnswer,
+        explanation: this.getFallbackExplanation(
+          result.userAnswer === result.correctAnswer,
+          result.correctAnswer,
+          subject
+        )
+      }));
+    }
+  }
+
+  /**
+   * Provide fallback explanation if AI fails
+   * @param {boolean} isCorrect - Whether the answer was correct
+   * @param {string} correctAnswer - The correct answer
+   * @param {string} subject - Subject of the question
+   * @returns {string} Fallback explanation
+   */
+  getFallbackExplanation(isCorrect, correctAnswer, subject) {
+    if (isCorrect) {
+      return `Great job! Your answer is correct. Understanding this concept is fundamental in ${subject}.`;
+    } else {
+      return `The correct answer is "${correctAnswer}". Take time to review this concept in ${subject} to strengthen your understanding.`;
+    }
+  }
+
+  /**
+   * Generate personalized learning suggestions based on quiz performance
+   * @param {Array} results - Array of question results with isCorrect flags
+   * @param {string} subject - Subject of the quiz
+   * @param {number} score - Overall quiz score
+   * @returns {Promise<Object>} Suggestions object with weak areas and recommendations
+   */
+  async generatePerformanceSuggestions(results, subject, score) {
+    try {
+      // Identify incorrect answers
+      const incorrectQuestions = results.filter(r => !r.isCorrect);
+      const correctQuestions = results.filter(r => r.isCorrect);
+      
+      if (incorrectQuestions.length === 0) {
+        return {
+          overallAssessment: 'Excellent! Perfect score!',
+          strengths: ['You demonstrated mastery of all concepts'],
+          weakAreas: [],
+          recommendations: ['Continue practicing to maintain your skill level', 'Consider helping peers who are struggling'],
+          nextSteps: ['Try harder difficulty levels', 'Explore advanced topics in ' + subject]
+        };
+      }
+
+      // Build prompt for AI analysis
+      const questionsText = incorrectQuestions.map((q, i) => 
+        `${i + 1}. Question: ${q.question}\n   Your Answer: ${q.userAnswer}\n   Correct Answer: ${q.correctAnswer}`
+      ).join('\n\n');
+
+      const prompt = `You are an expert education analyst. Analyze this student's quiz performance in ${subject}.
+
+Score: ${score}%
+Correct: ${correctQuestions.length}/${results.length}
+Incorrect: ${incorrectQuestions.length}/${results.length}
+
+Questions the student got wrong:
+${questionsText}
+
+Based on these mistakes, provide a detailed analysis in the following JSON format:
+{
+  "overallAssessment": "Brief assessment of overall performance (2-3 sentences)",
+  "strengths": ["List 2-3 things the student did well or showed understanding of"],
+  "weakAreas": ["List 2-4 specific topics/concepts the student needs to focus on"],
+  "recommendations": ["List 3-5 specific, actionable study recommendations"],
+  "nextSteps": ["List 2-3 concrete next steps for improvement"]
 }
+
+Be encouraging, specific, and practical. Focus on growth mindset and concrete actions.
+Respond ONLY with valid JSON, no markdown formatting or extra text.`;
+
+      const requestBody = {
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.8,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 1024,
+        }
+      };
+
+      // Try with retry logic for rate limits
+      let response;
+      let retries = 0;
+      
+      while (retries < this.maxRetries) {
+        try {
+          response = await fetch(this.geminiApiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+          });
+
+          if (response.ok) {
+            break; // Success, exit retry loop
+          }
+
+          // If rate limited (429), retry with exponential backoff
+          if (response.status === 429) {
+            retries++;
+            if (retries < this.maxRetries) {
+              const delay = this.retryDelay * Math.pow(2, retries - 1);
+              console.log(`Rate limited on suggestions. Retrying in ${delay}ms... (attempt ${retries}/${this.maxRetries})`);
+              await this.sleep(delay);
+              continue;
+            }
+          }
+
+          throw new Error(`Gemini API error: ${response.status}`);
+        } catch (fetchError) {
+          if (retries < this.maxRetries - 1) {
+            retries++;
+            await this.sleep(this.retryDelay);
+            continue;
+          }
+          throw fetchError;
+        }
+      }
+
+      const data = await response.json();
+      const suggestionText = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+
+      // Clean and parse JSON
+      const cleanedText = suggestionText
+        .replace(/```json\n?/g, '')
+        .replace(/```\n?/g, '')
+        .trim();
+
+      const suggestions = JSON.parse(cleanedText);
+
+      return suggestions;
+
+    } catch (error) {
+      console.error("Failed to generate performance suggestions:", error);
+      return this.getFallbackSuggestions(results, subject, score);
+    }
+  }
+
+  /**
+   * Provide fallback suggestions if AI fails
+   * @param {Array} results - Question results
+   * @param {string} subject - Subject of the quiz
+   * @param {number} score - Overall score
+   * @returns {Object} Fallback suggestions
+   */
+  getFallbackSuggestions(results, subject, score) {
+    const incorrectQuestions = results.filter(r => !r.isCorrect);
+    
+    let overallAssessment = '';
+    let recommendations = [];
+    
+    if (score >= 80) {
+      overallAssessment = `Great work! You scored ${score}%, showing strong understanding of ${subject}. Focus on the few areas where you made mistakes to achieve mastery.`;
+      recommendations = [
+        'Review the questions you missed to understand the concepts better',
+        'Practice similar problems to reinforce your knowledge',
+        'Consider challenging yourself with harder difficulty levels'
+      ];
+    } else if (score >= 60) {
+      overallAssessment = `Good effort! You scored ${score}%, demonstrating a solid foundation in ${subject}. With focused practice on your weak areas, you can improve significantly.`;
+      recommendations = [
+        'Review all the concepts from questions you missed',
+        'Spend extra time practicing the topics you struggled with',
+        'Watch educational videos or read materials about these topics',
+        'Take another quiz after reviewing to track your improvement'
+      ];
+    } else {
+      overallAssessment = `You scored ${score}%. Don't worry - learning takes time! Focus on building a strong foundation in the basics of ${subject}.`;
+      recommendations = [
+        'Start by reviewing fundamental concepts in ' + subject,
+        'Study the explanations for each question carefully',
+        'Practice with easier difficulty levels first',
+        'Consider asking a teacher or tutor for additional help',
+        'Take your time and practice regularly'
+      ];
+    }
+
+    return {
+      overallAssessment,
+      strengths: score >= 60 ? 
+        [`You correctly answered ${results.filter(r => r.isCorrect).length} questions`, 'You show potential in ' + subject] :
+        ['You completed the quiz', 'You are taking steps to learn'],
+      weakAreas: incorrectQuestions.slice(0, 3).map(q => 
+        `Understanding questions like: "${q.question.substring(0, 50)}..."`
+      ),
+      recommendations,
+      nextSteps: [
+        'Review the detailed explanations provided',
+        'Practice more quizzes in ' + subject,
+        'Focus on one topic at a time'
+      ]
+    };
+  }
+}
+
+module.exports = new QuizService();
 
 module.exports = new QuizService();

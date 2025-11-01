@@ -324,9 +324,9 @@ const QuizGenerator = () => {
         </p>
       </div>
 
-      {/* Multiplayer Options */}
+      {/* Quiz Options */}
       {!quiz && !showQuizForm && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Single Player Quiz */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
             <h2 className="text-xl font-bold text-white mb-4">Single Player</h2>
@@ -337,6 +337,19 @@ const QuizGenerator = () => {
             >
               <BookOpen className="w-5 h-5" />
               <span>Start Solo Quiz</span>
+            </button>
+          </div>
+
+          {/* Micro Quiz Builder */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+            <h2 className="text-xl font-bold text-white mb-4">Micro-Quiz Builder</h2>
+            <p className="text-gray-300 mb-6">Create custom 5-10 question quizzes with AI feedback</p>
+            <button
+              onClick={() => window.location.href = '/micro-quiz'}
+              className="w-full bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2"
+            >
+              <Plus className="w-5 h-5" />
+              <span>Create Micro-Quiz</span>
             </button>
           </div>
 

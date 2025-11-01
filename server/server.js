@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const quizRoutes = require("./routes/quizRoutes");
 const quizRoomRoutes = require("./routes/quizRoomRoutes"); // Add this line
+const microQuizRoutes = require("./routes/microQuizRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const simulationRoutes = require("./routes/simulationRoutes"); // 1. Import the router
 const geminiRoutes = require("./routes/geminiRoutes");
@@ -59,6 +60,7 @@ app.get("/", (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/quiz-room', quizRoomRoutes); // Add this line
+app.use('/api/micro-quiz', microQuizRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/simulations', simulationRoutes); // FIX: Was '/api/simulation'
 app.use('/api/gemini', geminiRoutes);
