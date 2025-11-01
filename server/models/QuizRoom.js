@@ -57,6 +57,17 @@ const quizRoomSchema = new mongoose.Schema({
       default: false
     }
   }],
+  quizPreferences: {
+    subject: {
+      type: String,
+      trim: true
+    },
+    difficulty: {
+      type: String,
+      enum: ['easy', 'medium', 'hard'],
+      default: 'medium'
+    }
+  },
   quiz: {
     questions: [{
       question: String,

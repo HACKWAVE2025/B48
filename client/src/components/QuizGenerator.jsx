@@ -32,17 +32,62 @@ const QuizGenerator = () => {
   const [showJoinRoomModal, setShowJoinRoomModal] = useState(false);
   const [currentRoom, setCurrentRoom] = useState(null);
   const [searchParams] = useSearchParams();
+  const [studentType, setStudentType] = useState('school');
+  const [customSubject, setCustomSubject] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
 
   const { user } = useAuth();
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
-  const subjects = [
+  // Role-based subject arrays
+  const schoolSubjects = [
     { value: 'math', label: 'Mathematics', icon: '🔢' },
     { value: 'science', label: 'Science', icon: '🔬' },
     { value: 'english', label: 'English', icon: '📚' },
-    { value: 'history', label: 'History', icon: '📜' },
-    { value: 'geography', label: 'Geography', icon: '🌍' }
+    { value: 'hindi', label: 'Hindi', icon: '🇮🇳' },
+    { value: 'social_studies', label: 'Social Studies', icon: '🌍' },
+    { value: 'art', label: 'Art', icon: '🎨' },
+    { value: 'music', label: 'Music', icon: '🎵' },
+    { value: 'computer_science', label: 'Computer Science', icon: '💻' }
   ];
+
+  const collegeSubjects = [
+    { value: 'engineering', label: 'Engineering', icon: '⚙️' },
+    { value: 'commerce', label: 'Commerce', icon: '💼' },
+    { value: 'humanities', label: 'Humanities', icon: '📖' },
+    { value: 'life_sciences', label: 'Life Sciences', icon: '🧬' },
+    { value: 'business', label: 'Business Studies', icon: '📊' },
+    { value: 'law', label: 'Law', icon: '⚖️' },
+    { value: 'it', label: 'Information Technology', icon: '�' },
+    { value: 'data_science', label: 'Data Science', icon: '📈' },
+    { value: 'research_skills', label: 'Research Skills', icon: '🔍' },
+    { value: 'languages', label: 'Languages', icon: '🗣️' }
+  ];
+
+  const researcherSubjects = [
+    { value: 'ai', label: 'Artificial Intelligence', icon: '🤖' },
+    { value: 'data_science', label: 'Data Science', icon: '📊' },
+    { value: 'educational_tech', label: 'Educational Technology', icon: '💡' },
+    { value: 'policy_research', label: 'Policy Research', icon: '📋' },
+    { value: 'ml', label: 'Machine Learning', icon: '🧠' },
+    { value: 'biotechnology', label: 'Biotechnology', icon: '🧬' },
+    { value: 'environmental_science', label: 'Environmental Science', icon: '�' },
+    { value: 'social_research', label: 'Social Research', icon: '👥' },
+    { value: 'medical_research', label: 'Medical Research', icon: '⚕️' },
+    { value: 'quantum_computing', label: 'Quantum Computing', icon: '⚛️' }
+  ];
+
+  // Get subjects based on user role
+  const getSubjects = () => {
+    if (user?.role === 'researcher') {
+      return researcherSubjects;
+    } else if (user?.role === 'student') {
+      return studentType === 'school' ? schoolSubjects : collegeSubjects;
+    }
+    return schoolSubjects; // default
+  };
+
+  const subjects = getSubjects();
 
   const difficulties = [
     { value: 'easy', label: 'Easy', color: 'green' },
@@ -489,6 +534,43 @@ const QuizGenerator = () => {
               </div>
             </div>
           </div>
+
+          {/* Student Type Selection - Only for students */}
+          {user?.role === 'student' && (
+            <div className="mb-6">
+              <label className="block text-white/80 text-sm font-medium mb-3">Student Type*</label>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setStudentType('school')}
+                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                    studentType === 'school'
+                      ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
+                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50'
+                  }`}
+                >
+                  <div className="text-center">
+                    <div className="text-2xl mb-1">🎒</div>
+                    <div className="font-semibold">School Student</div>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStudentType('college')}
+                  className={`flex-1 px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                    studentType === 'college'
+                      ? 'bg-purple-600/40 border-purple-400 text-white shadow-lg'
+                      : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50'
+                  }`}
+                >
+                  <div className="text-center">
+                    <div className="text-2xl mb-1">🎓</div>
+                    <div className="font-semibold">College Student</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          )}
           
           {/* Subject Selection */}
           <div className="mb-6">
@@ -497,9 +579,12 @@ const QuizGenerator = () => {
               {subjects.map((subject) => (
                 <button
                   key={subject.value}
-                  onClick={() => handlePreferenceChange('subject', subject.value)}
+                  onClick={() => {
+                    handlePreferenceChange('subject', subject.value);
+                    setShowCustomInput(false);
+                  }}
                   className={`p-4 rounded-xl border-2 font-medium transition-all duration-300 ${
-                    quizPreferences.subject === subject.value
+                    quizPreferences.subject === subject.value && !showCustomInput
                       ? 'bg-purple-600/30 border-purple-400/80 text-purple-200 shadow-lg shadow-purple-500/20'
                       : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-purple-500/50 hover:bg-gray-700/50'
                   }`}
@@ -508,8 +593,72 @@ const QuizGenerator = () => {
                   <div className="text-sm">{subject.label}</div>
                 </button>
               ))}
+              {/* Custom Subject Button */}
+              <button
+                onClick={() => {
+                  setShowCustomInput(true);
+                  setQuizPreferences(prev => ({ ...prev, subject: '' }));
+                }}
+                className={`p-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                  showCustomInput
+                    ? 'bg-orange-600/30 border-orange-400/80 text-orange-200 shadow-lg shadow-orange-500/20'
+                    : 'bg-gray-800/50 border-gray-600/50 text-gray-300 hover:border-orange-500/50 hover:bg-gray-700/50'
+                }`}
+              >
+                <div className="text-2xl mb-2">➕</div>
+                <div className="text-sm">Custom Subject</div>
+              </button>
             </div>
           </div>
+
+          {/* Custom Subject Input */}
+          {showCustomInput && (
+            <div className="mb-6">
+              <label className="block text-white/80 text-sm font-medium mb-3">Custom Subject*</label>
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={customSubject}
+                  onChange={(e) => setCustomSubject(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (customSubject.trim()) {
+                        handlePreferenceChange('subject', customSubject.trim());
+                        setShowCustomInput(false);
+                      }
+                    }
+                  }}
+                  className="flex-1 px-4 py-2 bg-gray-800/50 text-white rounded-lg border-2 border-gray-600/50 focus:border-purple-500 focus:outline-none"
+                  placeholder="Enter your custom subject (e.g., Robotics, Creative Writing)"
+                  autoFocus
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (customSubject.trim()) {
+                      handlePreferenceChange('subject', customSubject.trim());
+                      setShowCustomInput(false);
+                    }
+                  }}
+                  disabled={!customSubject.trim()}
+                  className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCustomInput(false);
+                    setCustomSubject('');
+                  }}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Difficulty Selection */}
           <div className="mb-6">

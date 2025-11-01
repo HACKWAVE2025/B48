@@ -9,15 +9,22 @@ const router = express.Router();
 // Create a new quiz room
 router.post('/create', authMiddleware, async (req, res) => {
   try {
-    const { roomName, hostName } = req.body;
+    const { roomName, hostName, subject, difficulty } = req.body;
     const userId = req.user.userId || req.user.id;
 
-    console.log('Create room request:', { roomName, hostName, userId, user: req.user });
+    console.log('Create room request:', { roomName, hostName, subject, difficulty, userId, user: req.user });
 
     if (!roomName || !hostName) {
       return res.status(400).json({
         success: false,
         message: 'Room name and host name are required'
+      });
+    }
+
+    if (!subject || !difficulty) {
+      return res.status(400).json({
+        success: false,
+        message: 'Subject and difficulty are required'
       });
     }
 
@@ -35,6 +42,10 @@ router.post('/create', authMiddleware, async (req, res) => {
       roomName: roomName.trim(),
       hostName: hostName.trim(),
       hostId: userId,
+      quizPreferences: {
+        subject: subject.trim(),
+        difficulty: difficulty.toLowerCase()
+      },
       participants: [{
         userId,
         name: hostName.trim(),

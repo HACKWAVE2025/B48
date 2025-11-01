@@ -1,17 +1,71 @@
 import React, { useState } from 'react';
 import { X, Users, Hash, Copy, Check } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
   const [formData, setFormData] = useState({
     roomName: '',
-    hostName: ''
+    hostName: '',
+    subject: '',
+    difficulty: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [roomCreated, setRoomCreated] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [studentType, setStudentType] = useState('school');
+  const [customSubject, setCustomSubject] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
+
+  const { user } = useAuth();
 
   if (!isOpen) return null;
+
+  // Role-based subject arrays
+  const schoolSubjects = [
+    { value: 'math', label: 'Mathematics', icon: '🔢' },
+    { value: 'science', label: 'Science', icon: '🔬' },
+    { value: 'english', label: 'English', icon: '📚' },
+    { value: 'hindi', label: 'Hindi', icon: '🇮🇳' },
+    { value: 'social_studies', label: 'Social Studies', icon: '🌍' },
+    { value: 'art', label: 'Art', icon: '🎨' }
+  ];
+
+  const collegeSubjects = [
+    { value: 'engineering', label: 'Engineering', icon: '⚙️' },
+    { value: 'commerce', label: 'Commerce', icon: '💼' },
+    { value: 'humanities', label: 'Humanities', icon: '📖' },
+    { value: 'life_sciences', label: 'Life Sciences', icon: '🧬' },
+    { value: 'business', label: 'Business', icon: '📊' },
+    { value: 'it', label: 'IT', icon: '💻' }
+  ];
+
+  const researcherSubjects = [
+    { value: 'ai', label: 'AI', icon: '🤖' },
+    { value: 'data_science', label: 'Data Science', icon: '📊' },
+    { value: 'ml', label: 'Machine Learning', icon: '🧠' },
+    { value: 'biotechnology', label: 'Biotechnology', icon: '🧬' },
+    { value: 'environmental_science', label: 'Environmental Science', icon: '🌱' },
+    { value: 'medical_research', label: 'Medical Research', icon: '⚕️' }
+  ];
+
+  const difficulties = [
+    { value: 'easy', label: 'Easy', color: 'green' },
+    { value: 'medium', label: 'Medium', color: 'yellow' },
+    { value: 'hard', label: 'Hard', color: 'red' }
+  ];
+
+  // Get subjects based on user role
+  const getSubjects = () => {
+    if (user?.role === 'researcher') {
+      return researcherSubjects;
+    } else if (user?.role === 'student') {
+      return studentType === 'school' ? schoolSubjects : collegeSubjects;
+    }
+    return schoolSubjects;
+  };
+
+  const subjects = getSubjects();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -22,7 +76,10 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.roomName.trim() || !formData.hostName.trim()) return;
+    if (!formData.roomName.trim() || !formData.hostName.trim() || !formData.subject || !formData.difficulty) {
+      setError('Please fill in all fields');
+      return;
+    }
 
     setIsLoading(true);
     setError('');
@@ -39,7 +96,9 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
         },
         body: JSON.stringify({
           roomName: formData.roomName.trim(),
-          hostName: formData.hostName.trim()
+          hostName: formData.hostName.trim(),
+          subject: formData.subject,
+          difficulty: formData.difficulty
         })
       });
 
@@ -69,10 +128,12 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
   };
 
   const handleClose = () => {
-    setFormData({ roomName: '', hostName: '' });
+    setFormData({ roomName: '', hostName: '', subject: '', difficulty: '' });
     setRoomCreated(null);
     setError('');
     setCopied(false);
+    setCustomSubject('');
+    setShowCustomInput(false);
     onClose();
   };
 
@@ -83,9 +144,9 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-purple-500/30 rounded-2xl w-full max-w-md shadow-2xl">
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-purple-500/30 rounded-2xl w-full max-w-md shadow-2xl max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-purple-500/20">
+        <div className="flex items-center justify-between p-6 border-b border-purple-500/20 flex-shrink-0">
           <h2 className="text-xl font-bold text-white">
             {roomCreated ? 'Room Created!' : 'Create Quiz Room'}
           </h2>
@@ -99,7 +160,7 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
 
         {!roomCreated ? (
           /* Room Creation Form */
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto flex-1">
             {error && (
               <div className="bg-red-500/20 border border-red-500/40 rounded-lg p-3">
                 <p className="text-red-200 text-sm">{error}</p>
@@ -138,7 +199,150 @@ const CreateQuizRoomModal = ({ isOpen, onClose, onRoomCreated }) => {
               />
             </div>
 
-            <div className="flex space-x-4">
+            {/* Student Type Selection - Only for students */}
+            {user?.role === 'student' && (
+              <div>
+                <label className="block text-white font-medium mb-2">Student Type</label>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStudentType('school')}
+                    className={`flex-1 px-3 py-2 rounded-lg border-2 transition-all duration-300 ${
+                      studentType === 'school'
+                        ? 'bg-purple-600/40 border-purple-400 text-white'
+                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-lg mb-1">🎒</div>
+                      <div className="text-sm font-medium">School</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStudentType('college')}
+                    className={`flex-1 px-3 py-2 rounded-lg border-2 transition-all duration-300 ${
+                      studentType === 'college'
+                        ? 'bg-purple-600/40 border-purple-400 text-white'
+                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-lg mb-1">🎓</div>
+                      <div className="text-sm font-medium">College</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Subject Selection */}
+            <div>
+              <label className="block text-white font-medium mb-2">Quiz Subject</label>
+              <div className="grid grid-cols-3 gap-2">
+                {subjects.map((subject) => (
+                  <button
+                    key={subject.value}
+                    type="button"
+                    onClick={() => {
+                      setFormData({ ...formData, subject: subject.value });
+                      setShowCustomInput(false);
+                    }}
+                    className={`p-2 rounded-lg border-2 transition-all duration-300 ${
+                      formData.subject === subject.value && !showCustomInput
+                        ? 'bg-purple-600/30 border-purple-400 text-white'
+                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-xl mb-1">{subject.icon}</div>
+                      <div className="text-xs font-medium">{subject.label}</div>
+                    </div>
+                  </button>
+                ))}
+                {/* Custom Subject Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowCustomInput(true);
+                    setFormData({ ...formData, subject: '' });
+                  }}
+                  className={`p-2 rounded-lg border-2 transition-all duration-300 ${
+                    showCustomInput
+                      ? 'bg-orange-600/30 border-orange-400 text-white'
+                      : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-orange-500/50'
+                  }`}
+                >
+                  <div className="text-center">
+                    <div className="text-xl mb-1">➕</div>
+                    <div className="text-xs font-medium">Custom</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Custom Subject Input */}
+            {showCustomInput && (
+              <div>
+                <label className="block text-white font-medium mb-2">Custom Subject</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={customSubject}
+                    onChange={(e) => setCustomSubject(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (customSubject.trim()) {
+                          setFormData({ ...formData, subject: customSubject.trim() });
+                          setShowCustomInput(false);
+                        }
+                      }
+                    }}
+                    className="flex-1 px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+                    placeholder="Enter custom subject"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (customSubject.trim()) {
+                        setFormData({ ...formData, subject: customSubject.trim() });
+                        setShowCustomInput(false);
+                      }
+                    }}
+                    disabled={!customSubject.trim()}
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Difficulty Selection */}
+            <div>
+              <label className="block text-white font-medium mb-2">Difficulty</label>
+              <div className="grid grid-cols-3 gap-2">
+                {difficulties.map((difficulty) => (
+                  <button
+                    key={difficulty.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, difficulty: difficulty.value })}
+                    className={`p-3 rounded-lg border-2 transition-all duration-300 ${
+                      formData.difficulty === difficulty.value
+                        ? `bg-${difficulty.color}-600/30 border-${difficulty.color}-400 text-white`
+                        : 'bg-gray-700/50 border-gray-600 text-gray-300 hover:border-purple-500/50'
+                    }`}
+                  >
+                    <div className="text-sm font-medium">{difficulty.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons - Fixed at bottom with padding */}
+            <div className="flex space-x-4 pt-2 pb-2">
               <button
                 type="button"
                 onClick={handleClose}

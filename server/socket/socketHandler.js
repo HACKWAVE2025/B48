@@ -854,8 +854,20 @@ class SocketHandler {
         return;
       }
 
-      // Generate quiz using existing service
-      const quizData = await quizService.generateQuiz(userId);
+      // Generate quiz using existing service with preferences
+      let quizData;
+      if (room.quizPreferences && room.quizPreferences.subject && room.quizPreferences.difficulty) {
+        // Use custom preferences
+        quizData = await quizService.generateCustomQuiz(
+          userId,
+          room.quizPreferences.subject,
+          room.quizPreferences.difficulty,
+          10 // 10 questions for multiplayer
+        );
+      } else {
+        // Use auto-generation
+        quizData = await quizService.generateQuiz(userId);
+      }
       
       if (!quizData.success) {
         socket.emit('quiz_room_error', { message: 'Failed to generate quiz. Please try again.' });
@@ -870,8 +882,8 @@ class SocketHandler {
 
       room.quiz = {
         questions: questionsWithNumbers,
-        subject: quizData.subject || 'General',
-        difficulty: quizData.difficulty || 'Medium'
+        subject: quizData.subject || room.quizPreferences?.subject || 'General',
+        difficulty: quizData.difficulty || room.quizPreferences?.difficulty || 'Medium'
       };
       room.status = 'active';
       room.startedAt = new Date();
