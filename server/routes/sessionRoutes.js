@@ -847,5 +847,132 @@ router.get('/sessions/:sessionId/summary', authenticateToken, async (req, res) =
   }
 });
 
+// Get session notes for current user
+router.get('/sessions/:sessionId/notes', authenticateToken, async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const userId = req.user.userId;
+
+    const session = await StudySession.findOne({ sessionId });
+    
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: 'Session not found'
+      });
+    }
+
+    // Check if user is creator or participant (including completed sessions)
+    const isCreator = session.createdBy.toString() === userId;
+    const isParticipant = session.activeUsers.some(u => u.toString() === userId);
+    
+    // Check if user participated in this session (via messages)
+    const hasMessages = await Message.exists({ roomId: sessionId, userId });
+
+    // Allow access if user is creator, current participant, or participated in the session
+    if (!isCreator && !isParticipant && !hasMessages) {
+      return res.status(403).json({
+        success: false,
+        message: 'You must be a participant to view notes'
+      });
+    }
+
+    // Find notes for this user and session
+    const notes = session.participantNotes?.find(n => n.userId.toString() === userId);
+
+    res.json({
+      success: true,
+      notes: notes || { content: '', userId, updatedAt: new Date() }
+    });
+
+  } catch (error) {
+    console.error('Get notes error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get notes'
+    });
+  }
+});
+
+// Save session notes for current user
+router.post('/sessions/:sessionId/notes', authenticateToken, async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const { content } = req.body;
+    const userId = req.user.userId;
+
+    if (!content || !content.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Notes content is required'
+      });
+    }
+
+    const session = await StudySession.findOne({ sessionId });
+    
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: 'Session not found'
+      });
+    }
+
+    // Check if user is creator or participant (including completed sessions)
+    const isCreator = session.createdBy.toString() === userId;
+    const isParticipant = session.activeUsers.some(u => u.toString() === userId);
+    const hasMessages = await Message.exists({ roomId: sessionId, userId });
+
+    // Allow saving if user is creator, current participant, or participated in the session
+    if (!isCreator && !isParticipant && !hasMessages) {
+      return res.status(403).json({
+        success: false,
+        message: 'You must be a participant to save notes'
+      });
+    }
+
+    // Initialize participantNotes array if it doesn't exist
+    if (!session.participantNotes) {
+      session.participantNotes = [];
+    }
+
+    // Find existing notes for this user
+    const existingNotesIndex = session.participantNotes.findIndex(
+      n => n.userId.toString() === userId
+    );
+
+    if (existingNotesIndex !== -1) {
+      // Update existing notes
+      session.participantNotes[existingNotesIndex].content = content.trim();
+      session.participantNotes[existingNotesIndex].updatedAt = new Date();
+    } else {
+      // Add new notes
+      session.participantNotes.push({
+        userId,
+        content: content.trim(),
+        updatedAt: new Date()
+      });
+    }
+
+    await session.save();
+
+    res.json({
+      success: true,
+      message: 'Notes saved successfully',
+      notes: {
+        content: content.trim(),
+        updatedAt: new Date()
+      }
+    });
+
+  } catch (error) {
+    console.error('Save notes error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to save notes'
+    });
+  }
+});
+
 module.exports = router;
+
 

@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, Send, Video, Users, Clock, BookOpen, 
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
-  Paperclip, File, Image, FileText, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
-  Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize
+  Paperclip, File, Image, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
+  Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize,
+  Brain, Bot, Loader, Gamepad2, Type, Star, StickyNote, Save
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
@@ -12,6 +13,8 @@ import InviteUsersModal from './InviteUsersModal';
 import SessionSummaryModal from './SessionSummaryModal';
 import Whiteboard from './Whiteboard';
 import resourcesData from '../data/resourcesData';
+import { toast } from 'react-hot-toast';
+import { api, animationApi } from '../utils/api';
 
 const StudySessionRoom = ({ session, onBack }) => {
   const [messages, setMessages] = useState([]);
@@ -27,7 +30,7 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [uploading, setUploading] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [showWhiteboard, setShowWhiteboard] = useState(false);
-  const [activeTab, setActiveTab] = useState('chat');
+  const [activeTab, setActiveTab] = useState('chat'); // 'chat', 'notes', 'ai-learning'
   const [simulations, setSimulations] = useState([]);
   const [selectedSimulation, setSelectedSimulation] = useState(null);
   const [simulationsLoading, setSimulationsLoading] = useState(false);
@@ -36,9 +39,23 @@ const StudySessionRoom = ({ session, onBack }) => {
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isSimulationFullscreen, setIsSimulationFullscreen] = useState(false);
   
+  // Notes states
+  const [sessionNotes, setSessionNotes] = useState('');
+  const [savingNotes, setSavingNotes] = useState(false);
+  const [notesLastSaved, setNotesLastSaved] = useState(null);
+  
+  // AI Learning states
+  const [aiMessages, setAiMessages] = useState([]);
+  const [aiInputMessage, setAiInputMessage] = useState('');
+  const [aiIsLoading, setAiIsLoading] = useState(false);
+  const [aiResponseType, setAiResponseType] = useState('both'); // 'text', 'animation', 'both'
+  const [currentAiSessionId, setCurrentAiSessionId] = useState(null);
+  
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
+  const aiMessagesEndRef = useRef(null);
+  const aiTextareaRef = useRef(null);
   
   const { socket, connected } = useSocket();
   const { user } = useAuth();
@@ -236,6 +253,224 @@ const StudySessionRoom = ({ session, onBack }) => {
       }
     } catch (error) {
       console.error('Error fetching messages:', error);
+    }
+  };
+
+  // Fetch session notes
+  const fetchSessionNotes = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const backendUrl = getBackendUrl();
+      
+      const response = await fetch(
+        `${backendUrl}/api/sessions/sessions/${session.sessionId}/notes`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      const data = await response.json();
+      if (data.success && data.notes) {
+        setSessionNotes(data.notes.content || '');
+        setNotesLastSaved(data.notes.updatedAt);
+      }
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+    }
+  };
+
+  // Save session notes
+  const handleSaveNotes = async () => {
+    if (!sessionNotes.trim()) {
+      toast.error('Notes cannot be empty');
+      return;
+    }
+
+    setSavingNotes(true);
+    try {
+      const token = localStorage.getItem('token');
+      const backendUrl = getBackendUrl();
+      
+      const response = await fetch(
+        `${backendUrl}/api/sessions/sessions/${session.sessionId}/notes`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ content: sessionNotes })
+        }
+      );
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Notes saved successfully!');
+        setNotesLastSaved(new Date());
+      } else {
+        toast.error(data.message || 'Failed to save notes');
+      }
+    } catch (error) {
+      console.error('Error saving notes:', error);
+      toast.error('Failed to save notes');
+    } finally {
+      setSavingNotes(false);
+    }
+  };
+
+  // Initialize AI session ID
+  useEffect(() => {
+    setCurrentAiSessionId(`ai_session_${session?.sessionId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
+  }, [session]);
+
+  // Fetch notes when joining session
+  useEffect(() => {
+    if (session && connected) {
+      fetchSessionNotes();
+    }
+  }, [session, connected]);
+
+  // AI Learning Functions
+  const scrollToBottomAi = () => {
+    aiMessagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleAiSubmit = async (e) => {
+    e.preventDefault();
+    if (!aiInputMessage.trim()) return;
+
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: aiInputMessage.trim(),
+      timestamp: new Date()
+    };
+
+    setAiMessages(prev => [...prev, userMessage]);
+    setAiInputMessage('');
+    setAiIsLoading(true);
+
+    try {
+      const baseId = Date.now();
+      const textMessageId = `${baseId}_text`;
+      const animationMessageId = `${baseId}_animation`;
+      
+      // Get text response
+      if (aiResponseType === 'text' || aiResponseType === 'both') {
+        try {
+          const requestData = {
+            message: aiInputMessage.trim()
+          };
+          
+          if (user && user._id && currentAiSessionId) {
+            requestData.userId = user._id;
+            requestData.sessionId = currentAiSessionId;
+          }
+          
+          const textResponse = await api.post('/api/gemini/chat', requestData);
+
+          if (textResponse.data && textResponse.data.success) {
+            const textMessage = {
+              id: textMessageId,
+              type: 'bot-text',
+              content: textResponse.data.response,
+              relatedSimulations: textResponse.data.relatedSimulations || [],
+              timestamp: new Date()
+            };
+            setAiMessages(prev => [...prev, textMessage]);
+            scrollToBottomAi();
+          }
+        } catch (error) {
+          console.error('Error fetching text response:', error);
+          let errorMessage = 'Sorry, I couldn\'t generate a text response right now. Please try again.';
+          
+          if (error.code === 'ECONNABORTED') {
+            errorMessage = 'The request took too long. Please try a simpler question.';
+          } else if (error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+          }
+          
+          setAiMessages(prev => [...prev, {
+            id: textMessageId,
+            type: 'bot-text',
+            content: errorMessage,
+            timestamp: new Date(),
+            error: true
+          }]);
+        }
+      }
+
+      // Get animation response
+      if (aiResponseType === 'animation' || aiResponseType === 'both') {
+        const loadingMessage = {
+          id: animationMessageId,
+          type: 'bot-animation',
+          content: null,
+          loading: true,
+          prompt: aiInputMessage.trim(),
+          timestamp: new Date()
+        };
+        setAiMessages(prev => [...prev, loadingMessage]);
+        scrollToBottomAi();
+
+        animationApi.post('/api/gemini/generate-animation', {
+          prompt: aiInputMessage.trim()
+        }).then(animationResponse => {
+          if (animationResponse.data && animationResponse.data.success) {
+            const animationMessage = {
+              id: animationMessageId,
+              type: 'bot-animation',
+              content: animationResponse.data.video_url,
+              prompt: aiInputMessage.trim(),
+              timestamp: new Date(),
+              message: animationResponse.data.message
+            };
+            
+            setAiMessages(prev => prev.map(msg => 
+              msg.id === animationMessageId ? animationMessage : msg
+            ));
+            scrollToBottomAi();
+          }
+        }).catch(error => {
+          console.error('Error fetching animation response:', error);
+          
+          let errorMessage = 'Failed to generate animation. Please try again.';
+          
+          if (error.code === 'ECONNABORTED') {
+            errorMessage = 'Animation generation timed out. Please try a simpler prompt.';
+          } else if (error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+          }
+          
+          setAiMessages(prev => prev.map(msg => 
+            msg.id === animationMessageId ? {
+              id: animationMessageId,
+              type: 'bot-animation',
+              content: null,
+              error: errorMessage,
+              timestamp: new Date()
+            } : msg
+          ));
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setAiMessages(prev => [...prev, {
+        id: Date.now() + 3,
+        type: 'bot-text',
+        content: 'Sorry, something went wrong. Please try again.',
+        timestamp: new Date(),
+        error: true
+      }]);
+    } finally {
+      setAiIsLoading(false);
+    }
+  };
+
+  const handleAiKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleAiSubmit(e);
     }
   };
 
@@ -468,36 +703,9 @@ const StudySessionRoom = ({ session, onBack }) => {
 
   const canInteract = session && !session.hasEnded;
   const isCreator = session?.createdBy?._id === user?.userId || session?.createdBy === user?.userId;
-
-  const getSubjectIcon = (subjectName) => {
-    switch (subjectName.toLowerCase()) {
-      case 'english':
-        return BookOpen;
-      case 'mathematics':
-        return GraduationCap;
-      case 'science':
-        return Library;
-      case 'social studies':
-        return FileText;
-      default:
-        return BookOpen;
-    }
-  };
-
-  const getSubjectColor = (subjectName) => {
-    switch (subjectName.toLowerCase()) {
-      case 'english':
-        return 'from-blue-500 to-cyan-500';
-      case 'mathematics':
-        return 'from-green-500 to-emerald-500';
-      case 'science':
-        return 'from-purple-500 to-pink-500';
-      case 'social studies':
-        return 'from-orange-500 to-red-500';
-      default:
-        return 'from-gray-500 to-slate-500';
-    }
-  };
+  
+  // Allow notes access for active sessions and completed sessions
+  const canAccessNotes = session && (session.status === 'active' || session.status === 'completed' || !session.hasEnded);
 
   return (
     <div className="bg-white border border-[#93DA97]/30 rounded-xl overflow-hidden flex flex-col shadow-sm" style={{ height: 'calc(100vh - 200px)' }}>
@@ -615,10 +823,10 @@ const StudySessionRoom = ({ session, onBack }) => {
         {/* Main Content Area with Tabs */}
         <div className={`flex flex-col ${showVideoCall ? 'w-2/3' : 'w-full'}`}>
           {/* Tab Navigation */}
-          <div className="flex items-center border-b border-[#93DA97]/30 bg-white">
+          <div className="flex items-center border-b border-[#93DA97]/30 bg-white overflow-x-auto">
             <button
               onClick={() => setActiveTab('chat')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
                 activeTab === 'chat'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -628,8 +836,31 @@ const StudySessionRoom = ({ session, onBack }) => {
               <span>Chat</span>
             </button>
             <button
+              onClick={() => setActiveTab('ai-learning')}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                activeTab === 'ai-learning'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <Brain className="w-4 h-4" />
+              <span>AI Learning</span>
+              <Sparkles className="w-3 h-3" />
+            </button>
+            <button
+              onClick={() => setActiveTab('notes')}
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                activeTab === 'notes'
+                  ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
+                  : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
+              }`}
+            >
+              <StickyNote className="w-4 h-4" />
+              <span>Notes</span>
+            </button>
+            <button
               onClick={() => setActiveTab('simulations')}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
                 activeTab === 'simulations'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -648,7 +879,7 @@ const StudySessionRoom = ({ session, onBack }) => {
                 setSelectedSubject(null);
                 setSelectedLesson(null);
               }}
-              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 ${
+              className={`flex items-center space-x-2 px-6 py-3 font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
                 activeTab === 'resources'
                   ? 'border-[#5E936C] text-[#5E936C] bg-[#E8FFD7]/30'
                   : 'border-transparent text-[#557063] hover:bg-[#E8FFD7]/20'
@@ -1108,6 +1339,328 @@ const StudySessionRoom = ({ session, onBack }) => {
                   </div>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* AI Learning Tab */}
+          {activeTab === 'ai-learning' && (
+            <div className="flex flex-col flex-1 overflow-hidden">
+              {/* AI Response Type Selector */}
+              <div className="p-3 border-b border-[#93DA97]/30 bg-white flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <Brain className="w-5 h-5 text-[#5E936C]" />
+                  <span className="text-sm font-medium text-[#3E5F44]">AI Learning Assistant</span>
+                </div>
+                <div className="flex items-center space-x-1 bg-[#E8FFD7]/50 rounded-lg p-1">
+                  <button
+                    onClick={() => setAiResponseType('text')}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                      aiResponseType === 'text'
+                        ? 'bg-[#5E936C] text-white shadow-sm'
+                        : 'text-[#557063] hover:text-[#3E5F44] hover:bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-1">
+                      <Type className="w-3 h-3" />
+                      <span>Text</span>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => setAiResponseType('animation')}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                      aiResponseType === 'animation'
+                        ? 'bg-[#5E936C] text-white shadow-sm'
+                        : 'text-[#557063] hover:text-[#3E5F44] hover:bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-1">
+                      <Video className="w-3 h-3" />
+                      <span>Animation</span>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => setAiResponseType('both')}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                      aiResponseType === 'both'
+                        ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97] text-white shadow-sm'
+                        : 'text-[#557063] hover:text-[#3E5F44] hover:bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-1">
+                      <Sparkles className="w-3 h-3" />
+                      <span>Magic</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* AI Messages */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+                {aiMessages.length === 0 ? (
+                  <div className="flex items-center justify-center min-h-[50vh]">
+                    <div className="text-center space-y-4 max-w-xl px-6">
+                      <div className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] p-6 rounded-full shadow-lg mx-auto w-24 h-24 flex items-center justify-center">
+                        <Brain className="w-12 h-12 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-[#3E5F44]">AI Learning Assistant</h3>
+                      <p className="text-[#557063] leading-relaxed">
+                        Ask questions about {session?.subject || 'any topic'} and get instant answers with optional video animations!
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
+                        <div className="bg-white border border-[#93DA97]/30 rounded-lg p-3 text-center">
+                          <Type className="w-6 h-6 text-[#5E936C] mx-auto mb-2" />
+                          <p className="text-xs text-[#557063]">Text Explanations</p>
+                        </div>
+                        <div className="bg-white border border-[#93DA97]/30 rounded-lg p-3 text-center">
+                          <Video className="w-6 h-6 text-blue-500 mx-auto mb-2" />
+                          <p className="text-xs text-[#557063]">Video Animations</p>
+                        </div>
+                        <div className="bg-white border border-[#93DA97]/30 rounded-lg p-3 text-center">
+                          <Gamepad2 className="w-6 h-6 text-green-500 mx-auto mb-2" />
+                          <p className="text-xs text-[#557063]">Related Simulations</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  aiMessages.map((message) => {
+                    const isUser = message.type === 'user';
+                    
+                    return (
+                      <div key={message.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`flex items-start space-x-3 max-w-3xl ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                          {/* Avatar */}
+                          <div className={`p-3 rounded-full shadow-sm flex-shrink-0 ${
+                            isUser 
+                              ? 'bg-gradient-to-r from-[#5E936C] to-[#93DA97]' 
+                              : message.type === 'bot-animation'
+                              ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                              : 'bg-gradient-to-r from-[#5E936C] to-emerald-500'
+                          }`}>
+                            {isUser ? (
+                              <User className="w-5 h-5 text-white" />
+                            ) : message.type === 'bot-animation' ? (
+                              <Video className="w-5 h-5 text-white" />
+                            ) : (
+                              <Brain className="w-5 h-5 text-white" />
+                            )}
+                          </div>
+
+                          {/* Message Content */}
+                          <div className={`border rounded-3xl p-6 shadow-sm ${
+                            isUser
+                              ? 'bg-[#E8FFD7] border-[#93DA97] text-[#3E5F44]'
+                              : message.error
+                              ? 'bg-red-50 border-red-300 text-red-700'
+                              : 'bg-white border-[#93DA97]/30 text-[#3E5F44]'
+                          }`}>
+                            {message.type === 'bot-animation' && message.loading ? (
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-2 text-blue-600 mb-3">
+                                  <Video className="w-4 h-4" />
+                                  <span className="text-sm font-medium">Generating Animation...</span>
+                                </div>
+                                <div className="flex items-center justify-center p-8 border border-blue-300 rounded-2xl bg-blue-50">
+                                  <div className="text-center space-y-3">
+                                    <Loader className="w-8 h-8 text-blue-600 animate-spin mx-auto" />
+                                    <p className="text-blue-600 text-sm">Creating your animated visualization...</p>
+                                    <p className="text-blue-500 text-xs">This may take 1-2 minutes</p>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : message.type === 'bot-animation' && message.content ? (
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-2 text-blue-600 mb-3">
+                                  <Video className="w-4 h-4" />
+                                  <span className="text-sm font-medium">Animation Response</span>
+                                </div>
+                                {message.message && (
+                                  <p className="text-blue-700 text-sm mb-3 italic">"{message.message}"</p>
+                                )}
+                                <video 
+                                  controls 
+                                  className="w-full max-w-lg rounded-2xl border border-blue-300"
+                                >
+                                  <source src={message.content} type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
+                                <div className="flex space-x-2">
+                                  <a 
+                                    href={message.content} 
+                                    download
+                                    className="flex items-center space-x-2 bg-[#E8FFD7] hover:bg-[#93DA97]/30 border border-[#93DA97] rounded-xl px-3 py-2 text-[#3E5F44] transition-all duration-200 text-sm"
+                                  >
+                                    <Download className="w-4 h-4" />
+                                    <span>Download</span>
+                                  </a>
+                                </div>
+                              </div>
+                            ) : message.type === 'bot-animation' && message.error ? (
+                              <div className="space-y-2">
+                                <div className="flex items-center space-x-2 text-red-600 mb-2">
+                                  <Video className="w-4 h-4" />
+                                  <span className="text-sm font-medium">Animation Error</span>
+                                </div>
+                                <p className="text-red-600 text-sm">{message.error}</p>
+                              </div>
+                            ) : (
+                              <div className="space-y-4">
+                                {!isUser && (
+                                  <div className="flex items-center space-x-2 text-[#5E936C] mb-2">
+                                    <Type className="w-4 h-4" />
+                                    <span className="text-sm font-medium">Text Response</span>
+                                  </div>
+                                )}
+                                <p className="whitespace-pre-wrap leading-relaxed text-sm">
+                                  {message.content}
+                                </p>
+                                
+                                {/* Related Simulations */}
+                                {!isUser && message.relatedSimulations && message.relatedSimulations.length > 0 && (
+                                  <div className="mt-4 space-y-3">
+                                    <div className="flex items-center space-x-2 text-[#5E936C]">
+                                      <Gamepad2 className="w-4 h-4" />
+                                      <span className="text-sm font-medium">Related Simulations</span>
+                                    </div>
+                                    <div className="space-y-2">
+                                      {message.relatedSimulations.map((simulation, index) => (
+                                        <div key={index} className="bg-[#E8FFD7]/50 border border-[#93DA97] rounded-xl p-3 hover:bg-[#E8FFD7] transition-all duration-200">
+                                          <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                              <h4 className="font-medium text-[#3E5F44] text-sm">{simulation.title}</h4>
+                                              <p className="text-xs text-[#557063] mt-1">{simulation.subject} • {simulation.category}</p>
+                                            </div>
+                                            <a
+                                              href={simulation.iframeUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="ml-3 bg-[#5E936C] hover:bg-[#3E5F44] rounded-lg px-3 py-1 text-xs text-white transition-all duration-200 flex items-center space-x-1"
+                                            >
+                                              <Play className="w-3 h-3" />
+                                              <span>Try</span>
+                                            </a>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            
+                            {/* Timestamp */}
+                            <div className="mt-3 text-xs opacity-60">
+                              {new Date(message.timestamp).toLocaleTimeString()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+                <div ref={aiMessagesEndRef} />
+              </div>
+
+              {/* AI Input */}
+              {canInteract && (
+                <div className="p-4 border-t border-[#93DA97]/30 bg-white">
+                  <form onSubmit={handleAiSubmit} className="flex space-x-2">
+                    <textarea
+                      ref={aiTextareaRef}
+                      value={aiInputMessage}
+                      onChange={(e) => setAiInputMessage(e.target.value)}
+                      onKeyPress={handleAiKeyPress}
+                      placeholder="Ask me anything about the topic..."
+                      className="flex-1 bg-white border border-[#93DA97]/30 rounded-lg px-4 py-3 text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none"
+                      rows="2"
+                      disabled={aiIsLoading}
+                    />
+                    <button
+                      type="submit"
+                      disabled={!aiInputMessage.trim() || aiIsLoading}
+                      className="bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white p-3 rounded-lg transition-all disabled:cursor-not-allowed flex items-center justify-center shadow-sm"
+                    >
+                      {aiIsLoading ? (
+                        <Loader className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <Send className="w-5 h-5" />
+                      )}
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Notes Tab */}
+          {activeTab === 'notes' && (
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-br from-[#E8FFD7]/30 to-white">
+                <div className="max-w-4xl mx-auto">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold text-[#3E5F44] mb-1">
+                        {session?.status === 'completed' ? 'Session Notes (Completed)' : 'Session Notes'}
+                      </h3>
+                      <p className="text-sm text-[#557063]">
+                        {session?.status === 'completed' 
+                          ? 'Your notes from this completed session. You can still view and edit them.'
+                          : 'Take notes during the session. Your notes are automatically linked to this session.'
+                        }
+                      </p>
+                      {notesLastSaved && (
+                        <p className="text-xs text-[#557063]/70 mt-1">
+                          Last saved: {new Date(notesLastSaved).toLocaleString()}
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handleSaveNotes}
+                      disabled={savingNotes || !sessionNotes.trim()}
+                      className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[#5E936C] to-[#93DA97] hover:from-[#3E5F44] hover:to-[#5E936C] disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg transition-all shadow-sm disabled:cursor-not-allowed"
+                      title={session?.status === 'completed' ? 'Save notes (session completed)' : 'Save notes'}
+                    >
+                      {savingNotes ? (
+                        <>
+                          <Loader className="w-4 h-4 animate-spin" />
+                          <span>Saving...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4" />
+                          <span>Save Notes</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  
+                  <textarea
+                    value={sessionNotes}
+                    onChange={(e) => setSessionNotes(e.target.value)}
+                    placeholder="Start taking notes here...&#10;&#10;You can use this space to:&#10;• Write down key points from the discussion&#10;• Save important links or resources&#10;• Track action items&#10;• Summarize what you learned"
+                    className="w-full h-[calc(100vh-450px)] min-h-[300px] p-4 bg-white border-2 border-[#93DA97]/30 rounded-lg text-[#3E5F44] placeholder-[#557063]/50 focus:outline-none focus:border-[#5E936C] resize-none font-mono text-sm"
+                    disabled={session?.status === 'scheduled'}
+                  />
+                  
+                  {session?.status === 'scheduled' && (
+                    <p className="text-sm text-[#557063] mt-2 text-center italic">
+                      Session has not started yet. Notes will be editable once the session starts.
+                    </p>
+                  )}
+                  
+                  {session?.status === 'completed' && (
+                   
+                    <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <div className="flex items-center space-x-2 text-blue-700">
+                        <CheckCircle className="w-4 h-4" />
+                        <p className="text-sm">
+                          This session has been completed. Your notes have been preserved and you can still edit them.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>
