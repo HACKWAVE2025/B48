@@ -4,7 +4,7 @@ import {
   Target, Calendar, CheckCircle, User, Crown, UserPlus,
   Paperclip, File, Image, FileVideo, FileAudio, Download, X, Sparkles, Pencil,
   Beaker, MessageSquare, Play, Library, GraduationCap, ExternalLink, Maximize, Minimize,
-  Brain, Bot, Loader, Gamepad2, Type, Star, StickyNote, Save
+  Brain, Bot, Loader, Gamepad2, Type, Star, StickyNote, Save,GitBranch,getSubjectIcon 
 } from 'lucide-react';
 import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
