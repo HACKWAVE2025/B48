@@ -80,6 +80,12 @@ class CronService {
     });
 
     for (const session of sessionsToActivate) {
+      // Skip if session doesn't have required fields
+      if (!session.startTime || !session.date) {
+        console.warn(`Session ${session.sessionId} missing startTime or date, skipping...`);
+        continue;
+      }
+
       const sessionDate = new Date(session.date);
       const [hours, minutes] = session.startTime.split(':').map(Number);
       sessionDate.setHours(hours, minutes, 0, 0);
@@ -98,6 +104,12 @@ class CronService {
     });
 
     for (const session of activeSessions) {
+      // Skip if session doesn't have required fields
+      if (!session.startTime || !session.date || !session.duration) {
+        console.warn(`Session ${session.sessionId} missing required fields, skipping...`);
+        continue;
+      }
+
       const sessionDate = new Date(session.date);
       const [startHours, startMinutes] = session.startTime.split(':').map(Number);
       sessionDate.setHours(startHours, startMinutes, 0, 0);
@@ -113,8 +125,10 @@ class CronService {
         await session.save();
         console.log(`Completed session: ${session.title} (${session.sessionId})`);
         
-        // Generate AI summary for the completed session (async, don't wait)
-        this.generateSummaryForSession(session.sessionId);
+        // Generate AI summary for the completed session (async, don't wait but handle errors)
+        this.generateSummaryForSession(session.sessionId).catch(err => {
+          console.error(`Failed to generate summary for ${session.sessionId}:`, err.message);
+        });
       }
     }
   }
@@ -124,11 +138,14 @@ class CronService {
    */
   async generateSummaryForSession(sessionId) {
     try {
-      console.log(`Generating AI summary for session: ${sessionId}`);
-      await aiSummaryService.generateSessionSummary(sessionId);
-      console.log(`AI summary generated for session: ${sessionId}`);
+      console.log(`[Summary] Starting AI summary generation for session: ${sessionId}`);
+      const result = await aiSummaryService.generateSessionSummary(sessionId);
+      console.log(`[Summary] AI summary generated successfully for session: ${sessionId}`);
+      return result;
     } catch (error) {
-      console.error(`Error generating AI summary for session ${sessionId}:`, error);
+      console.error(`[Summary] Error generating AI summary for session ${sessionId}:`, error.message);
+      console.error(`[Summary] Full error:`, error);
+      throw error;
     }
   }
 
