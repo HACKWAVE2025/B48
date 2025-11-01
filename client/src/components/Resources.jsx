@@ -170,9 +170,8 @@ const Resources = () => {
                             Comprehensive notes and key points
                           </p>
                           <a
-                            href={`/resources/${lesson.resources.notes}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={`/${lesson.resources.notes}`}
+                            download
                             className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md transform hover:scale-105"
                           >
                             <Download className="w-4 h-4" />
