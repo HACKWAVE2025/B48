@@ -258,6 +258,9 @@ const QuizGenerator = () => {
       if (data.success && data.newBadges && data.newBadges.length > 0) {
         setNewBadges(data.newBadges);
       }
+
+      // Trigger analytics refresh across tabs
+      localStorage.setItem('activityCompleted', Date.now().toString());
     } catch (error) {
       console.error('Error submitting quiz:', error);
     }
